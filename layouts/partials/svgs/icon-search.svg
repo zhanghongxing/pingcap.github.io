@@ -6,7 +6,6 @@
 	height="{{ .height }}"
 	fill="{{ .fill }}"
 	viewBox="0 0 67.125 67.125"
-	style="enable-background:new 0 0 67.125 67.125;"
 	xml:space="preserve">
 	<g>
 		<g>
