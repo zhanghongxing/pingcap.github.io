@@ -1,24 +1,24 @@
 [submodule "content/docs-cn"]
 	path = content/docs-cn
 	url = git@github.com:pingcap/docs-cn.git
-	branch = master
+	branch = website-preview
 [submodule "content/docs"]
 	path = content/docs
 	url = git@github.com:pingcap/docs.git
-	branch = master
+	branch = website-preview
 [submodule "content/blog-cn"]
 	path = content/blog-cn
 	url = git@github.com:pingcap/blog-cn.git
-  branch = master
+  branch = website-preview
 [submodule "content/meetup"]
 	path = content/meetup
 	url = https://github.com/pingcap/meetup
-	branch = hugo-refactor
+	branch = website-preview
 [submodule "content/blog"]
 	path = content/blog
 	url = git@github.com:pingcap/blog.git
-	branch = hugo-refactor
+	branch = website-preview
 [submodule "content/weekly"]
 	path = content/weekly
 	url = git@github.com:pingcap/weekly.git
-	branch = hugo-refactor
+	branch = website-preview
