@@ -1,13 +1,13 @@
 {{ define "title" }} Docs {{ end }}
 
-{{ define "headcss" }}
+{{ define "headtpl" }}
   {{$.Scratch.Set "nav_active" "docs"}}
   {{$.Scratch.Set "data_i18_link" "/docs-cn" }}
 {{ end }}
 
 {{ define "main" }}
 <div class="doc" id='list_page'>
-  {{ partial "pre-loading/3-column-layout.html" }}
+  {{ partial "loading/3-column-layout.html" }}
   <div class="container content-container" style="display: none;">
     <div class="sidebar">
       <div class="sticky-sidebar">
@@ -23,14 +23,13 @@
         {{ with .Site.GetPage "page" "docs/overview.md" }}{{.Content}}{{ end }}
       </div>
       <div class="article-toc"></div>
-
-      {{ partial "archives/operate-links.html" (dict "global" .) }}
     </div>
 
     <div class="sidebar-page sticky-sidebar">
       {{ with .Site.GetPage "page" "docs/overview.md" }}
-        {{ partial "improve-doc.html" (dict "repo" "docs" "global" .) }}
+        {{ partial "archives/improve-doc.html" (dict "repo" "docs" "global" .) }}
       {{ end }}
+      {{ partial "archives/download-pdf.html" }}
       <p class="toc-title">What’s on this page</p>
       <div id="smarttoc_wrapper"></div>
     </div>

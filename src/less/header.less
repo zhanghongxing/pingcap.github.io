@@ -6,6 +6,7 @@
 @search_box_height: 36px;
 @nav_brand_height: 32px;
 @header_height: calc(~'1rem + @{nav_height} + 3px');
+@download_button_height: 2em;
 
 // width
 @search_box_width: 12rem;
@@ -110,6 +111,7 @@
     background-color: transparent;
     color: @gray_white;
     font-size: 0.75rem;
+    -webkit-appearance: none;
   }
 }
 
@@ -186,6 +188,7 @@ nav.mobile-sidebar {
         width: 100%;
         padding: 0.3rem 0.75rem;
         font-size: 16px;
+        letter-spacing: 1.5px;
       }
     }
   }
@@ -331,9 +334,11 @@ nav.mobile-sidebar {
           a {
             box-sizing: content-box;
             display: flex;
+            justify-content: center;
             align-items: center;
             height: @nav_height;
             padding: 0.5rem 0.4rem;
+            letter-spacing: 1.5px;
           }
 
           & a:hover,
@@ -344,15 +349,27 @@ nav.mobile-sidebar {
         }
       }
 
-      .link-download {
+      a.link-download {
+        height: @download_button_height;
+        min-width: 3.5em;
+        padding: 0 1em;
+        margin: 0 0.2rem;
+        .rounded-corners(0.9rem);
+        text-align: center;
+        background: @theme_blue;
+
         svg {
           margin-left: 2px;
           margin-top: -6px;
         }
+
         &:hover {
+          background-color: @white;
+          color: @theme_blue;
+          transition: all 0.5s ease;
           svg,
           svg * {
-            fill: fade(white, 70%) !important;
+            fill: fade(@theme_blue, 70%) !important;
           }
         }
       }
@@ -360,16 +377,17 @@ nav.mobile-sidebar {
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 880px) {
   .nav-btn {
     display: none;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 879px) {
   .header {
     .container {
       justify-content: space-between;
+      min-height: @header_height;
     }
     .nav-brand {
       height: 28px;

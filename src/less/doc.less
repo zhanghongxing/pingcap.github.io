@@ -4,6 +4,7 @@
 @import './header.less';
 @import './footer.less';
 @import './sidebar.less';
+@import './post-share.less';
 
 // width
 @page_sidebar_width: 12.5rem;
@@ -11,17 +12,8 @@
 // line-height
 @smarttoc_title_line_height: 20px;
 
-// color
-@text_color: #3e3e3e;
-@title_color: #142848;
-@code_color: #c7254e;
-@code_bg_color: #f9f2f4;
-
 // margin
 @smarttoc_line_margin: 10px;
-
-// padding
-@pre_padding: 9.5px;
 
 // animation_fadein_300
 @animation_fadein_300: fadeIn 0.3s;
@@ -60,8 +52,8 @@
   .sidebar-page {
     flex: 0 0 @page_sidebar_width;
     .improve-doc,
+    .pdf-link,
     .toc-title {
-      margin-bottom: @smarttoc_line_margin;
       color: @title_color;
       font-size: 14px;
       line-height: @smarttoc_title_line_height;
@@ -71,19 +63,22 @@
       }
     }
 
-    a.improve-doc {
+    .improve-doc,
+    .pdf-link {
       display: flex;
       align-items: center;
       text-decoration: underline;
-      margin-bottom: calc(~'@{smarttoc_line_margin} * 2');
+      margin-bottom: @smarttoc_line_margin;
+    }
+
+    .toc-title {
+      margin: calc(~'@{smarttoc_line_margin} * 2') 0 @smarttoc_line_margin;
     }
   }
 
   .archive,
   .list {
     flex: 1;
-    padding: 20px;
-    min-height: 500px;
     max-width: calc(~'100% - 24rem');
     padding: calc(~'@{header_height} + 20px') 1rem 1.5rem;
 
@@ -97,19 +92,19 @@
 
     h1 {
       margin-bottom: 1.5rem;
-      font-size: 1.2rem;
+      font-size: 24px;
     }
 
     h2 {
-      font-size: 1.1rem;
+      font-size: 22px;
     }
 
     h3 {
-      font-size: 1rem;
+      font-size: 20px;
     }
 
     h4 {
-      font-size: 0.9rem;
+      font-size: 18px;
     }
   }
 
@@ -122,7 +117,7 @@
       ul {
         margin: 0.7rem 0;
         line-height: 1.7;
-        font-size: 0.7rem;
+        font-size: 16px;
         font-weight: 400;
         color: @text_color;
       }
@@ -140,7 +135,7 @@
       .blog-post-meta {
         padding-left: 0;
         margin-bottom: 1rem;
-        font-size: 0.7rem;
+        font-size: 14px;
         color: #6a737d;
         list-style: none;
 
@@ -161,10 +156,6 @@
       }
     }
 
-    .draw {
-      margin: 2rem 0 1rem;
-    }
-
     .operate {
       margin-top: 1.5rem;
       border-top: 2px solid #000;
@@ -177,7 +168,7 @@
         display: flex;
         align-items: center;
         margin-top: 1rem;
-        font-size: 0.7rem;
+        font-size: 16px;
 
         .icon {
           margin-right: 0.4rem;
@@ -204,7 +195,7 @@
   .error {
     color: @theme_blue;
     line-height: 1.7;
-    font-size: 0.8rem;
+    font-size: 16px;
   }
 
   #smarttoc {
@@ -244,11 +235,12 @@
   }
 
   .git-info {
-    margin-top: 2.5rem;
-    padding: 16px 14px;
+    margin-top: 5rem;
+    padding: 1rem 0.7rem;
     background-color: rgba(27, 31, 35, 0.05);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
+    line-height: 1.7;
     color: @text_color;
 
     a {
@@ -258,33 +250,49 @@
   }
 }
 
-.blog,
-.meetup,
-.recruit,
-.weekly {
-  .sidebar {
-    flex: 0 0 15rem;
-    max-width: 15rem;
-  }
-
-  .nav-tags {
-    padding: 20px 0;
-    position: relative;
-    top: @header_height;
-  }
-
-  .archive,
-  .list {
-    max-width: calc(~'100% - 15rem');
-    padding-left: 2.5rem;
-  }
-}
 // smarttoc-extender global
 #smarttoc-extender {
   display: none !important;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 880px) {
+  .blog,
+  .meetup,
+  .recruit,
+  .weekly {
+    .sidebar {
+      flex: 0 0 14rem;
+      max-width: 14rem;
+    }
+
+    .nav-tags {
+      padding: calc(~'@{header_height} + 20px') 0 20px;
+    }
+
+    .archive,
+    .list {
+      max-width: calc(~'100% - 15rem');
+      padding-right: 2.5rem;
+    }
+  }
+
+  .blog {
+    .content {
+      margin-right: 1rem;
+    }
+  }
+
+  .meetup,
+  .recruit,
+  .weekly {
+    .list,
+    .archive {
+      padding-left: 3rem;
+    }
+  }
+}
+
+@media (max-width: 879px) {
   .blog,
   .doc,
   .meetup,
@@ -298,7 +306,7 @@
     .list {
       max-width: 100%;
       margin: 20px 0;
-      padding: 25px 5px;
+      padding: 25px 0 !important;
     }
 
     .sidebar {
@@ -310,27 +318,36 @@
 
     .sidebar-page {
       min-height: 100%;
+      padding-bottom: 20px;
 
       #smarttoc {
         max-width: 100% !important;
       }
-    }
-
-    .sidebar .tag-list {
-      margin-left: -5px;
     }
   }
 
   .blog,
   .recruit,
   .meetup {
-    .nav-tags {
-      padding-top: 45px;
-    }
-
     .archive,
     .list {
       margin-top: 60px;
+    }
+  }
+}
+
+.recruit {
+  .archive {
+    h2 {
+      font-size: 19px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+
+    p {
+      font-size: 15px;
     }
   }
 }

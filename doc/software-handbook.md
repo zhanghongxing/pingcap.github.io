@@ -264,7 +264,7 @@ jobs:
           name: "Publish github.io"
           command: |
             if [ "${CIRCLE_BRANCH}" == "src" ];
-              then chmod +x ./push-gh-pages.sh;sh ./push-gh-pages.sh;
+              then chmod +x ./scripts/push-gh-pages.sh;sh ./scripts/push-gh-pages.sh;
             fi
 ```
 
@@ -474,7 +474,7 @@ gulp.task('js', buildJs)
 <!-- 英文页面 -->
 {{ define "title" }} Blog {{ end }}
 
-{{ define "headcss" }}
+{{ define "headtpl" }}
   {{$.Scratch.Set "nav_active" "blog"}}
   {{$.Scratch.Set "data_i18_link" "/blog-cn" }}
 {{ end }}
@@ -482,7 +482,7 @@ gulp.task('js', buildJs)
 <!-- 中文页面 -->
 {{ define "title" }} 博客 {{ end }}
 
-{{ define "headcss" }}
+{{ define "headtpl" }}
   {{$.Scratch.Set "nav_active" "blog"}}
   {{$.Scratch.Set "data_i18_cn" true }}
   {{$.Scratch.Set "data_i18_link" "/blog" }}

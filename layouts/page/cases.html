@@ -1,0 +1,15 @@
+{{ define "headtpl" }}
+  {{$.Scratch.Set "nav_active" "cases"}}
+  <!-- TODO: change the real cases-cn link -->
+  {{$.Scratch.Set "data_i18_link" "/cases" }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $heading := "World's Most Innovative Businesses Trust PingCAP" }}
+  <div class="cases">
+    {{ partial "layout/hero.html" (dict "heading" $heading) }}
+    <div class="container">
+      {{ partial "cases/list.html" (dict "posts" .Site.Data.cases "global" .) }}
+    </div>
+  </div>
+{{ end }}

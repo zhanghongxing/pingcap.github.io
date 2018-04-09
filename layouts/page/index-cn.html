@@ -1,6 +1,6 @@
 {{ define "title" }}首页{{ end }}
 
-{{ define "headcss" }}
+{{ define "headtpl" }}
   <meta name="baidu-site-verification" content="hrZ03lmoDB" />
   <meta name="google-site-verification" content="drHXf-Q97rcbwLZryBSFV8eW1pj1ddF4MHzZOfODhQU" />
   {{$.Scratch.Set "data_i18_cn" true }}
@@ -18,10 +18,10 @@
 {{ end }}
 
 {{ define "main" }}
-{{ partial "pre-loading/landingpage.html" . }}
+{{ partial "loading/homepage.html" . }}
 
-<div id="landingpage">
-  <section class="landingpage-slogan-mask">
+<div id="homepage_content" style="display: none;">
+  <section class="homepage-slogan-mask">
       <div class="container">
           <img class="logo" src="/images/tidb-logo.png" alt="TiDB">
           <h2 class="slogan">SQL at SCALE</h2>
@@ -30,12 +30,12 @@
               TiDB 是新一代开源分布式 NewSQL 数据库，模型受 Google Spanner / F1 论文的启发，实现了自动的水平伸缩，强一致性的分布式事务，基于 Raft 算法的多副本复制等重要 NewSQL 特性。TiDB 结合了 RDBMS 和 NoSQL 的优点，部署简单，在线弹性扩容和异步表结构变更不影响业务， 真正的异地多活及自动故障恢复保障数据安全，同时兼容 MySQL 协议，使迁移使用成本降到极低。
           </p>
           <div class="buttons">
-              <a href="/docs-cn" class="btn btn-primary"> 了解更多 </a>
-              <a href="http://github.com/pingcap" class="btn btn-github" target="_blank"> GitHub </a>
+              <a href="/docs-cn" class="btn btn-primary"> 立即开始 </a>
+              <a href="http://github.com/pingcap" class="btn btn-secondary" target="_blank"> GitHub </a>
           </div>
       </div>
   </section>
-  <section class="landingpage-features">
+  <section class="homepage-features">
       <div class="container">
           <div class="row row-1">
               <div class="item">
@@ -85,7 +85,7 @@
           </div>
       </div>
   </section>
-  <section class="landingpage-advantages">
+  <section class="homepage-advantages">
       <div class="container">
           <div class="row">
               <div class="image-wrap">
@@ -145,5 +145,9 @@
           </div>
       </div>
   </section>
+  <!-- TODO: display slider  -->
+  <!-- {{ $heading := "创新科技力量 助力全速前行" }}
+  {{ partial "layout/carousel.html" (dict "posts" .Site.Data.cases_cn "heading" $heading "global" .) }} -->
+  {{ partial "layout/cta-footer-cn.html" . }}
 </div>
 {{ end }}

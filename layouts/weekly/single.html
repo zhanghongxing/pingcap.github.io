@@ -1,11 +1,11 @@
-{{ define "headcss" }}
+{{ define "headtpl" }}
   {{$.Scratch.Set "nav_active" "weekly"}}
   {{$.Scratch.Set "data_i18_link" "/weekly" }}
 {{ end }}
 
 {{ define "main" }}
-<div class="blog">
-  {{ partial "pre-loading/2-column-layout.html" }}
+<div class="weekly">
+  {{ partial "loading/2-column-layout.html" }}
   <div class="container content-container" style="display: none;">
     {{ $blogs := where (where .Site.Pages "Section" "weekly") ".Params.title" "!=" nil }}
     {{ partial "navs/date-tree-nav.html" (dict "title" "Weekly" "data" $blogs "rss" "/weekly/index.xml") }}
@@ -24,10 +24,7 @@
         </ul>
         <div class="blog-text">{{ .Content }}</div>
       </div>
-
-      {{ partial "archives/operate-links.html" (dict "global" .) }}
     </div>
   </div>
 </div>
-
 {{ end }}

@@ -1,4 +1,4 @@
-/* landingpage */
+/* homepage */
 @import './base.less';
 @import './header.less';
 @import './footer.less';
@@ -6,7 +6,7 @@
 @logo_width: 10.5rem;
 // height
 @logo_height: 4rem;
-@button_height: 1.8rem;
+
 // margin
 @advantage_row_margin: 4rem;
 // color
@@ -20,11 +20,43 @@
 // animation_fadein
 @animation_fadein: fadeIn 0.6s;
 
-#landingpage {
+#homepage_content {
   .customAnimation(@animation_fadein);
 }
+.btn {
+  display: block;
+  height: @primary_button_height;
+  line-height: @primary_button_height;
+  padding: 0 1rem;
+  .rounded-corners(0.9rem);
+  font-size: 0.8rem;
+  text-align: center;
+}
+.btn-primary {
+  background: @theme_blue;
+
+  &:hover {
+    background-color: @white;
+    color: @theme_blue;
+    transition: all 0.5s ease;
+  }
+}
+
+.btn-secondary {
+  border: 1px solid @white;
+  background: transparent;
+  line-height: calc(@primary_button_height~' - 2px');
+  color: @white;
+
+  &:hover {
+    background-color: @theme_blue;
+    border: 1px solid @theme_blue;
+    color: @white;
+    transition: all 0.5s ease;
+  }
+}
 /* Section 1 */
-.landingpage-slogan-mask {
+.homepage-slogan-mask {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,57 +104,29 @@
     justify-content: space-between;
 
     .btn {
-      height: @button_height;
-      line-height: @button_height;
-      width: 7.2rem;
-      padding: 0 1rem;
-      .rounded-corners(0.9rem);
+      width: @primary_button_width;
       margin-top: 2.25rem;
-      font-size: 0.8rem;
-      text-align: center;
     }
 
-    .btn-primary {
-      background: @theme_blue;
-
-      &:hover {
-        background-color: @white;
-        color: @theme_blue;
-        transition: all 0.5s ease;
-      }
-    }
-
-    .btn-github {
+    .btn-secondary {
       position: relative;
-      padding-left: 2.25rem;
-      border: 1px solid @white;
-      background: transparent;
-      line-height: calc(@button_height~' - 2px');
-      color: @white;
-
-      &:hover {
-        background-color: @theme_blue;
-        border: 1px solid @theme_blue;
-        color: @white;
-        transition: all 0.5s ease;
-      }
-
+      padding-left: 2rem;
       &:after {
         position: absolute;
         content: '';
         top: 50%;
         left: 25px;
-        width: 20px;
-        height: 19px;
+        width: 18px;
+        height: 18px;
         margin-top: -10px;
         background: url('/images/icon-github.svg');
-        background-size: 20px 19px;
+        background-size: 18px 18px;
       }
     }
   }
 }
 /* Section 2 */
-.landingpage-features {
+.homepage-features {
   padding: calc(~'@{vertical_padding} + @{header_height}') 0;
   background: url('https://download.pingcap.com/images/bg-landingpage-features.png')
     no-repeat center top;
@@ -201,8 +205,8 @@
   }
 }
 /* Section 3 */
-.landingpage-advantages {
-  padding: calc(~'@{vertical_padding} + @{header_height}') 0 10rem;
+.homepage-advantages {
+  padding: calc(~'@{vertical_padding} + @{header_height}') 0;
   background: url('https://download.pingcap.com/images/bg-landingpage-advantages.png')
     no-repeat center bottom @dark_blue;
   background-size: cover;
@@ -255,54 +259,100 @@
         text-align: right;
       }
     }
+  }
+}
 
-    &:last-child {
-      margin-bottom: calc(@advantage_row_margin * 2);
+/* cta footer */
+.cta-footer {
+  margin: 0 auto;
+  padding: 50px 15px;
+  background-color: @bg_black_with_alpha90;
+  text-align: center;
+
+  .cta-footer__headline {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 35px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    .btn {
+      margin: 0 10px;
+      min-width: @primary_button_width;
     }
   }
 }
+
+@media screen and (min-width: 992px) {
+  .cta-footer__headline {
+    max-width: 715px;
+    font-size: 36px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cta-footer {
+    padding: 100px 0;
+    .cta-footer__headline {
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+}
+
 @media (max-width: 600px) {
-  .landingpage-slogan-mask {
+  .homepage-slogan-mask {
     padding: 8rem 0 0;
     height: auto;
     min-height: 100vh;
   }
 
-  .landingpage-slogan-mask .container {
+  .homepage-slogan-mask .container {
     align-items: center;
     text-align: center;
   }
 
-  .landingpage-slogan-mask .tagline {
+  .homepage-slogan-mask .tagline {
     margin-bottom: 1.2rem;
     font-size: 1rem;
   }
 
-  .landingpage-slogan-mask .buttons {
+  .homepage-slogan-mask .buttons {
     max-width: 100%;
     width: 90%;
     justify-content: space-around;
+    .btn-secondary:after {
+      width: 14px;
+      height: 14px;
+      background-size: 14px 14px;
+      margin-top: -8px;
+      left: 20px;
+    }
   }
 
-  .landingpage-advantages,
-  .landingpage-features {
+  .homepage-advantages,
+  .homepage-features {
     padding-top: 3rem;
   }
 
-  .landingpage-features .item {
+  .homepage-features .item {
     flex-basis: 100%;
   }
 
-  .landingpage-features .row-1 .item {
+  .homepage-features .row-1 .item {
     margin-top: 3rem;
   }
 
-  .landingpage-slogan-mask .desc {
+  .homepage-slogan-mask .desc {
     max-width: 100%;
   }
 
-  .landingpage-advantages .row,
-  .landingpage-advantages .row:nth-child(2n) {
+  .homepage-advantages .row,
+  .homepage-advantages .row:nth-child(2n) {
     justify-content: center;
     flex-wrap: wrap;
 
@@ -312,12 +362,24 @@
     }
   }
 
-  .landingpage-advantages .row .content {
+  .homepage-advantages .row .content {
     flex-basis: 100%;
+  }
+
+  .cta-footer .buttons {
+    display: block;
+    .btn {
+      margin: 0 auto;
+      width: 180px;
+    }
+
+    .btn-primary {
+      margin-bottom: 20px;
+    }
   }
 }
 @media (max-width: 320px) {
-  .landingpage-slogan-mask .buttons {
+  .homepage-slogan-mask .buttons {
     flex-direction: column;
     align-items: center;
 
