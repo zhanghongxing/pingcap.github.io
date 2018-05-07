@@ -3,6 +3,7 @@
 {{ define "headtpl" }}
   <meta name="baidu-site-verification" content="hrZ03lmoDB" />
   <meta name="google-site-verification" content="drHXf-Q97rcbwLZryBSFV8eW1pj1ddF4MHzZOfODhQU" />
+  {{$.Scratch.Set "homepage" true }}
   {{$.Scratch.Set "data_i18_cn" true }}
   {{$.Scratch.Set "data_i18_link" "/en" }}
   <style type="text/css" media="screen">
@@ -18,9 +19,8 @@
 {{ end }}
 
 {{ define "main" }}
-{{ partial "loading/homepage.html" . }}
 
-<div id="homepage_content" style="display: none;">
+<div class="homepage-container">
   <section class="homepage-slogan-mask">
       <div class="container">
           <img class="logo" src="/images/tidb-logo.png" alt="TiDB">
