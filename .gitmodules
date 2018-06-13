@@ -12,7 +12,7 @@
     branch = website-preview
 [submodule "content/meetup"]
 	path = content/meetup
-	url = https://github.com/pingcap/meetup
+	url = git@github.com:pingcap/meetup.git
 	branch = website-preview
 [submodule "content/blog"]
 	path = content/blog
