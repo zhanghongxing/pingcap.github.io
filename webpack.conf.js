@@ -47,7 +47,6 @@ export default {
     process.env.NODE_ENV === 'development'
       ? [
           new HtmlWebpackPlugin({
-            // hash: isDev ? false : true,
             inject: true,
             minify: {
               removeComments: true,
@@ -74,9 +73,7 @@ export default {
               'baseof.tpl.html'
             ),
           }),
-          new ExtractTextPlugin({
-            filename: '/css/style.css',
-          }),
+          new ExtractTextPlugin('../css/style.min.css'),
           new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/g,
             cssProcessor: require('cssnano'),
@@ -94,7 +91,6 @@ export default {
         ]
       : [
           new HtmlWebpackPlugin({
-            // hash: isDev ? false : true,
             inject: true,
             minify: {
               removeComments: true,
@@ -121,9 +117,7 @@ export default {
               'baseof.tpl.html'
             ),
           }),
-          new ExtractTextPlugin({
-            filename: '/css/style.css',
-          }),
+          new ExtractTextPlugin('../css/style.min.css'),
           new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/g,
             cssProcessor: require('cssnano'),
