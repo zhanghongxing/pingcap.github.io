@@ -3,35 +3,34 @@
 * main style
 */
 .content-item {
-  background-color: #fff;
-  border-radius: 3px;
-  padding-bottom: 20px;
-  /*margin: 0 auto;*/
-  max-width: 600px;
-  min-height: 140px;
- }
+    background-color: #fff;
+    border-radius: 3px;
+    padding-bottom: 20px;
+    max-width: 600px;
+    min-height: 140px;
+}
 
 @keyframes placeHolderShimmer {
-  0%{ background-position: -468px 0; }
-  100%{ background-position: 468px 0; }
+    0% { background-position: -468px 0; }
+    100% { background-position: 468px 0; }
 }
 
 .animated-background {
-  animation-duration: 1.5s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-name: placeHolderShimmer;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-  background-size: 800px 104px;
-  height: 96px;
-  position: relative;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-name: placeHolderShimmer;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 96px;
+    position: relative;
 }
 
 .background-masker {
-  background: #fff;
-  position: absolute;
+    background: #fff;
+    position: absolute;
 }
 
 /* Every thing below this is just positioning */
@@ -65,7 +64,6 @@
     height: 6px;
 }
 
-
 .background-masker.header-right,
 .background-masker.subheader-right {
     width: auto;
@@ -95,7 +93,7 @@
 }
 
 .background-masker.content-top {
-    height:20px;
+    height: 20px;
 }
 
 .background-masker.content-first-end,
@@ -128,19 +126,19 @@
 </style>
 
 <div class="content-item">
-  <div class="animated-background">
-    <div class="background-masker header-top"></div>
-    <div class="background-masker header-left"></div>
-    <div class="background-masker header-right"></div>
-    <div class="background-masker header-bottom"></div>
-    <div class="background-masker subheader-left"></div>
-    <div class="background-masker subheader-right"></div>
-    <div class="background-masker subheader-bottom"></div>
-    <div class="background-masker content-top"></div>
-    <div class="background-masker content-first-end"></div>
-    <div class="background-masker content-second-line"></div>
-    <div class="background-masker content-second-end"></div>
-    <div class="background-masker content-third-line"></div>
-    <div class="background-masker content-third-end"></div>
-  </div>
+    <div class="animated-background">
+        <div class="background-masker header-top"></div>
+        <div class="background-masker header-left"></div>
+        <div class="background-masker header-right"></div>
+        <div class="background-masker header-bottom"></div>
+        <div class="background-masker subheader-left"></div>
+        <div class="background-masker subheader-right"></div>
+        <div class="background-masker subheader-bottom"></div>
+        <div class="background-masker content-top"></div>
+        <div class="background-masker content-first-end"></div>
+        <div class="background-masker content-second-line"></div>
+        <div class="background-masker content-second-end"></div>
+        <div class="background-masker content-third-line"></div>
+        <div class="background-masker content-third-end"></div>
+    </div>
 </div>

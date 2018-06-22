@@ -1,25 +1,25 @@
 {{ define "title" }}招聘{{ end }}
 
 {{ define "headtpl" }}
-  {{$.Scratch.Set "nav_active" "about"}}
-  {{$.Scratch.Set "data_i18_link" "/recruit" }}
-  {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "nav_active" "about"}}
+    {{$.Scratch.Set "data_i18_link" "/recruit" }}
+    {{$.Scratch.Set "data_i18_cn" true }}
 {{ end }}
 
 {{ define "main" }}
 <div class="recruit">
-  <div class="container content-container">
-    {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil  }}
-    {{ partial "navs/tags-nav.html" (dict "title" "职位类型" "posts" $posts "global" .) }}
+    <div class="container content-container">
+        {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil  }}
+        {{ partial "navs/tags-nav.html" (dict "title" "职位类型" "posts" $posts "global" .) }}
 
-    <div class="list article-list">
-      {{ range ($posts.ByParam "label").Reverse }}
-        <div class="article" data-tag="{{ range .Params.tags }}{{ replace . " " "-" }} {{ end }}">
-          <h1 class="title"><a href="{{ .URL }}" style="margin-right: 8px;">{{ .Title }}</a><span class="article_label">{{ .Params.label }}</span></h1>
-          <div class="article_divider"></div>
+        <div class="list article-list">
+        {{ range ($posts.ByParam "label").Reverse }}
+            <div class="article" data-tag="{{ range .Params.tags }}{{ replace . " " "-" }} {{ end }}">
+                <h1 class="title"><a href="{{ .URL }}" style="margin-right: 8px;">{{ .Title }}</a><span class="article_label">{{ .Params.label }}</span></h1>
+                <div class="article_divider"></div>
+            </div>
+        {{ end }}
         </div>
-      {{ end }}
     </div>
-   </div>
 </div>
 {{ end }}

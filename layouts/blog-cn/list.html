@@ -1,20 +1,19 @@
 {{ define "title" }} 博客 {{ end }}
 
 {{ define "headtpl" }}
-  {{$.Scratch.Set "nav_active" "blog"}}
-  {{$.Scratch.Set "data_i18_cn" true }}
-  {{$.Scratch.Set "data_i18_link" "/blog" }}
+    {{$.Scratch.Set "nav_active" "blog"}}
+    {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "data_i18_link" "/blog" }}
 {{ end }}
 
 {{ define "main" }}
-<div class="blog">
-  <div class="container content-container">
-    {{ $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" }}
+    <div class="blog">
+        <div class="container content-container">
+        {{ $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" }}
 
-    {{ partial "navs/tags-nav.html" (dict "type" "list" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) }}
+        {{ partial "navs/tags-nav.html" (dict "type" "list" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) }}
 
-    {{ partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) }}
-  </div>
-</div>
-
+        {{ partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) }}
+        </div>
+    </div>
 {{ end }}

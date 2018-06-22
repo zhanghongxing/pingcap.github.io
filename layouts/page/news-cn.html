@@ -1,14 +1,14 @@
 {{ define "headtpl" }}
-  {{$.Scratch.Set "data_i18_cn" true }}
-  {{$.Scratch.Set "data_i18_link" "/news" }}
+    {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "data_i18_link" "/news" }}
 {{ end }}
 
 {{ define "main" }}
-  {{ $heading := "PingCAP 新闻报道" }}
-  <div class="news">
-    {{ partial "layout/hero.html" (dict "heading" $heading) }}
-    <div class="container">
-      {{ partial "news/list.html" (dict "posts" .Site.Data.news_cn "global" .) }}
+    {{ $heading := "PingCAP 新闻报道" }}
+    <div class="news">
+        {{ partial "layout/hero.html" (dict "heading" $heading) }}
+        <div class="container">
+            {{ partial "news/list.html" (dict "posts" .Site.Data.news_cn "global" .) }}
+        </div>
     </div>
-  </div>
 {{ end }}
