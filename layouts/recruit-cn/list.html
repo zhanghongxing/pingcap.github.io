@@ -10,7 +10,7 @@
 <div class="recruit">
     <div class="container content-container">
         {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil  }}
-        {{ partial "navs/tags-nav.html" (dict "title" "职位类型" "posts" $posts "global" .) }}
+        {{ partial "navs/tags-nav.html" (dict "title" "招贤纳士" "posts" $posts "global" .) }}
 
         <div class="list article-list">
         {{ range ($posts.ByParam "label").Reverse }}

@@ -1,0 +1,8 @@
+<div class="sidebar">
+    <div class="sticky-sidebar">
+        <h2 class="title"> {{ .title }} </h2>
+        <div class="st_tree nav-toc">
+        {{ partial "navs/tree-nav.html" (dict "tree" .tree "global" .) }}
+        </div>
+    </div>
+</div>

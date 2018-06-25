@@ -8,14 +8,7 @@
 {{ define "main" }}
 <div class="recruit">
     <div class="container content-container">
-        <div class="sidebar">
-            <div class="sticky-sidebar">
-                <h2 class="title"> 招聘职位 </h2>
-                <div class="st_tree nav-toc" style="display: none;">
-                {{ partial "navs/tree-nav.html" (dict "tree" .Site.Data.recruit_cn_toc "global" .) }}
-                </div>
-            </div>
-        </div>
+        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn_toc "title" "招贤纳士") }}
 
         <div class="archive">
             <div class="content">{{ .Content }}</div>
