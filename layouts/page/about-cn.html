@@ -1,6 +1,6 @@
 {{ define "title" }} 关于 {{ end }}
 
-{{ define "headtpl" }}
+{{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/about" }}
@@ -18,7 +18,7 @@
     </style>
 {{ end }}
 
-{{ define "footjs" }}
+{{ define "footJS" }}
     <!-- particles -->
     <script type="text/javascript" src="https://download.pingcap.com/js/particles.js"></script>
     <script type="text/javascript">

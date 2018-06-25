@@ -17,12 +17,12 @@
     {{ partial "head/meta-seo" . }}
 
     <style type="text/css" media="screen">
-        .st_tree {
-            display: none;
-        }
+    .st_tree {
+        display: none;
+    }
     </style>
 
-    {{ block "headtpl" . }}{{ end }}
+    {{ block "headTpl" . }}{{ end }}
 
     <script type="text/javascript">
     if (location.pathname === '/') {
@@ -61,7 +61,7 @@
     <div class="overlay"></div>
 
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
-    {{ block "footjs" . }}{{ end }}
+    {{ block "footJS" . }}{{ end }}
 
     {{ if $data_i18_cn }}
         {{ partial "search/algolia-cn-js" . }}
