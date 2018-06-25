@@ -11,8 +11,8 @@ import { run as toc_run } from './vendor/toc'
 var blogRegex = /\/blog(-cn)?\//gi
 var recruitRegex = /\/recruit(-cn)?\//gi
 
+// Smooth scrolling when the document is loaded and ready
 function smoothScroll(hash) {
-  /* Smooth scrolling when the document is loaded and ready */
   const y = $('header').height()
   if (hash && $(hash).offset())
     $('html, body').animate(
@@ -23,17 +23,16 @@ function smoothScroll(hash) {
     )
 }
 
-// enable javascript
 $(document).ready(function() {
   if ($('.homepage')) {
     var version = $('.release-banner').data('release')
 
     if (typeof Storage !== 'undefined') {
       // Code for localStorage/sessionStorage.
-      var releaseVerinStorage = localStorage.getItem(
+      var releaseVerInStorage = localStorage.getItem(
         `release-version-${version}`
       )
-      if (!releaseVerinStorage) $('.homepage').addClass('banner-active')
+      if (!releaseVerInStorage) $('.homepage').addClass('banner-active')
     } else {
       // Sorry! No Web Storage support..
       $('.homepage').addClass('banner-active')
@@ -74,13 +73,13 @@ $(document).ready(function() {
     if (hash) smoothScroll(hash)
   })
 
-  /* TOC for article in docs module */
+  // TOC for article in docs module
   const $tocWrap = $('.article-toc')
   if ($tocWrap.length) {
     toc_run()
   }
 
-  /* process tags */
+  // Process tags
   const hash = decodeURIComponent(location.hash)
   if (
     (location.pathname.match(blogRegex) ||
@@ -98,8 +97,8 @@ $(document).ready(function() {
       }
     })
   } else {
-    const pageTpye = $('.nav-tags').data('type')
-    if (pageTpye !== 'single') {
+    const pageType = $('.nav-tags').data('type')
+    if (pageType !== 'single') {
       $('.tag.all').addClass('sel')
     }
     if (hash) {
@@ -107,7 +106,7 @@ $(document).ready(function() {
     }
   }
 
-  /* tree sidebar */
+  // Process tree sidebar
   $('.st_tree').SimpleTree({
     click: a => {
       if ($(a).attr('href') != '#') {
@@ -124,7 +123,7 @@ $(document).ready(function() {
     },
   })
 
-  /* tags frontend filter */
+  // tags frontend filter
   $('.nav-tags .tag, .anchor-tag').click(function(e) {
     const $this = $(this)
     const isInlineTag = $this.hasClass('anchor-tag')
@@ -135,9 +134,9 @@ $(document).ready(function() {
     $(`.nav-tags .tag[data-tag="${filter}"]`).addClass('sel')
     isAll && $('.tag.all').addClass('sel')
 
-    const pageTpye = $('.nav-tags').data('type')
-    console.log(pageTpye)
-    if (pageTpye && pageTpye === 'single') {
+    const pageType = $('.nav-tags').data('type')
+
+    if (pageType && pageType === 'single') {
       if (isAll) window.location.href = '../'
       else window.location.href = `../#${encodeURIComponent(filter)}`
     } else {
@@ -161,8 +160,7 @@ $(document).ready(function() {
     return false
   })
 
-  /* play video */
-  // TODO: polish - use video.js
+  //  play video
   const playVideo = () => {
     $('#video').attr('controls', 'controls')
     // for safari
@@ -194,7 +192,7 @@ $(document).ready(function() {
     e.preventDefault()
   })
 
-  /* open first item in docs/docs-cn/weekly list page */
+  // Open the first item in docs/docs-cn/weekly list page
   const openFolder = li => {
     if (li.hasClass('has-child')) {
       li.addClass('open')
@@ -210,7 +208,7 @@ $(document).ready(function() {
   const $firstLI = $('#list_page .st_tree > ul > li:first-child')
   openFolder($firstLI)
 
-  /* markdown-body tag a ref */
+  // Replace the relative href in markdown-body
   function replaceHref(a) {
     var href = $(a).attr('href')
     var absUrlExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,
@@ -220,7 +218,6 @@ $(document).ready(function() {
       mdSuffixRegex = new RegExp(mdSuffixExp)
 
     if (!href.match(absUrlRegex) && href.match(mdSuffixRegex)) {
-      // ref
       var newHref = '../' + href.replace(/\.md/, '')
       $(a).attr('href', newHref)
     }
@@ -239,7 +236,7 @@ $(document).ready(function() {
       })
     })
 
-  /* toggle wechat qr code */
+  // Toggle wechat qr code
   $('#wechat').on('click', e => {
     e.preventDefault()
     $('#wechat .qr_code_outer').toggleClass('f-hide')
@@ -249,17 +246,17 @@ $(document).ready(function() {
     $('#wechat-mobile .qr_code_outer').toggleClass('f-hide')
   })
 
-  /* hide search suggestions dropdown menue on focusout */
+  // Hide search suggestions dropdown menu on focusout
   $('#search-input').focusout(function() {
     $('.ds-dropdown-menu').hide()
   })
-  /* show search suggestions dropdown menue on focus */
+  // Show search suggestions dropdown menu on focus
   $('#search-input').focus(function(e) {
     e.preventDefault()
     if (e.target && e.target.value) $('.ds-dropdown-menu').show()
   })
 
-  /* toggle mobile sidebar */
+  // Toggle mobile sidebar
   $('.nav-btn.nav-slider').on('click', function() {
     $('.overlay').show()
     $('nav').toggleClass('open')
