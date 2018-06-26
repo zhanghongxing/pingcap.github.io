@@ -10,6 +10,23 @@
 <div class="recruit" id="list_page">
     <div class="container content-container">
         {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" " 招贤纳士") }}
+
+        <div class="archive">
+            <div id="typed-strings">
+                <p>Typed.js is a <strong>JavaScript</strong> library.</p>
+                <p>It <em>types</em> out sentences.</p>
+            </div>
+            <span id="typed"></span>
+        </div>
     </div>
 </div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/vendor/typed.min.js"></script>
+    <script>
+        var typed = new Typed('#typed', {
+          stringsElement: '#typed-strings'
+        });
+      </script>
 {{ end }}
