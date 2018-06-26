@@ -1,13 +1,13 @@
-{{ define "title" }} 招贤纳士 {{ end }}
+{{ define "title" }} 招贤纳士 - 了解 PingCAP {{ end }}
 
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "about"}}
-    {{$.Scratch.Set "data_i18_link" "/recruit" }}
     {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
 {{ end }}
 
 {{ define "main" }}
-<div class="recruit">
+<div class="recruit" id="list_page">
     <div class="container content-container">
         {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" " 招贤纳士") }}
     </div>

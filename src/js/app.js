@@ -192,7 +192,7 @@ $(document).ready(function() {
     e.preventDefault()
   })
 
-  // Open the first item in docs/docs-cn/weekly list page
+  // Open the first item in docs/docs-cn/weekly/recruit-cn list page
   const openFolder = li => {
     if (li.hasClass('has-child')) {
       li.addClass('open')
