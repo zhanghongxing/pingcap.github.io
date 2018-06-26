@@ -10,6 +10,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 export default {
   entry: {
     app: [path.join(__dirname, 'src', 'js', 'app')],
+    docs: [path.join(__dirname, 'src', 'js', 'docs')],
   },
   output: {
     path: path.join(__dirname, 'dist', 'js'),
