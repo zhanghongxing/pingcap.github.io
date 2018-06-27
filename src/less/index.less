@@ -10,7 +10,7 @@
 // margin
 @advantage_row_margin: 4rem;
 // color
-@dark_blue: #0d0b1e;
+@homepage_bg_color: #080000;
 // font
 @font_weight_300: 300;
 @font_weight_400: 400;
@@ -18,11 +18,12 @@
 // others
 @line_height: 1.8;
 // animation_fade_in
-@animation_fade_in: fadeIn 0.6s;
+@animation_fade_in: fadeIn 0.3s;
 
 .homepage {
-  background-color: @dark_blue;
+  background-color: @homepage_bg_color;
   color: #fff;
+  .customAnimation(@animation_fade_in);
 
   p {
     font-weight: 300;
@@ -235,7 +236,7 @@
   padding: calc(~"@{vertical_padding} + @{header_height}") 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-advantages.png")
-  no-repeat center bottom @dark_blue;
+  no-repeat center bottom @homepage_bg_color;
   background-size: cover;
 
   h3 {
@@ -292,7 +293,7 @@
 .cta-footer {
   margin: 0 auto;
   padding: 50px 15px;
-  background-color: black;
+  background-color: @header_bg_color;
   text-align: center;
 
   .cta-footer__headline {

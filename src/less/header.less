@@ -130,7 +130,7 @@ nav.mobile-sidebar {
   width: 210px;
   height: 100%;
   color: #fff;
-  background-color: @bg_black_with_alpha90;
+  background-color: @header_bg_color;
   transition: all 0.3s ease;
   opacity: 0.9;
   z-index: 1002;
@@ -302,20 +302,20 @@ nav.mobile-sidebar {
 body.banner-active header.fixed-top {
   position: relative;
   transition: top 0s;
-  background-color: transparent;
+  // background-color: transparent;
 }
 
 body.banner-active.banner-active--scrolled header.fixed-top {
   position: fixed;
   top: 0;
-  background-color: @bg_black_with_alpha90;
+  background-color: @header_bg_color;
 }
 
 header {
   width: 100%;
   min-height: @header_height;
   padding: 0 @horizontal_padding;
-  background-color: @bg_black_with_alpha90;
+  background-color: @header_bg_color;
 
   &.fixed-top {
     position: fixed;
