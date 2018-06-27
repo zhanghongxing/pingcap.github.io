@@ -20,8 +20,13 @@
 // animation_fade_in
 @animation_fade_in: fadeIn 0.6s;
 
-.homepage-container {
-  .customAnimation(@animation_fade_in);
+.homepage {
+  background-color: @dark_blue;
+  color: #fff;
+
+  p {
+    font-weight: 300;
+  }
 }
 
 .btn {
@@ -287,7 +292,7 @@
 .cta-footer {
   margin: 0 auto;
   padding: 50px 15px;
-  background-color: @bg_black_with_alpha90;
+  background-color: black;
   text-align: center;
 
   .cta-footer__headline {
