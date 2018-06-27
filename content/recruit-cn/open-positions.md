@@ -1,4 +1,4 @@
 ---
 type: recruit-cn
-layout: open-jobs
+layout: open-positions
 ---
