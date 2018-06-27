@@ -14,7 +14,7 @@ function smoothScroll(hash) {
   if (hash && $(hash).offset())
     $('html, body').animate(
       {
-        scrollTop: $(hash).offset().top - y,
+        scrollTop: $(hash).offset().top - y - 20,
       },
       1000
     )
@@ -47,8 +47,7 @@ $(document).ready(function() {
   $(window).on('hashchange', function() {
     const hash = decodeURIComponent(location.hash)
     if (
-      (location.pathname.match(blogRegex) ||
-        location.pathname.match(recruitRegex)) &&
+      location.pathname.match(blogRegex) &&
       $('.nav-tags').data('type') !== 'single'
     )
       return
