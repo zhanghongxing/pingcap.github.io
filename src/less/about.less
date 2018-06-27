@@ -8,8 +8,8 @@
 @tidb_red: #e6002d; // width
 @video_width: 1124px; // height
 @video_height: calc(~"@{video_width}* 9/16"); // line
-@hr_width: 1.9rem; // animation_fadein
-@animation_fadein: fadeIn 0.4s;
+@hr_width: 1.9rem; // animation_fade_in
+@animation_fade_in: fadeIn 0.4s;
 
 section[class^="about-"],
 section[class^="meetup-landing-page-"] {
@@ -109,7 +109,7 @@ section[class^="meetup-landing-page-"] {
     -o-background-size: cover;
     background-size: cover;
     z-index: auto;
-    .customAnimation(@animation_fadein);
+    .customAnimation(@animation_fade_in);
 
     video {
       width: 100%;
