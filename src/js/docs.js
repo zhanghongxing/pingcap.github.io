@@ -21,24 +21,27 @@ function smoothScroll(hash) {
 }
 
 $(document).ready(function() {
-  // Sticky tree fade in
-  $('.st_tree').fadeIn()
-  // Process tree sidebar
-  $('.st_tree').SimpleTree({
-    click: a => {
-      if ($(a).attr('href') != '#') {
-        $(a)
-          .parent()
-          .parent()
-          .find('.active')
-          .removeClass('active')
-        $(a)
-          .parent()
-          .addClass('active')
-        window.location.href = $(a).attr('href')
-      }
-    },
-  })
+  // Process Sticky Tree
+  if ($('.st_tree').length) {
+    // Sticky tree fade in
+    $('.st_tree').fadeIn()
+    // Handle click events
+    $('.st_tree').SimpleTree({
+      click: a => {
+        if ($(a).attr('href') != '#') {
+          $(a)
+            .parent()
+            .parent()
+            .find('.active')
+            .removeClass('active')
+          $(a)
+            .parent()
+            .addClass('active')
+          window.location.href = $(a).attr('href')
+        }
+      },
+    })
+  }
 
   // Handle hash change
   $(window).on('hashchange', function() {
@@ -136,7 +139,7 @@ $(document).ready(function() {
     return false
   }
   const $firstLI = $('#list_page .st_tree > ul > li:first-child')
-  openFolder($firstLI)
+  if (!hash && $firstLI.length) openFolder($firstLI)
 
   // Replace the relative href in markdown-body
   function replaceHref(a) {

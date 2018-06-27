@@ -8,6 +8,7 @@ console.log('🦊 Hello! @PingCAP website')
 import '../../dist/css/style.css'
 
 $(document).ready(function() {
+  // Process release banner
   if ($('.homepage')) {
     var version = $('.release-banner').data('release')
 
@@ -22,7 +23,7 @@ $(document).ready(function() {
       $('.homepage').addClass('banner-active')
     }
   }
-
+  // Handle window scroll event
   $(window).scroll(function() {
     var scrollVal = $(this).scrollTop(),
       y = $('header').height()

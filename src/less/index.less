@@ -36,15 +36,15 @@
   text-align: center;
 }
 // mixin
-.btn-theme-switch (@bgcolor: @theme_blue, @color: white) {
-  background: @bgcolor;
-  border: 1px solid @bgcolor;
+.btn-theme-switch (@bg_color: @theme_blue, @color: white) {
+  background: @bg_color;
+  border: 1px solid @bg_color;
   line-height: calc(@primary_button_height~" - 2px");
 
   &:hover {
     background-color: @color;
     border: 1px solid @color;
-    color: @bgcolor;
+    color: @bg_color;
     transition: all 0.5s ease;
   }
 }
@@ -215,7 +215,7 @@
     }
   }
 
-  .image-wrap-noborder {
+  .image-wrap-no-border {
     border: none;
 
     .icon {
