@@ -1,13 +1,13 @@
-{{ define "headtpl" }}
-  {{$.Scratch.Set "data_i18_link" "/news-cn" }}
+{{ define "headTpl" }}
+    {{$.Scratch.Set "data_i18_link" "/news-cn" }}
 {{ end }}
 
 {{ define "main" }}
-  {{ $heading := "PingCAP in the news" }}
-  <div class="news">
-    {{ partial "layout/hero.html" (dict "heading" $heading) }}
-    <div class="container">
-      {{ partial "news/list.html" (dict "posts" .Site.Data.news "global" .) }}
+    {{ $heading := "PingCAP in the news" }}
+    <div class="news">
+        {{ partial "layout/hero.html" (dict "heading" $heading) }}
+        <div class="container">
+            {{ partial "news/list.html" (dict "posts" .Site.Data.news "global" .) }}
+        </div>
     </div>
-  </div>
 {{ end }}

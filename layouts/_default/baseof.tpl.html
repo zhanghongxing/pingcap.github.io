@@ -17,18 +17,18 @@
     {{ partial "head/meta-seo" . }}
 
     <style type="text/css" media="screen">
-      .st_tree {
+    .st_tree {
         display: none;
-      }
+    }
     </style>
 
-    {{ block "headtpl" . }}{{ end }}
+    {{ block "headTpl" . }}{{ end }}
 
     <script type="text/javascript">
     if (location.pathname === '/') {
-      if (location.hostname === 'pingcap.github.io') {
-        location.href = '/en/'
-      }
+        if (location.hostname === 'pingcap.github.io') {
+            location.href = '/en/'
+        }
     }
     </script>
 </head>
@@ -36,39 +36,39 @@
 {{ $homepage := $.Scratch.Get "homepage" }}
 
 <body {{ if $homepage }}class="homepage"{{ end }}>
-  {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
+    {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
 
-  {{ if $homepage }}
-    {{ partial "layout/release-banner" . }}
-  {{ end }}
+    {{ if $homepage }}
+        {{ partial "layout/release-banner" . }}
+    {{ end }}
 
-  {{ if $data_i18_cn }}
-    {{ partial "layout/header-cn" . }}
-    {{ partial "layout/mobile-sidebar-cn" . }}
-  {{ else }}
-    {{ partial "layout/header" . }}
-    {{ partial "layout/mobile-sidebar" . }}
-  {{ end }}
+    {{ if $data_i18_cn }}
+        {{ partial "layout/header-cn" . }}
+        {{ partial "layout/mobile-sidebar-cn" . }}
+    {{ else }}
+        {{ partial "layout/header" . }}
+        {{ partial "layout/mobile-sidebar" . }}
+    {{ end }}
 
-  {{ block "main" . }}{{ end }}
+    {{ block "main" . }}{{ end }}
 
-  {{ if $data_i18_cn }}
-    {{ partial "layout/footer-cn" . }}
-  {{ else }}
-    {{ partial "layout/footer" . }}
-  {{ end }}
+    {{ if $data_i18_cn }}
+        {{ partial "layout/footer-cn" . }}
+    {{ else }}
+        {{ partial "layout/footer" . }}
+    {{ end }}
 
-  <div class="overlay"></div>
+    <div class="overlay"></div>
 
-  <script src="https://download.pingcap.com/js/jquery.min.js"></script>
-  {{ block "footjs" . }}{{ end }}
+    <script src="https://download.pingcap.com/js/jquery.min.js"></script>
+    {{ block "footJS" . }}{{ end }}
 
-  {{ if $data_i18_cn }}
-    {{ partial "search/algolia-cn-js" . }}
-  {{ else }}
-    {{ partial "search/algolia-js" . }}
-    {{ partial "tracking-code/hubspot.html" }}
-  {{ end }}
+    {{ if $data_i18_cn }}
+        {{ partial "search/algolia-cn-js" . }}
+    {{ else }}
+        {{ partial "search/algolia-js" . }}
+        {{ partial "tracking-code/hubspot.html" }}
+    {{ end }}
 </body>
 
 </html>

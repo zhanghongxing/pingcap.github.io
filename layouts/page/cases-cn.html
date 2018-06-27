@@ -1,4 +1,4 @@
-{{ define "headtpl" }}
+{{ define "headTpl" }}
     <link rel="stylesheet" type="text/css" href="https://download.pingcap.com/style/gridtab.min.css" />
     {{$.Scratch.Set "nav_active" "cases"}}
     {{$.Scratch.Set "data_i18_link" "/cases" }}
@@ -31,7 +31,7 @@
     </div>
 {{ end }}
 
-{{ define "footjs" }}
+{{ define "footJS" }}
     <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -69,7 +69,7 @@
                     $('html, body').animate({
                         scrollTop: y - $('header').height() - $('.card.show').height(),
                     }, 1000);
-                 }
+                }
             }
 
             $(".tab").click(function(){

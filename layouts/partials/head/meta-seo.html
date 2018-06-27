@@ -1,19 +1,19 @@
 {{ if isset .Params "summary" }}
-  {{ $.Scratch.Add "summary" .Params.summary }}
+    {{ $.Scratch.Add "summary" .Params.summary }}
 {{ else }}
-  {{ $.Scratch.Add "summary" "PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database." }}
+    {{ $.Scratch.Add "summary" "PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database." }}
 {{ end }}
 
 {{ if isset .Params "image" }}
-  {{ $.Scratch.Add "image" (.Params.image | absURL )}}
+    {{ $.Scratch.Add "image" (.Params.image | absURL )}}
 {{ else }}
-  {{ $.Scratch.Add "image" ("/images/pingcap-opengraph.jpg" | absURL) }}
+    {{ $.Scratch.Add "image" ("/images/pingcap-opengraph.jpg" | absURL) }}
 {{ end }}
 
 {{ if isset .Params "title" }}
-  {{ $.Scratch.Add "title" .Params.title }}
+    {{ $.Scratch.Add "title" .Params.title }}
 {{ else }}
-  {{ $.Scratch.Add "title" .Title }}
+    {{ $.Scratch.Add "title" .Title }}
 {{ end }}
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -38,16 +38,20 @@
 <meta name="twitter:image:src" content="{{ $.Scratch.Get "image" }}">
 <meta name="twitter:creator" content="@pingcap">
 
+<!-- Start of CrazyEgg Embed Code -->
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0076/9903.js" async="async"></script>
+<!-- End of CrazyEgg Embed Code -->
+
 <script type="application/ld+json">
 {
-  "@context": "http:\/\/schema.org",
-  "@type": "WebSite",
-  "url": "https:\/\/www.pingcap.com\/",
-  "name": "PingCAP",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+    "@context": "http:\/\/schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/www.pingcap.com\/",
+    "name": "PingCAP",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
 }
 </script>

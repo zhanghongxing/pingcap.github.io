@@ -1,13 +1,13 @@
-{{ define "title" }}Meetup{{ end }}
+{{ define "title" }} Meetup {{ end }}
 
-{{ define "headtpl" }}
-  {{$.Scratch.Set "nav_active" "meetup"}}
-  {{$.Scratch.Set "data_i18_cn" true }}
-  {{$.Scratch.Set "data_i18_link" "/weekly" }}
+{{ define "headTpl" }}
+    {{$.Scratch.Set "nav_active" "meetup"}}
+    {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "data_i18_link" "/weekly" }}
 {{ end }}
 
 {{ define "main" }}
-<section class="meetup-landingpage-banner layout-text-on-hover">
+<section class="meetup-landing-page-banner layout-text-on-hover">
     <!-- TODO: sign up url -->
     <a href="http://path/to/signup" class="link-abs" target="_blank"></a>
     <!-- <a href="http://path/to/detail" class="link-abs" target="_blank"></a> -->
@@ -25,7 +25,7 @@
         <!-- <h3 class="title"> 查看详情 </h3> -->
     </div>
 </section>
-<section class="meetup-landingpage-intro">
+<section class="meetup-landing-page-intro">
     <div class="container">
         <h1 class="title"> Infra Meetup </h1>
         <div class="desc">
@@ -33,7 +33,7 @@
         </div>
     </div>
 </section>
-<section class="meetup-landingpage-review">
+<section class="meetup-landing-page-review">
     <div class="container">
         <h2 class="title">往期回顾</h2>
         <div class="details">
@@ -58,26 +58,26 @@
         <a href="/meetup/list" class="link link-more">查看更多 {{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</a>
     </div>
 </section>
-<section class="meetup-landingpage-memoir">
+<section class="meetup-landing-page-memoir">
     <div class="container">
         <h2 class="title">分享实录</h2>
         <div class="links-group">
-          {{ range where .Data.Pages ".Params.meetup_type" "memoir" }}
+            {{ range where .Data.Pages ".Params.meetup_type" "memoir" }}
             <a href="{{.URL}}" class="link">
-              {{.Title}} <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
+                {{.Title}} <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
             </a>
-          {{ end }}
-          <!-- TODO: remove mock data -->
-          <a href="./memoir/26-1.html" class="link">
-            NO.26: 分布式系统测试那些事儿 &#8212; 理念
-            <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
-          </a>
+            {{ end }}
+            <!-- TODO: remove mock data -->
+            <a href="./memoir/26-1.html" class="link">
+                NO.26: 分布式系统测试那些事儿 &#8212; 理念
+                <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
+            </a>
         </div>
         <!-- hide memoir list this version -->
         <!-- <a href="./memoir/list.html" class="link">查看更多 {{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</a> -->
     </div>
 </section>
-<section class="meetup-landingpage-lecturer">
+<section class="meetup-landing-page-lecturer">
     <div class="container">
         <h2 class="title">大咖讲师</h2>
         <div class="details">
@@ -104,7 +104,7 @@
         </div>
     </div>
 </section>
-<section class="meetup-landingpage-banner-footer">
+<section class="meetup-landing-page-banner-footer">
     <div class="container">
         <img src="/images/meetup-tags.svg" alt="meetup tags">
     </div>
