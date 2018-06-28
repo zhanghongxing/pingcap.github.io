@@ -5,7 +5,7 @@
 // Say hello
 console.log('🦊 Hello! @PingCAP website')
 
-import '../../dist/css/style.css'
+import '../../dist/css/main.css'
 
 $(document).ready(function() {
   // Process release banner
