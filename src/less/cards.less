@@ -1,8 +1,11 @@
-@banner_bg_color: #3d6cb9;
+// global colors
+@bannerBGColor: #3d6cb9;
+@titleColor: #142848;
 
 // colour stuff
 @lightBG: #f5f7f8;
 @salmon: #f66;
+@lightDimGray: #666;
 
 .cards {
   display: flex;
@@ -25,7 +28,7 @@
   z-index: 1;
 
   a.btn-toggle {
-    background: @banner_bg_color;
+    background: @bannerBGColor;
     border-radius: 4px;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
     color: white;
@@ -38,7 +41,7 @@
   }
 
   a.btn-toggle:hover {
-    background: lighten(@banner_bg_color, 2.5);
+    background: lighten(@bannerBGColor, 2.5);
     box-shadow: 0 8px 1px 0 rgba(0, 0, 0, 0.075);
     transform: translateY(-2px);
     transition: all 0.25s 0s ease-out;
@@ -46,7 +49,7 @@
 
   a.btn-toggle:active,
   a.btn-toggle:active {
-    background: darken(@banner_bg_color, 2.5);
+    background: darken(@bannerBGColor, 2.5);
     box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
     transform: translate3d(0, 1px, 0);
     transition: all 0.025s 0s ease-out;
@@ -106,7 +109,7 @@
       padding: 0;
       font-size: 16px;
       line-height: 26px;
-      color: lighten(#323643, 30%);
+      color: @titleColor;
     }
   }
 
@@ -115,6 +118,7 @@
     position: relative;
     font-size: 14px;
     line-height: 24px;
+    color: @lightDimGray;
   }
 
   .card__actions {

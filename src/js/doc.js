@@ -6,7 +6,6 @@ import './vendor/jquery.SimpleTree.js'
 import { run as toc_run } from './vendor/toc'
 
 var blogRegex = /\/blog(-cn)?\//gi
-var recruitRegex = /\/recruit(-cn)?\//gi
 
 // Smooth scrolling when the document is loaded and ready
 function smoothScroll(hash) {
