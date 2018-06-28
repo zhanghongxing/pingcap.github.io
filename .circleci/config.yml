@@ -19,7 +19,7 @@ jobs:
     branches:
       only:
         - src
-        - preview
+        # - preview
 
     steps:
       - checkout
