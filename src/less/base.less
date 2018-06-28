@@ -1,4 +1,7 @@
-/* base */
+/* base style */
+
+// import global variables
+@import "./variables.less";
 
 // font face
 @font-face {
@@ -21,94 +24,20 @@
   font-style: normal;
 }
 
-// color
-@theme_blue: #3a59f0;
-@gray_white: #f5f5f5;
-@text_color: #3e3e3e;
-@title_color: #142848;
-@header_bg_color: black;
-@banner_bg_color: #3d6cb9;
-
-// width
-@max_width_pc: 1288px;
-@primary_button_width: 7.5rem;
-
-// height
-@primary_button_height: 1.8rem;
-
-// box
-@box_size: border-box;
-
-//padding
-@vertical_padding: 4rem;
-@horizontal_padding: 1rem;
-
-// border-radius
-.rounded-corners (@radius: 3px) {
-  border-radius: @radius;
-}
-// hover
-.hover (@color: fade(white, 70%)) {
-  color: @color;
-}
-
-// animations
-.customAnimation (@animation_attrs) {
-  animation: @animation_attrs;
-}
-
-// fadeIn
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-//fadeInUp
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(1em);
-  }
-
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-// fadeInDown
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 body {
-  display: flex;
-  flex-direction: column;
   font-family: "Lato", "Helvetica Neue", Helvetica, "PingFang SC",
   "Hiragino Sans GB", "Noto Sans CJK SC", Arial, sans-serif;
+  color: @textColor;
 }
 
 html,
 body {
-  font-size: 18px;
+  font-size: @regularRemSize;
 }
 
 body,
 body * {
-  box-sizing: @box_size;
+  box-sizing: @boxSize;
   margin: 0;
   -webkit-tap-highlight-color: transparent;
 }
@@ -140,6 +69,7 @@ h3,
 h4 {
   font-family: "TitilliumWeb", "Helvetica Neue", Helvetica, "PingFang SC",
   "Hiragino Sans GB", "Noto Sans CJK SC", Arial, sans-serif;
+  color: @titleColor;
 }
 
 .link,
@@ -152,7 +82,7 @@ h4 {
 }
 
 .container {
-  max-width: @max_width_pc;
+  max-width: @pcMaxWidth;
   margin: 0 auto;
 }
 
@@ -209,30 +139,30 @@ h4 {
   transform: translate(-50%, -50%);
 }
 
-/* 大屏幕 */
+/* Big Screen */
 @media (min-width: 992px) {
   html,
   body {
-    font-size: 20px;
+    font-size: @largeRemSize;
   }
 }
 
-/* 超大屏幕 */
+/* Super Big Screen */
 @media (min-width: 1920px) {
   html,
   body {
-    font-size: 22px;
+    font-size: @superRemSize;
   }
 
   .container {
-    max-width: 1520px;
+    max-width: @containerMaxWidth;
   }
 }
 
-/* 小屏幕（平板，大于等于 768px） */
+/* Small Screen */
 @media (max-width: 768px) {
   html,
   body {
-    font-size: 16px;
+    font-size: @smallRemSize;
   }
 }

@@ -164,13 +164,13 @@
 {{ define "main" }}
     <section class="intro-video">
         <div id="particles-js"></div>
-        <div class="video-wrapper">
+        <div class="video-wrapper f-vhc">
             <video id="video" preload="auto" poster="https://download.pingcap.com/images/video-poster.jpg">
                 <source src="https://download.pingcap.com/videos/pingcap-intro-converted.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'
                 /> Your browser does not support the video tag.
             </video>
-            <div id="video-control">
-                <span class="icon">{{ partial "svgs/icon-play-button.svg" (dict "fill" "#fff" "width" 60 "height" 60 ) }}</span>
+            <div id="video-control f-vhc">
+                <span class="icon f-vhc">{{ partial "svgs/icon-play-button.svg" (dict "fill" "#fff" "width" 60 "height" 60 ) }}</span>
             </div>
         </div>
     </section>

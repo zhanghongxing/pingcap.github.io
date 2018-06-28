@@ -1,19 +1,16 @@
 /* about page */
-@import "base.less";
-@import "header.less";
-@import "footer.less"; //color
-@font_color: #3e3e3e;
-@purple_blue: #202884;
-@bg_graywhite: #fafafa;
-@tidb_red: #e6002d; // width
-@video_width: 1124px; // height
-@video_height: calc(~"@{video_width}* 9/16"); // line
-@hr_width: 1.9rem; // animation_fade_in
-@animation_fade_in: fadeIn 0.4s;
+
+// import global variables
+@import "./variables.less";
+
+@videoWidth: 1124px;
+@videoHeight: calc(~"@{videoWidth}* 9/16");
+@lineWidth: 1.9rem;
+@fadeInAttrs: fadeIn 0.4s;
 
 section[class^="about-"],
 section[class^="meetup-landing-page-"] {
-  padding: @vertical_padding @horizontal_padding;
+  padding: @verticalPadding @horizontalPadding;
   min-height: 20rem;
   text-align: center;
 
@@ -22,7 +19,7 @@ section[class^="meetup-landing-page-"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: @video_width;
+    max-width: @videoWidth;
   }
 
   .title {
@@ -37,7 +34,7 @@ section[class^="meetup-landing-page-"] {
       right: -2.5rem;
       top: 50%;
       transform: translateY(-50%);
-      width: @hr_width;
+      width: @lineWidth;
       height: 1px;
       background: black;
     }
@@ -48,7 +45,7 @@ section[class^="meetup-landing-page-"] {
       left: -2.5rem;
       top: 50%;
       transform: translateY(-50%);
-      width: @hr_width;
+      width: @lineWidth;
       height: 1px;
       background: black;
     }
@@ -60,10 +57,10 @@ section[class^="meetup-landing-page-"] {
     margin-right: auto;
     font-size: 0.8rem;
     line-height: 1.7;
-    color: @font_color;
+    // color: @font_color;
 
     a {
-      color: @theme_blue;
+      color: @themeBlue;
     }
   }
 
@@ -71,7 +68,7 @@ section[class^="meetup-landing-page-"] {
     display: flex;
     align-items: center;
     margin: 2rem auto 0;
-    color: @purple_blue;
+    color: @purpleBlue;
     font-size: 0.8rem;
 
     svg {
@@ -79,10 +76,10 @@ section[class^="meetup-landing-page-"] {
     }
 
     &:hover {
-      color: @tidb_red;
+      color: @tidbRed;
 
       svg {
-        fill: @tidb_red;
+        fill: @tidbRed;
       }
     }
   }
@@ -91,15 +88,13 @@ section[class^="meetup-landing-page-"] {
 .intro-video {
   position: relative;
   width: 100%;
-  height: calc(~"100vh - @{header_height}");
+  height: calc(~"100vh - @{headerHeight}");
   padding: 0;
 
   .video-wrapper {
-    .f-vhc();
-
     margin-top: 30px;
-    width: @video_width;
-    height: @video_height;
+    width: @videoWidth;
+    height: @videoHeight;
     box-shadow: 2px 2px 22px rgba(255, 255, 255, 0.5);
     background:
     transparent
@@ -109,27 +104,22 @@ section[class^="meetup-landing-page-"] {
     -o-background-size: cover;
     background-size: cover;
     z-index: auto;
-    .customAnimation(@animation_fade_in);
+    .customAnimation(@fadeInAttrs);
 
     video {
       width: 100%;
       height: 100%;
-    }
-
-    .icon {
-      .f-vhc();
     }
   }
 
   #video-control {
     width: 100%;
     height: 80%;
-    .f-vhc();
   }
 }
 
 .about-company {
-  background: @bg_graywhite;
+  background: @grayWhite;
 }
 
 .about-founders {
@@ -147,7 +137,7 @@ section[class^="meetup-landing-page-"] {
 }
 
 .about-culture {
-  background: @bg_graywhite;
+  background: @grayWhite;
 
   .details {
     display: flex;
@@ -160,7 +150,7 @@ section[class^="meetup-landing-page-"] {
     h3 {
       font-size: 1rem;
       margin: 8px 0;
-      color: @purple_blue;
+      color: @purpleBlue;
     }
 
     p {
@@ -225,10 +215,6 @@ section[class^="meetup-landing-page-"] {
         margin: 0 0 6px;
         font-size: 0.7rem;
         font-weight: 600;
-      }
-
-      .text {
-        color: @font_color;
       }
 
       .text-tel {

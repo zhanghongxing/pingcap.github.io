@@ -1,29 +1,28 @@
 /* homepage */
-@import "./base.less";
-@import "./header.less";
-@import "./footer.less";
+
+// import global variables
+@import "./variables.less";
+
 // width
-@logo_width: 10.5rem;
+@logoWidth: 10.5rem;
 // height
-@logo_height: 4rem;
+@logoHeight: 4rem;
 
 // margin
-@advantage_row_margin: 4rem;
+@advantageRowMargin: 4rem;
 // color
-@homepage_bg_color: #080000;
+@homepageBgColor: #080000;
 // font
-@font_weight_300: 300;
-@font_weight_400: 400;
-@text_size: 0.8rem;
+@textSize: 0.8rem;
 // others
-@line_height: 1.8;
-// animation_fade_in
-@animation_fade_in: fadeIn 0.3s;
+@textLineHeight: 1.8;
+// fadeInAttrs
+@fadeInAttrs: fadeIn 0.3s;
 
 .homepage {
-  background-color: @homepage_bg_color;
+  background-color: @homepageBgColor;
   color: #fff;
-  .customAnimation(@animation_fade_in);
+  .customAnimation(@fadeInAttrs);
 
   p {
     font-weight: 300;
@@ -32,9 +31,9 @@
 
 .btn {
   display: inline-block;
-  min-width: @primary_button_width;
-  height: @primary_button_height;
-  line-height: @primary_button_height;
+  min-width: @primaryBtnWidth;
+  height: @primaryBtnHeight;
+  line-height: @primaryBtnHeight;
   padding: 0 1rem;
   .rounded-corners(0.9rem);
 
@@ -42,10 +41,10 @@
   text-align: center;
 }
 // mixin
-.btn-theme-switch (@bg_color: @theme_blue, @color: white) {
+.btn-theme-switch (@bg_color: @themeBlue, @color: white) {
   background: @bg_color;
   border: 1px solid @bg_color;
-  line-height: calc(@primary_button_height~" - 2px");
+  line-height: calc(@primaryBtnHeight~" - 2px");
 
   &:hover {
     background-color: @color;
@@ -60,7 +59,7 @@
 }
 
 .btn-secondary {
-  .btn-theme-switch(white, @theme_blue);
+  .btn-theme-switch(white, @themeBlue);
 
   background: transparent;
 
@@ -76,7 +75,7 @@
   justify-content: center;
   width: 100%;
   height: 100vh;
-  padding: @vertical_padding 0;
+  padding: @verticalPadding 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-slogan.png")
   no-repeat center top;
@@ -86,12 +85,12 @@
   .container {
     display: flex;
     flex-direction: column;
-    padding: 0 @horizontal_padding;
+    padding: 0 @horizontalPadding;
   }
 
   .logo {
-    width: @logo_width;
-    height: @logo_height;
+    width: @logoWidth;
+    height: @logoHeight;
   }
 
   .slogan {
@@ -109,8 +108,8 @@
 
   .desc {
     max-width: 70%;
-    font-size: @text_size;
-    line-height: @line_height;
+    font-size: @textSize;
+    line-height: @textLineHeight;
   }
 
   .buttons {
@@ -144,7 +143,7 @@
 
 /* Section 2 */
 .homepage-features {
-  padding: calc(~"@{vertical_padding} + @{header_height}") 0;
+  padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-features.png")
   no-repeat center top;
@@ -158,7 +157,7 @@
   }
 
   .container {
-    padding: 0 @horizontal_padding;
+    padding: 0 @horizontalPadding;
   }
 
   .row {
@@ -177,8 +176,8 @@
       max-width: 12rem;
       margin-left: auto;
       margin-right: auto;
-      font-size: @text_size;
-      line-height: @line_height;
+      font-size: @textSize;
+      line-height: @textLineHeight;
     }
   }
 
@@ -233,10 +232,10 @@
 
 /* Section 3 */
 .homepage-advantages {
-  padding: calc(~"@{vertical_padding} + @{header_height}") 0;
+  padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-advantages.png")
-  no-repeat center bottom @homepage_bg_color;
+  no-repeat center bottom @homepageBgColor;
   background-size: cover;
 
   h3 {
@@ -245,21 +244,21 @@
   }
 
   h4 {
-    color: @theme_blue;
+    color: @themeBlue;
     font-size: 0.9rem;
     margin-bottom: 0.6rem;
-    font-weight: @font_weight_400;
+    font-weight: 400;
   }
 
   .container {
-    padding: 0 @horizontal_padding;
+    padding: 0 @horizontalPadding;
   }
 
   .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: @advantage_row_margin;
+    margin-bottom: @advantageRowMargin;
 
     .image-wrap {
       margin: 1rem 0;
@@ -274,8 +273,8 @@
       padding: 0 0.5rem;
 
       .text {
-        font-size: @text_size;
-        line-height: @line_height;
+        font-size: @textSize;
+        line-height: @textLineHeight;
       }
     }
 
@@ -293,7 +292,7 @@
 .cta-footer {
   margin: 0 auto;
   padding: 50px 15px;
-  background-color: @header_bg_color;
+  background-color: @headerBgColor;
   text-align: center;
 
   .cta-footer__headline {
@@ -302,6 +301,7 @@
     font-weight: 600;
     font-size: 21px;
     line-height: 35px;
+    color: #fff;
   }
 
   .buttons {
@@ -319,10 +319,10 @@
   display: none;
   position: relative;
   width: 100%;
-  padding: 12px @horizontal_padding;
+  padding: 12px @horizontalPadding;
   z-index: 1030;
-  background: @theme_blue;
-  font-size: 16px;
+  background: @themeBlue;
+  font-size: @regularFontSize;
   line-height: 32px;
   letter-spacing: 1px;
 }
@@ -407,7 +407,7 @@ body.banner-active .release-banner {
 
 @media screen and (min-width: 769px) {
   .banner-active .homepage-slogan-mask {
-    height: calc(~"100vh - @{header_height} - 64px");
+    height: calc(~"100vh - @{headerHeight} - 64px");
   }
 
   .release-banner__copy .party {

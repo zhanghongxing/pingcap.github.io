@@ -1,20 +1,19 @@
-@import "./header.less";
-@import "./footer.less";
-@import "./hero.less";
-@import "./cards.less";
+
+// import global variables
+@import "./variables.less";
 
 .cases,
 .news,
 .contact-us {
-  min-height: calc(~"100vh - @{footer_height_pc}");
-  padding-top: @header_height;
+  min-height: calc(~"100vh - @{pcFooterHeight}");
+  padding-top: @headerHeight;
 }
 
 .cases,
 .news {
   .list {
     width: 100%;
-    padding: 3rem @horizontal_padding;
+    padding: 3rem @horizontalPadding;
   }
 }
 
@@ -22,7 +21,7 @@
   .banner {
     position: relative;
     height: 320px;
-    background-color: @banner_bg_color;
+    background-color: @bannerBgColor;
   }
 
   .banner__inner {
@@ -44,16 +43,16 @@
 }
 
 .cases__intro {
-  padding: @vertical_padding @horizontal_padding;
+  padding: @verticalPadding @horizontalPadding;
   text-align: center;
 
   p {
     line-height: 1.8;
     font-size: 1.12rem;
-    color: @title_color;
+    color: @titleColor;
 
     strong {
-      color: @banner_bg_color;
+      color: @bannerBgColor;
     }
   }
 }
@@ -69,7 +68,7 @@
     padding-left: 3em;
     border: 1px solid transparent;
     cursor: pointer;
-    font-size: 16px;
+    font-size: @regularFontSize;
     color: #3d6cb9;
 
     &.is-active {
@@ -121,7 +120,7 @@
 @media (min-width: 992px) {
   .cases {
     .banner__slogan {
-      font-size: @hero_title_size_l;
+      font-size: @heroLTitleSize;
     }
   }
 }
@@ -149,7 +148,7 @@
 @media (max-width: 500px) {
   .cases {
     .banner__slogan {
-      font-size: @hero_title_size_s;
+      font-size: @heroSTitleSize;
       left: 1rem;
     }
   }
