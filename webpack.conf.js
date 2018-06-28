@@ -64,7 +64,7 @@ export default {
       filename: path.join(__dirname, 'layouts', '_default', 'baseof.html'),
       template: path.join(__dirname, 'layouts', '_default', 'baseof.tpl.html'),
     }),
-    new ExtractTextPlugin('../css/style.min.css'),
+    new ExtractTextPlugin('../css/main.css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
