@@ -62,11 +62,7 @@ $(document).ready(function() {
 
   // Process tags
   const hash = decodeURIComponent(location.hash)
-  if (
-    (location.pathname.match(blogRegex) ||
-      location.pathname.match(recruitRegex)) &&
-    hash
-  ) {
+  if (location.pathname.match(blogRegex) && hash) {
     $('.nav-tags .tag').removeClass('sel')
     $(`.nav-tags .tag[data-tag="${hash.slice(1)}"]`).addClass('sel')
     $('.article-list .article').each(function() {
