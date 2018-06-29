@@ -5,6 +5,7 @@
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
     <link rel="stylesheet" href="/css/doc.css" />
+    <link rel="stylesheet" href="/css/recruit.css" />
 {{ end }}
 
 {{ define "main" }}
@@ -13,28 +14,18 @@
         {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" " 招贤纳士") }}
 
         <div class="archive">
-            <style>
-                .section-milestones,
-                .section-offices,
-                .section-collaborations {
-                    min-height: 500px;
-                }
-            </style>
-            <div class="section-milestones">
-                <h2 id="milestones">发展历程</h2>
-                <div id="typed-strings">
-                    <p>Typed.js is a <strong>JavaScript</strong> library.</p>
-                    <p>It <em>types</em> out sentences.</p>
-                </div>
-                <span id="typed"></span>
+            <div class="section">
+                <h2 id="milestones" class="title">发展历程</h2>
+
+                {{ partial "typed-terminal.html" }}
             </div>
 
-            <div class="section-offices">
-                <h2 id="offices">Offices</h2>
+            <div class="section">
+                <h2 id="offices" class="title">Offices</h2>
             </div>
 
-            <div class="section-collaborations">
-                <h2 id="collaborations">协作方式</h2>
+            <div class="section">
+                <h2 id="collaborations" class="title">协作方式</h2>
             </div>
         </div>
     </div>
@@ -44,9 +35,19 @@
 {{ define "footJS" }}
     <script type="text/javascript" src="/js/doc.js"></script>
     <script type="text/javascript" src="https://download.pingcap.com/js/typed.min.js"></script>
-    <script>
-        var typed = new Typed('#typed', {
-            stringsElement: '#typed-strings'
-        });
+
+    <script type="text/javascript">
+        setTimeout(function(){
+            var sqlTyped  = new Typed('#typedSelect',{
+                strings: ["mysql> select * from pingcap.milestones;"],
+                typeSpeed: 50, // typing speed
+                loop: false,
+                onComplete: function(self) {
+                    setTimeout(function() {
+                        $('.table-content').show()
+                    }, 500);
+                }
+            });
+        }, 0);
     </script>
 {{ end }}

@@ -1,1 +1,48 @@
 
+/* recruit page */
+
+// import global variables
+@import "./variables.less";
+
+@lineWidth: 1.9rem;
+
+.recruit {
+  .archive {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    display: inline-block;
+    position: relative;
+    margin: 0.4rem auto 2rem;
+    font-size: 1.1rem;
+
+    &::before {
+      content: " ";
+      position: absolute;
+      right: -2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: @lineWidth;
+      height: 1px;
+      background: black;
+    }
+
+    &::after {
+      content: " ";
+      position: absolute;
+      left: -2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: @lineWidth;
+      height: 1px;
+      background: black;
+    }
+  }
+}
