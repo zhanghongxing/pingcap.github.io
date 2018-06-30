@@ -1,12 +1,14 @@
 {{ $rss := .rss }}
 
 <div class="sidebar nav-tags" data-type="{{.type}}">
-    <h2 class="title">
-        {{ .title }}
-        {{ if $rss }}
-            <a class="rss" href="{{.rss}}" title="RSS Feed">{{ partial "svgs/icon-rss.svg" (dict "fill" "#3A59F0" "width" 13 "height" 17 ) }}</a>
-        {{ end }}
-    </h2>
+    {{ if .title }}
+        <div class="title">
+            {{ .title }}
+            {{ if $rss }}
+                <a class="rss" href="{{.rss}}" title="RSS Feed">{{ partial "svgs/icon-rss.svg" (dict "fill" "#3A59F0" "width" 13 "height" 17 ) }}</a>
+            {{ end }}
+        </div>
+    {{ end }}
     <a href="#" class="tag all">ALL ({{ len .posts }})</a>
     <div class="tag-list">
         <!-- Get all posts-->
