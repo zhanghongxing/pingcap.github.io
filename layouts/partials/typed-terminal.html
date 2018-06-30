@@ -6,14 +6,16 @@
     }
 
     .terminal {
-        background-color: #293345;
-        min-width: 690px;
-        min-height: 350px;
-        padding: 1em;
+        width: 34.5em;
+        height: 17.5em;
+        padding: 1em 0 1em 1em;
         margin: 0 auto;
+        background-color: #293345;
         overflow: auto;
-        transition: all .3s;
-        /* TODO: transform */
+    }
+
+    .terminal-line span {
+        display: inline-block;
     }
 
     .sim {
@@ -41,9 +43,8 @@
 
     @media (max-width: 600px) {
         .terminal {
-            min-width: 540px;
-            min-height: 280px;
-            padding: 16px 8px;
+            width: 100%;
+            padding: 16px 0 16px 6px;
         }
     }
 </style>

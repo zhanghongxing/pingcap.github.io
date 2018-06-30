@@ -45,6 +45,7 @@
                 onComplete: function(self) {
                     setTimeout(function() {
                         $('.table-content').show()
+                        $('.terminal').animate({ scrollTop: $('.terminal').height() }, "slow")
                     }, 500);
                 }
             });

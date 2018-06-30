@@ -15,12 +15,13 @@
   .section {
     display: flex;
     flex-direction: column;
+    margin-bottom: 2rem;
   }
 
   h2 {
     display: inline-block;
     position: relative;
-    margin: 0.4rem auto 2rem;
+    margin: 0.4rem auto 1.6rem;
     font-size: 1.1rem;
 
     &::before {
@@ -43,6 +44,17 @@
       width: @lineWidth;
       height: 1px;
       background: black;
+    }
+  }
+
+  /* TODO: temporary ui */
+  .positions-tabs-wrapper {
+    .sidebar,
+    .nav-tags {
+      display: block !important;
+      max-width: 100%;
+      min-height: 0;
+      padding: .4rem 0 2rem;
     }
   }
 }
