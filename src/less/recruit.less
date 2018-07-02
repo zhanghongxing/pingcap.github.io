@@ -18,7 +18,7 @@
     margin-bottom: 2rem;
   }
 
-  h2 {
+  h2.title {
     display: inline-block;
     position: relative;
     margin: 0.4rem auto 1.6rem;
@@ -47,6 +47,14 @@
     }
   }
 
+  .desc {
+    max-width: 30rem;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+
   /* TODO: temporary ui */
   .positions-tabs-wrapper {
     .sidebar,
@@ -56,5 +64,17 @@
       min-height: 0;
       padding: .4rem 0 2rem;
     }
+  }
+
+  .timeline-container {
+    position: relative;
+    width: 85%;
+    margin: 3rem auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .recruit .timeline-container {
+    width: 100%;
   }
 }
