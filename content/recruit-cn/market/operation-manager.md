@@ -3,6 +3,7 @@ title: 市场运营
 tags:
   - MKT
 location: 北京
+avatar: marketing
 ---
 
 # 市场运营

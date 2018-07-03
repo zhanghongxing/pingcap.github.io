@@ -3,6 +3,7 @@ title: TiDB 商业产品开发 - 产品设计方向
 tags:
   - Tech
 location: 北京
+avatar: fe
 aliases:
   - /recruit-cn/engineer/bizdev-fe-engineer/
 ---

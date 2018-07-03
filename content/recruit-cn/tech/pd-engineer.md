@@ -3,6 +3,7 @@ title: PD 研发工程师
 tags:
   - Tech
 location: 北京，上海，广州，杭州
+avatar: database
 aliases:
   - /recruit-cn/engineer/pd-engineer/
 ---

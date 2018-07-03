@@ -3,6 +3,7 @@ title: PR经理
 tags:
   - MKT
 location: 北京
+avatar: marketing
 ---
 
 # PR 经理
