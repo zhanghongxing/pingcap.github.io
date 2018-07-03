@@ -2,7 +2,7 @@
 title: Technical Writer Intern
 tags:
   - Intern
-label: Intern
+location: 北京
 aliases:
   - /recruit-cn/campus/technical-writer-intern/
 ---

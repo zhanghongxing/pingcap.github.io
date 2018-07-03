@@ -2,7 +2,7 @@
 title: 数据库开发实习生
 tags:
   - Intern
-label: Intern
+location: 北京，上海，广州，杭州
 aliases:
   - /recruit-cn/campus/infrastructure-engineer-intern/
 ---

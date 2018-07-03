@@ -1,8 +1,8 @@
 ---
 title: 市场运营
 tags:
-  - Market
-label: Market
+  - MKT
+location: 北京
 ---
 
 # 市场运营

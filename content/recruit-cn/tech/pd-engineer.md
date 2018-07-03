@@ -2,7 +2,7 @@
 title: PD 研发工程师
 tags:
   - Tech
-label: Tech
+location: 北京，上海，广州，杭州
 aliases:
   - /recruit-cn/engineer/pd-engineer/
 ---
