@@ -13,7 +13,7 @@
 
 {{ define "main" }}
     <div class="blog">
-        <div class="container content-container">
+        <div class="container">
             {{ if and (isset .Params "category") (eq .Params.category "case") }}
                 {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.cases_cn_toc "title" "用户案例") }}
             {{ else }}

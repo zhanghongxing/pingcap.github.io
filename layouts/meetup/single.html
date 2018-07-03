@@ -8,7 +8,7 @@
 
 {{ define "main" }}
 <div class="meetup">
-    <div class="container content-container">
+    <div class="container">
         <!-- category: memoir/ record -->
         {{ $blogs := where (where .Site.Pages "Section" "meetup") ".Params.title" "!=" nil }}
         {{ partial "navs/date-tree-nav.html" (dict "title" "Meetup" "data" $blogs ) }}

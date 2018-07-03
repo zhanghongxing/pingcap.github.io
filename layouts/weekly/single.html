@@ -7,7 +7,7 @@
 
 {{ define "main" }}
 <div class="weekly">
-    <div class="container content-container">
+    <div class="container">
         {{ $blogs := where (where .Site.Pages "Section" "weekly") ".Params.title" "!=" nil }}
         {{ partial "navs/date-tree-nav.html" (dict "title" "Weekly" "data" $blogs "rss" "/weekly/index.xml") }}
 

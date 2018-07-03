@@ -9,7 +9,7 @@
 
 {{ define "main" }}
     <div class="blog">
-        <div class="container content-container">
+        <div class="container">
         {{ $posts := where (where .Site.Pages "Section" "blog") ".Params.title" "!=" nil  }}
         {{ partial "navs/tags-nav.html" (dict "type" "list" "title" "Popular Tags" "posts" $posts "rss" "/blog/index.xml" "global" .) }}
 
