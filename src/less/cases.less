@@ -1,8 +1,8 @@
 
 // import global variables
 @import "./variables.less";
-// import cards.less
-@import "./cards.less";
+// import flap-cards.less
+@import "./flap-cards.less";
 // import hero.less
 @import "./hero.less";
 // import list.less
@@ -63,16 +63,16 @@
   }
 }
 
-#cases-tab {
+#cases-tabs {
   max-width: 1024px;
   margin: 0 auto;
 
   dt {
     position: relative;
     width: auto;
-    background-color: #fff;
     padding-left: 3em;
     border: 1px solid transparent;
+    background-color: @grayWhite;
     cursor: pointer;
     font-size: @regularFontSize;
     color: #3d6cb9;
@@ -126,9 +126,10 @@
 }
 
 @media (min-width: 600px) {
-  #cases-tab {
+  #cases-tabs {
     dt {
-      min-width: 100px;
+      min-width: 10px;
+      background-color: white;
     }
   }
 }
