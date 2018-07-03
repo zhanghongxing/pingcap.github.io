@@ -1,8 +1,9 @@
-
 /* recruit page */
 
 // import global variables
 @import "./variables.less";
+// import cards.less
+@import "./cards.less";
 
 @lineWidth: 1.9rem;
 
@@ -21,7 +22,7 @@
   h2.title {
     display: inline-block;
     position: relative;
-    margin: 0.4rem auto 1.6rem;
+    margin: 0 auto 1.6rem;
     font-size: 1.1rem;
 
     &::before {
@@ -55,17 +56,6 @@
     text-align: center;
   }
 
-  /* TODO: temporary ui */
-  .positions-tabs-wrapper {
-    .sidebar,
-    .nav-tags {
-      display: block !important;
-      max-width: 100%;
-      min-height: 0;
-      padding: .4rem 0 2rem;
-    }
-  }
-
   .timeline-container {
     position: relative;
     width: 85%;
@@ -73,8 +63,44 @@
   }
 }
 
+#positions-tabs {
+  max-width: 1024px;
+  margin: 0 auto;
+
+  dt {
+    position: relative;
+    width: auto;
+    background-color: @grayWhite;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: @regularFontSize;
+    color: #3d6cb9;
+
+    &.is-active {
+      border: 1px solid #ddd;
+      border-top: 2px solid #264e86;
+      border-bottom: 1px solid #fff;
+    }
+  }
+
+  dd {
+    min-height: 500px;
+    border: 1px solid transparent;
+    border-top: 1px solid #ddd;
+  }
+}
+
 @media (max-width: 600px) {
   .recruit .timeline-container {
     width: 100%;
+  }
+}
+
+@media (min-width: 600px) {
+  #positions-tabs {
+    dt {
+      min-width: 10px;
+      background-color: white;
+    }
   }
 }

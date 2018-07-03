@@ -1,0 +1,33 @@
+<div class="cards">
+    {{ if .name }}
+        {{ range .posts }}
+            {{ if in .Params.tags $.global.name }}
+                <div class="card">
+                    <div class="card__thumbnail" style="background-image: url({{.Params.logo}});"></div>
+                    <div class="card__title">
+                        <a href="#" class="toggle-info btn-toggle">
+                            <span class="left"></span>
+                            <span class="right"></span>
+                        </a>
+                        <h2> {{ .Params.title }} </h2>
+                        <div> {{ .Params.location }}</div>
+                    </div>
+                </div>
+            {{ end }}
+        {{ end }}
+    {{ else }}
+        {{ range .posts }}
+            <div class="card">
+                <div class="card__thumbnail" style="background-image: url({{.Params.logo}});"></div>
+                <div class="card__title">
+                    <a href="#" class="toggle-info btn-toggle">
+                        <span class="left"></span>
+                        <span class="right"></span>
+                    </a>
+                    <h2> {{ .Params.title }} </h2>
+                    <div> {{ .Params.location }}</div>
+                </div>
+            </div>
+        {{ end }}
+    {{ end }}
+</div>
