@@ -1,0 +1,61 @@
+{{ define "title" }} 招贤纳士 - 虚位以待 {{ end }}
+
+{{ define "headTpl" }}
+    {{$.Scratch.Set "nav_active" "about"}}
+    {{$.Scratch.Set "data_i18_cn" true }}
+    {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
+    <link rel="stylesheet" type="text/css" href="https://download.pingcap.com/style/gridtab.min.css" />
+    <link rel="stylesheet" href="/css/doc.css" />
+    <link rel="stylesheet" href="/css/recruit.css" />
+{{ end }}
+
+{{ define "main" }}
+<div class="recruit">
+    <div class="container">
+        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" " 招贤纳士") }}
+
+        <div class="archive">
+            <div class="section">
+                <h2 class="title">虚位以待</h2>
+            </div>
+
+            {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil }}
+            <div id="positions-tabs">
+                <dt class="tab">All</dt>
+                <dd>{{ partial "recruit/tab-panel.html" (dict "posts" $posts "global" .) }}</dd>
+                {{ range $index, $toc := .Site.Data.recruit_cn_toc }}
+                    <dt class="tab tab-{{ $index }}">{{ .name }}</dt>
+                    <dd>{{ partial "recruit/tab-panel.html" (dict "posts" $posts "name" .name "global" .) }}</dd>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/doc.js"></script>
+    <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#positions-tabs').gridtab({
+                grid: 6,
+                borderWidth: 1,
+                tabPadding: 16,
+                contentPadding: 0,
+                config: {
+                    layout: 'tab',
+                    activeTab: 1,
+                    keepOpen: true,
+                },
+                responsive: [{
+                    breakpoint: 599,
+                    settings: {
+                        grid: 3,
+                    }
+                }]
+            });
+        });
+
+    </script>
+{{ end }}
