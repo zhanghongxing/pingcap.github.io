@@ -10,7 +10,7 @@
   - [TiDB 商业产品开发 - 工具方向](tech/bizdev-tools-engineer.md)
   - [TiDB 商业产品开发 - Cloud 方向](tech/bizdev-cloud-engineer.md)
   - [TiDB 商业产品开发 - SRE 方向](tech/bizdev-sre-engineer.md)
-  - [TiDB 商业产品开发 - 产品设计方向](tech/bizdev-fe-engineer.md)
+  - [TiDB 商业产品开发 - 产品方向](tech/bizdev-fe-engineer.md)
 
 - Business
 
