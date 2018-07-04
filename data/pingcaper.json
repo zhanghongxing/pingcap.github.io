@@ -1,0 +1,47 @@
+[
+  {
+    "team": "Storage Engine Team",
+    "avatar": "https://avatars3.githubusercontent.com/u/2150711?s=400&v=4",
+    "github": "overvenus",
+    "statement": "舒适的工作环境，自由的技术氛围。在这我们使用前沿技术，同时也在技术的前沿。在这里，我们拓展未知的领域，每天都有新的挑战，永远不会无聊。我们不断学习，不断进步！",
+    "blur": true
+  },
+  {
+    "team": "SQL Engine Team",
+    "avatar": "https://avatars0.githubusercontent.com/u/1916485?s=400&v=4",
+    "github": "breeswish",
+    "statement": "这里有诸多真 · 业界大牛，加入 PingCAP 一起来造轮子吧!"
+  },
+  {
+    "team": "SQL Engine Team",
+    "avatar": "https://avatars3.githubusercontent.com/u/9039012?s=400&v=4",
+    "github": "XuHuaiyu",
+    "statement": "问我为什么要加入 PingCAP？\n 这么说吧，别人知道我是 PingCAP 一员后，说话都用敬称...",
+    "blur": true
+  },
+  {
+    "team": "SQL Optimizer Team",
+    "avatar": "https://avatars3.githubusercontent.com/u/16222711?s=400&v=4",
+    "github": "lamxTyler",
+    "statement": "跟牛人一起做有趣的事情，而且环境相比大公司更自由，工作环境更舒服，喜欢和大家在一起的感觉。"
+  },
+  {
+    "team": "SQL Optimizer Team",
+    "avatar": "https://avatars3.githubusercontent.com/u/7846227?s=400&v=4",
+    "github": "winoros",
+    "statement": "Open Source and Geek，在你的手里将会诞生一个融合 OLTP 与 OLAP 的全新的数据库，多么一颗赛艇的挑战，难道你不会心动吗???"
+  },
+  {
+    "team": "SRE&Tools Team",
+    "avatar": "https://avatars0.githubusercontent.com/u/22956341?s=400&v=4",
+    "github": "cwen0",
+    "statement": "加入 PingCAP 让我体会到了和牛人一起工作的乐趣，也让我这个刚步入是社会的懵懂少年体会到了家的感觉。最重要的是让我感受到了是在和一群有趣的人做一些有意义的事情。"
+  },
+  {
+    "team": "TiSpark Team",
+    "avatar": "https://avatars0.githubusercontent.com/u/15857134?s=400&v=4",
+    "github": "birdstorm",
+    "statement": "在收到的几个 offer 之中犹豫了很久，最后还是选择了 PingCAP。主要是觉得在 PingCAP 中，能更好的亲自参与到前沿技术的各个方面，很多东西的理解不会停留在知道这个层面上，而是需要深入了解其原理，并明白怎样进行工程上的优化和实现。就我个人而言，比起单纯的实现业务逻辑更喜欢学习、接触新的知识。PingCAP 的氛围是有些 geek 的，在 PingCAP 中接触的都是很有意思、真正对技术抱有极大兴趣的人，和志同道合的人在一起工作真的很开心。",
+    "blur": true
+  }
+]
