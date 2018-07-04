@@ -19,7 +19,7 @@
     
                 <div class="cards">
                     {{ range .Site.Data.about_culture }}
-                        {{ partial "recruit/card.html" (dict "title" .title "description" .description) }}
+                        {{ partial "recruit/card.html" (dict "title" .title "description" .description "avatar" .avatar) }}
                     {{ end }}
                 </div>
             </div>
