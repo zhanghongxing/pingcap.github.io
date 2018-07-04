@@ -8,6 +8,8 @@
 @import "./cards.less";
 // import chat.less
 @import "./chat.less";
+// import collapses.less
+@import "./collapses.less";
 
 @lineWidth: 1.9rem;
 
@@ -67,7 +69,8 @@
   }
 }
 
-#positions-tabs {
+#positions-tabs,
+#qa-tabs {
   max-width: 1024px;
   margin: 0 auto;
 
@@ -101,7 +104,8 @@
 }
 
 @media (min-width: 600px) {
-  #positions-tabs {
+  #positions-tabs,
+  #qa-tabs {
     dt {
       min-width: 10px;
       background-color: white;
