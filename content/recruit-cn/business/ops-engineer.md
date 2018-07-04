@@ -3,7 +3,7 @@ title: 高级客户支持工程师
 tags:
   - Business
 location: 北京，上海，广州，杭州 
-avatar: business
+avatar: support
 aliases:
   - /recruit-cn/sales/ops-engineer/
   - /recruit-cn/engineer/ops-engineer/
