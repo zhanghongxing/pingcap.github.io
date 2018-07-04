@@ -5,6 +5,7 @@
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
     <link rel="stylesheet" href="/css/doc.css" />
+    <link rel="stylesheet" href="/css/recruit.css" />
 {{ end }}
 
 {{ define "main" }}
@@ -12,6 +13,29 @@
     <div class="container">
         {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" "招贤纳士") }}
 
+        <div class="archive">
+            <div class="section section-culture">
+                <h2 id="culture" class="title">体验纯正的工程师文化</h2>
+    
+                <div class="cards">
+                    {{ range .Site.Data.about_culture }}
+                        {{ partial "recruit/card.html" (dict "title" .title "description" .description) }}
+                    {{ end }}
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 id="pingcaper" class="title">学长学姐说</h2>
+                <div class="">
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 id="q&a" class="title">Q &amp; A</h2>
+                <div class="">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {{ end }}
