@@ -2,26 +2,78 @@
 @import "./variables.less";
 
 .cards {
-
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 980px;
+  margin: 2em auto;
+  transition: height 480ms ease-out;
 }
 
 .card {
+  position: relative;
+  width: 31%;
+  max-width: 300px;
+  margin: 20px 10px;
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: @cardBoxShadow;
+  transition: all 0.3s 0s ease-in;
 
+  &:hover {
+    box-shadow: @cardHoverBoxShadow;
+  }
+
+  .read-more {
+    display: block;
+    margin-top: 20px;
+    font-size: 15px;
+    color: @themeBlue;
+  }
 }
 
 .card__avatar {
-  height: 48px;
-  width: 48px;
+  height: 54px;
+  width: 54px;
+  margin: auto;
   display: flex;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
   background: @grayWhite;
 
-
   svg {
     display: block;
-    width: 24px;
+    width: 28px;
     fill: @bannerBgColor;
+  }
+}
+
+h3.card__title {
+  margin: 12px 0;
+  font-size: 18px !important;
+  line-height: 1.6;
+}
+
+.card__location,
+.card__description {
+  color: @lightDimGray;
+  font-size: 15px;
+}
+
+.section-culture .cards {
+  justify-content: center;
+}
+
+.section-culture .card {
+  width: 48%;
+  max-width: 380px;
+  margin: 20px 1%;
+}
+
+@media (max-width: 767px) {
+  .card,
+  .section-culture .card {
+    width: 100%;
+    max-width: 100%;
   }
 }

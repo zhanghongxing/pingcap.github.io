@@ -14,12 +14,11 @@
 }
 
 .flap-card {
+  width: 31%;
   max-width: 300px;
-  flex-basis: 31%;
   box-shadow: @cardBoxShadow;
   background: white;
-  margin: 30px 8px;
-  perspective: 1000;
+  margin: 20px 8px;
   position: relative;
   text-align: left;
   transition: all 0.3s 0s ease-in;
@@ -196,11 +195,11 @@
 
 @media (max-width: 767px) {
   .flap-card {
-    flex-basis: 100%;
+    width: 100%;
   }
 }
 
-@media (max-width: 693px) {
+@media (max-width: 649px) {
   .cards {
     justify-content: center;
   }

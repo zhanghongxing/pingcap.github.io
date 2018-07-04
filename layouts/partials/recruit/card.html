@@ -1,4 +1,8 @@
 <div class="card">
+    {{ if .link }}
+        <a href="{{ .link }}" class="f-link"></a>
+    {{ end }}
+
     <div class="card__avatar">
         {{ if .avatar}}
             {{ $avatarSVG := delimit (slice (delimit (slice "svgs/avatar" .avatar) "-") "svg") "." }}
@@ -7,11 +11,20 @@
             {{ partial "svgs/avatar-engineer.svg" }}
         {{ end }}
     </div>
-    <div class="card__title">
-        <h2> {{ .title }} </h2>
-        <div> {{ .location }}</div>
-    </div>
+
+    {{ if .title}}
+        <h3 class="card__title"> {{ .title }} </h3>
+    {{ end }}
+
+    {{ if .location}}
+        <div class="card__location">{{ .location }}</div>
+    {{ end }}
+
+    {{ if .description }}
+        <div class="card__description">{{ .description }}</div>
+    {{ end }}
+
     {{ if .link }}
-        <a href="{{ .link }}">Read More</a>
+        <span class="read-more">Read More</span>
     {{ end }}
 </div>
