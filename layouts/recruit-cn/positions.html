@@ -22,10 +22,10 @@
             {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil }}
             <div id="positions-tabs">
                 <dt class="tab">All</dt>
-                <dd>{{ partial "recruit/tab-panel.html" (dict "posts" $posts "global" .) }}</dd>
+                <dd>{{ partial "recruit/positions-tab-panel.html" (dict "posts" $posts "global" .) }}</dd>
                 {{ range $index, $toc := .Site.Data.recruit_cn_toc }}
                     <dt class="tab tab-{{ $index }}">{{ .name }}</dt>
-                    <dd>{{ partial "recruit/tab-panel.html" (dict "posts" $posts "name" .name "global" .) }}</dd>
+                    <dd>{{ partial "recruit/positions-tab-panel.html" (dict "posts" $posts "name" .name "global" .) }}</dd>
                 {{ end }}
             </div>
         </div>
