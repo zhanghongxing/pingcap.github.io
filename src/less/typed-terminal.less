@@ -4,13 +4,64 @@
   font-family: monospace;
 }
 
-.terminal {
-  min-width: 34.5em;
-  height: 17.5em;
-  padding: 1em;
+.terminal-section {
+  min-width: 33.5em;
   margin: 0 auto;
-  background-color: #293345;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal-header {
+  background-color: #c5c5c5;
+
+  .terminal-controls {
+    display: inline-block;
+
+    .elem {
+      float: left;
+    }
+  }
+}
+
+.terminal-body {
+  height: 18em;
+  padding: 0.5em;
+  background-color: #303030;
   overflow: auto;
+  color: white;
+}
+
+.elem {
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  background-color: #fff;
+  margin-right: 10px;
+  margin-top: 5px;
+  border-radius: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd;
+
+  &:first-child {
+    margin-left: 10px;
+  }
+
+  &.elem-close {
+    background-color: #ff5d5b;
+    border-color: #ee4644;
+  }
+
+  &.elem-minimize {
+    background-color: #ffbb46;
+    border-color: #f1ad39;
+  }
+
+  &.elem-fullscreen {
+    background-color: #00c74f;
+    border-color: #01b849;
+  }
 }
 
 .terminal-line span {
@@ -18,8 +69,7 @@
 }
 
 .sim {
-  color: white;
-  font-size: .85em;
+  font-size: 0.85em;
 }
 
 .hide {
@@ -27,8 +77,7 @@
 }
 
 .table-content {
-  color: #559e72;
-  font-size: .85em;
+  font-size: 0.85em;
   line-height: 1.45;
 }
 
@@ -41,8 +90,7 @@
 }
 
 @media (max-width: 600px) {
-  .terminal {
+  .terminal-section {
     min-width: 100%;
-    padding: 16px 6px;
   }
 }
