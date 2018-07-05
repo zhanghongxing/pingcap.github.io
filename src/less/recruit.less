@@ -2,20 +2,19 @@
 
 // import global variables
 @import "./variables.less";
-// import timeline.less
+
+// import partials
+@import "./typed-terminal.less";
 @import "./timeline.less";
-// import cards.less
 @import "./cards.less";
-// import chat.less
 @import "./chat.less";
-// import collapses.less
 @import "./collapses.less";
 
 @lineWidth: 1.9rem;
 
 .recruit {
   .archive {
-    padding-left: 0;
+    padding-left: 1em;
     padding-right: 0;
   }
 
@@ -55,7 +54,7 @@
   }
 
   .desc {
-    max-width: 30rem;
+    max-width: 35rem;
     margin: 0 auto;
     font-size: 0.8rem;
     line-height: 1.7;
@@ -65,7 +64,7 @@
   .timeline-wrapper {
     position: relative;
     width: 85%;
-    margin: 3rem auto;
+    margin: 1em auto;
   }
 
   // TODO: temporary
@@ -112,7 +111,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 599px) {
   .recruit .timeline-wrapper {
     width: 100%;
   }
@@ -124,6 +123,20 @@
     dt {
       min-width: 10px;
       background-color: white;
+    }
+  }
+}
+
+@media (min-width: 880px) {
+  .recruit {
+    .sidebar {
+      flex: 0 0 10rem;
+      max-width: 10rem;
+    }
+
+    .archive,
+    .list {
+      max-width: calc(~"100% - 15rem");
     }
   }
 }

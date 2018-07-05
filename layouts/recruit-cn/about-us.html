@@ -33,13 +33,13 @@
             <div class="section">
                 <h2 id="qa" class="title">Q &amp; A</h2>
                 <div id="qa-tabs">
-                        <dt class="tab">All</dt>
-                        <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "global" .) }}</dd>
-                        {{ range $index, $data := .Site.Data.about_qa }}
-                            <dt class="tab tab-{{ $index }}">{{ .tag }}</dt>
-                            <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "tag" .tag "global" .) }}</dd>
-                        {{ end }}
-                    </div>
+                    <dt class="tab">All</dt>
+                    <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "global" .) }}</dd>
+                    {{ range $index, $data := .Site.Data.about_qa }}
+                        <dt class="tab tab-{{ $index }}">{{ .tag }}</dt>
+                        <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "tag" .tag "global" .) }}</dd>
+                    {{ end }}
+                </div>
             </div>
         </div>
     </div>
@@ -93,6 +93,6 @@
 
                 setHeight();
             })
-        }, 0);
+        }, 10);
     </script>
 {{ end }}

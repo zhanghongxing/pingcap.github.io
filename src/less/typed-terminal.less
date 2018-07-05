@@ -1,0 +1,50 @@
+.terminal-wrapper {
+  display: flex;
+  width: 100%;
+  font-family: monospace;
+}
+
+.terminal {
+  width: 85%;
+  min-width: 34.5em;
+  height: 17.5em;
+  padding: 1em;
+  margin: 0 auto;
+  background-color: #293345;
+  overflow: auto;
+}
+
+.terminal-line span {
+  display: inline-block;
+}
+
+.sim {
+  color: white;
+  font-size: .85em;
+}
+
+.hide {
+  display: none;
+}
+
+.table-content {
+  color: #559e72;
+  font-size: .85em;
+  line-height: 1.45;
+}
+
+.table-content pre {
+  font-size: 85%;
+  line-height: 1.45;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+@media (max-width: 600px) {
+  .terminal {
+    width: 100%;
+    min-width: 100%;
+    padding: 16px 0 16px 6px;
+  }
+}
