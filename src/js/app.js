@@ -45,38 +45,6 @@ $(document).ready(function() {
     e.preventDefault()
   })
 
-  // About page: play video
-  const playVideo = () => {
-    $('#video').attr('controls', 'controls')
-    // for safari
-    var promise = document.getElementById('video').play()
-    if (promise !== undefined) {
-      promise
-        .then(_ => {
-          // Autoplay started!
-        })
-        .catch(error => {
-          // Autoplay was prevented.
-          // Show a "Play" button so that user can start playback.
-        })
-    }
-  }
-  $('#video-control').click(function(e) {
-    const videoEl = document.getElementById('video')
-    if (videoEl.paused) {
-      $(this).css('opacity', '0')
-      playVideo()
-    } else {
-      $(this).css('opacity', '1')
-      videoEl.pause()
-    }
-    e.preventDefault()
-  })
-  $('#video').focus(function(e) {
-    $(this).attr('controls', 'controls')
-    e.preventDefault()
-  })
-
   // Footer: Toggle wechat qr code
   $('#wechat').on('click', e => {
     e.preventDefault()
