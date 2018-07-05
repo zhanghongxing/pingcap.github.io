@@ -22,10 +22,10 @@
 
             {{ $posts := where (where .Site.Pages "Section" "recruit-cn") ".Params.title" "!=" nil }}
             <div id="positions-tabs">
-                <dt class="tab">All</dt>
+                <dt>All</dt>
                 <dd>{{ partial "recruit/positions-tab-panel.html" (dict "posts" $posts "global" .) }}</dd>
                 {{ range $index, $toc := .Site.Data.recruit_cn_toc }}
-                    <dt class="tab tab-{{ $index }}">{{ .name }}</dt>
+                    <dt class="tab-{{ $index }}">{{ .name }}</dt>
                     <dd>{{ partial "recruit/positions-tab-panel.html" (dict "posts" $posts "name" .name "global" .) }}</dd>
                 {{ end }}
             </div>
@@ -41,20 +41,13 @@
         $(document).ready(function () {
             $('#positions-tabs').gridtab({
                 grid: 6,
-                borderWidth: 1,
-                tabPadding: 16,
+                tabPadding: 12,
                 contentPadding: 0,
                 config: {
                     layout: 'tab',
                     activeTab: 1,
                     keepOpen: true,
                 },
-                responsive: [{
-                    breakpoint: 599,
-                    settings: {
-                        grid: 3,
-                    }
-                }]
             });
         });
     </script>

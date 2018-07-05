@@ -33,10 +33,10 @@
             <div class="section">
                 <h2 id="qa" class="title">Q &amp; A</h2>
                 <div id="qa-tabs">
-                    <dt class="tab">All</dt>
+                    <dt>All</dt>
                     <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "global" .) }}</dd>
                     {{ range $index, $data := .Site.Data.about_qa }}
-                        <dt class="tab tab-{{ $index }}">{{ .tag }}</dt>
+                        <dt class="tab-{{ $index }}">{{ .tag }}</dt>
                         <dd>{{ partial "recruit/qa-tab-panel.html" (dict "data" .Site.Data.about_qa "tag" .tag "global" .) }}</dd>
                     {{ end }}
                 </div>
@@ -58,20 +58,13 @@
 
                 $('#qa-tabs').gridtab({
                     grid: 7,
-                    borderWidth: 1,
-                    tabPadding: 16,
+                    tabPadding: 12,
                     contentPadding: 0,
                     config: {
                         layout: 'tab',
                         activeTab: 1,
                         keepOpen: true,
                     },
-                    responsive: [{
-                        breakpoint: 599,
-                        settings: {
-                            grid: 3,
-                        }
-                    }]
                 });
 
                 function setHeight() {
