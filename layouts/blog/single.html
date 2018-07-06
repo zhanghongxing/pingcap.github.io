@@ -16,11 +16,11 @@
                     <h1 class="title">{{ .Title }}</h1>
                     <ul class="blog-post-meta">
                         <li class="meta-item">
-                            <img src="/images/icon-date.svg">
+                            <img src="/images/svgs/icon-date.svg">
                         {{ .Date.Format "Mon, Jan 2, 2006" }}
                         </li>
                         <li class="meta-item">
-                            <img src="/images/icon-author.svg">
+                            <img src="/images/svgs/icon-writer.svg">
                         {{ if .Params.author }}
                             {{ range .Params.author }} {{ . }}  {{ end }}
                         {{ else }}
