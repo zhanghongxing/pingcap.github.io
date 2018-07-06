@@ -81,7 +81,6 @@
   .list {
     flex: 1;
     max-width: calc(~"100% - 24rem");
-    padding: calc(~"@{headerHeight} + 20px") 1rem 1.5rem;
 
     h1,
     h2,
@@ -143,7 +142,7 @@
 
         img {
           display: inline-block;
-          height: 18px;
+          height: 16px;
           margin-top: -2px;
           margin-right: 5px;
           vertical-align: middle;
@@ -258,6 +257,13 @@
 }
 
 @media (min-width: 880px) {
+  .doc {
+    .archive,
+    .list {
+      padding: calc(~"@{headerHeight} + 20px") 1rem 1.5rem;
+    }
+  }
+
   .blog,
   .meetup,
   .weekly {
@@ -273,21 +279,13 @@
     .archive,
     .list {
       max-width: calc(~"100% - 15rem");
-      padding-right: 2.5rem;
+      padding: calc(~"@{headerHeight} + 20px") 2.5rem 1.5rem;
     }
   }
 
   .blog {
     .content {
       margin-right: 1rem;
-    }
-  }
-
-  .meetup,
-  .weekly {
-    .list,
-    .archive {
-      padding-left: 3rem;
     }
   }
 }
