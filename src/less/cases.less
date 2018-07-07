@@ -1,11 +1,9 @@
 
 // import global variables
 @import "./variables.less";
-// import flap-cards.less
+// import partials
 @import "./flap-cards.less";
-// import hero.less
 @import "./hero.less";
-// import list.less
 @import "./list.less";
 
 .cases,
@@ -68,18 +66,25 @@
 
   dt {
     position: relative;
+    display: inline-block;
     width: auto;
-    padding-left: 3em;
+    margin: 8px;
+    padding: 2px 12px 2px 3em;
     border: 1px solid transparent;
-    background-color: @grayWhite;
+    border-radius: 16px;
+    background-color: @silverWhite;
     cursor: pointer;
-    font-size: @regularFontSize;
-    color: #3d6cb9;
+    font-size: 15px;
+    line-height: 27px;
+    color: @bannerBgColor;
 
     &.is-active {
-      border: 1px solid #ddd;
-      border-top: 2px solid #264e86;
-      border-bottom: 1px solid #fff;
+      background: @bannerBgColor;
+      color: white;
+    }
+
+    &.is-active:after {
+      height: 0;
     }
 
     &::before {
@@ -96,23 +101,38 @@
       background: url(/images/svgs/icon-internet.svg) 100% 100% no-repeat;
     }
 
+    &.tab-0.is-active::before {
+      background: url(/images/svgs/icon-internet-white.svg) 100% 100% no-repeat;
+    }
+
     &.tab-1::before {
       background: url(/images/svgs/icon-video-game.svg) 100% 100% no-repeat;
+    }
+
+    &.tab-1.is-active::before {
+      background: url(/images/svgs/icon-video-game-white.svg) 100% 100% no-repeat;
     }
 
     &.tab-2::before {
       background: url(/images/svgs/icon-payment.svg) 100% 100% no-repeat;
     }
 
+    &.tab-2.is-active::before {
+      background: url(/images/svgs/icon-payment-white.svg) 100% 100% no-repeat;
+    }
+
     &.tab-3::before {
       background: url(/images/svgs/icon-industry.svg) 100% 100% no-repeat;
+    }
+
+    &.tab-3.is-active::before {
+      background: url(/images/svgs/icon-industry-white.svg) 100% 100% no-repeat;
     }
   }
 
   dd {
     min-height: 500px;
     border: 1px solid transparent;
-    border-top: 1px solid #ddd;
   }
 }
 
@@ -128,7 +148,6 @@
   #cases-tabs {
     dt {
       min-width: 10px;
-      background-color: white;
     }
   }
 }
