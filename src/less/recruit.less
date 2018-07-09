@@ -68,7 +68,7 @@
 
   .map-wrapper {
     width: 90%;
-    margin: 2em auto;
+    margin: 2em auto 1em;
   }
 
   // TODO: temporary
@@ -112,7 +112,7 @@
     }
   }
 
-  & > dt.is-active:after {
+  & > dt.is-active::after {
     height: 0;
   }
 
@@ -130,7 +130,8 @@
 }
 
 @media (max-width: 599px) {
-  .recruit .timeline-wrapper {
+  .recruit .timeline-wrapper,
+  .recruit .map-wrapper {
     width: 100%;
   }
 }
