@@ -67,8 +67,12 @@
   }
 
   .map-wrapper {
-    width: 90%;
+    width: 100%;
     margin: 2em auto 1em;
+
+    text {
+      font: 300 12px arial, sans-serif !important;
+    }
   }
 
   // TODO: temporary
@@ -130,9 +134,14 @@
 }
 
 @media (max-width: 599px) {
-  .recruit .timeline-wrapper,
-  .recruit .map-wrapper {
+  .recruit .timeline-wrapper {
     width: 100%;
+  }
+
+  .recruit .map-wrapper {
+    text {
+      font: 300 8px arial, sans-serif !important;
+    }
   }
 }
 
