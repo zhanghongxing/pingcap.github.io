@@ -19,11 +19,26 @@ function smoothScroll(hash) {
     )
 }
 
-$(document).ready(function() {
+// Open the first folder
+function openFolder(li) {
+  if (li.hasClass('has-child')) {
+    li.addClass('open')
+    const $firstUL = li.find('ul')[0]
+    const $LI = $($firstUL)
+      .attr('style', 'display: block;')
+      .find('li:first-child')
+    return openFolder($LI)
+  }
+  li.addClass('active')
+  return false
+}
+
+// Process Sidebar
+function processSidebar() {
   // Process Sticky Tree
   if ($('.st_tree').length) {
     // Sticky tree fade in
-    $('.st_tree').fadeIn()
+    $('.st_tree').show()
     // Handle click events
     $('.st_tree').SimpleTree({
       click: a => {
@@ -42,24 +57,21 @@ $(document).ready(function() {
     })
   }
 
-  // Handle hash change
-  $(window).on('hashchange', function() {
-    const hash = decodeURIComponent(location.hash)
-    if (
-      location.pathname.match(blogRegex) &&
-      $('.nav-tags').data('type') !== 'single'
-    )
-      return
-    if (hash) smoothScroll(hash)
-  })
-
   // Create TOC for article in docs module
-  const $tocWrap = $('.article-toc')
+  var $tocWrap = $('.article-toc')
   if ($tocWrap.length) {
     toc_run()
   }
 
-  // Process tags
+  // Open the first item in docs/docs-cn/weekly/recruit-cn list page
+  const $firstLI = $('#list_page .st_tree > ul > li:first-child')
+  const hash = decodeURIComponent(location.hash)
+  if (!hash && $firstLI.length) openFolder($firstLI)
+}
+
+// Process tags
+function processTags() {
+  // Process hash
   const hash = decodeURIComponent(location.hash)
   if (location.pathname.match(blogRegex) && hash) {
     $('.nav-tags .tag').removeClass('sel')
@@ -81,8 +93,63 @@ $(document).ready(function() {
       smoothScroll(hash)
     }
   }
+}
 
-  // Filter tags on frontend
+// Replace the relative href in markdown-body
+function replaceHref(a) {
+  var href = $(a).attr('href')
+  var absUrlExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,
+    mdSuffixExp = /\.md/
+
+  var absUrlRegex = new RegExp(absUrlExp),
+    mdSuffixRegex = new RegExp(mdSuffixExp)
+
+  if (!href.match(absUrlRegex) && href.match(mdSuffixRegex)) {
+    var newHref = '../' + href.replace(/\.md/, '')
+    $(a).attr('href', newHref)
+  }
+}
+
+// Process links in markdown content
+function processLinksInMarkdown() {
+  $('.markdown-body')
+    .find('a')
+    .each(function() {
+      var $this = $(this)
+      // click event
+      $this.click(function(e) {
+        replaceHref(this)
+      })
+      // right click event for open in new window or copy link url
+      $this.contextmenu(function(e) {
+        replaceHref(this)
+      })
+    })
+}
+
+$(document).ready(function() {
+  // Process dom elements after loaded
+  var loadingTimer = setInterval(function() {
+    if ($('#page-content').css('display') !== 'none') {
+      processSidebar()
+      processTags()
+      processLinksInMarkdown()
+      clearInterval(loadingTimer)
+    }
+  }, 50)
+
+  // Handle hash change
+  $(window).on('hashchange', function() {
+    const hash = decodeURIComponent(location.hash)
+    if (
+      location.pathname.match(blogRegex) &&
+      $('.nav-tags').data('type') !== 'single'
+    )
+      return
+    if (hash) smoothScroll(hash)
+  })
+
+  // Handle tags click: Filter tags on frontend
   $('.nav-tags .tag, .anchor-tag').click(function(e) {
     const $this = $(this)
     const isInlineTag = $this.hasClass('anchor-tag')
@@ -118,48 +185,4 @@ $(document).ready(function() {
     e.preventDefault()
     return false
   })
-
-  // Open the first item in docs/docs-cn/weekly/recruit-cn list page
-  const openFolder = li => {
-    if (li.hasClass('has-child')) {
-      li.addClass('open')
-      const $firstUL = li.find('ul')[0]
-      const $LI = $($firstUL)
-        .attr('style', 'display: block;')
-        .find('li:first-child')
-      return openFolder($LI)
-    }
-    li.addClass('active')
-    return false
-  }
-  const $firstLI = $('#list_page .st_tree > ul > li:first-child')
-  if (!hash && $firstLI.length) openFolder($firstLI)
-
-  // Replace the relative href in markdown-body
-  function replaceHref(a) {
-    var href = $(a).attr('href')
-    var absUrlExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,
-      mdSuffixExp = /\.md/
-
-    var absUrlRegex = new RegExp(absUrlExp),
-      mdSuffixRegex = new RegExp(mdSuffixExp)
-
-    if (!href.match(absUrlRegex) && href.match(mdSuffixRegex)) {
-      var newHref = '../' + href.replace(/\.md/, '')
-      $(a).attr('href', newHref)
-    }
-  }
-  $('.markdown-body')
-    .find('a')
-    .each(function() {
-      var $this = $(this)
-      // click event
-      $this.click(function(e) {
-        replaceHref(this)
-      })
-      // right click event for open in new window or copy link url
-      $this.contextmenu(function(e) {
-        replaceHref(this)
-      })
-    })
 })
