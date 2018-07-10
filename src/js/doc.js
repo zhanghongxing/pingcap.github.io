@@ -37,7 +37,7 @@ function openFolder(li) {
 function processSidebar() {
   // Process Sticky Tree
   if ($('.st_tree').length) {
-    // Sticky tree fade in
+    // Sticky tree show
     $('.st_tree').show()
     // Handle click events
     $('.st_tree').SimpleTree({
@@ -129,14 +129,9 @@ function processLinksInMarkdown() {
 
 $(document).ready(function() {
   // Process dom elements after loaded
-  var loadingTimer = setInterval(function() {
-    if ($('#page-content').css('display') !== 'none') {
-      processSidebar()
-      processTags()
-      processLinksInMarkdown()
-      clearInterval(loadingTimer)
-    }
-  }, 50)
+  processSidebar()
+  processTags()
+  processLinksInMarkdown()
 
   // Handle hash change
   $(window).on('hashchange', function() {

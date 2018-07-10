@@ -21,10 +21,6 @@
     .st_tree {
         display: none;
     }
-
-    #page-content {
-        display: none;
-    }
     </style>
 
     {{ block "headTpl" . }}{{ end }}
@@ -43,7 +39,7 @@
 <body {{ if $homepage }}class="homepage"{{ end }}>
     {{ partial "loaders/page-loader.html" }}
 
-    <div id="page-content">
+    <div id="page-content" style="display: none;">
         {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
 
         {{ if $homepage }}
@@ -66,6 +62,11 @@
             {{ partial "layout/footer" . }}
         {{ end }}
     </div>
+
+    <script type="text/javascript">
+        document.getElementById('page-loader').style.display='none';
+        document.getElementById('page-content').style.display='block';
+    </script>
 
     <div class="overlay"></div>
 

@@ -8,10 +8,6 @@ console.log('🦊 Hello! @PingCAP website')
 import '../../dist/css/main.css'
 
 $(document).ready(function() {
-  // Process Page Loader
-  $('#page-loader').fadeOut('fast')
-  $('#page-content').fadeIn('fast')
-
   // Process release banner
   if ($('.homepage')) {
     var version = $('.release-banner').data('release')
