@@ -6,7 +6,7 @@
 @videoWidth: 1124px;
 @videoHeight: calc(~"@{videoWidth}* 9/16");
 @lineWidth: 1.9rem;
-@fadeInAttrs: fadeIn 0.4s;
+// @fadeInAttrs: fadeIn 0.4s;
 
 section[class^="about-"],
 section[class^="meetup-landing-page-"] {
@@ -99,7 +99,6 @@ section[class^="meetup-landing-page-"] {
     url("https://download.pingcap.com/images/video-poster.jpg") no-repeat 0 0;
     background-size: cover;
     z-index: auto;
-    .customAnimation(@fadeInAttrs);
 
     video {
       width: 100%;
