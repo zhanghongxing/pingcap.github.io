@@ -32,7 +32,7 @@ input[name="question"] + label {
   background: @themeBlue;
   color: @themeBlue;
   padding: 10px 20px;
-  -webkit-transform: translate3d(0, -40px, 0) rotate(-0.5deg);
+  transform: translate3d(0, -40px, 0) rotate(-0.5deg);
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -50,8 +50,8 @@ input[name="question"]:checked + label + .response {
   opacity: 1;
   visibility: visible;
   padding: 10px 20px;
-  -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
-  -webkit-filter: blur(0);
+  transform: translate3d(0, 0, 0) rotate(0deg);
+  filter: blur(0);
   margin-bottom: 20px;
   color: white;
 }
