@@ -5,10 +5,10 @@
 
     <div class="card__avatar">
         {{ if .avatar}}
-            {{ $avatarSVG := delimit (slice (delimit (slice "svgs/avatar" .avatar) "-") "svg") "." }}
-            {{ partial (string $avatarSVG) }}
+            {{ $avatarPath := delimit (slice (delimit (slice "/images/svgs/avatar" .avatar) "-") "svg") "." }}
+            <img src="{{- $avatarPath -}}" alt="avatar-{{- .avatar -}}" />
         {{ else }}
-            {{ partial "svgs/avatar-engineer.svg" }}
+            <img src="/images/svgs/avatar-engineer.svg" alt="avatar-engineer" />
         {{ end }}
     </div>
 

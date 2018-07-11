@@ -110,17 +110,26 @@
     }
 
     .folder {
-      .icon {
+      .icon-arrow {
         margin-right: 0.3rem;
         width: 10px;
         height: 10px;
         background-image: url('/images/svgs/icon-arrow-right.svg');
         background-size: 10px 10px;
       }
+
+      .icon-file {
+        flex: 0 0 auto; // flex: none; // no shrink
+        width: 14px;
+        height: 14px;
+        margin-right: 0.3rem;
+        background-image: url('/images/svgs/icon-file.svg');
+        background-size: 14px 14px;
+      }
     }
 
     .open > a {
-      .icon {
+      .icon-arrow {
         width: 10px;
         height: 10px;
         background-image: url('/images/svgs/icon-arrow-down.svg');
@@ -129,18 +138,13 @@
     }
 
     li.leaf-child {
-      svg {
-        flex: 0 0 auto; // flex: none; // no shrink
-        margin-right: 0.3rem;
-      }
-
       &.active {
         a {
           color: @themeBlue;
         }
 
-        svg {
-          fill: @themeBlue;
+        .icon-file {
+          background-image: url('/images/svgs/icon-file-blue.svg');
         }
       }
     }
@@ -149,7 +153,7 @@
   .nav-toc {
     .folder,
     .open > a {
-      .icon {
+      .icon-arrow {
         margin-left: 0.4rem;
       }
     }
