@@ -2,9 +2,8 @@ import gulp from 'gulp'
 import { spawn } from 'child_process'
 import hugoBin from 'hugo-bin'
 import gutil from 'gulp-util'
-import postcss from 'gulp-postcss'
 import less from 'gulp-less'
-import cssImport from 'postcss-import'
+import autoprefixer from 'gulp-autoprefixer'
 import cleanCSS from 'gulp-clean-css'
 import BrowserSync from 'browser-sync'
 import webpack from 'webpack'
@@ -38,6 +37,12 @@ const buildCss = () => {
     .pipe(
       less({
         paths: [path.join(__dirname, 'less', 'includes')],
+      })
+    )
+    .pipe(
+      autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false,
       })
     )
     .pipe(cleanCSS({ compatibility: 'ie8' }))
