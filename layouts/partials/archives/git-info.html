@@ -16,11 +16,7 @@
             {{ $filename := index (split $item.name "___") 1 }}
             <div class="git-info">
                 <a class="link" href="https://github.com/pingcap/{{$.repo}}/blob/master/{{$filename}}">"{{ $.global.Page.Title }}"</a>
-                {{ if $.isCn }}
-                    更新于
-                {{ else }}
-                    was last updated
-                {{ end }}
+                {{ if $.isCn }}更新于{{ else }}was last updated{{ end }}
                 <span>{{ $month }} {{ $day }} {{ $year }}</span>:
                 <a class="link" href="https://github.com/pingcap/{{$.repo}}/commit/{{$commit_id}}">
                     {{ $msg }}

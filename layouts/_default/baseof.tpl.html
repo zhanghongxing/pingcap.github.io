@@ -15,9 +15,7 @@
     <title>{{ block "title" . }}{{- .Title -}}{{ end }} | PingCAP</title>
     {{- partial "head/ga" . -}}
     {{- partial "head/meta-seo" . -}}
-
     {{- block "headTpl" . -}}{{- end -}}
-
     <script type="text/javascript">
     if (location.pathname === '/') {
         if (location.hostname === 'pingcap.github.io') {
@@ -27,24 +25,23 @@
     </script>
 </head>
 
-{{- $homepage := $.Scratch.Get "homepage" -}}
-
+{{ $homepage := $.Scratch.Get "homepage" }}
 <body {{ if $homepage }}class="homepage"{{ end }}>
     {{- partial "loaders/page-loader.html" -}}
 
     <div id="page-content" style="display: none;">
-        {{- $data_i18_cn := $.Scratch.Get "data_i18_cn" -}}
+        {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
 
         {{- if $homepage -}}
             {{- partial "layout/release-banner" . -}}
         {{- end -}}
 
         {{- if $data_i18_cn -}}
-            {{ partial "layout/header-cn" . }}
-            {{ partial "layout/mobile-sidebar-cn" . }}
+            {{- partial "layout/header-cn" . -}}
+            {{- partial "layout/mobile-sidebar-cn" . -}}
         {{- else -}}
-            {{ partial "layout/header" . }}
-            {{ partial "layout/mobile-sidebar" . }}
+            {{- partial "layout/header" . -}}
+            {{- partial "layout/mobile-sidebar" . -}}
         {{- end -}}
 
         {{- block "main" . -}}{{- end -}}

@@ -59,6 +59,7 @@ export default {
         keepClosingSlash: true,
         preserveLineBreaks: true,
         removeTagWhitespace: true,
+        removeEmptyAttributes: true,
         trimCustomFragments: true,
         minifyJS: true,
         minifyCSS: true,
