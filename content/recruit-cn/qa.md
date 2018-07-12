@@ -1,4 +1,4 @@
 ---
 type: recruit-cn
-layout: join-us
+layout: qa
 ---

@@ -11,10 +11,16 @@
 @import "./collapses.less";
 
 @lineWidth: 1.9rem;
+@contentMaxWidth: 980px;
 
 .recruit {
-  .archive {
-    padding: calc(~"@{headerHeight} + 18px") 0 1.5em 1em;
+  padding: calc(~"@{headerHeight} + 18px") @horizontalPadding;
+
+  h2,
+  h3,
+  h4 {
+    font-weight: 400;
+    color: @titleColor;
   }
 
   .section {
@@ -60,22 +66,6 @@
     text-align: center;
   }
 
-  .timeline-wrapper {
-    position: relative;
-    width: 85%;
-    margin: 1em auto;
-  }
-
-  .map-wrapper {
-    width: 100%;
-    margin: 2em auto 1em;
-
-    text {
-      font: 300 10px arial, sans-serif !important;
-    }
-  }
-
-  // TODO: temporary
   .logo-list {
     display: flex;
     flex-flow: row wrap;
@@ -92,8 +82,36 @@
   }
 }
 
+.timeline-wrapper {
+  position: relative;
+  width: 85%;
+  margin: 3em auto 2em;
+}
+
+.map-wrapper {
+  width: 100%;
+  margin: 2em auto 1em;
+
+  text {
+    font: 300 10px arial, sans-serif !important;
+  }
+}
+
+.section-culture .cards {
+  justify-content: center;
+  align-items: stretch;
+  margin: 0 auto;
+}
+
+.section-culture .card {
+  width: 48%;
+  max-width: 380px;
+  margin: 20px 1%;
+}
+
 #positions-tabs,
 #qa-tabs {
+  width: 100%;
   margin: 0 auto;
 
   dt {
@@ -107,7 +125,7 @@
     background: @silverWhite;
     cursor: pointer;
     font-size: 15px;
-    line-height: 27px;
+    line-height: 1.8;
     color: @bannerBgColor;
 
     &.is-active {
@@ -122,15 +140,23 @@
 
   dd {
     border: 1px solid transparent;
+    min-height: 360px;
   }
 }
 
-#qa-tabs {
-  max-width: 720px;
+#qa-tabs,
+#positions-tabs,
+.timeline-wrapper,
+.map-wrapper,
+.section-culture .cards {
+  max-width: @contentMaxWidth;
 }
 
-#positions-tabs {
-  max-width: 980px;
+@media (max-width: 767px) {
+  .section-culture .card {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 599px) {
@@ -143,6 +169,11 @@
       font: 300 8px arial, sans-serif !important;
     }
   }
+
+  #positions-tabs dt,
+  #qa-tabs dt {
+    font-size: 13px;
+  }
 }
 
 @media (min-width: 600px) {
@@ -150,20 +181,6 @@
   #qa-tabs {
     dt {
       min-width: 10px;
-    }
-  }
-}
-
-@media (min-width: 880px) {
-  .recruit {
-    .sidebar {
-      flex: 0 0 10rem;
-      max-width: 10rem;
-    }
-
-    .archive,
-    .list {
-      max-width: calc(~"100% - 13rem");
     }
   }
 }

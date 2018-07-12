@@ -12,6 +12,7 @@ export default {
     app: [path.join(__dirname, 'src', 'js', 'app')],
     doc: [path.join(__dirname, 'src', 'js', 'doc')],
     about: [path.join(__dirname, 'src', 'js', 'about')],
+    recruit: [path.join(__dirname, 'src', 'js', 'recruit')],
   },
   output: {
     path: path.join(__dirname, 'dist', 'js'),

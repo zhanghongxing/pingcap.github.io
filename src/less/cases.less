@@ -75,7 +75,7 @@
     background-color: @silverWhite;
     cursor: pointer;
     font-size: 15px;
-    line-height: 27px;
+    line-height: 1.8;
     color: @bannerBgColor;
 
     &.is-active {
@@ -83,7 +83,7 @@
       color: white;
     }
 
-    &.is-active:after {
+    &.is-active::after {
       height: 0;
     }
 
@@ -170,5 +170,15 @@
       font-size: @heroSTitleSize;
       left: 1rem;
     }
+  }
+
+  #cases-tabs dt {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 320px) {
+  .cases__intro p {
+    font-size: 15px;
   }
 }
