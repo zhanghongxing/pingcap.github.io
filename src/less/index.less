@@ -16,8 +16,6 @@
 @textSize: 0.8rem;
 // others
 @textLineHeight: 1.8;
-// fadeInAttrs
-// @fadeInAttrs: fadeIn 0.3s;
 
 .homepage {
   background-color: @homepageBgColor;
@@ -39,6 +37,7 @@
   font-size: 0.8rem;
   text-align: center;
 }
+
 // mixin
 .btn-theme-switch (@bg_color: @themeBlue, @color: white) {
   background: @bg_color;
@@ -74,8 +73,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  // height: 100vh;
-  // padding: @verticalPadding 0;
   padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-slogan.png")
@@ -236,7 +233,7 @@
   padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
   url("https://download.pingcap.com/images/bg-landingpage-advantages.png")
-  no-repeat center bottom @homepageBgColor;
+  no-repeat center bottom;
   background-size: cover;
 
   h3 {
@@ -407,10 +404,6 @@ body.banner-active .release-banner {
 }
 
 @media screen and (min-width: 769px) {
-  .banner-active .homepage-slogan-mask {
-    // height: calc(~"100vh - @{headerHeight} - 64px");
-  }
-
   .release-banner__copy .party {
     margin-right: 25px;
   }
@@ -442,9 +435,6 @@ body.banner-active .release-banner {
   }
 
   .homepage-slogan-mask {
-    // height: auto;
-    // min-height: 100vh;
-
     .container {
       align-items: center;
       text-align: center;
