@@ -1,9 +1,10 @@
-{{ define "title" }} Meetup {{ end }}
+{{- define "title" -}} Meetup {{- end -}}
 
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "meetup"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/weekly" }}
+    <link rel="stylesheet" href="/css/meetup.css" />
 {{ end }}
 
 {{ define "main" }}
@@ -106,7 +107,7 @@
 </section>
 <section class="meetup-landing-page-banner-footer">
     <div class="container">
-        <img src="/images/meetup-tags.svg" alt="meetup tags">
+        <img src="/images/svgs/meetup-tags.svg" alt="meetup tags">
     </div>
 </section>
 {{ end }}

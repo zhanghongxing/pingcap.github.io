@@ -1,7 +1,9 @@
-{{ define "title" }} Meetup {{ end }}
+{{- define "title" -}} Meetup {{- end -}}
 
 {{ define "headTpl" }}
     <link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css" />
+    <link rel="stylesheet" href="/css/doc.css" />
+    <link rel="stylesheet" href="/css/list.css" />
     {{$.Scratch.Set "nav_active" "meetup"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/weekly" }}
@@ -10,9 +12,13 @@
 {{ define "main" }}
     {{ $posts := where (where .Site.Pages "Section" "meetup") ".Params.title" "!=" nil  }}
     <div class="meetup">
-        <div class="container content-container">
+        <div class="container">
         {{ partial "navs/tags-nav.html" (dict "title" "Popular Tags" "posts" $posts "global" .) }}
         {{ partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) }}
         </div>
     </div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/doc.js"></script>
 {{ end }}

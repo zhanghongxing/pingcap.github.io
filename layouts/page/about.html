@@ -1,14 +1,13 @@
-{{ define "title" }} About {{ end }}
-
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_link" "/about-cn" }}
+    <link rel="stylesheet" href="/css/about.css" />
 {{ end }}
 
 {{ define "main" }}
     <section class="about-company">
         <div class="container">
-            <h1 class="title">ABOUT THE COMPANY</h1>
+            <h2 class="title">ABOUT THE COMPANY</h2>
             <div class="desc f-tf" style="max-width: 36rem;">
             PingCAP started in 2015 when three seasoned infrastructure engineers were sick and tired of the way databases were managed, scaled, and maintained while working at leading Internet companies.
             Seeing no good solution on the market, they decided to build one themselves--the open-source way.
@@ -65,21 +64,21 @@
             <div class="row">
                 <div class="item">
                 <div class="image-wrap">
-                    <img class="icon icon-m" src="https://download.pingcap.com/images/icon_pc.svg" alt="Office Equipment">
+                    <img class="icon icon-m" src="/images/svgs/icon-pc.svg" alt="Office Equipment">
                 </div>
                 <h3>Office Equipment</h3>
                 <p class="desc">Excellent developers need high-end devices.</p>
                 </div>
                 <div class="item item-short">
                 <div class="image-wrap">
-                    <img class="icon icon-s" src="https://download.pingcap.com/images/icon_gym.svg" alt="Gym">
+                    <img class="icon icon-s" src="/images/svgs/icon-gym.svg" alt="Gym">
                 </div>
                 <h3>Gym</h3>
                 <p class="desc">Refresh yourself with a workout!</p>
                 </div>
                 <div class="item">
                 <div class="image-wrap">
-                    <img class="icon icon-m" src="https://download.pingcap.com/images/icon_tb.svg" alt="Team Building">
+                    <img class="icon icon-m" src="/images/svgs/icon-tb.svg" alt="Team Building">
                 </div>
                 <h3>Team Building</h3>
                 <p class="desc">A monthly team outing to help you bond with your teammates.</p>
@@ -88,21 +87,21 @@
             <div class="row">
                 <div class="item">
                 <div class="image-wrap">
-                    <img class="icon" src="https://download.pingcap.com/images/icon_food.svg" alt="Food & Beverage">
+                    <img class="icon" src="/images/svgs/icon-food.svg" alt="Food & Beverage">
                 </div>
                 <h3>Food &amp; Beverage</h3>
                 <p class="desc">A selection of food and snacks is provided in the office.</p>
                 </div>
                 <div class="item">
                 <div class="image-wrap">
-                    <img class="icon" src="https://download.pingcap.com/images/icon_tgif.svg" alt="TGIF">
+                    <img class="icon" src="/images/svgs/icon-tgif.svg" alt="TGIF">
                 </div>
                 <h3>TGIF</h3>
                 <p class="desc">Thank God It's Friday! Let's talk and share everything to stay on the same page every two weeks.</p>
                 </div>
                 <div class="item">
                 <div class="image-wrap">
-                    <img class="icon" src="https://download.pingcap.com/images/icon_hour.svg" alt="Flexible Work Schedule">
+                    <img class="icon" src="/images/svgs/icon-hour.svg" alt="Flexible Work Schedule">
                 </div>
                 <h3>Flexible Work Schedule</h3>
                 <p class="desc">You are entitled to have a work-life balance by working at flexible hours of your choice or telecommuting.</p>

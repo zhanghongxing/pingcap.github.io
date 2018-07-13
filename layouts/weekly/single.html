@@ -1,12 +1,18 @@
 {{ define "headTpl" }}
+    <style type="text/css" media="screen">
+        .st_tree {
+            display: none;
+        }
+    </style>
     <link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css" />
+    <link rel="stylesheet" href="/css/doc.css" />
     {{$.Scratch.Set "nav_active" "weekly"}}
     {{$.Scratch.Set "data_i18_link" "/weekly" }}
 {{ end }}
 
 {{ define "main" }}
 <div class="weekly">
-    <div class="container content-container">
+    <div class="container">
         {{ $blogs := where (where .Site.Pages "Section" "weekly") ".Params.title" "!=" nil }}
         {{ partial "navs/date-tree-nav.html" (dict "title" "Weekly" "data" $blogs "rss" "/weekly/index.xml") }}
 
@@ -14,7 +20,7 @@
         <div class="content markdown-body">
             <ul class="blog-post-meta">
             <li class="meta-item">
-                {{ partial "svgs/icon-date.svg" (dict "fill" "#040000" "width" 14 "height" 16 ) }}
+                <img src="/images/svgs/icon-date.svg">
                 {{ .Date.Format "Mon, Jan 2, 2006" }}
             </li>
             </ul>
@@ -23,4 +29,8 @@
         </div>
     </div>
 </div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/doc.js"></script>
 {{ end }}

@@ -1,5 +1,11 @@
 {{ define "headTpl" }}
+    <style type="text/css" media="screen">
+        .st_tree {
+            display: none;
+        }
+    </style>
     <link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css" />
+    <link rel="stylesheet" href="/css/doc.css" />
     {{$.Scratch.Set "nav_active" "docs"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$v0 := (strings.TrimPrefix "docs-cn/" .File.Path )}}
@@ -10,7 +16,7 @@
 
 {{ define "main" }}
 <div class="doc">
-    <div class="container content-container">
+    <div class="container">
         {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") }}
 
         <div class="archive">
@@ -28,4 +34,8 @@
         </div>
     </div>
 </div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/doc.js"></script>
 {{ end }}

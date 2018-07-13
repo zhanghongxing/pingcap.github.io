@@ -1,22 +1,57 @@
-{{ define "title" }} 招贤纳士 - 了解 PingCAP {{ end }}
+{{- define "title" -}} 招贤纳士 - 了解 PingCAP {{- end -}}
 
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
+    <link rel="stylesheet" href="/css/recruit.css" />
 {{ end }}
 
 {{ define "main" }}
-<div class="recruit" id="list_page">
-    <div class="container content-container">
-        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn "title" " 招贤纳士") }}
+<div class="recruit">
+    <div class="container">
+        <div class="section">
+            <h2 id="milestones" class="title">发展历程</h2>
+            {{ partial "recruit/typed-terminal.html" }}
+        </div>
 
-        <div class="archive">
-            <div id="typed-strings">
-                <p>Typed.js is a <strong>JavaScript</strong> library.</p>
-                <p>It <em>types</em> out sentences.</p>
+        <div class="section">
+            <h2 id="offices" class="title">Offices</h2>
+            <div class="desc">
+                从北京到上海再到广州，从中国到美国硅谷，我们的工作地点在不断刷新。我们信仰 Get Things Done，只要能把事情做好，工作时间和地点都是次要的，你可以选择自己舒服的方式和时间来合理进行调节，找到对自己更高效的方式。
             </div>
-            <span id="typed"></span>
+            <div class="map-wrapper">
+                {{ partial "maps/world-map.html" }}
+            </div>
+        </div>
+
+        <div class="section section-culture">
+            <h2 id="culture" class="title">工程师文化</h2>
+            <div class="cards">
+                {{ range .Site.Data.about_culture }}
+                    {{ partial "recruit/card.html" (dict "title" .title "description" .description "avatar" .avatar) }}
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 id="collaborations" class="title">协作方式</h2>
+            <div class="desc">
+                很多小伙伴问我们，你们的工作地点这么分散，甚至还支持 remote，成员之间到底是如何协作的呢？戳下面的 GIF 图寻找答案吧！
+            </div>
+            <div class="logo-list">
+                <img src="/images/svgs/trello.svg" alt="">
+                <img src="/images/google-docs.png" alt="">
+                <img src="/images/svgs/github.svg" alt="">
+                <img src="/images/slack.png" alt="">
+                <img src="/images/svgs/confluence.svg" alt="">
+                <img src="/images/svgs/jira.svg" alt="">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 id="pingcaper" class="title">PingCAPer</h2>
+            {{ partial "recruit/chat.html" (dict "employee" .Site.Data.pingcaper) }}
         </div>
     </div>
 </div>
@@ -24,9 +59,6 @@
 
 {{ define "footJS" }}
     <script type="text/javascript" src="https://download.pingcap.com/js/typed.min.js"></script>
-    <script>
-        var typed = new Typed('#typed', {
-          stringsElement: '#typed-strings'
-        });
-      </script>
+    <script type="text/javascript" src="https://download.pingcap.com/js/worldmap.js"></script>
+    <script type="text/javascript" src="/js/recruit.js"></script>
 {{ end }}

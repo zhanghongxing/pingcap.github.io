@@ -2,7 +2,8 @@
 title: 人力资源实习生
 tags:
   - Intern
-label: Intern
+location: 北京
+avatar: hr
 aliases:
   - /recruit-cn/campus/hr-intern/
 ---

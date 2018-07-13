@@ -1,7 +1,7 @@
 <ul>
     {{range .tree}}
         {{ if isset . "children" }}
-            <li class="has-child"><a href="#">{{ .name }}<i class="icon"></i></a>
+            <li class="has-child"><a href="#">{{ .name }}<i class="icon-arrow"></i></a>
                 {{ partial "navs/tree-nav.html" (dict "tree" .children "global" $) }}
             </li>
         {{else}}

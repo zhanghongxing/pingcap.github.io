@@ -5,7 +5,7 @@
 // Say hello
 console.log('🦊 Hello! @PingCAP website')
 
-import '../../dist/css/style.css'
+import '../../dist/css/main.css'
 
 $(document).ready(function() {
   // Process release banner
@@ -42,38 +42,6 @@ $(document).ready(function() {
       var version = $('.release-banner').data('release')
       localStorage.setItem(`release-version-${version}`, version)
     }
-    e.preventDefault()
-  })
-
-  // About page: play video
-  const playVideo = () => {
-    $('#video').attr('controls', 'controls')
-    // for safari
-    var promise = document.getElementById('video').play()
-    if (promise !== undefined) {
-      promise
-        .then(_ => {
-          // Autoplay started!
-        })
-        .catch(error => {
-          // Autoplay was prevented.
-          // Show a "Play" button so that user can start playback.
-        })
-    }
-  }
-  $('#video-control').click(function(e) {
-    const videoEl = document.getElementById('video')
-    if (videoEl.paused) {
-      $(this).css('opacity', '0')
-      playVideo()
-    } else {
-      $(this).css('opacity', '1')
-      videoEl.pause()
-    }
-    e.preventDefault()
-  })
-  $('#video').focus(function(e) {
-    $(this).attr('controls', 'controls')
     e.preventDefault()
   })
 

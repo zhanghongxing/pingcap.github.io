@@ -1,14 +1,16 @@
-{{ define "title" }} 博客 {{ end }}
+{{- define "title" -}} 博客 {{- end -}}
 
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "blog"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/blog" }}
+    <link rel="stylesheet" href="/css/doc.css" />
+    <link rel="stylesheet" href="/css/list.css" />
 {{ end }}
 
 {{ define "main" }}
     <div class="blog">
-        <div class="container content-container">
+        <div class="container">
         {{ $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" }}
 
         {{ partial "navs/tags-nav.html" (dict "type" "list" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) }}
@@ -16,4 +18,8 @@
         {{ partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) }}
         </div>
     </div>
+{{ end }}
+
+{{ define "footJS" }}
+    <script type="text/javascript" src="/js/doc.js"></script>
 {{ end }}
