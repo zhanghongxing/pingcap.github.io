@@ -12,6 +12,8 @@
 
 @lineWidth: 1.9rem;
 @contentMaxWidth: 980px;
+@asideBgColor: #fafafa;
+@asideColor: @themeBlue;
 
 .recruit {
   padding: calc(~"@{headerHeight} + 18px") @horizontalPadding;
@@ -80,6 +82,10 @@
       margin: 1em;
     }
   }
+
+  // aside {
+  //   background: @asideBgColor;
+  // }
 }
 
 .timeline-wrapper {
@@ -144,12 +150,88 @@
   }
 }
 
-#qa-tabs,
 #positions-tabs,
 .timeline-wrapper,
 .map-wrapper,
 .section-culture .cards {
   max-width: @contentMaxWidth;
+}
+
+#qa-tabs {
+  max-width: 800px;
+}
+
+#menu-toggle-list {
+  padding: 0;
+  margin: 0 auto;
+  max-width: 112px;
+
+  li {
+    list-style: none;
+    color: @asideColor;
+    font-family: sans-serif;
+    padding: 15px 0;
+    position: relative;
+    margin-bottom: 10px;
+    opacity: 0.5;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 13px;
+    line-height: 1.3em;
+    text-align: right;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+
+      a::after {
+        width: 100%;
+        width: 30%;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: @asideColor;
+
+      &::after {
+        content: " ";
+        background: @asideColor;
+        width: 0%;
+        height: 2px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transition: all ease 0.4s;
+      }
+    }
+
+    &.active {
+      opacity: 1;
+
+      a::after {
+        content: " ";
+        background: @asideColor;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1040px) {
+  .recruit aside {
+    position: fixed;
+    width: 120px;
+    top: 200px;
+    right: 20px;
+    padding: 12px;
+    z-index: 10;
+  }
 }
 
 @media (max-width: 767px) {

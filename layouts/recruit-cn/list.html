@@ -13,7 +13,6 @@
             <h2 id="milestones" class="title">发展历程</h2>
             {{ partial "recruit/typed-terminal.html" }}
         </div>
-
         <div class="section">
             <h2 id="offices" class="title">Offices</h2>
             <div class="desc">
@@ -23,7 +22,6 @@
                 {{ partial "maps/world-map.html" }}
             </div>
         </div>
-
         <div class="section section-culture">
             <h2 id="culture" class="title">工程师文化</h2>
             <div class="cards">
@@ -32,7 +30,6 @@
                 {{ end }}
             </div>
         </div>
-
         <div class="section">
             <h2 id="collaborations" class="title">协作方式</h2>
             <div class="desc">
@@ -47,12 +44,12 @@
                 <img src="/images/svgs/jira.svg" alt="">
             </div>
         </div>
-
         <div class="section">
             <h2 id="pingcaper" class="title">PingCAPer</h2>
             {{ partial "recruit/chat.html" (dict "employee" .Site.Data.pingcaper) }}
         </div>
     </div>
+    {{ partial "recruit/menu.html" (dict "active" "about") }}
 </div>
 {{ end }}
 
