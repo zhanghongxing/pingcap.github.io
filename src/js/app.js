@@ -7,9 +7,35 @@ console.log('🦊 Hello! @PingCAP website')
 
 import '../../dist/css/main.css'
 
+// Smooth scrolling when the document is loaded and ready
+function smoothScroll(hash) {
+  const y = $('header').height()
+  if (hash && $(hash).offset())
+    $('html, body').animate(
+      {
+        scrollTop: $(hash).offset().top - y - 20,
+      },
+      1000
+    )
+}
+
+// Process hash
+function processHash() {
+  const hash = decodeURIComponent(location.hash)
+  if (!hash) return
+  if ($('.nav-tags').length && $('.nav-tags').data('type') === 'list') return
+
+  smoothScroll(hash)
+}
+
 $(document).ready(function() {
+  processHash()
+
+  // Handle hash change
+  $(window).on('hashchange', processHash)
+
   // Process release banner
-  if ($('.homepage')) {
+  if ($('.homepage').length) {
     var version = $('.release-banner').data('release')
 
     if (typeof Storage !== 'undefined') {
@@ -23,6 +49,7 @@ $(document).ready(function() {
       $('.homepage').addClass('banner-active')
     }
   }
+
   // Handle window scroll event
   $(window).scroll(function() {
     var scrollVal = $(this).scrollTop(),

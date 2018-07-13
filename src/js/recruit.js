@@ -1,21 +1,8 @@
-function smoothScroll(hash) {
-  const y = $('header').height()
-  if (hash && $(hash).offset())
-    $('html, body').animate(
-      {
-        scrollTop: $(hash).offset().top - y - 20,
-      },
-      1000
-    )
-}
+// JS Goes here - ES6 supported
+
+// Recruit Pages
 
 $(function() {
-  // Handle hash change
-  $(window).on('hashchange', function() {
-    const hash = decodeURIComponent(location.hash)
-    if (hash) smoothScroll(hash)
-  })
-
   // Process Typed terminal
   var sqlTyped = new Typed('#typedSelect', {
     strings: ['mysql> select * from pingcap.milestones;'],

@@ -1,23 +1,9 @@
 // JS Goes here - ES6 supported
 
-// Process doc-liked pages
+// Document Pages
 
 import './vendor/jquery.SimpleTree.js'
 import { run as toc_run } from './vendor/toc'
-
-var blogRegex = /\/blog(-cn)?\//gi
-
-// Smooth scrolling when the document is loaded and ready
-function smoothScroll(hash) {
-  const y = $('header').height()
-  if (hash && $(hash).offset())
-    $('html, body').animate(
-      {
-        scrollTop: $(hash).offset().top - y - 20,
-      },
-      1000
-    )
-}
 
 // Open the first folder
 function openFolder(li) {
@@ -33,35 +19,26 @@ function openFolder(li) {
   return false
 }
 
-// Process Sidebar
-function processSidebar() {
-  // Process Sticky Tree
-  if ($('.st_tree').length) {
-    // Sticky tree show
-    $('.st_tree').show()
-    // Handle click events
-    $('.st_tree').SimpleTree({
-      click: a => {
-        if ($(a).attr('href') != '#') {
-          $(a)
-            .parent()
-            .parent()
-            .find('.active')
-            .removeClass('active')
-          $(a)
-            .parent()
-            .addClass('active')
-          window.location.href = $(a).attr('href')
-        }
-      },
-    })
-  }
-
-  // Create TOC for article in docs module
-  var $tocWrap = $('.article-toc')
-  if ($tocWrap.length) {
-    toc_run()
-  }
+// Process Sticky Tree
+function processStickyTree() {
+  // Sticky tree show
+  $('.st_tree').show()
+  // Handle click events
+  $('.st_tree').SimpleTree({
+    click: a => {
+      if ($(a).attr('href') != '#') {
+        $(a)
+          .parent()
+          .parent()
+          .find('.active')
+          .removeClass('active')
+        $(a)
+          .parent()
+          .addClass('active')
+        window.location.href = $(a).attr('href')
+      }
+    },
+  })
 
   // Open the first item in docs/docs-cn/weekly/recruit-cn list page
   const $firstLI = $('#list_page .st_tree > ul > li:first-child')
@@ -71,9 +48,12 @@ function processSidebar() {
 
 // Process tags
 function processTags() {
-  // Process hash
   const hash = decodeURIComponent(location.hash)
-  if (location.pathname.match(blogRegex) && hash) {
+  const pageType = $('.nav-tags').data('type')
+
+  if (!hash) $('.tag.all').addClass('sel')
+
+  if (pageType === 'list' && hash) {
     $('.nav-tags .tag').removeClass('sel')
     $(`.nav-tags .tag[data-tag="${hash.slice(1)}"]`).addClass('sel')
     $('.article-list .article').each(function() {
@@ -84,14 +64,6 @@ function processTags() {
         $this.hide()
       }
     })
-  } else {
-    const pageType = $('.nav-tags').data('type')
-    if (pageType !== 'single') {
-      $('.tag.all').addClass('sel')
-    }
-    if (hash) {
-      smoothScroll(hash)
-    }
   }
 }
 
@@ -127,22 +99,16 @@ function processLinksInMarkdown() {
     })
 }
 
+// Process dom elements after loaded
 $(document).ready(function() {
-  // Process dom elements after loaded
-  processSidebar()
-  processTags()
-  processLinksInMarkdown()
+  if ($('.st_tree').length) processStickyTree()
 
-  // Handle hash change
-  $(window).on('hashchange', function() {
-    const hash = decodeURIComponent(location.hash)
-    if (
-      location.pathname.match(blogRegex) &&
-      $('.nav-tags').data('type') !== 'single'
-    )
-      return
-    if (hash) smoothScroll(hash)
-  })
+  if ($('.nav-tags').length) processTags()
+
+  // Create TOC for article in docs module
+  if ($('.article-toc').length) toc_run()
+
+  processLinksInMarkdown()
 
   // Handle tags click: Filter tags on frontend
   $('.nav-tags .tag, .anchor-tag').click(function(e) {
