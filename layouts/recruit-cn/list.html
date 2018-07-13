@@ -10,7 +10,7 @@
 <div class="recruit">
     <div class="container">
         <div class="section">
-            <h2 id="milestones" class="title">发展历程</h2>
+            <h2 id="milestones" class="title">Milestones</h2>
             {{ partial "recruit/typed-terminal.html" }}
         </div>
         <div class="section">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="section section-culture">
-            <h2 id="culture" class="title">工程师文化</h2>
+            <h2 id="culture" class="title">Culture</h2>
             <div class="cards">
                 {{ range .Site.Data.about_culture }}
                     {{ partial "recruit/card.html" (dict "title" .title "description" .description "avatar" .avatar) }}
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="section">
-            <h2 id="collaborations" class="title">协作方式</h2>
+            <h2 id="collaboration" class="title">Collaboration</h2>
             <div class="desc">
                 很多小伙伴问我们，你们的工作地点这么分散，甚至还支持 remote，成员之间到底是如何协作的呢？戳下面的 GIF 图寻找答案吧！
             </div>
@@ -49,7 +49,7 @@
             {{ partial "recruit/chat.html" (dict "employee" .Site.Data.pingcaper) }}
         </div>
     </div>
-    {{ partial "recruit/menu.html" (dict "active" "about") }}
+    {{ partial "recruit/aside-menu.html" (dict "active" "about") }}
 </div>
 {{ end }}
 
