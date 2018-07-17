@@ -71,7 +71,12 @@ input,
 button,
 select,
 textarea {
-  outline: none;
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
 }
 
 button,

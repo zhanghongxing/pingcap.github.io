@@ -54,11 +54,20 @@ $(document).ready(function() {
   $(window).scroll(function() {
     var scrollVal = $(this).scrollTop(),
       y = $('header').height()
+    var amountScrolled = 200
+
+    //process release banner in homepage
     if ($('body.banner-active') && scrollVal >= y) {
       $('body.banner-active').addClass('banner-active--scrolled')
     }
     if ($('body.banner-active--scrolled') && scrollVal < y) {
       $('body').removeClass('banner-active--scrolled')
+    }
+    // process back to top button
+    if (scrollVal > amountScrolled) {
+      $('.back-to-top').addClass('show')
+    } else {
+      $('.back-to-top').removeClass('show')
     }
   })
 
@@ -102,5 +111,16 @@ $(document).ready(function() {
       $('nav').removeClass('open')
     }
     $(this).hide()
+  })
+
+  // Handle click event on Back to top button
+  $('.back-to-top').click(function() {
+    $('html, body').animate(
+      {
+        scrollTop: 0,
+      },
+      800
+    )
+    return false
   })
 })
