@@ -73,6 +73,7 @@
     justify-content: center;
     width: 100%;
     margin: 1em auto;
+    padding: 0 1em;
 
     img {
       display: block;
@@ -81,10 +82,6 @@
       margin: 1em;
     }
   }
-
-  // aside {
-  //   background: @asideBgColor;
-  // }
 }
 
 .timeline-wrapper {
@@ -152,6 +149,7 @@
 #positions-tabs,
 .timeline-wrapper,
 .map-wrapper,
+.logo-list,
 .section-culture .cards {
   max-width: @contentMaxWidth;
 }
@@ -168,13 +166,21 @@
 }
 
 @media (max-width: 599px) {
-  .recruit .timeline-wrapper {
-    width: 100%;
-  }
+  .recruit {
+    .timeline-wrapper {
+      width: 100%;
+    }
 
-  .recruit .map-wrapper {
-    text {
-      font: 300 8px arial, sans-serif !important;
+    .map-wrapper {
+      text {
+        font: 300 8px arial, sans-serif !important;
+      }
+    }
+
+    .logo-list {
+      img {
+        height: 36px;
+      }
     }
   }
 
