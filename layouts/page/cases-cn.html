@@ -32,6 +32,7 @@
 
 {{ define "footJS" }}
     <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // process grid tabs
@@ -111,6 +112,12 @@
                 var url = $(this).data('url');
                 if(url) location.href = url;
             })
+
+            // process image: lazy load and add fade in effect
+            $(".lazy").lazyload({
+                threshold: 200,
+                effect : "fadeIn"
+            });
         });
     </script>
 {{ end }}

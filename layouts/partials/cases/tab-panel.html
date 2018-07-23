@@ -2,7 +2,7 @@
     {{ range sort .posts.ByWeight }}
         {{ if in .Params.tags $.global.name }}
             <div class="card flap-card">
-                <div class="card__thumbnail" style="background-image: url({{.Params.logo}});"></div>
+                <div class="card__thumbnail lazy" data-original="{{.Params.logo}}" style="background-image: url('/images/svgs/loader-spin.svg'); width: 55%; height: 120px;"></div>
                 <div class="card__title">
                     <a href="#" class="toggle-info btn-toggle">
                         <span class="left"></span>

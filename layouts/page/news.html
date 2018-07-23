@@ -12,3 +12,13 @@
         </div>
     </div>
 {{ end }}
+
+{{ define "footJS"}}
+<script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
+<script type="text/javascript">
+    $(".lazy").lazyload({
+        threshold: 200,        
+        effect : "fadeIn"
+    });
+</script>
+{{ end }}
