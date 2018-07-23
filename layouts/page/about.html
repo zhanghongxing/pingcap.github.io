@@ -133,7 +133,14 @@
                 </div>
             </div>
             </div>
-            <div class="map map-shotcut"></div>
+            <div class="map-wrapper">
+                {{ partial "maps/usa-map.html" }}
+            </div>
+            <!-- <div class="map map-shotcut"></div> -->
         </div>
     </section>
+{{ end }}
+
+{{ define "footJS" }}
+<script type="text/javascript" src="https://download.pingcap.com/usmap.js"></script>
 {{ end }}
