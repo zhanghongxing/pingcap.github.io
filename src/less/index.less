@@ -11,7 +11,7 @@
 // margin
 @advantageRowMargin: 4rem;
 // color
-@homepageBgColor: #080000;
+@homepageBgColor: #080713;
 // font
 @textSize: 0.8rem;
 // others
@@ -75,7 +75,7 @@
   height: 100%;
   padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
-  url("https://download.pingcap.com/images/bg-landingpage-slogan.png")
+  url("https://download.pingcap.com/images/bg-homepage-banner.jpg")
   no-repeat center top;
   background-attachment: fixed;
   background-size: cover;
@@ -143,7 +143,7 @@
 .homepage-features {
   padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
   background:
-  url("https://download.pingcap.com/images/bg-landingpage-features.png")
+  url("https://download.pingcap.com/images/bg-homepage-features.png")
   no-repeat center top;
   background-attachment: fixed;
   background-size: cover;
@@ -230,11 +230,8 @@
 
 /* Section 3 */
 .homepage-advantages {
-  padding: calc(~"@{verticalPadding} + @{headerHeight}") 0;
-  background:
-  url("https://download.pingcap.com/images/bg-landingpage-advantages.png")
-  no-repeat center bottom;
-  background-size: cover;
+  padding: calc(~"@{verticalPadding} + @{headerHeight}") 0 0;
+  background: #080713;
 
   h3 {
     font-size: 1.1rem;
@@ -246,6 +243,12 @@
     font-size: 0.9rem;
     margin-bottom: 0.6rem;
     font-weight: 400;
+  }
+
+  .bottom {
+    height: 320px;
+    background: url('/images/svgs/polygon.svg') no-repeat center top;
+    background-size: cover;
   }
 
   .container {
