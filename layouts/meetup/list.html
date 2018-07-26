@@ -9,9 +9,7 @@
 
 {{ define "main" }}
 <section class="meetup-landing-page-banner layout-text-on-hover">
-    <!-- TODO: sign up url -->
     <a href="http://path/to/signup" class="link-abs" target="_blank"></a>
-    <!-- <a href="http://path/to/detail" class="link-abs" target="_blank"></a> -->
     <div class="image">
         <img src="/images/meetup-earth.png" alt="banner">
     </div>
@@ -23,7 +21,6 @@
     </div>
     <div class="text">
         <h4 class="inner-title"> 报名加入 </h4>
-        <!-- <h3 class="title"> 查看详情 </h3> -->
     </div>
 </section>
 <section class="meetup-landing-page-intro">
@@ -44,7 +41,7 @@
                     <div class="layout-text-on-hover">
                         <a href="{{.URL}}" class="link-abs"></a>
                         <div class="image">
-                            <img src="{{.Params.image|default .Site.Data.meetup.default_cover}}" alt="cover">
+                            <img class="lazy" width="100%" data-original="{{.Params.image|default .Site.Data.meetup.default_cover}}" src="/images/svgs/loader-spinner.svg" alt="cover">
                         </div>
                         <div class="text">
                             <h3 class="inner-title"> {{.Date.Format "2006-01-02"}} </h3>
@@ -68,7 +65,6 @@
                 {{.Title}} <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
             </a>
             {{ end }}
-            <!-- TODO: remove mock data -->
             <a href="./memoir/26-1.html" class="link">
                 NO.26: 分布式系统测试那些事儿 &#8212; 理念
                 <i class="arrow-right">{{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</i>
@@ -88,7 +84,7 @@
                 <div class="item">
                     <div class="layout-text-on-hover">
                         <div class="image">
-                            <img src="{{if isset $i " image "}}{{$i.image}}{{else}}http://lorempixel.com/480/480/people/{{$idx}}{{end}}" alt="lecturer">
+                            <img class="lazy" width="100%" data-original="{{if isset $i " image "}}{{$i.image}}{{else}}http://lorempixel.com/480/480/people/{{$idx}}{{end}}" src="/images/svgs/loader-spinner.svg" alt="lecturer">
                         </div>
                         <div class="text">
                             <p>{{$i.intro}} </p>
@@ -110,4 +106,14 @@
         <img src="/images/svgs/meetup-tags.svg" alt="meetup tags">
     </div>
 </section>
+{{ end }}
+
+{{ define "footJS"}}
+<script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
+<script type="text/javascript">
+    $(".lazy").lazyload({
+    effect : "fadeIn",
+    threshold: 200
+});
+</script>
 {{ end }}
