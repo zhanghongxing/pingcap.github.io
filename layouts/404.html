@@ -1,5 +1,5 @@
 {{ define "headTpl" }}
-    <link rel="stylesheet" href="/css/doc.css" />
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
 {{ end }}
 
 {{ define "main" }}

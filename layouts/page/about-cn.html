@@ -2,13 +2,12 @@
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/about" }}
-    <link rel="stylesheet" href="/css/about.css" />
+    {{- partial "head/preload-css" (dict "href" "/css/about.css") -}}
     <style type="text/css">
     .amap-logo,
     .amap-copyright {
         display: none !important;
     }
-
     .amap-icon img {
         width: 100%;
         height: 100%;

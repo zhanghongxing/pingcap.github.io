@@ -3,6 +3,7 @@ import path from 'path'
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -69,7 +70,16 @@ export default {
       filename: path.join(__dirname, 'layouts', '_default', 'baseof.html'),
       template: path.join(__dirname, 'layouts', '_default', 'baseof.tpl.html'),
     }),
-    new ExtractTextPlugin('../css/main.css'),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as(entry) {
+        if (/\.css$/.test(entry)) return 'style'
+        if (/\.(woff)|(woff2)|(ttf)$/.test(entry)) return 'font'
+        if (/\.(png)|(jpg)|(svg)|(gif)$/.test(entry)) return 'image'
+        return 'script'
+      },
+      include: 'initial',
+    }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),

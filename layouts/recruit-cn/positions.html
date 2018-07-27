@@ -3,8 +3,8 @@
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
-    <link rel="stylesheet" type="text/css" href="https://download.pingcap.com/style/gridtab.min.css" />
-    <link rel="stylesheet" href="/css/recruit.css" />
+    {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/gridtab.min.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/recruit.css") -}}
 {{ end }}
 
 {{ define "main" }}

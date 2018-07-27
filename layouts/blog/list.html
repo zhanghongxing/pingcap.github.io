@@ -3,8 +3,8 @@
 {{ define "headTpl" }}
     {{$.Scratch.Set "nav_active" "blog"}}
     {{$.Scratch.Set "data_i18_link" "/blog-cn" }}
-    <link rel="stylesheet" href="/css/doc.css" />
-    <link rel="stylesheet" href="/css/list.css" />
+    {{- partial "head/preload-css" (dict "href" "/css/list.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
 {{ end }}
 
 {{ define "main" }}

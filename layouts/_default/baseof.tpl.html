@@ -15,6 +15,9 @@
     <title>{{ block "title" . }}{{- .Title -}}{{ end }} | PingCAP</title>
     {{- partial "head/ga" . -}}
     {{- partial "head/meta-seo" . -}}
+    {{- partial "head/preload-assets" . -}}
+    {{- partial "head/preload-css" (dict "href" "/css/main.css") -}}
+    {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/docsearch.min.css") -}}
     {{- block "headTpl" . -}}{{- end -}}
     <script type="text/javascript">
     if (location.pathname === '/') {
@@ -62,7 +65,6 @@
     <div class="overlay"></div>
 
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
-    {{- partial "head/preload-css-link" (dict "href" "https://download.pingcap.com/style/docsearch.min.css") -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/docsearch.min.js"></script>
 
     {{- block "footJS" . -}}{{- end -}}

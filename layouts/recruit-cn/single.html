@@ -4,8 +4,8 @@
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css" />
-    <link rel="stylesheet" href="/css/doc.css" />
+    {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/github-markdown.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
