@@ -54,7 +54,6 @@
 
         {{ partial "common/back-to-top.html" }}
     </div>
-
     <script type="text/javascript">
         document.getElementById('page-loader').style.display='none';
         document.getElementById('page-content').style.display='block';
@@ -63,14 +62,10 @@
     <div class="overlay"></div>
 
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
-    {{- block "footJS" . -}}{{- end -}}
+    {{- partial "head/preload-css-link" (dict "href" "https://download.pingcap.com/style/docsearch.min.css") -}}
+    <script type="text/javascript" src="https://download.pingcap.com/js/docsearch.min.js"></script>
 
-    {{- if $data_i18_cn -}}
-        {{- partial "search/algolia-cn-js" . -}}
-    {{- else -}}
-        {{- partial "search/algolia-js" . -}}
-        {{- partial "tracking-code/hubspot.html" -}}
-    {{- end -}}
+    {{- block "footJS" . -}}{{- end -}}
 </body>
 
 </html>
