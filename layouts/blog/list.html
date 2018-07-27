@@ -11,9 +11,8 @@
     <div class="blog">
         <div class="container">
         {{ $posts := where (where .Site.Pages "Section" "blog") ".Params.title" "!=" nil  }}
-        {{ partial "navs/tags-nav.html" (dict "type" "list" "title" "Popular Tags" "posts" $posts "rss" "/blog/index.xml" "global" .) }}
-
-        {{ partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) }}
+        {{- partial "navs/tags-nav.html" (dict "type" "list" "title" "Popular Tags" "posts" $posts "rss" "/blog/index.xml" "global" .) -}}
+        {{- partial "archives/list.html" (dict "posts" $posts.ByDate.Reverse "hasMetaData" "true" "hasBrief" "true" "global" .) -}}
         </div>
     </div>
 {{ end }}

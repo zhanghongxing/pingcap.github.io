@@ -9,8 +9,7 @@
     <div class="blog">
         <div class="container">
             {{ $posts := where (where .Site.Pages "Section" "blog") ".Params.title" "!=" nil  }}
-            {{ partial "navs/tags-nav.html" (dict "type" "single" "title" "Popular Tags" "posts" $posts "rss" "/blog/index.xml" "global" .) }}
-
+            {{- partial "navs/tags-nav.html" (dict "type" "single" "title" "Popular Tags" "posts" $posts "rss" "/blog/index.xml" "global" .) -}}
             <div class="archive">
                 <div class="content markdown-body">
                     <h1 class="title">{{ .Title }}</h1>
@@ -21,17 +20,16 @@
                         </li>
                         <li class="meta-item">
                             <img src="/images/svgs/icon-writer.svg">
-                        {{ if .Params.author }}
-                            {{ range .Params.author }} {{ . }}  {{ end }}
-                        {{ else }}
-                            PingCAP
-                        {{ end }}
+                            {{ if .Params.author }}
+                                {{ range .Params.author }} {{ . }}  {{ end }}
+                            {{ else }}
+                                PingCAP
+                            {{ end }}
                         </li>
                     </ul>
-                    <div class="blog-text">{{ .Content }}</div>
+                    <div class="blog-text">{{- .Content -}}</div>
                 </div>
-
-                {{ partial "archives/post-share.html" . }}
+                {{- partial "archives/post-share.html" . -}}
             </div>
         </div>
     </div>

@@ -17,18 +17,16 @@
 {{ define "main" }}
 <div class="doc">
     <div class="container">
-        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") }}
+        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") -}}
 
         <div class="archive">
-            <div class="content markdown-body">
-                {{ .Content }}
-            </div>
+            <div class="content markdown-body"> {{- .Content -}} </div>
             <div class="article-toc"></div>
-            {{ partial "archives/git-info.html" (dict "repo" "docs-cn" "isCn" "true" "global" .) }}
+            {{- partial "archives/git-info.html" (dict "repo" "docs-cn" "isCn" "true" "global" .) -}}
         </div>
 
         <div class="sidebar-page sticky-sidebar">
-            {{ partial "archives/improve-doc.html" (dict "repo" "docs-cn" "global" . "isCn" "true") }}
+            {{- partial "archives/improve-doc.html" (dict "repo" "docs-cn" "global" . "isCn" "true") -}}
             <p class="toc-title">本页导航</p>
             <div id="smart_toc_wrapper"></div>
         </div>

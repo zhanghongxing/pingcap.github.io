@@ -9,7 +9,7 @@
     <div class="news">
         {{ partial "layout/hero.html" (dict "heading" $heading) }}
         <div class="container">
-            {{ partial "news/list.html" (dict "posts" .Site.Data.news_cn "global" .) }}
+            {{- partial "news/list.html" (dict "posts" .Site.Data.news_cn "global" .) -}}
         </div>
     </div>
 {{ end }}

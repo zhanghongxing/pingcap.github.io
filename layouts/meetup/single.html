@@ -16,7 +16,7 @@
     <div class="container">
         <!-- category: memoir/ record -->
         {{ $blogs := where (where .Site.Pages "Section" "meetup") ".Params.title" "!=" nil }}
-        {{ partial "navs/date-tree-nav.html" (dict "title" "Meetup" "data" $blogs ) }}
+        {{- partial "navs/date-tree-nav.html" (dict "title" "Meetup" "data" $blogs ) -}}
 
         <div class="archive">
             <div class="content markdown-body">
@@ -31,7 +31,7 @@
                         {{ range .Params.author }} {{ . }}  {{ end }}
                     </li>
                 </ul>
-                <div class="blog-text">{{ .Content }}</div>
+                <div class="blog-text">{{- .Content -}}</div>
             </div>
         </div>
     </div>

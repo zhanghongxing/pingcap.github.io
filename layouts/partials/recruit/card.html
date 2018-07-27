@@ -4,19 +4,15 @@
     {{ end }}
 
     <div class="card__avatar">
-        {{ if .avatar}}
-            {{ $avatarPath := delimit (slice (delimit (slice "/images/svgs/avatar" .avatar) "-") "svg") "." }}
-            <img src="{{- $avatarPath -}}" alt="avatar-{{- .avatar -}}" />
-        {{ else }}
-            <img src="/images/svgs/avatar-engineer.svg" alt="avatar-engineer" />
-        {{ end }}
+        {{ $avatarPath := delimit (slice (delimit (slice "/images/svgs/avatar" (.avatar | default "engineer")) "-") "svg") "." }}
+        <img src="{{- $avatarPath -}}" alt="avatar-{{- .avatar -}}" />
     </div>
 
     {{ if .title}}
         <h3 class="card__title"> {{ .title }} </h3>
     {{ end }}
 
-    {{ if .location}}
+    {{ if .location }}
         <div class="card__location">{{ .location }}</div>
     {{ end }}
 

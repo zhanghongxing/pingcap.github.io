@@ -15,14 +15,14 @@
     <div class="blog">
         <div class="container">
             {{ if and (isset .Params "category") (eq .Params.category "case") }}
-                {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.cases_cn_toc "title" "用户案例") }}
+                {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.cases_cn_toc "title" "用户案例") -}}
             {{ else }}
-                {{ $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" }}
-                {{ partial "navs/tags-nav.html" (dict "type" "single" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) }}
+                {{- $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" -}}
+                {{- partial "navs/tags-nav.html" (dict "type" "single" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) -}}
             {{ end }}
             <div class="archive">
                 <div class="content markdown-body">
-                    <h1 class="title">{{ .Title }}</h1>
+                    <h1 class="title">{{- .Title -}}</h1>
                     <ul class="blog-post-meta">
                         <li class="meta-item">
                             <img src="/images/svgs/icon-date.svg">
@@ -31,15 +31,15 @@
                         <li class="meta-item">
                             <img src="/images/svgs/icon-writer.svg">
                             {{ if .Params.author }}
-                            {{ range .Params.author }} {{ . }}  {{ end }}
+                                {{ range .Params.author }} {{ . }}  {{ end }}
                             {{ else }}
-                            PingCAP
+                                PingCAP
                             {{ end }}
                         </li>
                     </ul>
-                    <div class="blog-text">{{ .Content }}</div>
+                    <div class="blog-text">{{- .Content -}}</div>
                 </div>
-                {{ partial "archives/post-share-cn.html" . }}
+                {{- partial "archives/post-share-cn.html" . -}}
             </div>
         </div>
     </div>

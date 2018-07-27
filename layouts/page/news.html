@@ -8,7 +8,7 @@
     <div class="news">
         {{ partial "layout/hero.html" (dict "heading" $heading) }}
         <div class="container">
-            {{ partial "news/list.html" (dict "posts" .Site.Data.news "global" .) }}
+            {{- partial "news/list.html" (dict "posts" .Site.Data.news "global" .) -}}
         </div>
     </div>
 {{ end }}

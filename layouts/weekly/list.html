@@ -16,7 +16,7 @@
 <div class="weekly" id="list_page">
     <div class="container">
         {{ $archives := where ( where .Site.Pages "Section" "weekly" ) ".Params.title" "!=" nil }}
-        {{ partial "navs/date-tree-nav.html" (dict "data" $archives "title" "Weekly" "rss" "/weekly/index.xml") }}
+        {{- partial "navs/date-tree-nav.html" (dict "data" $archives "title" "Weekly" "rss" "/weekly/index.xml") -}}
 
         <div class="archive">
         {{ range first 1 .Data.Pages.ByDate.Reverse }}
@@ -27,7 +27,7 @@
                     {{ .Date.Format "Mon, Jan 2, 2006" }}
                 </li>
             </ul>
-            <div class="blog-text">{{ .Content }}</div>
+            <div class="blog-text">{{- .Content -}}</div>
             </div>
         {{ end }}
         </div>

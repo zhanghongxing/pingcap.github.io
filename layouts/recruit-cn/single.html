@@ -14,10 +14,9 @@
 {{ define "main" }}
 <div class="recruit-single">
     <div class="container">
-        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn_toc "title" "招贤纳士") }}
-
+        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn_toc "title" "招贤纳士") -}}
         <div class="archive">
-            <div class="content">{{ .Content }}</div>
+            <div class="content">{{- .Content -}}</div>
             <div class="operate">
                 <div class="item">
                     <a href="mailto:hire@pingcap.com">
@@ -29,7 +28,7 @@
             </div>
         </div>
     </div>
-    {{ partial "recruit/aside-menu.html" (dict "active" "join") }}
+    {{- partial "recruit/aside-menu.html" (dict "active" "join") -}}
 </div>
 {{ end }}
 
