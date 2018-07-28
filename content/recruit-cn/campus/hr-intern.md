@@ -1,7 +1,7 @@
 ---
 title: 人力资源实习生
 tags:
-  - Intern
+  - Campus
 location: 北京
 avatar: hr
 aliases:

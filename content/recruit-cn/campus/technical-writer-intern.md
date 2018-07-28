@@ -1,7 +1,7 @@
 ---
 title: Technical Writer Intern
 tags:
-  - Intern
+  - Campus
 location: 北京
 avatar: writer
 aliases:

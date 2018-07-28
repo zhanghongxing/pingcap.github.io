@@ -24,15 +24,15 @@
     "location": "Guangzhou",
     "avatar": "https://avatars1.githubusercontent.com/u/6949944?s=400&v=4",
     "github": "winkyao",
-    "statement": "我曾经待过其他一些大公司、初创公司，PingCAP 是一个真正有工程师文化的国内公司。作为一家技术驱动型公司，PingCAP 能给大家提供足够多的技术挑战，工作多年的我在这里每天都还可以学习到新的东西。这份工作着实让人迷恋。",
-    "blur": true
+    "statement": "我曾经待过其他一些大公司、初创公司，PingCAP 是一个真正有工程师文化的国内公司。作为一家技术驱动型公司，PingCAP 能给大家提供足够多的技术挑战，工作多年的我在这里每天都还可以学习到新的东西。这份工作着实让人迷恋。"
   },
   {
     "position": "SRE Engineer",
     "location": "Hangzhou",
     "avatar": "https://avatars3.githubusercontent.com/u/23521459?s=400&v=4",
     "github": "zhouqiang-cl",
-    "statement": "Coding 的自由只是 Coding，自由的 Coding 才是自由。  贵司做的是开源、自由软件，这里也可以放开手脚的去探索、发现和实践，终将成为自我发现之旅。"
+    "statement": "Coding 的自由只是 Coding，自由的 Coding 才是自由。  贵司做的是开源、自由软件，这里也可以放开手脚的去探索、发现和实践，终将成为自我发现之旅。",
+    "blur": true
   },
   {
     "position": "TiSpark Engineer",
@@ -65,7 +65,8 @@
     "position": "Business Team",
     "avatar": "https://avatars2.githubusercontent.com/u/32172006?s=400&v=4",
     "github": "datahoecn",
-    "statement": "或梦想，或情怀，让已过而立之年的我奔赴北京加入 PingCAP，短短半年，收获颇多，真真的体验一把纯正的开源工程师文化，作为从小地方来的一数据库狂热份子，每天能够与业内顶尖大牛学习讨论，亲自参与打造一款代表未来的国际化数据库产品，全行业上千家客户的在线支持，想想还是挺牛掰的！"
+    "statement": "或梦想，或情怀，让已过而立之年的我奔赴北京加入 PingCAP，短短半年，收获颇多，真真的体验一把纯正的开源工程师文化，作为从小地方来的一数据库狂热份子，每天能够与业内顶尖大牛学习讨论，亲自参与打造一款代表未来的国际化数据库产品，全行业上千家客户的在线支持，想想还是挺牛掰的！",
+    "blur": true
   },
   {
     "position": "Business Team",
@@ -77,6 +78,7 @@
     "position": "HR & Admin & FA Team Team",
     "avatar": "https://avatars2.githubusercontent.com/u/40820418?s=400&v=4",
     "github": "Soline324",
-    "statement": "加入 PingCAP 之后，我最大的感受是：PingCAP 是一个“不唯上、不唯书、只唯实”的大家庭。这里没有冗杂的层级观念，不过分强调理论教条，每一位 PingCAPer 都把“又快又好地完成工作”放在第一位，不断刷新着自己的技能。加入 PingCAP 的时间虽然不长，但每天都能有新的收获，很开心能与 PingCAP 一同成长！"
+    "statement": "加入 PingCAP 之后，我最大的感受是：PingCAP 是一个“不唯上、不唯书、只唯实”的大家庭。这里没有冗杂的层级观念，不过分强调理论教条，每一位 PingCAPer 都把“又快又好地完成工作”放在第一位，不断刷新着自己的技能。加入 PingCAP 的时间虽然不长，但每天都能有新的收获，很开心能与 PingCAP 一同成长！",
+    "blur": true
   }
 ]

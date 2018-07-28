@@ -1,7 +1,7 @@
 ---
 title: 数据库开发实习生
 tags:
-  - Intern
+  - Campus
 location: 北京，上海，广州，杭州
 avatar: database
 aliases:
