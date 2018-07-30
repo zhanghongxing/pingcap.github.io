@@ -1,13 +1,14 @@
 {{- define "title" -}} Q &amp; A {{- end -}}
-{{ define "headTpl" }}
+
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
     {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/gridtab.min.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/recruit.css") -}}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="recruit">
     <div class="container">
         <div class="section">
@@ -24,9 +25,9 @@
     </div>
     {{- partial "recruit/aside-menu.html" (dict "active" "qa") -}}
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
 <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
 <script type="text/javascript">
     $(function() {
@@ -60,4 +61,4 @@
         setHeight();
     })
 </script>
-{{ end }}
+{{- end -}}

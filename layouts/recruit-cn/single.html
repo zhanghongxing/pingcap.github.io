@@ -1,4 +1,4 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <style type="text/css" media="screen">
         .st_tree {
             display: none;
@@ -9,9 +9,9 @@
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="recruit-single">
     <div class="container">
         {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.recruit_cn_toc "title" "招贤纳士") -}}
@@ -30,8 +30,8 @@
     </div>
     {{- partial "recruit/aside-menu.html" (dict "active" "join") -}}
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}

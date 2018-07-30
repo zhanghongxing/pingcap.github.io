@@ -28,12 +28,12 @@
     </script>
 </head>
 
-{{ $homepage := $.Scratch.Get "homepage" }}
+{{- $homepage := $.Scratch.Get "homepage" -}}
 <body {{ if $homepage }}class="homepage"{{ end }}>
     {{- partial "loaders/page-loader.html" -}}
 
     <div id="page-content" style="display: none;">
-        {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
+        {{- $data_i18_cn := $.Scratch.Get "data_i18_cn" -}}
 
         {{- if $homepage -}}
             {{- partial "layout/release-banner" . -}}
@@ -55,7 +55,7 @@
             {{- partial "layout/footer" . -}}
         {{- end -}}
 
-        {{ partial "common/back-to-top.html" }}
+        {{- partial "common/back-to-top.html" -}}
     </div>
     <script type="text/javascript">
         document.getElementById('page-loader').style.display='none';

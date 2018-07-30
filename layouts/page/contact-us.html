@@ -1,4 +1,4 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "data_i18_link" "/about-cn" }}
     {{- partial "head/preload-css" (dict "href" "/css/cases.css") -}}
     <style type="text/css">
@@ -6,9 +6,9 @@
             margin: 80px auto;
         }
     </style>
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     {{ $heading := "Contact PingCAP" }}
     <div class="contact-us">
         {{- partial "layout/hero.html" (dict "heading" $heading) -}}
@@ -24,4 +24,4 @@
             </div>
         </div>
     </div>
-{{ end }}
+{{- end -}}

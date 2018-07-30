@@ -1,12 +1,12 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/gridtab.min.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/cases.css") -}}
     {{$.Scratch.Set "nav_active" "cases"}}
     {{$.Scratch.Set "data_i18_link" "/cases" }}
     {{$.Scratch.Set "data_i18_cn" true }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <div class="cases">
         <div class="banner">
             <div class="banner__inner">
@@ -28,9 +28,9 @@
             </div>
         </div>
     </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
     <script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
     <script type="text/javascript">
@@ -120,4 +120,4 @@
             });
         });
     </script>
-{{ end }}
+{{- end -}}

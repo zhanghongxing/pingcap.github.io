@@ -2,7 +2,7 @@
     <div class="sticky-sidebar">
         <div class="title"> {{ .title }} </div>
         <div class="st_tree nav-toc">
-        {{ partial "navs/tree-nav.html" (dict "tree" .tree "global" .) }}
+        {{- partial "navs/tree-nav.html" (dict "tree" .tree "global" .) -}}
         </div>
     </div>
 </div>

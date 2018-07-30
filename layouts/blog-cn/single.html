@@ -1,40 +1,44 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/github-markdown.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
-    {{ if and (isset .Params "category") (eq .Params.category "case") }}
+    {{- if and (isset .Params "category") (eq .Params.category "case") -}}
         {{$.Scratch.Set "data_i18_link" "/cases" }}
         {{$.Scratch.Set "nav_active" "cases"}}
-    {{ else }}
+    {{- else -}}
         {{$.Scratch.Set "data_i18_link" "/blog" }}
         {{$.Scratch.Set "nav_active" "blog"}}
-    {{ end }}
+    {{- end -}}
     {{$.Scratch.Set "data_i18_cn" true }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <div class="blog">
         <div class="container">
-            {{ if and (isset .Params "category") (eq .Params.category "case") }}
+            {{- if and (isset .Params "category") (eq .Params.category "case") -}}
                 {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.cases_cn_toc "title" "用户案例") -}}
-            {{ else }}
+            {{- else -}}
                 {{- $posts := where (where (where .Site.Pages "Section" "blog-cn") ".Params.title" "!=" nil) ".Params.category" "!=" "case" -}}
                 {{- partial "navs/tags-nav.html" (dict "type" "single" "title" "热门标签" "posts" $posts "rss" "/blog-cn/index.xml" "global" .) -}}
-            {{ end }}
+            {{- end -}}
             <div class="archive">
                 <div class="content markdown-body">
                     <h1 class="title">{{- .Title -}}</h1>
                     <ul class="blog-post-meta">
                         <li class="meta-item">
                             <img src="/images/svgs/icon-date.svg">
-                            {{ .Date.Format "Mon, Jan 2, 2006" }}
+                            {{- .Date.Format "Mon, Jan 2, 2006" -}}
                         </li>
                         <li class="meta-item">
                             <img src="/images/svgs/icon-writer.svg">
-                            {{ if .Params.author }}
-                                {{ range .Params.author }} {{ . }}  {{ end }}
-                            {{ else }}
+                            {{- if .Params.author -}}
+                                {{ $len := len .Params.author }}
+                                {{- range $idx, $i := .Params.author -}}
+                                    {{ . }}
+                                    {{- if lt $idx (sub $len 1) -}} ,&nbsp; {{- end -}}
+                                {{- end -}}
+                            {{- else -}}
                                 PingCAP
-                            {{ end }}
+                            {{- end -}}
                         </li>
                     </ul>
                     <div class="blog-text">{{- .Content -}}</div>
@@ -43,8 +47,8 @@
             </div>
         </div>
     </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}

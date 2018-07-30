@@ -1,13 +1,13 @@
 {{- define "title" -}} 虚位以待 {{- end -}}
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
     {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/gridtab.min.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/recruit.css") -}}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="recruit">
     <div class="container">
         <div class="section">
@@ -28,15 +28,15 @@
                 {{- range $index, $toc := .Site.Data.recruit_cn_toc -}}
                     <dt class="tab-{{ $index }}">{{- .name -}}</dt>
                     <dd>{{- partial "recruit/positions-tab-panel.html" (dict "posts" $posts "name" .name "global" .) -}}</dd>
-                {{ end }}
+                {{- end -}}
             </div>
         </div>
     </div>
     {{- partial "recruit/aside-menu.html" (dict "active" "join") -}}
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/gridtab.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -52,4 +52,4 @@
             });
         });
     </script>
-{{ end }}
+{{- end -}}

@@ -1,12 +1,13 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <meta name="baidu-site-verification" content="hrZ03lmoDB" />
     <meta name="google-site-verification" content="drHXf-Q97rcbwLZryBSFV8eW1pj1ddF4MHzZOfODhQU" />
     {{ $.Scratch.Set "data_i18_link" "/index.html" }}
     {{ $.Scratch.Set "homepage" true }}
     {{- partial "head/preload-css" (dict "href" "/css/index.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/carousel.css") -}}
-{{ end }}
-{{ define "main" }}
+{{- end -}}
+
+{{- define "main" -}}
     <section class="homepage-slogan-mask">
         <div class="container">
             <img class="logo" src="/images/tidb-logo.png" alt="TiDB">
@@ -76,8 +77,9 @@
     {{ $heading := "World's Most Innovative Businesses Trust PingCAP" }}
     {{ partial "layout/carousel.html" (dict "posts" .Site.Data.cases "heading" $heading "global" .) }}
     {{ partial "layout/cta-footer.html" . }}
-{{ end }}
-{{ define "footJS" }}
+{{- end -}}
+
+{{- define "footJS" -}}
 <script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
 <script type="text/javascript">
     $(".lazy").lazyload({
@@ -85,4 +87,4 @@
     threshold: 200
 });
 </script>
-{{ end }}
+{{- end -}}

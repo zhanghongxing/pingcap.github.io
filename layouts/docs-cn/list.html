@@ -1,6 +1,6 @@
 {{- define "title" -}} 文档 {{- end -}}
 
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <style type="text/css" media="screen">
         .st_tree {
             display: none;
@@ -11,9 +11,9 @@
     {{$.Scratch.Set "nav_active" "docs"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/docs" }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="doc" id="list_page">
     <div class="container">
         {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") -}}
@@ -35,8 +35,8 @@
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}

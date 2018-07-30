@@ -1,4 +1,4 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/about" }}
@@ -13,9 +13,9 @@
         height: 100%;
     }
     </style>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/particles.js"></script>
     <script type="text/javascript" src="/js/about.js"></script>
 
@@ -41,9 +41,9 @@
         }
     </script>
     <!-- End bai_du map -->
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <section class="intro-video">
         <div id="particles-js"></div>
         <div class="video-wrapper f-vhc">
@@ -161,4 +161,4 @@
             <div id="map" class="map" style="width: 100%; height: 340px;"></div>
         </div>
     </section>
-{{ end }}
+{{- end -}}

@@ -1,4 +1,4 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <style type="text/css" media="screen">
         .st_tree {
             display: none;
@@ -9,9 +9,9 @@
     {{$.Scratch.Set "nav_active" "meetup"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/weekly" }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="meetup">
     <div class="container">
         <!-- category: memoir/ record -->
@@ -24,11 +24,15 @@
                 <ul class="blog-post-meta">
                     <li class="meta-item">
                         <img src="/images/svgs/icon-date.svg">
-                        {{ .Date.Format "Mon, Jan 2, 2006" }}
+                        {{- .Date.Format "Mon, Jan 2, 2006" -}}
                     </li>
                     <li class="meta-item">
                         <img src="/images/svgs/icon-writer.svg">
-                        {{ range .Params.author }} {{ . }}  {{ end }}
+                        {{ $len := len .Params.author }}
+                        {{- range $idx, $i := .Params.author -}}
+                            {{ . }}
+                            {{- if lt $idx (sub $len 1) -}} ,&nbsp; {{- end -}}
+                        {{- end -}}
                     </li>
                 </ul>
                 <div class="blog-text">{{- .Content -}}</div>
@@ -36,9 +40,9 @@
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}
 

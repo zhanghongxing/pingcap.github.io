@@ -1,4 +1,4 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <style type="text/css" media="screen">
         .st_tree {
             display: none;
@@ -12,9 +12,9 @@
     {{$v1 := (strings.TrimSuffix ".md" $v0 )}}
     {{$v := (printf "%s%s" "/docs/" $v1)}}
     {{$.Scratch.Set "data_i18_link" $v }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="doc">
     <div class="container">
         {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") -}}
@@ -32,8 +32,8 @@
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}

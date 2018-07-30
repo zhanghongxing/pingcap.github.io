@@ -1,10 +1,10 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "cases"}}
     {{$.Scratch.Set "data_i18_link" "/cases-cn" }}
     {{- partial "head/preload-css" (dict "href" "/css/cases.css") -}}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     {{ $heading := "World's Most Innovative Businesses Trust PingCAP" }}
     <div class="cases">
         {{ partial "layout/hero.html" (dict "heading" $heading) }}
@@ -12,7 +12,7 @@
             {{- partial "cases/list.html" (dict "posts" .Site.Data.cases "global" .) -}}
         </div>
     </div>
-{{ end }}
+{{- end -}}
 
 {{ define "footJS"}}
 <script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
@@ -22,4 +22,4 @@
     threshold: 200
 });
 </script>
-{{ end }}
+{{- end -}}

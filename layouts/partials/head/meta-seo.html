@@ -1,20 +1,20 @@
-{{ if isset .Params "summary" }}
+{{- if isset .Params "summary" -}}
     {{ $.Scratch.Add "summary" .Params.summary }}
-{{ else }}
+{{- else -}}
     {{ $.Scratch.Add "summary" "PingCAP is focused on developing distributed NewSQL and is the team building TiDB, an open-source distributed NewSQL database." }}
-{{ end }}
+{{- end -}}
 
-{{ if isset .Params "image" }}
-    {{ $.Scratch.Add "image" (.Params.image | absURL )}}
-{{ else }}
-    {{ $.Scratch.Add "image" ("/images/pingcap-opengraph.jpg" | absURL) }}
-{{ end }}
+{{- if isset .Params "image" -}}
+    {{- $.Scratch.Add "image" (.Params.image | absURL ) -}}
+{{- else -}}
+    {{- $.Scratch.Add "image" ("/images/pingcap-opengraph.jpg" | absURL) -}}
+{{- end -}}
 
-{{ if isset .Params "title" }}
+{{- if isset .Params "title" -}}
     {{ $.Scratch.Add "title" .Params.title }}
-{{ else }}
+{{- else -}}
     {{ $.Scratch.Add "title" .Title }}
-{{ end }}
+{{- end -}}
 
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">

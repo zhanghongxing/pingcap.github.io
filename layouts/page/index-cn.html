@@ -1,13 +1,13 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <meta name="baidu-site-verification" content="hrZ03lmoDB" />
     <meta name="google-site-verification" content="drHXf-Q97rcbwLZryBSFV8eW1pj1ddF4MHzZOfODhQU" />
     {{$.Scratch.Set "homepage" true }}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/en" }}
     {{- partial "head/preload-css" (dict "href" "/css/index.css") -}}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <section class="homepage-slogan-mask">
         <div class="container">
             <img class="logo" src="/images/tidb-logo.png" alt="TiDB">
@@ -134,4 +134,4 @@
         <div class="bottom"></div>
     </section>
     {{ partial "layout/cta-footer-cn.html" . }}
-{{ end }}
+{{- end -}}

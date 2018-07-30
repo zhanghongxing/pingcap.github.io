@@ -1,10 +1,10 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_link" "/about-cn" }}
     {{- partial "head/preload-css" (dict "href" "/css/about.css") -}}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <section class="about-company">
         <div class="container">
             <h2 class="title">ABOUT THE COMPANY</h2>
@@ -136,4 +136,4 @@
             <div class="map map-shotcut"></div>
         </div>
     </section>
-{{ end }}
+{{- end -}}

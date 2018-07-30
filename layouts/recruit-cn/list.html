@@ -1,14 +1,15 @@
 {{- define "title" -}} 招贤纳士 {{- end -}}
-{{ define "headTpl" }}
+
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "https://angel.co/pingcap-1/jobs" }}
     {{- partial "head/preload-css" (dict "href" "/css/recruit.css") -}}
     <link rel="preload" href="https://download.pingcap.com/js/typed.min.js" as="script">
     <link rel="preload" href="/js/recruit.js" as="script">
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="recruit">
     <div class="container">
         <div class="section">
@@ -54,11 +55,11 @@
     </div>
     {{- partial "recruit/aside-menu.html" (dict "active" "working") -}}
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/typed.min.js"></script>
     <script type="text/javascript" src="https://download.pingcap.com/js/worldmap.js"></script>
     <script type="text/javascript" src="/js/vendor/lazyload.min.js"></script>
     <script type="text/javascript" src="/js/recruit.js"></script>
-{{ end }}
+{{- end -}}
