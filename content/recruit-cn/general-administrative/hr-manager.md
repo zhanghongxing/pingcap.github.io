@@ -1,7 +1,7 @@
 ---
 title: 招聘主管
 tags:
-  -  Back Office
+  -  'General & Administrative'
 location: 北京
 avatar: hr
 ---

@@ -5,7 +5,7 @@
 $(function() {
   // Process Typed terminal
   var sqlTyped = new Typed('#typedSelect', {
-    strings: ['tidb> select * from pingcap.milestones;'],
+    strings: ['tidb> select * from pingcap.milestones order by date desc;'],
     typeSpeed: 50, // typing speed
     backSpeed: 0,
     showCursor: false,
@@ -26,8 +26,8 @@ $(function() {
   })
 
   // process image: lazy load and add fade in effect
-  $(".lazy").lazyload({
+  $('.lazy').lazyload({
     threshold: 200,
-    effect : "fadeIn"
-  });
+    effect: 'fadeIn',
+  })
 })

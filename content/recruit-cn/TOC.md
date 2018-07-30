@@ -2,14 +2,14 @@
 
 ## 目录
 
-- Tech
-  - [TiKV 研发工程师](tech/tikv-engineer.md)
-  - [PD 研发工程师](tech/pd-engineer.md)
-  - [TiDB 研发工程师](tech/tidb-engineer.md)
-  - [TiDB 商业产品开发 - 工具方向](tech/bizdev-tools-engineer.md)
-  - [TiDB 商业产品开发 - Cloud 方向](tech/bizdev-cloud-engineer.md)
-  - [TiDB 商业产品开发 - SRE 方向](tech/bizdev-sre-engineer.md)
-  - [TiDB 商业产品开发 - 产品方向](tech/bizdev-fe-engineer.md)
+- Engineering
+  - [TiKV 研发工程师](engineering/tikv-engineer.md)
+  - [PD 研发工程师](engineering/pd-engineer.md)
+  - [TiDB 研发工程师](engineering/tidb-engineer.md)
+  - [TiDB 商业产品开发 - 工具方向](engineering/bizdev-tools-engineer.md)
+  - [TiDB 商业产品开发 - Cloud 方向](engineering/bizdev-cloud-engineer.md)
+  - [TiDB 商业产品开发 - SRE 方向](engineering/bizdev-sre-engineer.md)
+  - [TiDB 商业产品开发 - 产品方向](engineering/bizdev-fe-engineer.md)
 - Business
   - [行业销售负责人/总监](business/sales-director.md)
   - [售前技术总监](business/presales-director.md)
@@ -24,6 +24,6 @@
   - [Infrastructure Engineer Intern](campus/infrastructure-engineer-intern.md)
   - [HR Intern](campus/hr-intern.md)
   - [Technical Writer Intern](campus/technical-writer-intern.md)
-- Back Office
-  - [出纳](back-office/cashier.md)
-  - [招聘主管](back-office/hr-manager.md)
+- General & Administrative
+  - [出纳](general-administrative/cashier.md)
+  - [招聘主管](general-administrative/hr-manager.md)

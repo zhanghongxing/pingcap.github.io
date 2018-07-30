@@ -1,7 +1,7 @@
 ---
 title: 出纳
 tags:
-  -  Back Office
+  -  'General & Administrative'
 location: 北京
 avatar: finance
 ---

@@ -33,7 +33,6 @@
     li a {
       display: flex;
       margin: 12px 0;
-      // border-radius: 54px 0 0 54px;
       cursor: pointer;
       color: @asideColor;
 
@@ -57,7 +56,7 @@
         width: @asideW;
         height: @asideW;
         line-height: @asideW;
-        
+
         // ICON
         &:nth-child(1) {
           display: flex;
@@ -65,12 +64,16 @@
           height: @asideW;
           align-items: center;
           justify-content: center;
+          border: 1px solid @asideBgColor;
           border-radius: 50%;
-          background: lighten(@asideBgColor, 10%);
 
           svg {
             width: 32px;
             height: 32px;
+
+            .cls-1 {
+              fill: @asideBgColor;
+            }
           }
         }
 
