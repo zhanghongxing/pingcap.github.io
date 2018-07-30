@@ -5,7 +5,7 @@
 // Say hello
 console.log('🦊 Hello! @PingCAP website')
 
-// import '../../dist/css/main.css'
+import '../../dist/css/main.css'
 
 // Smooth scrolling when the document is loaded and ready
 function smoothScroll(hash) {

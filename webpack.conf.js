@@ -80,6 +80,7 @@ export default {
       },
       include: 'initial',
     }),
+    new ExtractTextPlugin('../css/main.css'),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
