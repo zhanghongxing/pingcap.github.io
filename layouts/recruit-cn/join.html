@@ -25,14 +25,14 @@
             <div id="positions-tabs">
                 <dt>All</dt>
                 <dd>{{- partial "recruit/positions-tab-panel.html" (dict "posts" $posts "global" .) -}}</dd>
-                {{ range $index, $toc := .Site.Data.recruit_cn_toc }}
-                    <dt class="tab-{{ $index }}">{{ .name }}</dt>
-                    <dd>{{ partial "recruit/positions-tab-panel.html" (dict "posts" $posts "name" .name "global" .) }}</dd>
+                {{- range $index, $toc := .Site.Data.recruit_cn_toc -}}
+                    <dt class="tab-{{ $index }}">{{- .name -}}</dt>
+                    <dd>{{- partial "recruit/positions-tab-panel.html" (dict "posts" $posts "name" .name "global" .) -}}</dd>
                 {{ end }}
             </div>
         </div>
     </div>
-    {{ partial "recruit/aside-menu.html" (dict "active" "join") }}
+    {{- partial "recruit/aside-menu.html" (dict "active" "join") -}}
 </div>
 {{ end }}
 
