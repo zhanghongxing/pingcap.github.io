@@ -1,8 +1,7 @@
 {{ $release := .Site.Data.release}}
 {{ $data_i18_cn := $.Scratch.Get "data_i18_cn" }}
 
-
-{{ if $release.isShow }}
+{{- if $release.isShow -}}
     <div class="release-banner" data-release="{{ $release.version }}">
         <div class="container">
             <div class="release-banner__inner">
@@ -23,4 +22,4 @@
             </div>
         </div>
     </div>
-{{ end }}
+{{- end -}}

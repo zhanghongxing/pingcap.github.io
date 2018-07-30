@@ -9,6 +9,7 @@
 @import "./cards.less";
 @import "./chat.less";
 @import "./collapses.less";
+@import "./aside-menu.less";
 
 @lineWidth: 1.9rem;
 @contentMaxWidth: 980px;
@@ -59,7 +60,7 @@
   }
 
   .desc {
-    max-width: 32rem;
+    max-width: 38em;
     margin: 0 auto;
     font-size: 0.8rem;
     line-height: 1.7;
@@ -72,6 +73,7 @@
     justify-content: center;
     width: 100%;
     margin: 1em auto;
+    padding: 0 1em;
 
     img {
       display: block;
@@ -92,7 +94,7 @@
   width: 100%;
   margin: 2em auto 1em;
 
-  text {
+  text[href="http://simplemaps.com"] {
     font: 300 10px arial, sans-serif !important;
   }
 }
@@ -144,12 +146,16 @@
   }
 }
 
-#qa-tabs,
 #positions-tabs,
 .timeline-wrapper,
 .map-wrapper,
+.logo-list,
 .section-culture .cards {
   max-width: @contentMaxWidth;
+}
+
+#qa-tabs {
+  max-width: 800px;
 }
 
 @media (max-width: 767px) {
@@ -160,13 +166,21 @@
 }
 
 @media (max-width: 599px) {
-  .recruit .timeline-wrapper {
-    width: 100%;
-  }
+  .recruit {
+    .timeline-wrapper {
+      width: 100%;
+    }
 
-  .recruit .map-wrapper {
-    text {
-      font: 300 8px arial, sans-serif !important;
+    .map-wrapper {
+      text[href="http://simplemaps.com"] {
+        font: 300 8px arial, sans-serif !important;
+      }
+    }
+
+    .logo-list {
+      img {
+        height: 36px;
+      }
     }
   }
 

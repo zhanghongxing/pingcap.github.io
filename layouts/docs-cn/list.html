@@ -1,42 +1,42 @@
 {{- define "title" -}} 文档 {{- end -}}
 
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     <style type="text/css" media="screen">
         .st_tree {
             display: none;
         }
     </style>
-    <link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css" />
-    <link rel="stylesheet" href="/css/doc.css" />
+    {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/github-markdown.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
     {{$.Scratch.Set "nav_active" "docs"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/docs" }}
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="doc" id="list_page">
     <div class="container">
-        {{ partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") }}
+        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.docs_cn_toc "title" "文档") -}}
 
         <div class="archive">
             <div class="content markdown-body">
-                {{ with .Site.GetPage "page" "docs-cn/overview.md" }}{{.Content}}{{ end }}
+                {{ with .Site.GetPage "page" "docs-cn/overview.md" }}{{- .Content -}}{{ end }}
             </div>
             <div class="article-toc"></div>
         </div>
 
         <div class="sidebar-page sticky-sidebar">
             {{ with .Site.GetPage "page" "docs-cn/overview.md" }}
-                {{ partial "archives/improve-doc.html" (dict "repo" "docs-cn" "global" . "isCn" "true") }}
+                {{- partial "archives/improve-doc.html" (dict "repo" "docs-cn" "global" . "isCn" "true") -}}
             {{ end }}
-            {{ partial "archives/download-pdf.html" (dict "isCn" "true") }}
+            {{- partial "archives/download-pdf.html" (dict "isCn" "true") -}}
             <p class="toc-title">本页导航</p>
             <div id="smart_toc_wrapper"></div>
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
-{{ end }}
+{{- end -}}

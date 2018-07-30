@@ -1,5 +1,4 @@
 {{ $nav_active := $.Scratch.Get "nav_active" }}
-
 <header role="navigation" class="fixed-top">
     <div class="container">
         <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
@@ -17,7 +16,7 @@
             <div class="global-search">
                 <div class="search-wrapper">
                 <span class="icon-search">{{ partial "svgs/icon-search.svg" (dict "fill" "#fff" "width" 18 "height" 18 ) }}</span>
-                {{ partial "search/ui.html" . }}
+                <input data-lang="en" type="search" id="search-input" placeholder="Search...">
                 </div>
             </div>
         </div>

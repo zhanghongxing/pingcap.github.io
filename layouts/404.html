@@ -1,8 +1,8 @@
-{{ define "headTpl" }}
-    <link rel="stylesheet" href="/css/doc.css" />
-{{ end }}
+{{- define "headTpl" -}}
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
 <div class="doc">
     <div class="container">
         <div class="archive">
@@ -15,4 +15,4 @@
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}

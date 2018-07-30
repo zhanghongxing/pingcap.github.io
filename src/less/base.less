@@ -7,9 +7,9 @@
 @font-face {
   font-family: "Lato";
   src:
-  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.eot"),
-  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf"),
-  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff");
+  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff2") format('woff2'),
+  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff") format('woff'),
+  url("https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -17,9 +17,9 @@
 @font-face {
   font-family: "TitilliumWeb";
   src:
-  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.eot"),
-  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf"),
-  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff");
+  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff2") format('woff2'),
+  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff") format('woff'),
+  url("https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,8 +28,8 @@ body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  font-family: "Lato", "Helvetica Neue", Helvetica, "PingFang SC",
-  "Hiragino Sans GB", "Noto Sans CJK SC", Arial, sans-serif;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, Helvetica, "Segoe UI",
+  "Hiragino Sans GB", "Noto Sans CJK SC", Arial, Ubuntu, sans-serif, "Apple Color Emoji";
   color: @textColor;
 }
 
@@ -71,7 +71,12 @@ input,
 button,
 select,
 textarea {
-  outline: none;
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
 }
 
 button,
@@ -92,8 +97,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "TitilliumWeb", "Helvetica Neue", Helvetica, "PingFang SC",
-  "Hiragino Sans GB", "Noto Sans CJK SC", Arial, sans-serif;
+  font-family: "TitilliumWeb", -apple-system, BlinkMacSystemFont, Helvetica, "Segoe UI",
+  "Hiragino Sans GB", "Noto Sans CJK SC", Arial, Ubuntu, sans-serif, "Apple Color Emoji";
   color: @titleColor;
 }
 

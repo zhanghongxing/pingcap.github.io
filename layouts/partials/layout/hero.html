@@ -2,9 +2,9 @@
     <div class="hero__container">
         <div class="hero__inner f-tc">
         <h1 class="hero__heading">{{ .heading }}</h1>
-        {{ if .subheading }}
+        {{- if .subheading -}}
             <h2 class="hero__subheading">{{ .subheading }}</h2>
-        {{ end }}
+        {{- end -}}
         </div>
     </div>
 </div>

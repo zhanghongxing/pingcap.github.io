@@ -1,22 +1,21 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "nav_active" "about"}}
     {{$.Scratch.Set "data_i18_cn" true }}
     {{$.Scratch.Set "data_i18_link" "/about" }}
-    <link rel="stylesheet" href="/css/about.css" />
+    {{- partial "head/preload-css" (dict "href" "/css/about.css") -}}
     <style type="text/css">
     .amap-logo,
     .amap-copyright {
         display: none !important;
     }
-
     .amap-icon img {
         width: 100%;
         height: 100%;
     }
     </style>
-{{ end }}
+{{- end -}}
 
-{{ define "footJS" }}
+{{- define "footJS" -}}
     <script type="text/javascript" src="https://download.pingcap.com/js/particles.js"></script>
     <script type="text/javascript" src="/js/about.js"></script>
 
@@ -42,9 +41,9 @@
         }
     </script>
     <!-- End bai_du map -->
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <section class="intro-video">
         <div id="particles-js"></div>
         <div class="video-wrapper f-vhc">
@@ -63,7 +62,7 @@
             <div class="desc">
                 PingCAP 是一家开源的新型分布式数据库公司，秉承开源是基础软件的未来这一理念，PingCAP 持续扩大社区影响力，致力于前沿技术领域的创新实现。其研发的分布式关系型数据库 TiDB 项目，具备「分布式强一致性事务、在线弹性水平扩展、故障自恢复的高可用、跨数据中心多活」等核心 NewSQL 特性，是大数据时代理想的数据库集群和云数据库解决方案。目前准生产测试用户 1000 余家，并已被 200 余家不同行业的领先企业应用在实际生产环境，涉及互联网、游戏、金融、政府、电信、制造业等多个领域。
             </div>
-            <a class="link" href="/recruit-cn/">Join Us {{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</a>
+            <a class="link" href="/recruit-cn/join/">Join Us {{ partial "svgs/icon-right-arrow.svg" (dict "fill" "#202884" "width" 16 "height" 16 ) }}</a>
         </div>
     </section>
     <section class="about-founders">
@@ -162,4 +161,4 @@
             <div id="map" class="map" style="width: 100%; height: 340px;"></div>
         </div>
     </section>
-{{ end }}
+{{- end -}}

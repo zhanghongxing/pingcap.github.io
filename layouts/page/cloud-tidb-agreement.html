@@ -1,15 +1,15 @@
-{{ define "headTpl" }}
+{{- define "headTpl" -}}
     {{$.Scratch.Set "data_i18_cn" true }}
     <meta name="robots" content="noindex,nofollow,nosnippet">
-    <link rel="stylesheet" href="/css/doc.css" />
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css") -}}
     <style type="text/css">
     .agreement {
         padding-left: 0 !important;
     }
     </style>
-{{ end }}
+{{- end -}}
 
-{{ define "main" }}
+{{- define "main" -}}
     <div class="doc">
         <div class="container">
             <div class="archive agreement">
@@ -67,4 +67,4 @@
             </div>
         </div>
     </div>
-{{ end }}
+{{- end -}}

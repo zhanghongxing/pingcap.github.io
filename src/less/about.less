@@ -6,7 +6,7 @@
 @videoWidth: 1124px;
 @videoHeight: calc(~"@{videoWidth}* 9/16");
 @lineWidth: 1.9rem;
-// @fadeInAttrs: fadeIn 0.4s;
+@mapWidth: 660px;
 
 section[class^="about-"],
 section[class^="meetup-landing-page-"] {
@@ -248,9 +248,20 @@ section[class^="meetup-landing-page-"] {
 .map-shotcut {
   width: 100%;
   height: 340px;
-  background: url("https://download.pingcap.com/images/map-shotcut-pc.png");
+  background: url("https://download.pingcap.com/images/map-office-2955-campus.png");
   background-size: cover;
 }
+
+// .map-wrapper {
+//   width: 100%;
+//   max-width: @mapWidth;
+//   margin: 2em auto 1em;
+//   text-align: left;
+
+//   text[href="http://simplemaps.com"] {
+//     font: 300 10px arial, sans-serif !important;
+//   }
+// }
 
 /* ---- particles.js container ---- */
 #particles-js {
@@ -297,7 +308,7 @@ section[class^="meetup-landing-page-"] {
 
   .map-shotcut {
     height: 270px;
-    background: url("https://download.pingcap.com/images/map-shotcut-min.png");
+    background: url("https://download.pingcap.com/images/map-office-2955-campus-mobile.png");
     background-size: cover;
   }
 }
