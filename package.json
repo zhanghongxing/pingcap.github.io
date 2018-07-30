@@ -35,6 +35,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^3.9.4",
     "gulp-less": "^3.3.2",
+    "gulp-postcss": "^6.1.1",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.30.1",
     "hugo-bin": "^0.17.0",
