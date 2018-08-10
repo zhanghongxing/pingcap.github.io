@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Tech Team",
+    "children": [
+      {
+        "name": "TiKV 研发工程师",
+        "link": "/recruit-cn/tech/tikv-engineer/"
+      },
+      {
+        "name": "PD 研发工程师",
+        "link": "/recruit-cn/tech/pd-engineer/"
+      },
+      {
+        "name": "TiDB 研发工程师",
+        "link": "/recruit-cn/tech/tidb-engineer/"
+      },
+      {
+        "name": "TiDB 商业产品开发 - 工具方向",
+        "link": "/recruit-cn/tech/bizdev-tools-engineer/"
+      },
+      {
+        "name": "TiDB 商业产品开发 - Cloud 方向",
+        "link": "/recruit-cn/tech/bizdev-cloud-engineer/"
+      },
+      {
+        "name": "TiDB 商业产品开发 - SRE 方向",
+        "link": "/recruit-cn/tech/bizdev-sre-engineer/"
+      },
+      {
+        "name": "TiDB 商业产品开发 - 产品设计方向",
+        "link": "/recruit-cn/tech/bizdev-fe-engineer/"
+      }
+    ]
+  },
+  {
+    "name": "Business Team",
+    "children": [
+      {
+        "name": "行业销售负责人/总监",
+        "link": "/recruit-cn/business/sales-director/"
+      },
+      {
+        "name": "售前技术总监",
+        "link": "/recruit-cn/business/presales-director/"
+      },
+      {
+        "name": "渠道合作总监",
+        "link": "/recruit-cn/business/channel-co-director/"
+      },
+      {
+        "name": "高级客户技术工程师",
+        "link": "/recruit-cn/business/ops-engineer/"
+      }
+    ]
+  },
+  {
+    "name": "MKT Team",
+    "children": [
+      {
+        "name": "PR 经理",
+        "link": "/recruit-cn/market/pr-manager/"
+      },
+      {
+        "name": "市场运营",
+        "link": "/recruit-cn/market/operation-manager/"
+      }
+    ]
+  },
+  {
+    "name": "I18N Team",
+    "children": [
+      {
+        "name": "Technical Writer",
+        "link": "/recruit-cn/i18n/technical-writer/"
+      }
+    ]
+  },
+  {
+    "name": "Intern",
+    "children": [
+      {
+        "name": "Infrastructure Engineer Intern",
+        "link": "/recruit-cn/intern/infrastructure-engineer-intern/"
+      },
+      {
+        "name": "HR Intern",
+        "link": "/recruit-cn/intern/hr-intern/"
+      },
+      {
+        "name": "Technical Writer Intern",
+        "link": "/recruit-cn/intern/technical-writer-intern/"
+      }
+    ]
+  }
+]
