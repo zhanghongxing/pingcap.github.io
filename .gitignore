@@ -31,14 +31,6 @@ yarn-error.log*
 dist/
 build/
 
-# submodules content
-content/blog-cn
-content/blog
-content/docs-cn
-content/docs
-content/weekly
-content/meetup
-
 # atuo generated data
 data/docs_cn_toc.json
 data/docs_toc.json
@@ -100,5 +92,4 @@ $RECYCLE.BIN/
 .com.apple.timemachine.donotpresent
 baseof.html
 gulp-build.log
-data/docs_cn_toc.json
-data/docs_toc.json
+
