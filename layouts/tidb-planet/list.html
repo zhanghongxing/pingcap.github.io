@@ -33,6 +33,7 @@
     <script type="text/javascript">
         $.ajax({
             url: "https://api.github.com/repos/pingcap/tidb/contributors",
+            crossDomain: true,
             success: function(data) {
             console.log(data)
         }});
