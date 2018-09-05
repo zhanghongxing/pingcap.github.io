@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div>
+    <div id="tidb-planet" data-contributors="{{.Site.Data.contributors | jsonify}}">
         TiDB Planet
     </div>
     <ul>
@@ -29,15 +29,9 @@
         <li><a href="/tidb-planet/visitor">Visitor Info</a></li>
         <li><a href="/tidb-planet/rorbot">TiDB Robot</a></li>
     </ul>
-    <script src="https://download.pingcap.com/js/jquery.min.js"></script>
-    <script type="text/javascript">
-        $.ajax({
-            url: "https://api.github.com/repos/pingcap/tidb/contributors",
-            crossDomain: true,
-            success: function(data) {
-            console.log(data)
-        }});
-        </script>
+    <script type="text/javascript" src="https://download.pingcap.com/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/tidb_planet.js"></script>
 </body>
 
 </html>
