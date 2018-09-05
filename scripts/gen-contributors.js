@@ -1,14 +1,19 @@
-// generate contributors.json for tidb-planet
+// generate contributors.json for tidb-planet pages
 
 const octokit = require('@octokit/rest')()
 // https://github.com/octokit/rest.js
 
-
-const repoList = ['tidb']
 const owner = 'pingcap'
+const repo = 'tidb'
 const per_page = 100
 
-async function getRepoContributors(repo) {
+// FIXME: GitHub REST API Issue: empty commit list
+const omittedContributorsCommits = {
+  liubin: {first_commit_date: "2016-04-26"},
+  buggithubs: {first_commit_date: "2017-11-20"}
+}
+
+async function getRepoContributors() {
   let all = []
   const result = await octokit.repos.getContributors({
     owner,
@@ -29,84 +34,76 @@ async function getRepoContributors(repo) {
   }
 }
 
-// fetch each contributor's first commit
-async function getContributorFirstCommit(author) {
-  console.log(author)
+// generate each contributor's first commit
+async function genContributorFirstCommit(author) {
   let first_commit_date
-  const repo = repoList[0]
   const result = await octokit.repos.getCommits({owner, repo, author, per_page})
-  console.log('commits result data', result.data)
 
   await innerCallback(result)
   return first_commit_date
 
   async function innerCallback(result) {
-    if(octokit.hasNextPage(result)) {
-      let _r = await octokit.getNextPage(result)
-      innerCallback(_r)
-    } else {
-      console.log(result.data.length)
-      first_commit_date = result.data[result.data.length - 1].commit.author.first_commit_date
-      console.log(first_commit_date)
+    let _res = result
+    if(octokit.hasLastPage(result))
+      _res = await octokit.getLastPage(result)
+
+    if(_res.data.length) {
+      const first_commit = _res.data[_res.data.length - 1].commit
+      if(first_commit)
+        first_commit_date = first_commit.author.date
     }
   }
-
 }
 
 const fs = require('fs')
 
 async function main() {
-  let RepoContributorList = []
-  for(let i of repoList) {
-    RepoContributorList.push(await getRepoContributors(i))
+  let contributors = {}
+  let commits = {}
+  const list = await getRepoContributors()
+  await processContributorsCommits()
+  // https://blog.lavrton.com/javascript-loops-how-to-handle-async-await-6252dd3c795
+  await genJSON()
+
+  async function processContributorsCommits () {
+    // map array to promises
+    const promises = list.map(asyncGenCommit)
+    // wait until all promises are resolved
+    await Promise.all(promises)
+
+    async function asyncGenCommit(c) {
+      const { login } = c
+      const first_commit_date = await genContributorFirstCommit(login) || ''
+      if(!commits[login]) {
+        commits[login] = {
+          first_commit_date
+        }
+      }
+    }
   }
 
-  let collections = {}
+  async function genJSON() {
+    // generate contributor item
+    // FIXME: add omitted contributors
+    commits = Object.assign({}, commits, omittedContributorsCommits)
+    // console.log('commits', commits)
 
-  RepoContributorList.forEach((list, idx)=>{
-    console.log(`Repo ${repoList[idx]} has ${list.length} contributors`)
-
-    // callback
-    async function callback(c) {
+    list.forEach(c => {
       const { id, login, avatar_url, contributions } = c
-
-      // TODO: get each contributor's first commit
-
-      if(!collections[login]) {
-        const first_commit_date = await getContributorFirstCommit(login) || ''
-
-        collections[login] = {
-          id,
-          login,
+      if(!contributors[login]) {
+        const { first_commit_date } = commits[login]
+        contributors[login] = {
+          // id,
+          // login,
           avatar_url,
           contributions,
           first_commit_date
         }
       }
-    }
-
-    list.forEach(c => {
-      callback(c)
-      // const { id, login, avatar_url, contributions } = c
-
-      // // TODO: get each contributor's first commit
-
-      // if(!collections[login]) {
-      //   const first_commit_date = getContributorFirstCommit(login) || ''
-
-      //   collections[login] = {
-      //     id,
-      //     login,
-      //     avatar_url,
-      //     contributions,
-      //     first_commit_date
-      //   }
-      // }
     })
-  }, {})
-
-  fs.writeFileSync('./contributors.json', JSON.stringify(collections), 'utf8')
-  // hash -> array
+    // write to file
+    fs.writeFileSync('data/contributors.json', JSON.stringify(contributors), 'utf8')
+  }
 }
 
 main()
