@@ -89,12 +89,11 @@ async function main() {
     // console.log('commits', commits)
 
     list.forEach(c => {
-      const { id, login, avatar_url, contributions } = c
+      const { login, avatar_url, contributions } = c
       if(!contributors[login]) {
         const { first_commit_date } = commits[login]
         contributors[login] = {
-          // id,
-          // login,
+          login,
           avatar_url,
           contributions,
           first_commit_date

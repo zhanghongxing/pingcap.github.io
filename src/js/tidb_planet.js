@@ -25,12 +25,29 @@ const isAuthContributor = username => {
 
 const authenticateContributor = name => {
   if (window.tidbContributors[name]) {
-    // auth success: is a contributor
+    // success: is a contributor
     // TODO: change algorithm to getting contributor number
     // sort by commit date
     // update contributor number
+    const sortedContributors = _.toArray(window.tidbContributors).sort(
+      (a, b) => {
+        var dateA = a.first_commit_date.toLowerCase() // ignore upper and lowercase
+        var dateB = b.first_commit_date.toLowerCase() // ignore upper and lowercase
+        if (dateA < dateB) {
+          return -1
+        }
+        if (dateA > dateB) {
+          return 1
+        }
+        return 0
+      }
+    )
+    // console.log(sortedContributors)
+    const cNum = sortedContributors.indexOf(window.tidbContributors[name]) + 1
+    // console.log(cNum)
+    $.cookie(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
   } else {
-    // auth failed: is a visitor
+    // failed: is a visitor
     console.log('Not a contributor')
     // TODO: visitor card number
   }
@@ -55,7 +72,9 @@ $(function() {
     // TODO: login input
     // after input username
     // TODO: authenticate contributor
-    // TODO: test user
+    // test contributor
+    // const inputName = 'ngaut'
+    // test visitor
     const inputName = 'xuechunL'
     authenticateContributor(inputName)
     $.cookie(cookiesKeyMap['USERNAME'], inputName)
