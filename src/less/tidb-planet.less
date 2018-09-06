@@ -1,0 +1,213 @@
+// TiDB Planet Pages
+
+@import "./variables.less";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background:
+    radial-gradient(
+      #172D72,
+      #120E34
+    ) center no-repeat;
+  color: #fff;
+  font-family: Helvetica;
+}
+
+body,
+body * {
+  box-sizing: @boxSize;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+input,
+button,
+select,
+textarea {
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+  appearance: none;
+}
+
+
+// Basic Button Style
+.button {
+  appearance: none;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  margin: 20px;
+  border-radius: 0;
+  padding: 1em 2.8em;
+  color: @themeBlue;
+  cursor: pointer;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 0 40px 40px @themeBlue inset;
+    color: #fff;
+    border-color: @themeBlue;
+  }
+}
+
+.control-box {
+  display: flex;
+  margin: 40px;
+  .menu {
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  height: 220px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  width: 340px;
+}
+
+.title {
+  color: #667;
+  font-size: 1.5em;
+  height: 29px;
+  margin-bottom: 0;
+}
+
+.text {
+  color: #667;
+  font-size: 1em;
+  height: 38px;
+  margin: 5px 0 0;
+}
+
+.line {
+  left: 0;
+  position: absolute;
+  width: 340px;
+}
+
+.line path {
+  fill: none;
+  stroke: black;
+  stroke-width: 2;
+  stroke-dasharray: 300 1903;
+}
+
+.card.saving .line path {
+  stroke-dashoffset: -472;
+  stroke-dasharray: 153 1903;
+  transition: stroke-dasharray 500ms, stroke-dashoffset 500ms;
+}
+
+.card.done .line path {
+  stroke-dashoffset: -762;
+  stroke-dasharray: 1095 1903;
+  transition: stroke-dasharray 1500ms, stroke-dashoffset 1500ms;
+}
+
+.line2 {
+  height: 52px;
+  left: 150px;
+  opacity: 0;
+  position: absolute;
+  stroke-dasharray: 6 48;
+  stroke-dashoffset: -42;
+  top: 138px;
+  transform-origin: 50%;
+  width: 50px;
+}
+
+.card.saving .line2 {
+  animation: 4s 500ms Rotate forwards;
+}
+
+.card.done .line2 {
+  animation: 500ms ScaleDown forwards;
+}
+
+.form {
+  transform-origin: 0 50%;
+  transition: transform 500ms, opacity 500ms;
+}
+
+.card.saving .form {
+  transform: translateY(-16px) scale(.8);
+}
+
+.card.done .form {
+  transform: translateY(-16px) scale(.8);
+  opacity: 0;
+}
+
+.input {
+  background: transparent;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 40px;
+  margin-top: 20px;
+  outline: none !important;
+  position: relative;
+  width: 300px;
+}
+
+@keyframes Rotate {
+  0% { transform: rotate(0); opacity: 1; }
+  25% { transform: rotate(360deg); opacity: 1; }
+  50% { transform: rotate(720deg); opacity: 1; }
+  75% { transform: rotate(1080deg); opacity: 1; stroke-dasharray: 6 48; stroke-dashoffset: -42;}
+  100% { transform: rotate(1080deg); opacity: 1; stroke-dashoffset: 0; stroke-dasharray: 36 48;}
+}
+
+@keyframes ScaleDown {
+  0% { transform: scale(1); }
+  100% { transform: scale(0);}
+}
+

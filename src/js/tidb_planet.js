@@ -52,7 +52,6 @@ const authenticateContributor = name => {
     )
 
     const cNum = sortedContributors.indexOf(window.tidbContributors[name]) + 1
-    // console.log(cNum)
     Cookies.set(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
     console.log(
       `Congratulations! You are the ${cNum}th landing on TiDB Planet!`
@@ -74,24 +73,17 @@ $(function() {
 
     // tidb planet welcome page
     if ($('body.tidb-planet').length) {
-      // TODO: open video mask
-      // TODO: after playing video, show login box or mask
-
-      // TODO: login input,  get inputName
-      //
-      // TODO: after getting inputName authenticate contributor
-      // test contributor
-      // const inputName = 'ngaut'
-      // test visitor
-      const inputName = 'xuechunL'
-      console.log('after getting inputName', inputName)
-      authenticateContributor(inputName)
-      // create a cookie about username
-      Cookies.set(cookiesKeyMap['USERNAME'], inputName)
+      // TODO: open video mask and playing video
+      console.log('playing video')
+      // TODO: after playing video, show login box
+      // show login button and form card
+      $('.j-login-btn').show()
+      $('.card-login').show()
     } else {
       // not welcome page
       console.log('Not Welcome Page')
       // show login button in every pages
+      $('.j-login-btn').show()
       // if is user info page, not show any card
     }
   } else if (isAuthContributor(username)) {
@@ -105,4 +97,41 @@ $(function() {
     // is a visitor
     console.log('Welcome to the TiDB planet, join us now! www.pingcap.com')
   }
+
+  // control buttons
+  $('.j-menu-btn').click(function() {
+    if($('.menu').css("display") === 'block')
+      $('.menu').fadeOut();
+    else
+      $('.menu').fadeIn();
+  });
+
+  $('.j-login-btn').click(function() {
+    if($('.card-login').css("display") === 'block')
+      $('.card-login').fadeOut();
+    else
+      $('.card-login').fadeIn();
+  });
+
+  // login authentication
+  $('.form').submit(function(e) {
+    $('.input').blur()
+    $('.card').addClass('saving')
+  
+    const inputName = $('.form .input')[0].value
+    console.log('input name', inputName)
+    // authenticate input name
+    authenticateContributor(inputName)
+    // create a cookie about username
+    Cookies.set(cookiesKeyMap['USERNAME'], inputName)
+    e.preventDefault()
+  })
+  
+  $('.line2').on('animationend', function(e) {
+    setTimeout(() => {
+      $('.card').addClass('done')
+      // go to user info page after loading
+      location.href = '/tidb-planet/user/'
+    }, 1000)
+  })
 })

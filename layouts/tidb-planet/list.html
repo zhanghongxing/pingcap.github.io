@@ -15,10 +15,10 @@
     <title>{{ block "title" . }}{{- .Title -}}{{ end }} | TiDB Planet</title>
     {{- partial "head/ga" . -}}
     {{- partial "head/meta-seo" . -}}
+    {{- partial "head/preload-css" (dict "href" "/css/tidb-planet.css") -}}
 </head>
 
 <body class="tidb-planet">
-    <h1> TiDB Planet </h1>
 
     {{- partial "tidb-planet/control-box" . -}}
 

@@ -1,15 +1,11 @@
 <div class="control-box">
     <div class="container j-contributor-login" data-contributors="{{.Site.Data.contributors | jsonify}}">
-        <div class="button">Login</div>
+        <button class="button j-login-btn" style="display: none;">Login</button>
         {{- partial "tidb-planet/login" . -}}
     </div>
 
     <div class="container">
-        <div class="button">Menu</div>
+        <button class="button j-menu-btn">Menu</button>
         {{- partial "tidb-planet/menu" . -}}
     </div>
 </div>
-
-
-<script>
-</script>
