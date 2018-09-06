@@ -5,7 +5,6 @@
 const prefix = '_tidb_planet_'
 const cookiesKeyMap = {
   CONTRIBUTOR_NUM: `${prefix}contributor_num`,
-  // VISITOR_NUM: `${prefix}visitor_num`,
   USERNAME: `${prefix}username`,
 }
 
@@ -26,9 +25,7 @@ const isAuthContributor = username => {
 const authenticateContributor = name => {
   if (window.tidbContributors[name]) {
     // success: is a contributor
-    // TODO: change algorithm to getting contributor number
     // sort by commit date
-    // update contributor number
     const sortedContributors = _.toArray(window.tidbContributors).sort(
       (a, b) => {
         var dateA = a.first_commit_date.toLowerCase() // ignore upper and lowercase
@@ -42,14 +39,16 @@ const authenticateContributor = name => {
         return 0
       }
     )
-    // console.log(sortedContributors)
+
     const cNum = sortedContributors.indexOf(window.tidbContributors[name]) + 1
     // console.log(cNum)
     $.cookie(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
+    console.log(
+      `Congratulations! You are the ${cNum}th landing on TiDB Planet!`
+    )
   } else {
     // failed: is a visitor
-    console.log('Not a contributor')
-    // TODO: visitor card number: use current date number
+    console.log('Welcome to the TiDB planet, join us now! www.pingcap.com')
   }
 }
 
@@ -73,9 +72,9 @@ $(function() {
     // after input username
     // TODO: authenticate contributor
     // test contributor
-    // const inputName = 'ngaut'
+    const inputName = 'ngaut'
     // test visitor
-    const inputName = 'xuechunL'
+    // const inputName = 'xuechunL'
     authenticateContributor(inputName)
     $.cookie(cookiesKeyMap['USERNAME'], inputName)
   } else if (isAuthContributor(username)) {
