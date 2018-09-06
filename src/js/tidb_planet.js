@@ -2,6 +2,9 @@
 
 // TiDB Planet Pages
 
+import Cookies from './vendor/js.cookie.js'
+// https://github.com/js-cookie/js-cookie
+
 const prefix = '_tidb_planet_'
 const cookiesKeyMap = {
   CONTRIBUTOR_NUM: `${prefix}contributor_num`,
@@ -11,18 +14,26 @@ const cookiesKeyMap = {
 const getCookies = () => {
   let cookiesValMap = {}
   for (let ck in cookiesKeyMap) {
-    const val = $.cookie(cookiesKeyMap[ck])
+    const val = Cookies.get(cookiesKeyMap[ck])
     cookiesValMap[ck] = val
   }
   return cookiesValMap
 }
 
-const isAuthContributor = username => {
-  console.log('has username', username)
-  return window.tidbContributors[username]
+const isAuthContributor = () => {
+  console.log(
+    'authenticated contributor number',
+    getCookies()['CONTRIBUTOR_NUM']
+  )
+  return getCookies()['CONTRIBUTOR_NUM']
 }
 
 const authenticateContributor = name => {
+  // load contributors json data
+  if (!window.tidbContributors) {
+    window.tidbContributors = $('.login-box-wrapper').data('contributors')
+  }
+
   if (window.tidbContributors[name]) {
     // success: is a contributor
     // sort by commit date
@@ -42,7 +53,7 @@ const authenticateContributor = name => {
 
     const cNum = sortedContributors.indexOf(window.tidbContributors[name]) + 1
     // console.log(cNum)
-    $.cookie(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
+    Cookies.set(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
     console.log(
       `Congratulations! You are the ${cNum}th landing on TiDB Planet!`
     )
@@ -53,30 +64,36 @@ const authenticateContributor = name => {
 }
 
 $(function() {
-  // load contributors json
-  if (!window.tidbContributors) {
-    window.tidbContributors = $('#tidb-planet').data('contributors')
-  }
-
-  // get username
+  // get username in cookie
   const username = getCookies()['USERNAME']
   console.log('username in cookies', username)
   if (!username) {
     // is a new user
     // TODO: play milestones video
     console.log('You are fresh~ please login')
-    // TODO: after play video, show login mask
-    // after close mask(either login or not) show login button - every page with the same rule
 
-    // TODO: login input
-    // after input username
-    // TODO: authenticate contributor
-    // test contributor
-    const inputName = 'ngaut'
-    // test visitor
-    // const inputName = 'xuechunL'
-    authenticateContributor(inputName)
-    $.cookie(cookiesKeyMap['USERNAME'], inputName)
+    // tidb planet welcome page
+    if ($('body.tidb-planet').length) {
+      // TODO: open video mask
+      // TODO: after playing video, show login box or mask
+
+      // TODO: login input,  get inputName
+      //
+      // TODO: after getting inputName authenticate contributor
+      // test contributor
+      // const inputName = 'ngaut'
+      // test visitor
+      const inputName = 'xuechunL'
+      console.log('after getting inputName', inputName)
+      authenticateContributor(inputName)
+      // create a cookie about username
+      Cookies.set(cookiesKeyMap['USERNAME'], inputName)
+    } else {
+      // not welcome page
+      console.log('Not Welcome Page')
+      // show login button in every pages
+      // if is user info page, not show any card
+    }
   } else if (isAuthContributor(username)) {
     // is a contributor
     console.log(
