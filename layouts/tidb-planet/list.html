@@ -18,18 +18,10 @@
 </head>
 
 <body class="tidb-planet">
-    <h1>
-        TiDB Planet
-    </h1>
-    {{- partial "tidb-planet/login" . -}}
-    <ul>
-        <li><a href="/tidb-planet/village">TiDB Village</a></li>
-        <li><a href="/tidb-planet/release-note">TiDB Release Note</a></li>
-        <li><a href="/tidb-planet/milestones">TiDB Milestones</a></li>
-        <li><a href="/tidb-planet/user">User Info</a></li>
-        <li><a href="/tidb-planet/robot">TiDB Robot</a></li>
-        <li><a href="/tidb-planet/how-to-become-a-contributor">How to Become a TiDB Contributor</a></li>
-    </ul>
+    <h1> TiDB Planet </h1>
+
+    {{- partial "tidb-planet/control-box" . -}}
+
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
     <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
     <script src="/js/tidb_planet.js"></script>

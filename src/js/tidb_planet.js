@@ -31,7 +31,7 @@ const isAuthContributor = () => {
 const authenticateContributor = name => {
   // load contributors json data
   if (!window.tidbContributors) {
-    window.tidbContributors = $('.login-box-wrapper').data('contributors')
+    window.tidbContributors = $('.j-contributor-login').data('contributors')
   }
 
   if (window.tidbContributors[name]) {
