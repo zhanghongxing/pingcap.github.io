@@ -49,7 +49,7 @@ const authenticateContributor = name => {
   } else {
     // failed: is a visitor
     console.log('Not a contributor')
-    // TODO: visitor card number
+    // TODO: visitor card number: use current date number
   }
 }
 
