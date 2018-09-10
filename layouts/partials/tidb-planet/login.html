@@ -1,12 +1,16 @@
-<div class="card card-login" style="display: none;">
+<div class="card card-login j-contributor-login" data-contributors="{{.contributors | jsonify}}">
     <div class="rocket">
-        {{- partial "svgs/illustration-rocket.svg" . -}}
+        {{- partial "svgs/illustration-rocket.svg" -}}
     </div>
     <div class="login">
         <form class="form" action="">
-            <input type="text" name="name" class="input" id="username" required autocomplete="off" placeholder="Your Github ID" />
+            <div class="input-container">
+                <input type="text" name="name" class="input" id="username" autocomplete="off" placeholder="Your Github ID" />
+            </div>
             <button class="button" type="submit" id="login">landing on planet now</button>
         </form>
         <a class="link">Later</a>
     </div>
 </div>
+
+

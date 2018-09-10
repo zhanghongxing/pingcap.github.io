@@ -22,7 +22,7 @@ const isAuthContributor = () => getCookies()['CONTRIBUTOR_NUM']
 
 const usernameValidation = name => {
   var githubUsernameRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i
-  console.log('username validation', githubUsernameRegex.test(name))
+  // console.log('username validation', githubUsernameRegex.test(name))
   return githubUsernameRegex.test(name)
 }
 
@@ -123,7 +123,6 @@ const convert2image = () => {
 $(function() {
   // get username in cookie
   const username = getCookies()['USERNAME']
-  // console.log('username in cookies', username)
   if (!username) {
     // is a new user
     console.log('Welcome to TiDB Planet! You are not logged in yet.')
@@ -131,7 +130,7 @@ $(function() {
     // TiDB Planet welcome page
     if ($('body.tidb-planet').length) {
       // TODO: open video mask and playing video
-      console.log('playing video...')
+
       // TODO: after playing video, show login box
       // show login button and form card
       $('.j-login-btn').show()
@@ -157,33 +156,60 @@ $(function() {
   }
 
   // control buttons
+  // TODO: Modal controls
+  $('.close-modal').click(function() {
+    $('.modal-overlay').fadeOut()
+    $('.modal-overlay, .modal').removeClass('active')
+  })
   $('.j-menu-btn').click(function() {
     if ($('.menu').css('display') === 'block') $('.menu').fadeOut()
     else $('.menu').fadeIn()
   })
-
   $('.j-login-btn').click(function() {
-    if ($('.card-login').css('display') === 'block') $('.card-login').fadeOut()
-    else $('.card-login').fadeIn()
+    $('.j-login-overlay').fadeIn()
+    $('.j-login-overlay, .modal').addClass('active')
+  })
+  $('.j-contributors-btn').click(function() {
+    $('.j-contributors-overlay').fadeIn()
+    $('.j-contributors-overlay, .modal').addClass('active')
+  })
+  $('.j-video-btn').click(function() {
+    $('.j-video-overlay').fadeIn()
+    $('.j-video-overlay, .modal').addClass('active')
+  })
+
+  // form validation
+  $('.form .input').blur(function() {
+    if (!usernameValidation($(this).val())) {
+      $('.input-container').append(
+        '<span class="inner" >' + 'Please enter a valid username.' + '</span>'
+      )
+      setTimeout(() => {
+        $('.input-container .inner').addClass('error')
+      }, 100)
+    }
+  })
+  $('.form .input').focus(function() {
+    $('.input-container .inner').removeClass('error')
+    $('.input-container .inner').remove()
   })
 
   // login authentication
   $('.form').submit(function(e) {
-    $('.input').blur()
-    $('.card').addClass('landing')
+    $('.form .input').blur()
+    const inputName = $('.form .input').val()
 
-    const inputName = $('.form .input')[0].value
-    console.log('input name', inputName)
-    // authenticate input name
-    authenticateContributor(inputName)
-    // create a cookie about username
-    Cookies.set(cookiesKeyMap['USERNAME'], inputName)
+    if (usernameValidation(inputName)) {
+      $('.card').addClass('landing')
 
-    setTimeout(() => {
-      $('.card').addClass('done')
-      // go to user info page after loading
-      location.href = '/tidb-planet/user/'
-    }, 2000)
+      authenticateContributor(inputName)
+      // create a cookie about username
+      Cookies.set(cookiesKeyMap['USERNAME'], inputName)
+
+      setTimeout(() => {
+        location.href = '/tidb-planet/user/'
+      }, 2000)
+    }
 
     e.preventDefault()
   })

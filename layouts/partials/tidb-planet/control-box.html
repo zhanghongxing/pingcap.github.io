@@ -1,11 +1,10 @@
 <div class="control-box">
-    <div class="container j-contributor-login" data-contributors="{{.Site.Data.contributors | jsonify}}">
-        <button class="button j-login-btn" style="display: none;">Login</button>
-        {{- partial "tidb-planet/login" . -}}
-    </div>
+    <button class="button j-login-btn" style="display: none;">Login</button>
 
     <div class="container">
         <button class="button j-menu-btn">Menu</button>
         {{- partial "tidb-planet/menu" . -}}
     </div>
 </div>
+
+{{- partial "tidb-planet/modal" (dict "type" "login" "global" .) -}}
