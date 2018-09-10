@@ -18,12 +18,12 @@ const getCookies = () => {
   return cookiesValMap
 }
 
-const isAuthContributor = () => {
-  console.log(
-    'authenticated contributor number',
-    getCookies()['CONTRIBUTOR_NUM']
-  )
-  return getCookies()['CONTRIBUTOR_NUM']
+const isAuthContributor = () => getCookies()['CONTRIBUTOR_NUM']
+
+const usernameValidation = name => {
+  var githubUsernameRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i
+  console.log('username validation', githubUsernameRegex.test(name))
+  return githubUsernameRegex.test(name)
 }
 
 const authenticateContributor = name => {
@@ -170,7 +170,7 @@ $(function() {
   // login authentication
   $('.form').submit(function(e) {
     $('.input').blur()
-    $('.card').addClass('saving')
+    $('.card').addClass('landing')
 
     const inputName = $('.form .input')[0].value
     console.log('input name', inputName)
@@ -178,15 +178,14 @@ $(function() {
     authenticateContributor(inputName)
     // create a cookie about username
     Cookies.set(cookiesKeyMap['USERNAME'], inputName)
-    e.preventDefault()
-  })
 
-  $('.line2').on('animationend', function(e) {
     setTimeout(() => {
       $('.card').addClass('done')
       // go to user info page after loading
       location.href = '/tidb-planet/user/'
-    }, 1000)
+    }, 2000)
+
+    e.preventDefault()
   })
 
   //TODO: save picture button

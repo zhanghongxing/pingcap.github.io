@@ -2,15 +2,14 @@
 
 @import "./variables.less";
 
+@borderRadius: 2px;
+@lightBlue: rgba(58, 88, 240, 0.5);
+
 body {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background:
-    radial-gradient(
-      #172D72,
-      #120E34
-    ) center no-repeat;
+  background: radial-gradient(#172d72, #120e34) center no-repeat;
   color: #fff;
   font-family: Helvetica;
 }
@@ -66,20 +65,15 @@ input[type="button"] {
 .button {
   appearance: none;
   background-color: #fff;
-  position: relative;
-  display: flex;
-  margin: 20px;
-  border-radius: 0;
-  padding: 1em 2.8em;
+  border: none;
+  border-radius: @borderRadius;
   color: @themeBlue;
   cursor: pointer;
-  align-self: center;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 400;
-  line-height: 1;
   text-decoration: none;
   text-align: center;
-  text-transform: uppercase;
+  text-transform: capitalize;
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 
   &:hover,
@@ -103,72 +97,11 @@ input[type="button"] {
 
 .card {
   background: white;
-  border-radius: 3px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  height: 220px;
+  border-radius: @borderRadius;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   overflow: hidden;
   padding: 20px;
   position: relative;
-  width: 340px;
-}
-
-.title {
-  color: #667;
-  font-size: 1.5em;
-  height: 29px;
-  margin-bottom: 0;
-}
-
-.text {
-  color: #667;
-  font-size: 1em;
-  height: 38px;
-  margin: 5px 0 0;
-}
-
-.line {
-  left: 0;
-  position: absolute;
-  width: 340px;
-}
-
-.line path {
-  fill: none;
-  stroke: black;
-  stroke-width: 2;
-  stroke-dasharray: 300 1903;
-}
-
-.card.saving .line path {
-  stroke-dashoffset: -472;
-  stroke-dasharray: 153 1903;
-  transition: stroke-dasharray 500ms, stroke-dashoffset 500ms;
-}
-
-.card.done .line path {
-  stroke-dashoffset: -762;
-  stroke-dasharray: 1095 1903;
-  transition: stroke-dasharray 1500ms, stroke-dashoffset 1500ms;
-}
-
-.line2 {
-  height: 52px;
-  left: 150px;
-  opacity: 0;
-  position: absolute;
-  stroke-dasharray: 6 48;
-  stroke-dashoffset: -42;
-  top: 138px;
-  transform-origin: 50%;
-  width: 50px;
-}
-
-.card.saving .line2 {
-  animation: 4s 500ms Rotate forwards;
-}
-
-.card.done .line2 {
-  animation: 500ms ScaleDown forwards;
 }
 
 .form {
@@ -176,42 +109,183 @@ input[type="button"] {
   transition: transform 500ms, opacity 500ms;
 }
 
-.card.saving .form {
-  transform: translateY(-16px) scale(.8);
+.card-login {
+  width: 280px;
+  height: 178px;
+  padding: 43px 23px 16px;
+
+  .rocket {
+    display: none;
+  }
+
+  .input,
+  .button,
+  .link {
+    display: block;
+    width: 227px;
+    font-size: 13px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 92px;
+
+    .input,
+    .button {
+      height: 34px;
+      text-align: center;
+    }
+
+    .input {
+      margin-bottom: calc(92px - 34px * 2);
+      border: 1px solid @themeBlue;
+      border-radius: @borderRadius;
+      color: @lightBlue;
+
+      &::placeholder {
+        color: @lightBlue;
+      }
+    }
+
+    .button {
+      background-color: @themeBlue;
+      color: #fff;
+    }
+  }
+
+  .link {
+    padding-top: 12px;
+    color: @lightBlue;
+    text-align: right;
+  }
 }
 
-.card.done .form {
-  transform: translateY(-16px) scale(.8);
-  opacity: 0;
+.rocket {
+  width: 200px;
+  top: 25%;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  animation: vibrate 0.3s ease infinite;
+
+  svg {
+    width: 100px;
+    fill: @lightBlue;
+
+    .fire {
+      transition: all ease-in-out 1s;
+      stroke: @lightBlue;
+
+      &.first {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 0;
+        animation: dash 0.2s ease infinite;
+      }
+
+      &.second {
+        stroke-dasharray: 200;
+        stroke-dashoffset: 0;
+        animation: dash2 0.2s ease infinite;
+      }
+
+      &.third {
+        stroke-dasharray: 85;
+        stroke-dashoffset: 0;
+        animation: dash 0.2s ease infinite;
+      }
+    }
+  }
 }
 
-.input {
-  background: transparent;
-  border: 0;
-  box-sizing: border-box;
-  font-size: 20px;
-  height: 40px;
-  margin-top: 20px;
-  outline: none !important;
-  position: relative;
-  width: 300px;
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 50;
+  }
+
+  50% {
+    stroke-dashoffset: 70;
+  }
+
+  80% {
+    stroke-dashoffset: 60;
+  }
+
+  100% {
+    stroke-dashoffset: 50;
+  }
+}
+
+@-webkit-keyframes dash2 {
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  50% {
+    stroke-dashoffset: 120;
+  }
+
+  80% {
+    stroke-dashoffset: 110;
+  }
+
+  100% {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-1px, 1px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.card-login.landing .login {
+  animation: scale-out-tl 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+.card-login.landing .rocket {
+  display: block;
+  animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+}
+
+@keyframes scale-out-tl {
+  0% {
+    transform: scale(1);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    transform-origin: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 // user info page
 .user-info-container {
   margin: 60px;
 }
-
-@keyframes Rotate {
-  0% { transform: rotate(0); opacity: 1; }
-  25% { transform: rotate(360deg); opacity: 1; }
-  50% { transform: rotate(720deg); opacity: 1; }
-  75% { transform: rotate(1080deg); opacity: 1; stroke-dasharray: 6 48; stroke-dashoffset: -42;}
-  100% { transform: rotate(1080deg); opacity: 1; stroke-dashoffset: 0; stroke-dasharray: 36 48;}
-}
-
-@keyframes ScaleDown {
-  0% { transform: scale(1); }
-  100% { transform: scale(0);}
-}
-
