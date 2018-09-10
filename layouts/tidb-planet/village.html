@@ -22,25 +22,7 @@
     <div>
         <h1>TiDB Village</h1>
         <h2>Contributors List</h2>
-
-        {{- $map := .Site.Data.contributors -}}
-        <ul class="list">
-            {{- range $elem_key, $elem_val := $map -}}
-            <li>
-                User Name: <a href="https://github.com/{{$elem_key}}">{{ $elem_key }}</a>
-                <br />
-                {{- range $c_key, $c_val := $elem_val -}}
-                    {{- if eq $c_key "first_commit_date" -}}
-                        Issue Date: {{ dateFormat "Jan / 2 / 2006" $c_val }}
-                    {{- else -}}
-                        {{ $c_key }}: {{ $c_val }}
-                    {{- end -}}
-                    <br />
-                {{- end -}}
-            </li>
-            {{- end -}}
-        </ul>
-
+        {{- partial "tidb-planet/contributor-list" (dict "contributors" .Site.Data.contributors) -}}
     </div>
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
 </body>
