@@ -29,7 +29,7 @@ const usernameValidation = name => {
 const authenticateContributor = name => {
   // load contributors json data
   if (!window.tidbContributors) {
-    window.tidbContributors = $('.j-contributor-login').data('contributors')
+    window.tidbContributors = $('.j-login-btn').data('contributors')
   }
 
   if (window.tidbContributors[name]) {
@@ -134,7 +134,6 @@ $(function() {
       // TODO: after playing video, show login box
       // show login button and form card
       $('.j-login-btn').show()
-      $('.card-login').show()
     } else {
       // not the welcome page
       console.log('Not the TiDB Planet Welcome Page')
@@ -200,7 +199,7 @@ $(function() {
     const inputName = $('.form .input').val()
 
     if (usernameValidation(inputName)) {
-      $('.card').addClass('landing')
+      $('.modal-login').addClass('landing')
 
       authenticateContributor(inputName)
       // create a cookie about username

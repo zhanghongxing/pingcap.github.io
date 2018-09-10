@@ -1,16 +1,19 @@
-<ul class="contributor-list">
-    {{- range $elem_key, $elem_val := .contributors -}}
-    <li>
-        User Name: <a href="https://github.com/{{$elem_key}}">{{ $elem_key }}</a>
-        <br />
-        {{- range $c_key, $c_val := $elem_val -}}
-            {{- if eq $c_key "first_commit_date" -}}
-                Issue Date: {{ dateFormat "Jan / 2 / 2006" $c_val }}
-            {{- else -}}
-                {{ $c_key }}: {{ $c_val }}
-            {{- end -}}
+<div class="modal-content">
+    <ul class="contributor-list">
+        {{- range $elem_key, $elem_val := .contributors -}}
+        <li>
+            User Name: <a href="https://github.com/{{$elem_key}}">{{ $elem_key }}</a>
             <br />
+            {{- range $c_key, $c_val := $elem_val -}}
+                {{- if eq $c_key "first_commit_date" -}}
+                    Issue Date: {{ dateFormat "Jan / 2 / 2006" $c_val }}
+                {{- else -}}
+                    {{ $c_key }}: {{ $c_val }}
+                {{- end -}}
+                <br />
+            {{- end -}}
+        </li>
         {{- end -}}
-    </li>
-    {{- end -}}
-</ul>
+    </ul>
+</div>
+
