@@ -68,6 +68,7 @@ const ordinalAbbr = number => {
     : b === 1 ? 'st' : b === 2 ? 'nd' : b === 3 ? 'rd' : 'th'
 }
 
+// process user info page
 const showUserInfo = type => {
   // fill username
   $('.j-username').text(getCookies()['USERNAME'])
@@ -154,31 +155,51 @@ $(function() {
     showUserInfo('visitor')
   }
 
-  // control buttons
-  // TODO: Modal controls
+  // buttons control
+  // close modal button
   $('.close-modal').click(function() {
     $('.modal-overlay').fadeOut()
     $('.modal-overlay, .modal').removeClass('active')
+    // reset login
+    resetLogin()
   })
-  $('.j-menu-btn').click(function() {
-    if ($('.menu').css('display') === 'block') $('.menu').fadeOut()
-    else $('.menu').fadeIn()
-  })
+  // login button
   $('.j-login-btn').click(function() {
     $('.j-login-overlay').fadeIn()
     $('.j-login-overlay, .modal').addClass('active')
   })
+  // later button
+  $('.j-later').click(function() {
+    $('.j-login-overlay').fadeOut()
+    $('.j-login-overlay, .modal').removeClass('active')
+    // reset login
+    resetLogin()
+  })
+  // show contributor list button
   $('.j-contributors-btn').click(function() {
     $('.j-contributors-overlay').fadeIn()
     $('.j-contributors-overlay, .modal').addClass('active')
   })
+  // play video button
   $('.j-video-btn').click(function() {
     $('.j-video-overlay').fadeIn()
     $('.j-video-overlay, .modal').addClass('active')
   })
 
-  // form validation
-  $('.form .input').blur(function() {
+  const resetLogin = () => {
+    $('.input-container .inner').removeClass('error')
+    $('.input-container .inner').remove()
+    $('.form__input').val(null)
+  }
+
+  // menu control
+  $('.j-menu-btn').click(function() {
+    if ($('.menu').css('display') === 'block') $('.menu').fadeOut()
+    else $('.menu').fadeIn()
+  })
+
+  // input validation
+  $('.form__input').blur(function() {
     if (!usernameValidation($(this).val())) {
       $('.input-container').append(
         '<span class="inner" >' + 'Please enter a valid username.' + '</span>'
@@ -188,15 +209,15 @@ $(function() {
       }, 100)
     }
   })
-  $('.form .input').focus(function() {
+  $('.form__input').focus(function() {
     $('.input-container .inner').removeClass('error')
     $('.input-container .inner').remove()
   })
 
-  // login authentication
+  //  form submit handler: login authentication
   $('.form').submit(function(e) {
-    $('.form .input').blur()
-    const inputName = $('.form .input').val()
+    $('.form__input').blur()
+    const inputName = $('.form__input').val()
 
     if (usernameValidation(inputName)) {
       $('.modal-login').addClass('landing')
