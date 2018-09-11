@@ -38,7 +38,7 @@ async function main() {
 
       if(octokit.hasNextPage(result)) {
         let _r = await octokit.getNextPage(result)
-        inner(_r)
+        await inner(_r)
       } else {
         console.log(all.length)
       }
