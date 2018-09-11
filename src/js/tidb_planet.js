@@ -2,6 +2,8 @@
 
 import Cookies from './vendor/js.cookie.js'
 // https://github.com/js-cookie/js-cookie
+import './vendor/jquery-dateformat.js'
+// https://github.com/phstc/jquery-dateFormat
 
 const prefix = '_tidb_planet_'
 const cookiesKeyMap = {
@@ -85,7 +87,6 @@ const showUserInfo = type => {
     $('.j-contributor-num').text(`${cNum}${ordinalAbbr(cNum)}`)
     // fill issue date
     const issueDate = getCookies()['ISSUE_DATE']
-    // https://github.com/phstc/jquery-dateFormat
     $('.j-issue-date').text($.format.date(issueDate, 'MMM / dd / yyyy'))
 
     // fill residence card No.
@@ -101,7 +102,6 @@ const showUserInfo = type => {
     )
   } else {
     $('.j-visitor').fadeIn()
-    // https://github.com/phstc/jquery-dateFormat
     $('.j-vcard-id').text(`R${$.format.date(_.now(), 'MMddyyyyhhmm')}`)
   }
 }
