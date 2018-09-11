@@ -1,0 +1,113 @@
+@import "./variables.less";
+@import "./keyframes.less";
+
+// reset
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+input,
+button,
+select,
+textarea {
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    outline: 0;
+  }
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+  appearance: none;
+  cursor: pointer;
+}
+
+// Basic Button Style
+.button {
+  appearance: none;
+  background-color: #fff;
+  border: none;
+  border-radius: @borderRadius;
+  color: @themeBlue;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 400;
+  text-decoration: none;
+  text-align: center;
+  text-transform: capitalize;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 0 40px 40px @themeBlue inset;
+    color: #fff;
+    border-color: @themeBlue;
+  }
+}
+
+.form {
+  transform-origin: 0 50%;
+  transition: transform 500ms, opacity 500ms;
+}
+
+// rocket animation
+.rocket {
+  width: 200px;
+  top: 25%;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  animation: vibrate 0.3s ease infinite;
+
+  svg {
+    width: 80px;
+    fill: @lightBlue;
+
+    .fire {
+      transition: all ease-in-out 1s;
+      stroke: @lightBlue;
+
+      &.first {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 0;
+        animation: dash 0.2s ease infinite;
+      }
+
+      &.second {
+        stroke-dasharray: 200;
+        stroke-dashoffset: 0;
+        animation: dash2 0.2s ease infinite;
+      }
+
+      &.third {
+        stroke-dasharray: 85;
+        stroke-dashoffset: 0;
+        animation: dash 0.2s ease infinite;
+      }
+    }
+  }
+}
