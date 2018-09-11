@@ -19,9 +19,9 @@
     {{- partial "head/preload-css" (dict "href" "/css/tidb-planet.css") -}}
 </head>
 
-<body>
+<body class="user-info-page">
     <div>
-        {{- partial "tidb-planet/control-box" . -}}
+        {{- partial "tidb-planet/nav" . -}}
 
         <button class="j-save">save</button>
     </div>
@@ -29,17 +29,26 @@
     <div class="user-info-container j-visitor" style="display: none;">
         <h1><span class="j-username"></span></h1>
         <h2>Welcome to the TiDB planet, join us now! www.pingcap.com</h2>
+        <div>
+            Pass Card ID: <span class="j-vcard-id"></span>
+        </div>
     </div>
 
     <div class="user-info-container j-contributor" style="display: none;">
         <h1><span class="j-username"></span></h1>
         <h2>Congratulations! You are the <span class="j-contributor-num"></span> landing on TiDB Planet!</h2>
+        <div>
+            Issue Date: <span class="j-issue-date"></span>
+            <br>
+            Residence Card ID: <span class="j-rcard-id"></span>
+        </div>
     </div>
 
     <script src="https://download.pingcap.com/js/jquery.min.js"></script>
     <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
     <script src="https://download.pingcap.com/js/html2canvas.min.js"></script>
     <script src="https://download.pingcap.com/js/canvas2image.min.js"></script>
+    <script src="/js/vendor/jquery-dateformat.min.js"></script>
     <script src="/js/tidb_planet.js"></script>
 </body>
 

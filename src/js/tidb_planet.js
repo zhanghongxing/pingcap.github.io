@@ -6,6 +6,7 @@ import Cookies from './vendor/js.cookie.js'
 const prefix = '_tidb_planet_'
 const cookiesKeyMap = {
   CONTRIBUTOR_NUM: `${prefix}contributor_num`,
+  ISSUE_DATE: `${prefix}issue_date`,
   USERNAME: `${prefix}username`,
 }
 
@@ -29,7 +30,7 @@ const usernameValidation = name => {
 const authenticateContributor = name => {
   // load contributors json data
   if (!window.tidbContributors) {
-    window.tidbContributors = $('.j-login-btn').data('contributors')
+    window.tidbContributors = $('.j-login').data('contributors')
   }
 
   if (window.tidbContributors[name]) {
@@ -50,9 +51,13 @@ const authenticateContributor = name => {
     )
 
     const cNum = sortedContributors.indexOf(window.tidbContributors[name]) + 1
+    const issueDate = window.tidbContributors[name].first_commit_date
     Cookies.set(cookiesKeyMap['CONTRIBUTOR_NUM'], cNum)
+    Cookies.set(cookiesKeyMap['ISSUE_DATE'], issueDate)
     console.log(
-      `Congratulations! You are the ${cNum}th landing on TiDB Planet!`
+      `Congratulations! You are the ${
+        cNum
+      }th landing on TiDB Planet! Issue Date: ${issueDate}`
     )
   } else {
     // failed: is a visitor
@@ -76,13 +81,28 @@ const showUserInfo = type => {
   if (type === 'contributor') {
     $('.j-contributor').fadeIn()
     // fill contributor num
-    $('.j-contributor-num').text(
-      `${getCookies()['CONTRIBUTOR_NUM']}${ordinalAbbr(
-        getCookies()['CONTRIBUTOR_NUM']
-      )}`
+    const cNum = getCookies()['CONTRIBUTOR_NUM']
+    $('.j-contributor-num').text(`${cNum}${ordinalAbbr(cNum)}`)
+    // fill issue date
+    const issueDate = getCookies()['ISSUE_DATE']
+    // https://github.com/phstc/jquery-dateFormat
+    $('.j-issue-date').text($.format.date(issueDate, 'MMM / dd / yyyy'))
+
+    // fill residence card No.
+    // pad number with specific value
+    function pad(n, width, z) {
+      z = z || '0'
+      n = n + ''
+      return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
+    }
+    // console.log(pad(cNum, 4))
+    $('.j-rcard-id').text(
+      `R${$.format.date(issueDate, 'MMddyyyy')}${pad(cNum, 4)}`
     )
   } else {
     $('.j-visitor').fadeIn()
+    // https://github.com/phstc/jquery-dateFormat
+    $('.j-vcard-id').text(`R${$.format.date(_.now(), 'MMddyyyyhhmm')}`)
   }
 }
 
@@ -127,63 +147,64 @@ $(function() {
   if (!username) {
     // is a new user
     console.log('Welcome to TiDB Planet! You are not logged in yet.')
-
     // TiDB Planet welcome page
-    if ($('body.tidb-planet').length) {
-      // TODO: open video mask and playing video
+    if ($('body').hasClass('tidb-planet')) {
+      // TODO: open video modal and playing video
 
-      // TODO: after playing video, show login box
-      // show login button and form card
-      $('.j-login-btn').show()
+      // TODO: after playing video, show login modal and login button
+      $('.j-login').show()
     } else {
       // not the welcome page
       console.log('Not the TiDB Planet Welcome Page')
       // show login button in every pages
-      $('.j-login-btn').show()
+      $('.j-login').show()
     }
   } else if (isAuthContributor()) {
     // is a contributor
-    console.log(
-      `Congratulations! You are the ${
-        getCookies()['CONTRIBUTOR_NUM']
-      }th landing on TiDB Planet!`
-    )
-    showUserInfo('contributor')
+    if ($('body').hasClass('user-info-page')) showUserInfo('contributor')
   } else {
     // is a visitor
-    console.log('Welcome to the TiDB planet, join us now! www.pingcap.com')
-    showUserInfo('visitor')
+    if ($('body').hasClass('user-info-page')) showUserInfo('visitor')
   }
 
   // buttons control
   // close modal button
-  $('.close-modal').click(function() {
+  $('.close-modal').on('click touchstart', function(e) {
     $('.modal-overlay').fadeOut()
     $('.modal-overlay, .modal').removeClass('active')
     // reset login
     resetLogin()
+    e.preventDefault()
   })
   // login button
-  $('.j-login-btn').click(function() {
+  $('.j-login').on('click touchstart', function(e) {
+    $('.nav__submenu').fadeOut()
     $('.j-login-overlay').fadeIn()
     $('.j-login-overlay, .modal').addClass('active')
+    e.preventDefault()
   })
   // later button
-  $('.j-later').click(function() {
+  $('.j-later').on('click touchstart', function(e) {
+    $('.nav__submenu').fadeOut()
     $('.j-login-overlay').fadeOut()
     $('.j-login-overlay, .modal').removeClass('active')
     // reset login
     resetLogin()
+    e.preventDefault()
   })
   // show contributor list button
-  $('.j-contributors-btn').click(function() {
+  $('.j-contributors-btn').on('click touchstart', function(e) {
+    $('.nav__submenu').fadeOut()
     $('.j-contributors-overlay').fadeIn()
     $('.j-contributors-overlay, .modal').addClass('active')
+    e.preventDefault()
   })
   // play video button
-  $('.j-video-btn').click(function() {
+  $('.j-video-btn').on('click touchstart', function(e) {
+    $('.nav__submenu').fadeOut()
     $('.j-video-overlay').fadeIn()
     $('.j-video-overlay, .modal').addClass('active')
+    e.preventDefault()
   })
 
   const resetLogin = () => {
@@ -193,14 +214,16 @@ $(function() {
   }
 
   // menu control
-  $('.j-menu-btn').click(function() {
-    if ($('.menu').css('display') === 'block') $('.menu').fadeOut()
-    else $('.menu').fadeIn()
+  $('.j-menu').on('click touchstart', function(e) {
+    if ($('.nav__submenu').css('display') === 'none')
+      $('.nav__submenu').fadeIn()
+    else $('.nav__submenu').fadeOut()
+    e.preventDefault()
   })
 
   // input validation
   $('.form__input').blur(function() {
-    if (!usernameValidation($(this).val())) {
+    if (!usernameValidation($(this).val()) && !$('.error').length) {
       $('.input-container').append(
         '<span class="inner" >' + 'Please enter a valid username.' + '</span>'
       )
@@ -235,7 +258,7 @@ $(function() {
   })
 
   //TODO: save picture button
-  $('.j-save').click(function() {
+  $('.j-save').on('click touchstart ', function() {
     // TODO: polish qr code container dom element
     $('body').append(
       '<div class="qr-code-container">Test QRCode <img src="https://download.pingcap.com/images/wechat-qrcode.jpg" alt="" /></div>'
