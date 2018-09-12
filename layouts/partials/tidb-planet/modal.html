@@ -21,7 +21,7 @@
             {{- partial "tidb-planet/contributor-list" (dict "contributors" .global.Site.Data.contributors) -}}
         {{- end -}}
         {{- if eq .type "capture" -}}
-            <div class="j-capture-image"></div>
+            <div class="j-capture-image"><img src="/images/svgs/loader-spinner.svg" /></div>
         {{- end -}}
 
     </div><!-- modal -->

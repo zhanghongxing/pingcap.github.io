@@ -67,9 +67,9 @@
   position: relative;
   margin: 0 auto;
   background-color: #fff;
-  width: 90vw;
-  height: 80vh;
-  max-width: 900px;
+  width: 90%;
+  height: 80%;
+  max-width: 960px;
   border-radius: @borderRadius;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   opacity: 0;
@@ -100,6 +100,7 @@
   }
 }
 
+// login modal
 .modal-login {
   width: 280px !important;
   height: 178px !important;
@@ -233,12 +234,31 @@
   }
 }
 
+// video modal
+.modal-video {
+  height: auto !important;
+  background: transparent;
+  video {
+    width: 100%;
+    height: auto;
+  }
+}
+
+// contributors modal
+.modal-contributors {
+}
+
+// capture modal
+.modal-capture {
+  overflow: hidden;
+  background: transparent;
+}
+
 /**
  * Mobile styling
  */
 @media only screen and (max-width: 40em) {
   .modal {
-    height: 80%;
     -webkit-overflow-scrolling: touch;
     transform: scale(1.1);
   }

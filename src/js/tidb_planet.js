@@ -110,9 +110,9 @@ const convert2image = () => {
   var shareContent = document.body
   var width = shareContent.offsetWidth
   var height = shareContent.offsetHeight
-  var canvas = document.createElement('canvas')
   var scale = 2
-
+  var canvas = document.createElement('canvas')
+  
   canvas.width = width * scale
   canvas.height = height * scale
   canvas.getContext('2d').scale(scale, scale)
@@ -132,12 +132,11 @@ const convert2image = () => {
 
     var img = Canvas2Image.convertToImage(canvas, canvas.width, canvas.height)
 
-    // TODO: polish generated picture container dom element
-    // document.body.appendChild(img)
-    $('.j-capture-image').append(img)
+    $('.j-capture-image').html(img)
+
     $(img).css({
-      width: canvas.width / 2 * 0.9 + 'px',
-      height: canvas.height / 2 * 0.8 + 'px',
+      width: (canvas.width / 2) * 0.9 + 'px',
+      height: (canvas.height / 2) * 0.8 + 'px',
     })
   })
 }
@@ -264,10 +263,9 @@ $(function() {
       $('.html2image-container').removeClass('show')
     else $('.html2image-container').addClass('show')
   })
-  //TODO: capture picture button
+  // capture picture button
   $('.j-capture').on('click ', function() {
-    // TODO: polish qr code container dom element
-    // add qrCode
+    // add share section
     $('.html2image-section').append(
       '<div class="share-section"><div class="text">Scan the QR Code to explore more about TiDB!</div><img src="https://download.pingcap.com/images/wechat-qrcode.jpg" alt="" /></div>'
     )
