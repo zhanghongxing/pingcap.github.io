@@ -11,8 +11,8 @@
         {{- end -}}
         {{- if eq .type "video" -}}
             <div class="modal-content">
-                <video id="video" preload="auto" controls poster="https://download.pingcap.com/images/video-poster.jpg">
-                    <source src="https://download.pingcap.com/videos/pingcap-intro-converted.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'
+                <video id="video" preload="auto" controls poster="">
+                    <source src="/videos/tidb-200-contributors-video.mp4" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"'
                     /> Your browser does not support the video tag.
                 </video>
             </div>
@@ -20,6 +20,10 @@
         {{- if eq .type "contributors" -}}
             {{- partial "tidb-planet/contributor-list" (dict "contributors" .global.Site.Data.contributors) -}}
         {{- end -}}
+        {{- if eq .type "capture" -}}
+            <div class="j-capture-image"></div>
+        {{- end -}}
+
     </div><!-- modal -->
 </div>
 <!-- overlay -->

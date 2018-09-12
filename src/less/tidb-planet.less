@@ -3,11 +3,13 @@
 @import "./tidb-planet/variables.less";
 @import "./tidb-planet/ui.less";
 @import "./tidb-planet/modal.less";
+@import "./tidb-planet/user-info.less";
 
 body {
   width: 100vw;
   height: 100vh;
   position: relative;
+  overflow: hidden;
   background: radial-gradient(#172d72, #120e34) center no-repeat;
   color: #fff;
   // font-family: 'Roboto', Helvetica;
@@ -18,11 +20,6 @@ body * {
   box-sizing: @boxSize;
   margin: 0;
   -webkit-tap-highlight-color: transparent;
-}
-
-// user info page
-.user-info-container {
-  margin: 60px;
 }
 
 // contributor list
@@ -39,3 +36,11 @@ body * {
   }
 }
 
+/**
+ * Mobile  Only Styling
+ */
+@media only screen and (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+}

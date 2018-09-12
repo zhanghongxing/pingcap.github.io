@@ -25,7 +25,6 @@ const isAuthContributor = () => getCookies()['CONTRIBUTOR_NUM']
 
 const usernameValidation = name => {
   var githubUsernameRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i
-  // console.log('username validation', githubUsernameRegex.test(name))
   return githubUsernameRegex.test(name)
 }
 
@@ -127,16 +126,18 @@ const convert2image = () => {
     height: height,
   }
   html2canvas(shareContent, opts).then(function(canvas) {
-    $('.qr-code-container').remove()
+    $('.share-section').remove()
+
     var context = canvas.getContext('2d')
 
     var img = Canvas2Image.convertToImage(canvas, canvas.width, canvas.height)
 
     // TODO: polish generated picture container dom element
-    document.body.appendChild(img)
+    // document.body.appendChild(img)
+    $('.j-capture-image').append(img)
     $(img).css({
-      width: canvas.width / 2 + 'px',
-      height: canvas.height / 2 + 'px',
+      width: canvas.width / 2 * 0.9 + 'px',
+      height: canvas.height / 2 * 0.8 + 'px',
     })
   })
 }
@@ -169,7 +170,7 @@ $(function() {
 
   // buttons control
   // close modal button
-  $('.close-modal').on('click touchstart', function(e) {
+  $('.close-modal').on('click', function(e) {
     $('.modal-overlay').fadeOut()
     $('.modal-overlay, .modal').removeClass('active')
     // reset login
@@ -177,14 +178,14 @@ $(function() {
     e.preventDefault()
   })
   // login button
-  $('.j-login').on('click touchstart', function(e) {
+  $('.j-login').on('click', function(e) {
     $('.nav__submenu').fadeOut()
     $('.j-login-overlay').fadeIn()
     $('.j-login-overlay, .modal').addClass('active')
     e.preventDefault()
   })
   // later button
-  $('.j-later').on('click touchstart', function(e) {
+  $('.j-later').on('click', function(e) {
     $('.nav__submenu').fadeOut()
     $('.j-login-overlay').fadeOut()
     $('.j-login-overlay, .modal').removeClass('active')
@@ -193,14 +194,14 @@ $(function() {
     e.preventDefault()
   })
   // show contributor list button
-  $('.j-contributors-btn').on('click touchstart', function(e) {
+  $('.j-contributors-btn').on('click', function(e) {
     $('.nav__submenu').fadeOut()
     $('.j-contributors-overlay').fadeIn()
     $('.j-contributors-overlay, .modal').addClass('active')
     e.preventDefault()
   })
   // play video button
-  $('.j-video-btn').on('click touchstart', function(e) {
+  $('.j-video-btn').on('click', function(e) {
     $('.nav__submenu').fadeOut()
     $('.j-video-overlay').fadeIn()
     $('.j-video-overlay, .modal').addClass('active')
@@ -214,7 +215,7 @@ $(function() {
   }
 
   // menu control
-  $('.j-menu').on('click touchstart', function(e) {
+  $('.j-menu').on('click', function(e) {
     if ($('.nav__submenu').css('display') === 'none')
       $('.nav__submenu').fadeIn()
     else $('.nav__submenu').fadeOut()
@@ -257,12 +258,22 @@ $(function() {
     e.preventDefault()
   })
 
-  //TODO: save picture button
-  $('.j-save').on('click touchstart ', function() {
+  // camera button
+  $('.j-camera').on('click', function() {
+    if ($('.html2image-container').hasClass('show'))
+      $('.html2image-container').removeClass('show')
+    else $('.html2image-container').addClass('show')
+  })
+  //TODO: capture picture button
+  $('.j-capture').on('click ', function() {
     // TODO: polish qr code container dom element
-    $('body').append(
-      '<div class="qr-code-container">Test QRCode <img src="https://download.pingcap.com/images/wechat-qrcode.jpg" alt="" /></div>'
+    // add qrCode
+    $('.html2image-section').append(
+      '<div class="share-section"><div class="text">Scan the QR Code to explore more about TiDB!</div><img src="https://download.pingcap.com/images/wechat-qrcode.jpg" alt="" /></div>'
     )
+    // open capture overlay
+    $('.j-capture-overlay').fadeIn()
+    $('.j-capture-overlay, .modal').addClass('active')
     convert2image()
   })
 })

@@ -1,0 +1,145 @@
+// user info page
+
+.html2image-section {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.html2image-container {
+  width: 600px;
+  height: 600px;
+  position: fixed;
+  z-index: 1000;
+  right: -240px;
+  bottom: -240px;
+  visibility: visible;
+  transition: visibility 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+
+  .camera-btn-container {
+    position: absolute;
+    top: 240px;
+    left: 240px;
+    width: 112px;
+    height: 112px;
+    z-index: 10001;
+    border-radius: 50%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      opacity: 0;
+      transform: scale(0);
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+      opacity 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+      -webkit-transform 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+    }
+  }
+
+  .camera-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    background: #1e2969;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    visibility: visible;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  }
+
+  .icon-camera {
+    width: 30px;
+    height: 30px;
+    flex: 1;
+    margin: 0;
+  }
+
+  .html2image-tip-container {
+    background-color: #1e2969;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    transform: scale(0);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+    opacity 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s,
+    -webkit-transform 0.3s cubic-bezier(0.42, 0, 0.58, 1) 0s;
+  }
+
+  .html2image-tip {
+    width: 280px;
+    padding: 12px;
+    position: fixed;
+    left: 56px;
+    top: 142px;
+    color: #fff;
+  }
+
+  .html2image-tip .text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .capture-btn {
+    padding: 4px 8px;
+    margin: 24px 0;
+    border: 2px solid #fff;
+    color: #fff;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &.show {
+    .camera-btn-container::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .html2image-tip-container {
+      opacity: 0.95;
+      transform: scale(1);
+    }
+  }
+}
+
+.share-section {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  padding: 1em;
+
+  .text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    width: 11em;
+  }
+
+  img {
+    display: block;
+    width: 32%;
+    height: 32%;
+  }
+}
+
+.user-info-container {
+  margin: 60px;
+}
