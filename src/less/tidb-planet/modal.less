@@ -67,9 +67,10 @@
   position: relative;
   margin: 0 auto;
   background-color: #fff;
-  width: 90%;
-  height: 80%;
+  // width: 90%;
+  // height: 80%;
   max-width: 960px;
+  max-height: 80vh;
   border-radius: @borderRadius;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   opacity: 0;
@@ -236,8 +237,10 @@
 
 // video modal
 .modal-video {
-  height: auto !important;
+  width: 90%;
+  height: auto;
   background: transparent;
+
   video {
     width: 100%;
     height: auto;
@@ -246,10 +249,14 @@
 
 // contributors modal
 .modal-contributors {
+  width: 90%;
+  height: 80%;
 }
 
 // capture modal
 .modal-capture {
+  width: 80%;
+  height: auto;
   overflow: hidden;
   background: transparent;
 }

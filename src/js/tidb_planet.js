@@ -112,7 +112,7 @@ const convert2image = () => {
   var height = shareContent.offsetHeight
   var scale = 2
   var canvas = document.createElement('canvas')
-  
+
   canvas.width = width * scale
   canvas.height = height * scale
   canvas.getContext('2d').scale(scale, scale)
@@ -135,8 +135,8 @@ const convert2image = () => {
     $('.j-capture-image').html(img)
 
     $(img).css({
-      width: (canvas.width / 2) * 0.9 + 'px',
-      height: (canvas.height / 2) * 0.8 + 'px',
+      width: canvas.width / 2 * 0.8 + 'px',
+      height: canvas.height / 2 * 0.8 + 'px',
     })
   })
 }
@@ -145,19 +145,15 @@ $(function() {
   // get username in cookie
   const username = getCookies()['USERNAME']
   if (!username) {
-    // is a new user
+    // is a new user, not login
     console.log('Welcome to TiDB Planet! You are not logged in yet.')
-    // TiDB Planet welcome page
-    if ($('body').hasClass('tidb-planet')) {
-      // TODO: open video modal and playing video
+    // show login button in every pages
+    $('.j-login').show()
 
+    if ($('body').hasClass('tidb-planet')) {
+      // TiDB Planet welcome page
+      // TODO: open video modal and playing video
       // TODO: after playing video, show login modal and login button
-      $('.j-login').show()
-    } else {
-      // not the welcome page
-      console.log('Not the TiDB Planet Welcome Page')
-      // show login button in every pages
-      $('.j-login').show()
     }
   } else if (isAuthContributor()) {
     // is a contributor
@@ -166,6 +162,9 @@ $(function() {
     // is a visitor
     if ($('body').hasClass('user-info-page')) showUserInfo('visitor')
   }
+
+  // show nav in every pages
+  $('.nav').fadeIn()
 
   // buttons control
   // close modal button
@@ -267,7 +266,7 @@ $(function() {
   $('.j-capture').on('click ', function() {
     // add share section
     $('.html2image-section').append(
-      '<div class="share-section"><div class="text">Scan the QR Code to explore more about TiDB!</div><img src="https://download.pingcap.com/images/wechat-qrcode.jpg" alt="" /></div>'
+      '<div class="share-section"><div class="text">Scan the QR Code to explore more about TiDB!</div><img src="/images/qrcode-min.jpg" alt="" /></div>'
     )
     // open capture overlay
     $('.j-capture-overlay').fadeIn()

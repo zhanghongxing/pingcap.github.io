@@ -62,11 +62,7 @@ input[type="button"] {
 
 // Basic Button Style
 .button {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  display: block;
   border: none;
   border-radius: @borderRadius;
   padding: 0;
@@ -141,7 +137,11 @@ nav {
 }
 
 .nav {
+  position: absolute;
+  top: 50px;
+  left: 50px;
   width: 282px;
+  display: none;
 
   a.button {
     display: block;
