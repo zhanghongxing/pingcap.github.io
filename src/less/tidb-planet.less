@@ -43,11 +43,6 @@ body * {
   -webkit-tap-highlight-color: transparent;
 }
 
-.container {
-  max-width: 1264px;
-  padding: 2em;
-}
-
 // home page
 .space,
 .tidb-planet,
@@ -56,7 +51,6 @@ div[class^="element-"] {
 }
 
 .tidb-planet {
-  // position: absolute;
   bottom: -110%;
   left: -25%;
   width: 150%;
@@ -67,10 +61,9 @@ div[class^="element-"] {
 }
 
 .element-astronaut {
-  // position: absolute;
+  top: -12.5em;
   left: 50%;
-  top: -15%;
-  transform: translateX(-50%);
+  margin-left: calc(~"-10.125em / 2");
   width: 10.125em;
   height: 21.875em;
   background: url('/images/tidb-planet/astronaut.svg') no-repeat;
@@ -79,10 +72,9 @@ div[class^="element-"] {
 }
 
 .element-flag {
-  // position: absolute;
+  top: -5em;
   left: 50%;
-  top: -7%;
-  transform: translateX(-185%);
+  margin-left: calc(~"-14.6875em / 2 - 10.125em / 2 - 1.2em");
   width: 7.6785em;
   height: 14.6875em;
   background: url('/images/tidb-planet/flag.svg') no-repeat;
@@ -91,7 +83,6 @@ div[class^="element-"] {
 }
 
 .space {
-  // position: relative;
   width: 100%;
   height: 100%;
 }
@@ -107,7 +98,7 @@ div[class^="element-"] {
 }
 
 .element-cloud {
-  top: 15%;
+  top: 16%;
   right: 12%;
   width: 13.6em;
   height: 3.8em;
@@ -116,15 +107,15 @@ div[class^="element-"] {
   background-position: center;
 
   &.large {
-    top: 0;
-    left: 6%;
-    width: 17em;
-    height: 4.75em;
+    top: 2em;
+    left: 6em;
+    width: 32em;
+    height: 9em;
   }
 
   &.small {
-    top: 12%;
-    left: 48%;
+    top: 10%;
+    right: 36%;
     width: 8.5em;
     height: 2.375em;
   }
@@ -154,13 +145,24 @@ div[class^="element-"] {
   }
 
   .element-astronaut {
-    top: 6%;
-    transform: translateX(-32%);
+    top: 5.4em;
+    left: 58%;
   }
 
   .element-flag {
-    top: 16%;
-    transform: translateX(-148%);
+    top: 12.4em;
+    left: 58%;
+  }
+
+  .element-cloud.large {
+    left: 2em;
+    width: 16em;
+    height: 4.5em;
+  }
+
+  .element-cloud.small {
+    top: 2em;
+    right: 1em;
   }
 }
 
