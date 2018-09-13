@@ -21,26 +21,29 @@
 
 <body class="user-info-page">
     <div class="html2image-section">
-        {{- partial "tidb-planet/nav" . -}}
-        <div class="user-info-container j-visitor" style="display: none;">
-            <h1><span class="j-username"></span></h1>
-            <h2>Welcome to the TiDB planet, join us now! www.pingcap.com</h2>
-            <div>
-                Pass Card ID: <span class="j-vcard-id"></span>
+        <div class="container">
+            {{- partial "tidb-planet/nav" . -}}
+            <div class="user-info-container j-visitor" style="display: none;">
+                <h1><span class="j-username"></span></h1>
+                <h2>Welcome to the TiDB planet, join us now! www.pingcap.com</h2>
+                <div>
+                    Pass Card ID: <span class="j-vcard-id"></span>
+                </div>
+            </div>
+
+            <div class="user-info-container j-contributor" style="display: none;">
+                <h1><span class="j-username"></span></h1>
+                <h2>Congratulations! You are the <span class="j-contributor-num"></span> landing on TiDB Planet!</h2>
+                <div>
+                    Issue Date: <span class="j-issue-date"></span>
+                    <br>
+                    Residence Card ID: <span class="j-rcard-id"></span>
+                </div>
             </div>
         </div>
 
-        <div class="user-info-container j-contributor" style="display: none;">
-            <h1><span class="j-username"></span></h1>
-            <h2>Congratulations! You are the <span class="j-contributor-num"></span> landing on TiDB Planet!</h2>
-            <div>
-                Issue Date: <span class="j-issue-date"></span>
-                <br>
-                Residence Card ID: <span class="j-rcard-id"></span>
-            </div>
-        </div>
+        <div class="illustration-grey-planet"></div>
     </div>
-
 
     {{- partial "tidb-planet/html2image.html" . -}}
 

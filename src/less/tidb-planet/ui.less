@@ -25,21 +25,20 @@
 }
 
 input,
-button,
-select,
-textarea {
+button {
   outline: 0;
+  appearance: none;
 
   &:focus,
   &:hover {
     outline: 0;
+    appearance: none;
   }
 }
 
 button,
 input[type="submit"],
 input[type="button"] {
-  appearance: none;
   cursor: pointer;
 }
 
@@ -137,10 +136,7 @@ nav {
 }
 
 .nav {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 282px;
+  width: 17.5em;
   display: none;
 
   a.button {

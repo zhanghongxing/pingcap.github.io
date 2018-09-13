@@ -43,11 +43,20 @@ body * {
   -webkit-tap-highlight-color: transparent;
 }
 
-// contributor list
-.contributor-list {
-  color: #555;
-  font-size: 14px;
-  line-height: 2;
+.container {
+  max-width: 1264px;
+  height: 100%;
+  padding: 2em;
+}
+
+// home page
+.illustration-grey-planet {
+  position: absolute;
+  bottom: -110%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  background: url('/images/tidb-planet/illustration-greyplanet.svg') center no-repeat;
 }
 
 /**
@@ -62,9 +71,14 @@ body * {
 /**
  * Mobile  Styling
  */
-@media only screen and (max-width: 500px) {  
+@media only screen and (max-width: 500px) {
   html,
   body {
     font-size: 14px;
+    overflow: hidden;
+  }
+
+  .illustration-grey-planet {
+    bottom: -80%;
   }
 }
