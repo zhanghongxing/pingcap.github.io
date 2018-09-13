@@ -5,6 +5,26 @@
 @import "./tidb-planet/modal.less";
 @import "./tidb-planet/user-info.less";
 
+/**
+ * Include Roboto Condensed font
+ */
+
+/* Normal */
+@font-face {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("/fonts/RobotoCondensed/RobotoCondensed-Regular.ttf") format('truetype');
+}
+
+/* Bold */
+@font-face {
+	font-family: "Roboto Condensed Bold";
+	font-style: normal;
+	font-weight: 600;
+	src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold'), url("/fonts/RobotoCondensed/RobotoCondensed-Bold.ttf") format('truetype');
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -12,7 +32,8 @@ body {
   overflow: hidden;
   background: radial-gradient(#172d72, #120e34) center no-repeat;
   color: #fff;
-  // font-family: 'Roboto', Helvetica;
+  font-size: 16px;
+  font-family: 'Roboto Condensed', Helvetica;
 }
 
 body,
@@ -30,10 +51,20 @@ body * {
 }
 
 /**
- * Mobile  Only Styling
+ * Mobile Only Styling
  */
 @media only screen and (min-width: 769px) {
   .mobile-only {
     display: none;
+  }
+}
+
+/**
+ * Mobile  Styling
+ */
+@media only screen and (max-width: 500px) {  
+  html,
+  body {
+    font-size: 14px;
   }
 }
