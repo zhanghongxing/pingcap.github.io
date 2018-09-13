@@ -49,13 +49,85 @@ body * {
 }
 
 // home page
-.illustration-grey-planet {
+.space,
+.tidb-planet,
+div[class^="element-"] {
   position: absolute;
+}
+
+.tidb-planet {
+  // position: absolute;
   bottom: -110%;
   left: -25%;
   width: 150%;
   height: 150%;
-  background: url('/images/tidb-planet/illustration-greyplanet.svg') center no-repeat;
+  background: url('/images/tidb-planet/grey-planet.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.element-astronaut {
+  // position: absolute;
+  left: 50%;
+  top: -15%;
+  transform: translateX(-50%);
+  width: 10.125em;
+  height: 21.875em;
+  background: url('/images/tidb-planet/astronaut.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.element-flag {
+  // position: absolute;
+  left: 50%;
+  top: -7%;
+  transform: translateX(-185%);
+  width: 7.6785em;
+  height: 14.6875em;
+  background: url('/images/tidb-planet/flag.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.space {
+  // position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.element-planet {
+  top: 8%;
+  left: 5%;
+  width: 4.8em;
+  height: 4.8em;
+  background: url('/images/tidb-planet/red-planet.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.element-cloud {
+  top: 15%;
+  right: 12%;
+  width: 13.6em;
+  height: 3.8em;
+  background: url('/images/tidb-planet/cloud.svg') no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  &.large {
+    top: 0;
+    left: 6%;
+    width: 17em;
+    height: 4.75em;
+  }
+
+  &.small {
+    top: 12%;
+    left: 48%;
+    width: 8.5em;
+    height: 2.375em;
+  }
 }
 
 /**
@@ -77,14 +149,26 @@ body * {
     overflow: hidden;
   }
 
-  .illustration-grey-planet {
-    position: absolute;
-    bottom: -55%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: url('/images/tidb-planet/illustration-greyplanet.svg') no-repeat;
-    background-size: contain;
-    background-position: center;
+  .tidb-planet {
+    bottom: -80%;
+  }
+
+  .element-astronaut {
+    top: 6%;
+    transform: translateX(-32%);
+  }
+
+  .element-flag {
+    top: 16%;
+    transform: translateX(-148%);
+  }
+}
+
+// x-small screen
+@media only screen and (max-width: 320px) {
+  html,
+  body {
+    font-size: 12px;
+    overflow: hidden;
   }
 }

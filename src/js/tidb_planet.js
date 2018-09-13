@@ -151,7 +151,7 @@ $(function() {
     // show login button in every pages
     $('.j-login').show()
 
-    if ($('body').hasClass('tidb-planet')) {
+    if ($('body').hasClass('welcome-page')) {
       // TiDB Planet welcome page
       // TODO: open video modal and playing video
       // TODO: after playing video, show login modal and login button

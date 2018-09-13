@@ -42,7 +42,12 @@
             </div>
         </div>
 
-        <div class="illustration-grey-planet"></div>
+        {{- partial "tidb-planet/space" . -}}
+
+        <div class="tidb-planet">
+            <div class="element-flag"></div>
+            <div class="element-astronaut"></div>
+        </div>
     </div>
 
     {{- partial "tidb-planet/html2image.html" . -}}
