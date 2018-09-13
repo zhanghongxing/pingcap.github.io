@@ -124,6 +124,7 @@ const convert2image = () => {
     logging: true,
     width: width,
     height: height,
+    imageTimeout: 0,
   }
   html2canvas(shareContent, opts).then(function(canvas) {
     $('.share-section').remove()
