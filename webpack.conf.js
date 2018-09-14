@@ -14,6 +14,7 @@ export default {
     doc: [path.join(__dirname, 'src', 'js', 'doc')],
     about: [path.join(__dirname, 'src', 'js', 'about')],
     recruit: [path.join(__dirname, 'src', 'js', 'recruit')],
+    tidb_planet: [path.join(__dirname, 'src', 'js', 'tidb_planet')],
   },
   output: {
     path: path.join(__dirname, 'dist', 'js'),

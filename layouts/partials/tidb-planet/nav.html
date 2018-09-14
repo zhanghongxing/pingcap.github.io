@@ -1,0 +1,17 @@
+<nav class="nav" data-html2canvas-ignore="true">
+    <ul class="nav__menu">
+        <li class="nav__menu-item j-login" style="display: none;" data-contributors="{{.Site.Data.contributors | jsonify}}"><a class="button">Login</a></li>
+        <li class="nav__menu-item"><a class="button j-menu">Menu</a>
+            <ul class="nav__submenu" style="display: none;">
+                <li class="nav__submenu-item"><a href="/tidb-planet/user">User Info</a></li>
+                <li class="nav__submenu-item"><a href="/tidb-planet/village">Contributor List</a></li>
+                <li class="nav__submenu-item"><a href="/tidb-planet/milestones">Watch Video</a></li>
+                <li class="nav__submenu-item"><a href="/tidb-planet/become-a-contributor">Become a contributor</a></li>
+                <li class="nav__submenu-item"><a href="/tidb-planet/robot">TiDB Robot</a></li>
+                <li class="nav__submenu-item"><a href="/tidb-planet/release-note">Release Note</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+{{- partial "tidb-planet/modal" (dict "type" "login") -}}
