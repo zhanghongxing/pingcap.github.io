@@ -2,11 +2,18 @@
 const octokit = require('@octokit/rest')()
 // https://github.com/octokit/rest.js
 
-octokit.authenticate({
-  type: 'oauth',
-  key: '4d00056f425d3297d24f',
-  secret: '1c2b099ceb13dd845507f87b600b28afa16894dc'
-})
+const key = process.env.GITHUB_OAUTH_CLIENT_ID || ''
+const secret = process.env.GITHUB_OAUTH_CLIENT_SECRET || ''
+
+console.log(key)
+console.log(secret)
+
+if(key && secret)
+  octokit.authenticate({
+    type: 'oauth',
+    key,
+    secret,
+  })
 
 const fs = require('fs')
 const _ = require('lodash')
