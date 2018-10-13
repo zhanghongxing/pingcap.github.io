@@ -13,33 +13,16 @@ $('document').ready(function () {
   $('#qsLoginBtn').click(function (e) {
     e.preventDefault();
     webAuth.authorize();
-    // $.ajax({
-    //   url: `https://pingcap.auth0.com/oauth/token`,
-    //   type: 'POST',
-    //   crossDomain: true,
-    //   data: {
-    //     grant_type: 'client_credentials',
-    //     client_id: AUTH0_CLIENT_ID,
-    //     client_secret: AUTH0_SECRETE,
-    //     audience: `https://pingcap.auth0.com/api/v2/`
-    //   },
-    //   success: function (data) {
-    //     // todo - consume access token
-    //     console.log('access_token')
-    //     return data.access_token;
-    //   },
-    //   // error: function (jqXHR) {
-    //   //   console.log(json.stringify(jqXHR));
-    //   // }
-    // });
-    // debugger
   });
 
   $('#qsLogoutBtn').click(function (e) {
     console.log('inside logout click');
+    e.preventDefault();
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('username')
+    localStorage.removeItem('avatar')
     // debugger
     webAuth.logout({
       returnTo: AUTH0_LOGOUT_URL,
@@ -76,10 +59,12 @@ $('document').ready(function () {
     webAuth.client.userInfo(authResult.accessToken, function (err, profile) {
       userProfile = profile
       console.log('userprofile:', userProfile)
-      $('#username').text(userProfile.name)
-      // $('#avatar').attr('src', userProfile.picture)
+      localStorage.setItem('username', userProfile.name)
+      localStorage.setItem('avatar', userProfile.picture)
     })
   }
+  $('#username').text(localStorage.username)
+  $('.j-avatar').attr('src', localStorage.avatar)
 
   function isAuthenticated() {
     // Check whether the current time is past the
@@ -109,4 +94,6 @@ $('document').ready(function () {
   }
 
   handleAuthentication();
+
+  // $('#handle-parse-hash').text()
 });

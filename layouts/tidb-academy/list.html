@@ -1,6 +1,8 @@
 {{- define "headTpl" -}}
 {{$.Scratch.Set "data_i18_link" "/about-cn" }}
-{{- partial "head/preload-css" (dict "href" "/css/cases.css") -}}
+{{- partial "head/preload-css" (dict "href" "/css/tidb-academy.css") -}}
+
+
 <style type="text/css">
   .contact-us .contact-form {
     margin: 80px auto;
@@ -22,6 +24,69 @@
 
 {{- define "footJS" -}}
 <script type="text/javascript" src="/js/vendor/login.js"></script>
+<!-- <script type="text/javascript" src="/js/app.js"></script> -->
 <script src="https://cdn.auth0.com/js/auth0/9.5.1/auth0.min.js"></script>
 <script type="text/javascript" src="/js/vendor/auth0-variables.js"></script>
+
+<!-- <script>
+  var webAuth = new auth0.WebAuth({
+    domain: AUTH0_DOMAIN,
+    clientID: AUTH0_CLIENT_ID,
+    redirectUri: AUTH0_CALLBACK_URL,
+    responseType: 'token id_token',
+    scope: 'openid profile',
+  });
+
+  var authResult
+  var userProfile
+
+  $('#qsLoginBtn').click(function (e) {
+    e.preventDefault();
+    webAuth.authorize();
+  });
+
+  function setSession() {
+    // Set the time that the access token will expire at
+    console.log('authResult: ', authResult.expiresIn * 1000)
+    var expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime()
+    );
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_at', expiresAt);
+    console.log('expire at: ', expiresAt)
+  }
+
+    function getUserProfile() {
+      webAuth.client.userInfo(authResult.accessToken, function (err, profile) {
+      userProfile = profile
+      console.log('userprofile:', userProfile)
+      $('#username').text(userProfile.name)
+      // $('#avatar').attr('src', userProfile.picture)
+      })
+    }
+
+  if (location.hash) {
+    console.log('true')
+    webAuth.parseHash(function (err, authenticationRes) {
+      authResult = authenticationRes
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('authResult: ', authResult)
+        console.log('authResult.accessToken', authResult.accessToken)
+        console.log('authResult.idToken', authResult.idToken)
+        window.location.hash = '';
+        location.href = 'http://localhost:3005/tidb-academy/mysql_dbas/introduction/course-overview/'
+        setSession();
+        getUserProfile();      
+       
+      } else if (err) {
+        console.log('inside handleAuthentication error ', err)
+        alert(
+          'Error: ' + err.error + '. Check the console for further details.'
+        );
+      }
+    });
+    
+  }
+</script> -->
 {{- end -}}

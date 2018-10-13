@@ -6,31 +6,49 @@
     </style>
     {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/github-markdown.css") -}}
     {{- partial "head/preload-css" (dict "href" "/css/doc.css")}}
+    {{- partial "head/preload-css" (dict "href" "/css/tidb-academy.css")}}
     {{$.Scratch.Set "nav_active" "academy"}}
     {{$v0 := (strings.TrimPrefix "private-tidb-academy/" .File.Path )}}
     {{$v1 := (strings.TrimSuffix ".md" $v0) }}
 <script>
-  console.log('location.pathname: ', location.pathname)
-  console.log('token ', localStorage.getItem('access_token'))
+  // console.log('location.pathname: ', location.pathname)
+  // console.log('token ', localStorage.getItem('access_token'))
 
-if (location.pathname.substr(0,13) == '/tidb-academy' && !localStorage.getItem('access_token')) {
-  console.log('not login')
-  // location.replace('http://localhost:3005/tidb-academy')
-  console.log('location href: ', location.href)
-} else {
-// window.location.href = 'http://localhost:3005/tidb-academy'
-  // location.replace('http://localhost:3005/tidb-academy')
-  console.log('has logged in')
-}
+  // window.location = 'http://localhost:3005/docs/'
+
+  // setTimeout(test, 1000)
+  // test()
+
+// console.log('document.referrer: ', document.referrer)
+
+  // function test() {
+  //   if(location.hash) {
+  //     console.log('true')
+  //   }
+  // }
+  window.location.hash = ''
+
+  function test() {
+    if (location.pathname.substr(0, 13) == '/tidb-academy' && !localStorage.getItem('access_token')) {
+      console.log('not login')
+      console.log('last url: ', document.referrer)
+      debugger
+      window.location.pathname = '/tidb-academy/'
+      debugger
+      console.log('location href: ', location.href)
+    } 
+  }
+
 </script>
 {{- end -}}
 
 {{- define "main" -}}
-<div class="doc">
-    <div class="container">
-        
-        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.tidb_academy_toc) -}}
+{{- partial "tidb-academy/navbar.html" -}}
 
+<div class="doc">  
+    <p id="handle-parse-hash"></p>
+    <div class="container">
+        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.tidb_academy_toc) -}}
         <div class="archive">
           <div class="content markdown-body">{{- .Content -}}</div>
           <div class="article-toc"></div>
@@ -40,9 +58,9 @@ if (location.pathname.substr(0,13) == '/tidb-academy' && !localStorage.getItem('
           <div class="sticky-sidebar">
             {{- partial "archives/improve-doc.html" (dict "repo" "private-tidb-academy" "global" .) -}}
             <p class="toc-title">What’s on this page</p>
-              <button id="qsLogoutBtn" class="btn btn-primary btn-margin">
+              <!-- <button id="qsLogoutBtn" class="btn btn-primary btn-margin">
               Log Out
-            </button>
+            </button> -->
             <span id='username'></span>
             <div id="smart_toc_wrapper"></div>
           </div>
