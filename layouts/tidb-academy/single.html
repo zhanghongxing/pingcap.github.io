@@ -1,0 +1,59 @@
+{{- define "headTpl" -}}
+    <style type="text/css" media="screen">
+        .st_tree {
+          display: none;
+        }
+    </style>
+    {{- partial "head/preload-css" (dict "href" "https://download.pingcap.com/style/github-markdown.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/doc.css")}}
+    {{$.Scratch.Set "nav_active" "academy"}}
+    {{$v0 := (strings.TrimPrefix "private-tidb-academy/" .File.Path )}}
+    {{$v1 := (strings.TrimSuffix ".md" $v0) }}
+<script>
+  console.log('location.pathname: ', location.pathname)
+  console.log('token ', localStorage.getItem('access_token'))
+
+if (location.pathname.substr(0,13) == '/tidb-academy' && !localStorage.getItem('access_token')) {
+  console.log('not login')
+  // location.replace('http://localhost:3005/tidb-academy')
+  console.log('location href: ', location.href)
+} else {
+// window.location.href = 'http://localhost:3005/tidb-academy'
+  // location.replace('http://localhost:3005/tidb-academy')
+  console.log('has logged in')
+}
+</script>
+{{- end -}}
+
+{{- define "main" -}}
+<div class="doc">
+    <div class="container">
+        
+        {{- partial "archives/sticky-tree.html" (dict "tree" .Site.Data.tidb_academy_toc) -}}
+
+        <div class="archive">
+          <div class="content markdown-body">{{- .Content -}}</div>
+          <div class="article-toc"></div>
+          {{- partial "archives/git-info.html" (dict "repo" "private-tidb-academy" "global" .) -}}
+        </div>
+        <div class="sidebar-page">
+          <div class="sticky-sidebar">
+            {{- partial "archives/improve-doc.html" (dict "repo" "private-tidb-academy" "global" .) -}}
+            <p class="toc-title">What’s on this page</p>
+              <button id="qsLogoutBtn" class="btn btn-primary btn-margin">
+              Log Out
+            </button>
+            <span id='username'></span>
+            <div id="smart_toc_wrapper"></div>
+          </div>
+        </div>
+    </div>
+</div>
+{{- end -}}
+
+{{- define "footJS" -}}
+    <script type="text/javascript" src="/js/doc.js"></script>
+    <script type="text/javascript" src="/js/vendor/login.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.5.1/auth0.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/auth0-variables.js"></script>
+{{- end -}}
