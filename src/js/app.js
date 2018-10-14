@@ -141,21 +141,21 @@ function processMobileOverlay() {
   })
 }
 
-// function isExpired() {
-//   // Check whether the current time is past the
-//   // access token's expiry time
-//   if (localStorage.getItem('expires_at')) {
-//     var expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-//     if (new Date().getTime() > expiresAt) {
-//       localStorage.removeItem('access_token')
-//       localStorage.removeItem('id_token')
-//       localStorage.removeItem('expires_at')
-//       return true
-//     }
-//   } else {
-//     return false
-//   }
-// }
+function isExpired() {
+  // Check whether the current time is past the
+  // access token's expiry time
+  if (localStorage.getItem('expires_at')) {
+    var expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+    if (new Date().getTime() > expiresAt) {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('id_token')
+      localStorage.removeItem('expires_at')
+      return true
+    }
+  } else {
+    return false
+  }
+}
 
 $(document).ready(function() {
   processHash()
@@ -186,17 +186,13 @@ $(document).ready(function() {
   })
 
   // handle tidb academy login authentication
-  // $('.tidb-academy').click(function(e) {
-  //   console.log('click click clickhhhhhhhhh')
-  //   // e.preventDefault() // 阻止页面跳转，先做 auth0 判断
-  //   // TO DO: 在这里做 auth0 的判断, 如果状态为 logged in, 不跳转至原 a 标签中的 href, 而是换一个 href
-  //   // TO DO: 如果状态为 not logged in, 就做原标签中的 href 跳转
-  //   // if (!localStorage.access_token || isExpired()) {
-  //   //   // $(this).attr('href', 'http://localhost:3005/tidb-academy')
-  //   //   location.href = 'http://localhost:3005/tidb-academy'
-  //   // } else {
-  //   //   location.href =
-  //   //     'http://localhost:3005/tidb-academy/mysql_dbas/introduction/course-overview/'
-  //   // }
-  // })
+  $('.tidb-academy').click(function(e) {
+    e.preventDefault() // 阻止页面跳转，先做 auth0 判断
+    if (!localStorage.access_token || isExpired()) {
+      location.pathname = '/tidb-academy'
+    } else {
+      location.pathname =
+        '/tidb-academy/mysql_dbas/introduction/course-overview'
+    }
+  })
 })

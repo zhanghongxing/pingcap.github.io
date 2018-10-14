@@ -10,11 +10,13 @@ $('document').ready(function () {
   var authResult
   var userProfile
 
+  // proccess login
   $('#qsLoginBtn').click(function (e) {
     e.preventDefault();
     webAuth.authorize();
   });
 
+  // process logout
   $('#qsLogoutBtn').click(function (e) {
     console.log('inside logout click');
     e.preventDefault();
@@ -23,7 +25,6 @@ $('document').ready(function () {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('username')
     localStorage.removeItem('avatar')
-    // debugger
     webAuth.logout({
       returnTo: AUTH0_LOGOUT_URL,
       client_id: AUTH0_CLIENT_ID
@@ -41,20 +42,8 @@ $('document').ready(function () {
     localStorage.setItem('expires_at', expiresAt);
     console.log('expire at: ',expiresAt)
   }
-
-  // function logout() {
-  //   // Remove tokens and expiry time from localStorage
-  //   console.log('inside logout click')
-  //   localStorage.removeItem('access_token');
-  //   localStorage.removeItem('id_token');
-  //   localStorage.removeItem('expires_at');
-  //   debugger
-  //   webAuth.logout({
-  //     returnTo: AUTH0_LOGOUT_URL,
-  //     client_id: AUTH0_CLIENT_ID
-  //   })
-  // }
-
+  
+  // get user profile and store in localStorage
   function getUserProfile() {
     webAuth.client.userInfo(authResult.accessToken, function (err, profile) {
       userProfile = profile
@@ -66,13 +55,14 @@ $('document').ready(function () {
   $('#username').text(localStorage.username)
   $('.j-avatar').attr('src', localStorage.avatar)
 
+  // Check whether the current time is past the
+  // access token's expiry time
   function isAuthenticated() {
-    // Check whether the current time is past the
-    // access token's expiry time
     var expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
 
+  // parse access token and set sesstion
   function handleAuthentication() {
     console.log('handle token')
     webAuth.parseHash(function (err, authenticationRes) {
@@ -81,11 +71,11 @@ $('document').ready(function () {
         console.log('authResult: ', authResult)
         console.log('authResult.accessToken', authResult.accessToken)
         console.log('authResult.idToken', authResult.idToken)
-        window.location.hash = '';
+        window.location.hash = ''
         setSession();
         getUserProfile();
       } else if (err) {
-        console.log('inside handleAuthentication error ', err)
+        console.log('Error inside handleAuthentication', err)
         alert(
           'Error: ' + err.error + '. Check the console for further details.'
         );
@@ -94,6 +84,4 @@ $('document').ready(function () {
   }
 
   handleAuthentication();
-
-  // $('#handle-parse-hash').text()
 });

@@ -11,34 +11,11 @@
     {{$v0 := (strings.TrimPrefix "private-tidb-academy/" .File.Path )}}
     {{$v1 := (strings.TrimSuffix ".md" $v0) }}
 <script>
-  // console.log('location.pathname: ', location.pathname)
-  // console.log('token ', localStorage.getItem('access_token'))
-
-  // window.location = 'http://localhost:3005/docs/'
-
-  // setTimeout(test, 1000)
-  // test()
-
-// console.log('document.referrer: ', document.referrer)
-
-  // function test() {
-  //   if(location.hash) {
-  //     console.log('true')
-  //   }
-  // }
-  window.location.hash = ''
-
-  function test() {
-    if (location.pathname.substr(0, 13) == '/tidb-academy' && !localStorage.getItem('access_token')) {
-      console.log('not login')
-      console.log('last url: ', document.referrer)
-      debugger
+  // if the user has not logged in, he will be redirect to intro page
+  if(location.href.search('#access_token') == -1 && location.pathname.substr(0,13) == '/tidb-academy' &&
+      !localStorage.getItem('access_token')) {
       window.location.pathname = '/tidb-academy/'
-      debugger
-      console.log('location href: ', location.href)
-    } 
   }
-
 </script>
 {{- end -}}
 
@@ -58,9 +35,6 @@
           <div class="sticky-sidebar">
             {{- partial "archives/improve-doc.html" (dict "repo" "private-tidb-academy" "global" .) -}}
             <p class="toc-title">What’s on this page</p>
-              <!-- <button id="qsLogoutBtn" class="btn btn-primary btn-margin">
-              Log Out
-            </button> -->
             <span id='username'></span>
             <div id="smart_toc_wrapper"></div>
           </div>
@@ -72,6 +46,4 @@
 {{- define "footJS" -}}
     <script type="text/javascript" src="/js/doc.js"></script>
     <script type="text/javascript" src="/js/vendor/login.js"></script>
-    <script src="https://cdn.auth0.com/js/auth0/9.5.1/auth0.min.js"></script>
-    <script type="text/javascript" src="/js/vendor/auth0-variables.js"></script>
 {{- end -}}
