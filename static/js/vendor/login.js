@@ -12,9 +12,16 @@ $('document').ready(function () {
 
   // proccess login
   $('#qsLoginBtn').click(function (e) {
+    console.log('bottom click login')
     e.preventDefault();
     webAuth.authorize();
   });
+
+  $('#topLoginBtn').click(function (e) {
+      console.log('top click login')
+      e.preventDefault();
+      webAuth.authorize();
+    });
 
   // process logout
   $('#qsLogoutBtn').click(function (e) {
@@ -53,6 +60,7 @@ $('document').ready(function () {
     })
   }
   
+  console.log('inside login.js')
   $('#username').text(localStorage.username)
   $('.j-avatar').attr('src', localStorage.avatar)
 
