@@ -1,25 +1,73 @@
 {{- define "headTpl" -}}
     {{$.Scratch.Set "data_i18_link" "/about-cn" }}
-    {{- partial "head/preload-css" (dict "href" "/css/cases.css") -}}
+    {{- partial "head/preload-css" (dict "href" "/css/tidb-cloud.css") -}}
 {{- end -}}
 
 {{- define "main" -}}
     {{ $heading := "TiDB Cloud" }}
-    <div class="contact-us">
+    <div class="main">
         {{- partial "layout/hero.html" (dict "heading" $heading) -}}
-        <div class="container" style="padding: 0 1rem; min-height: 700px;">
-            <div class="desc">
-                To get early access to PingCAP's TiDB cloud offering, please fill out the form below. You will be notified when the
-                product is ready for you!
-            </div>
-            <div class="contact-form" style="max-width: 500px;">
-            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-            <script>
-              hbspt.forms.create({
-                  portalId: "4466002",
-                  formId: "e6a1d648-4334-47e5-b905-6319b9402b08"
-                });
-            </script>
+        <div class="container" style="padding: 0 1rem;">
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><h2>Marketplace TiDB Cloud</h2></th>
+                        <th><h2>PingCAP Managed TiDB Cloud</h2></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td-label">Available Platform</td>
+                        <td>Google Kubernetes Marketplace (other marketplaces coming soon)</td>
+                        <td>Any public or private cloud platform</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Pricing Scheme</td>
+                        <td>Pay per hour per container</td>
+                        <td>Pay per user: based on a combination of computing resources and storage capacity</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Elastic Horizontal Scaling</td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Rolling Upgrades, Updates and Patching (no downtime)</td>
+                        <td><span class="icon-minus-mark"></span></td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Managed Backup & Restore</td>
+                        <td><span class="icon-minus-mark"></span></td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Cluster and Cost Management Dashboard</td>
+                        <td><span class="icon-minus-mark"></span></td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Data Migration Support</td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">Uptime SLA</td>
+                        <td>{{- partial "svgs/icon-check-mark.svg" -}}</td>
+                        <td>99.99</td>
+                    </tr>
+                    <tr>
+                        <td class="td-label">PingCAP Expert Support SLA</td>
+                        <td>2 business day response time; email only</td>
+                        <td>24 hours response time; email + instant message + phone <br> (Support package with shorter response time available for additional cost)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="actions">
+                <button class="actions__button">Sign Up</button>
+                <button class="actions__button">Sing Up</button>
             </div>
         </div>
     </div>

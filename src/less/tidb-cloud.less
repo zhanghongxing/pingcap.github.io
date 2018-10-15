@@ -1,0 +1,145 @@
+// import global variables
+@import "./colors.less";
+
+// import partials
+@import "./hero.less";
+
+@tdColor: #394a7e;
+
+.main {
+  padding-top: @headerHeight;
+}
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius: 12px;
+  border-collapse: collapse;
+  margin: 3em auto;
+  max-width: 42em;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+th {
+  background: #5cc7fd;
+  padding: 0.5em 1em;
+  color: #fff;
+  text-align: left;
+  vertical-align: middle;
+
+  h2 {
+    font-size: 1.1em;
+    color: inherit;
+  }
+}
+
+th:first-child {
+  border-top-left-radius: 12px;
+}
+
+th:last-child {
+  border-top-right-radius: 12px;
+  border-right: none;
+}
+
+tr {
+  border-top: 1px solid #e4e3eb;
+  border-bottom: 1px solid #e4e3eb;
+  color: @tdColor;
+}
+
+tr:first-child {
+  border-top: none;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+td {
+  background: #fff;
+  padding: 0.5em 1em;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 400;
+  font-size: 0.8em;
+  line-height: 1.5;
+  border-right: 1px solid #e4e3eb;
+
+  svg,
+  .icon-minus-mark {
+    display: block;
+    width: 4.2em;
+    height: 4.2em;
+    position: relative;
+  }
+
+  .icon-minus-mark::after {
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: 4px;
+    left: 50%;
+    top: 50%;
+    margin-top: -2px;
+    margin-left: -1em;
+    background: #394a7e;
+  }
+}
+
+td.td-label {
+  width: 12em;
+  font-weight: 600;
+  color: @tdColor;
+}
+
+td:last-child {
+  border-right: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 42em;
+  margin: 3em auto;
+
+  .actions__button {
+    height: 2em;
+    line-height: 2em;
+    margin-right: 3em;
+    padding: 0 1.5em;
+    border: none;
+    border-radius: 1em;
+    background-color: @themeBlue;
+    font-size: 0.85em;
+    color: #fff;
+    text-transform: uppercase;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #fff;
+      color: @themeBlue;
+    }
+  }
+}
+
+// x-small screen
+@media only screen and (max-width: 320px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
