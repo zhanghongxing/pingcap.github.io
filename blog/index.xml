@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on PingCAP Site</title>
+    <link>https://pingcap.com/blog/</link>
+    <description>Recent content in Blogs on PingCAP Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://pingcap.com/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PingCAP Raises $50 Million in Series C Round, Sets Eyes on Global Expansion, Cross-Cloud Offering, and More Core Technology Investment</title>
+      <link>https://pingcap.com/blog/series-c-announcement/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/series-c-announcement/</guid>
+      <description>Read the coverage on TechCrunch, Business Insider, SiliconANGLE
+PingCAP Raises $50 Million in Series C Round
+SAN MATEO, CA., September 11, 2018 &amp;ndash; PingCAP, a leading distributed database company that created the popular cloud-native NewSQL database TiDB, announces a $50 million Series C funding round led by FOSUN and Morningside Venture Capital. All previous investors—China Growth Capital, Yunqi Partners, Matrix Partners China, and others—have also participated in this round. PingCAP plans to use this new capital to expand the TiDB ecosystem globally, build cross-cloud product offering, and invest in innovation of its core technology.</description>
+    </item>
+    
+    <item>
+      <title>TiDB Reaches the 200 Contributors Milestone</title>
+      <link>https://pingcap.com/blog/tidb-community-200-contributors/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/tidb-community-200-contributors/</guid>
+      <description>Dear TiDB Contributors:
+As you might’ve noticed, TiDB recently added its 200th contributor. As CEO and co-founder of PingCAP who began building TiDB three years ago, I would like to thank the entire TiDB community for helping us reach this important milestone!
+TiDB development started in 2015. In August 2018, we welcomed our 200th contributor!
+Here are a few of my favorite contributions to highlight:
+ @dbjoa (from Samsung Electronics) contributed plan cache for prepared statements, resulting in a performance gain of 27%!</description>
+    </item>
+    
+    <item>
+      <title>9 Why&#39;s to Ask When Evaluating a Distributed Database</title>
+      <link>https://pingcap.com/blog/9-whys-to-ask-when-evaluating-a-distributed-database/</link>
+      <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/9-whys-to-ask-when-evaluating-a-distributed-database/</guid>
+      <description>When I first started building TiDB with my co-founders, we encountered countless challenges, pitfalls, and critical design choices that could have made or broken the project. To build an enterprise-grade distributed database like TiDB from scratch, we have to constantly make difficult decisions that balance the speed of development with long-term considerations for our customers and our team.
+Three years and two big releases later, TiDB 2.0 is now deployed in-production in more than 200 companies.</description>
+    </item>
+    
+    <item>
+      <title>Managing the Surging Data Volume of a Fast-Growing Marketplace with TiDB</title>
+      <link>https://pingcap.com/success-stories/tidb-in-zhuanzhuan/</link>
+      <pubDate>Tue, 07 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/success-stories/tidb-in-zhuanzhuan/</guid>
+      <description>Industry: E-commerce
+Authors: Xuan Sun (Chief Architect at Zhuan Zhuan), Dong Chen (Senior Engineer at Zhuan Zhuan) and Haodong Ji (Senior Database Administrator at Zhuan Zhuan)
+The Letgo of China, Zhuan Zhuan is a mobile app that enables our 100 million users to engage in “recommerce,” the e-commerce of buying and selling of second-hand goods ranging from smartphones and clothes to furniture and baby gear. Co-invested by 58.com Inc., the leading online classifieds and listings website in China, and the internet services giant Tencent, our platform has experienced tremendous growth since its launch in 2015.</description>
+    </item>
+    
+    <item>
+      <title>Landing Your First Rust Pull Request in TiKV</title>
+      <link>https://pingcap.com/blog/adding-built-in-functions-to-tikv/</link>
+      <pubDate>Fri, 03 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/adding-built-in-functions-to-tikv/</guid>
+      <description>This guide is intended to show how you can land your first Pull Request (PR) in Rust to contribute to TiKV in less than 30 minutes. But before we do that, here’s some helpful background.
+TiDB (&amp;ldquo;Ti&amp;rdquo; = Titanium) is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database, built by the company PingCAP (that’s us!) and its active open-source community (that’s you!). It’s designed to provide infinite horizontal scalability, strong consistency, and high availability with MySQL compatibility.</description>
+    </item>
+    
+    <item>
+      <title>TiSpark: More Data Insights, Less ETL</title>
+      <link>https://pingcap.com/blog/tispark-more-data-insights-no-more-etl/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/tispark-more-data-insights-no-more-etl/</guid>
+      <description>Author: Shawn Ma is a Tech Lead at PingCAP in the OLAP team. Previously, he was Tech Lead at Netease and Quantcast. He received his Masters in Computer Science from University of California&amp;ndash;Irvine.
+When we released TiDB 2.0 in April, part of that announcement also included the release of TiSpark 1.0&amp;ndash;an integral part of the TiDB platform that makes complex analytics on &amp;ldquo;fresh&amp;rdquo; transactional data possible. Since then, many people in the TiDB community have been asking for more information about TiSpark.</description>
+    </item>
+    
+    <item>
+      <title>Ele.me? TiDB At Your Service</title>
+      <link>https://pingcap.com/success-stories/tidb-in-eleme/</link>
+      <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/success-stories/tidb-in-eleme/</guid>
+      <description>Industry: Food Delivery
+Authors: Yanzhao Zhang (Senior Database Engineer at Ele.me) and Dongming Chen (Senior Infrastructure Engineer at Ele.me)
+Ele.me, which means &amp;ldquo;Are you hungry?&amp;rdquo; in Chinese, is the largest online food delivery platform in China. Our platform allows users to order all kinds of food and beverages and get their takeout delivered within 30 minutes. Currently, with 3 million scooter-riding delivery staff, Ele.me is serving 260 million customers and 1.</description>
+    </item>
+    
+    <item>
+      <title>How To Spin Up an HTAP Database in 5 Minutes with TiDB &#43; TiSpark</title>
+      <link>https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/how_to_spin_up_an_htap_database_in_5_minutes_with_tidb_tispark/</guid>
+      <description>TiDB is an open-source distributed Hybrid Transactional and Analytical Processing (HTAP) database built by PingCAP, powering companies to do real-time data analytics on live transactional data in the same data warehouse &amp;ndash; no more ETL, no more T+1, no more delays. More than 200 companies are now using TiDB in production. Its 2.0 version was launched in late April 2018 (read about it in this blog post).
+In this 5-minute tutorial, we will show you how to spin up a standard TiDB cluster using Docker Compose on your local computer, so you can get a taste of its hybrid power, before using it for work or your own project in production.</description>
+    </item>
+    
+    <item>
+      <title>Implement Raft in Rust</title>
+      <link>https://pingcap.com/blog/implement-raft-in-rust/</link>
+      <pubDate>Tue, 22 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/implement-raft-in-rust/</guid>
+      <description>Consensus is one of the most important challenges in designing and building distributed systems&amp;ndash;how to make sure multiple nodes (or agents, processes, threads, tasks, participants, etc.) in a group agree on a specific value proposed by at least one of the nodes. As an open-source distributed scalable HTAP database, TiDB uses the Raft Consensus Algorithm in its distributed transactional key-value storage engine, TiKV, to ensure data consistency, auto-failover, and fault tolerance.</description>
+    </item>
+    
+    <item>
+      <title>TiDB 2.0 is Ready - Faster, Smarter, and Battle-Tested</title>
+      <link>https://pingcap.com/blog/tidb-2-0-announcement/</link>
+      <pubDate>Sun, 29 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/tidb-2-0-announcement/</guid>
+      <description>TiDB 2.0 is Ready! TiDB is an open-source distributed scalable Hybrid Transactional and Analytical Processing (HTAP) database. It is designed to provide infinite horizontal scalability, strong consistency, and high availability. TiDB is MySQL compatible and serves as a one-stop data warehouse for both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workload.
+When we launched TiDB 1.0 last October, we were excited but also a bit nervous. After working on TiDB heads-down, non-stop for more than two years, even with the support of a large (and growing) open-source community, we weren’t sure how the world would receive what we’ve built.</description>
+    </item>
+    
+    <item>
+      <title>From Chaos to Order -- Tools and Techniques for Testing TiDB, A Distributed NewSQL Database</title>
+      <link>https://pingcap.com/blog/chaos-practice-in-tidb/</link>
+      <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/chaos-practice-in-tidb/</guid>
+      <description>What is Chaos? In the world of distributed computing, you can never predict what will happen to your cluster. Anything is possible. A butterfly fluttering in Rio de Janeiro could change the weather in Chicago, or destroy an entire data center in Cairo. Network Time Protocol (NTP) might be out of sync, CPUs might mysteriously max out, or worse yet, your diligent DBA might accidentally remove data in the middle of the night.</description>
+    </item>
+    
+    <item>
+      <title>Blitzscaling the Largest Dockless Bikesharing Platform with TiDB’s Help</title>
+      <link>https://pingcap.com/success-stories/tidb-in-mobike/</link>
+      <pubDate>Tue, 03 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/success-stories/tidb-in-mobike/</guid>
+      <description>Industry: Ridesharing
+Data Growth Rate: ~30TB per day
+Author: Chengjie Ding and Ming Hu (Infrastructure Platform Engineers at Mobike)
+Mobike is the world’s first and largest dockless bike-sharing provider, serving over 200 million users in 200 cities across the world, operating over 9 million smart bikes. It’s an affordable and convenient way of transportation for short urban trips, with a patented bike design with a smart lock system and a mobile app.</description>
+    </item>
+    
+    <item>
+      <title>How to do Performance Tuning on TiDB, A Distributed NewSQL Database</title>
+      <link>https://pingcap.com/blog/performance_tuning_on_a_distributed_newsql_database/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/performance_tuning_on_a_distributed_newsql_database/</guid>
+      <description>Author: Jinpeng Zhang, Database Engineer, Storage Team at PingCAP
+Doing performance tuning on distributed systems is no joking matter. It’s much more complicated than on a single node server, and bottlenecks can pop up anywhere, from system resources in a single node or subcomponent, to cooperation between nodes, to even network bandwidth. Performance tuning is a practice that aims to find these bottlenecks and address them, in order to reveal more bottlenecks and address them as well, until the system reaches an optimal performance level.</description>
+    </item>
+    
+    <item>
+      <title>Bringing TiKV to Rust Devroom at FOSDEM 2018</title>
+      <link>https://pingcap.com/blog/FOSDEM-2018-Rust-Devroom-reflection/</link>
+      <pubDate>Thu, 15 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/FOSDEM-2018-Rust-Devroom-reflection/</guid>
+      <description>At the crack of dawn on February 1, I landed in Brussels, Belgium, for the first time in my life. The goal of my trip wasn’t to taste the local cuisine, tour world-famous museums, or grab a pint of the local brew (though I ended up doing all those things anyway). It was to deliver a talk three days later at &amp;ldquo;FOSDEM 2018 Rust Devroom&amp;rdquo; about our experience at PingCAP using Rust to build TiKV, a distributed transactional Key-Value storage engine.</description>
+    </item>
+    
+    <item>
+      <title>TiDB DevCon 2018 Recap - News, Latest Development, and Roadmap</title>
+      <link>https://pingcap.com/blog/tidb-devcon-2018-recap/</link>
+      <pubDate>Thu, 25 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/tidb-devcon-2018-recap/</guid>
+      <description>On January 20th, 2018, a chilly Saturday in the middle of the winter, more than 200 coders, hackers, and techies streamed into Garage Café, a chic coffee shop in the heart of Beijing’s techhub, Zhongguancun. They weren’t there to get coffee. They weren’t there to stay warm. They were there to be part of TiDB DevCon 2018, a technology party for the developers, by the developers.
+TiDB DevCon 2018 attendees signing-in on the event banner</description>
+    </item>
+    
+    <item>
+      <title>2017 Reflection and Gratitude</title>
+      <link>https://pingcap.com/blog/pingcap-reflection-and-gratitude/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/pingcap-reflection-and-gratitude/</guid>
+      <description>In open source, we trust!
+2017 has witnessed the growth of PingCAP, from Beijing to Silicon Valley, and the evolution of TiDB, from RC1 to the 1.0 release, and then to the 1.0.5 release. As our CEO Max said in the TiDB 1.0 announcement, &amp;ldquo;because of the hard work and dedication of not just every member of our team, but also every contributor, user, and partner in our open source community.</description>
+    </item>
+    
+    <item>
+      <title>Tick or Tock? Keeping Time and Order in Distributed Databases</title>
+      <link>https://pingcap.com/blog/Time-in-Distributed-Systems/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/Time-in-Distributed-Systems/</guid>
+      <description>Preface At re:Invent 2017, Amazon Web Services (AWS) announced Amazon Time Sync Service, a highly accurate and reliable time reference that is natively accessible from Amazon EC2 instances. It is much like the Google TrueTime published in 2012. Why do Google and AWS both want to make efforts to provide global time service? Is there any inspiration for building distributed database? This topic is important to think about.
+Time synchronization remains a hard nut to crack in distributed systems, especially for distributed databases such as TiDB where time is used to confirm the order of the transaction to guarantee the ACID compliance.</description>
+    </item>
+    
+    <item>
+      <title>PingCAP Plants its Seed in Silicon Valley</title>
+      <link>https://pingcap.com/blog/Silicon-Valley-Office-Announcement/</link>
+      <pubDate>Fri, 08 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/Silicon-Valley-Office-Announcement/</guid>
+      <description>PingCAP Plants its Seed in Silicon Valley PingCAP, a cutting-edge distributed Hybrid Transactional/Analytical Processing (HTAP) database company, is excited to announce the opening of its Silicon Valley office, located at the GSV Labs in Redwood City, California. GSV (Global Silicon Valley) Labs is a global innovation platform that houses more than 170 startups, investors, and partners in its 60,000 square foot space in the heart of Silicon Valley. Its member startups work in a wide range of technologies and industries, from Big Data and healthcare, to VR and education.</description>
+    </item>
+    
+    <item>
+      <title>A TiKV Source Code Walkthrough – Raft Optimization</title>
+      <link>https://pingcap.com/blog/optimizing-raft-in-tikv/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/optimizing-raft-in-tikv/</guid>
+      <description>Paxos or Raft is frequently used to ensure data consistency in the distributed databases. But Paxos is known for its complexity and is rather difficult to understand while Raft is very simple. Therefore, a lot of emerging databases tend to use Raft as the consensus algorithm at its bottom layer. TiKV is no exception.
+Simple as Raft is, its performance is not ideal if we follow exactly the way introduced in the Paper.</description>
+    </item>
+    
+    <item>
+      <title>PingCAP Launches TiDB 1.0</title>
+      <link>https://pingcap.com/blog/2017-10-17-announcement/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-10-17-announcement/</guid>
+      <description>PingCAP Launches TiDB 1.0, A Scalable Hybrid Database Solution October 16, 2017 - PingCAP Inc., a cutting-edge distributed database technology company, officially announces the release of TiDB 1.0. TiDB is an open source distributed Hybrid Transactional/Analytical Processing (HTAP) database that empowers businesses to meet both workloads with a single database.
+In the current database landscape, infrastructure engineers often have to use one database for online transactional processing (OLTP) and another for online analytical processing (OLAP).</description>
+    </item>
+    
+    <item>
+      <title>Scale the Relational Database with NewSQL</title>
+      <link>https://pingcap.com/blog/2017-10-10-nextcon/</link>
+      <pubDate>Tue, 10 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-10-10-nextcon/</guid>
+      <description>This is the speech Li SHEN gave at the 3rd NEXTCON: Cloud+Data NEXT Conference Seattle on September 16th, 2017.
+ Speaker introduction Why we build a new relational database TiDB Project - Goal Architecture The core components of TiDB  The Storage stack Dynamic Multi-Raft Safe Split ACID Transaction Something we haven&amp;rsquo;t mentioned Placement Driver The SQL Layer What Happens behind a query SQL Layer Overview Cost-Based Optimizer  Tools matter Spark on TiKV Future plans  Speaker introduction Hello everyone, I am glad to be here in this beautiful city and share this talk with you.</description>
+    </item>
+    
+    <item>
+      <title>Why did we choose Rust over Golang or C/C&#43;&#43; to develop TiKV?</title>
+      <link>https://pingcap.com/blog/2017-09-26-whyrust/</link>
+      <pubDate>Tue, 26 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-09-26-whyrust/</guid>
+      <description>What is Rust Rust is a systems programming language sponsored by Mozilla Research. It moves fast and steady with a 6-week release cycle ever since its 1.0 version in May 2015.
+See the following list for some of the features that most attract us:
+ The design principles of Rust resemble with C++ in Abstraction without overhead and RAII (Resource acquisition is initialization).
+ The minimum runtime and efficient C bindings empower Rust to be as efficient as C and C++, thus making it very suitable for the systems programming field where high performance matters the most.</description>
+    </item>
+    
+    <item>
+      <title>RocksDB in TiKV</title>
+      <link>https://pingcap.com/blog/2017-09-15-rocksdbintikv/</link>
+      <pubDate>Fri, 15 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-09-15-rocksdbintikv/</guid>
+      <description>This is the speech Siddon Tang gave at the RocksDB meetup on August 28, 2017.
+ Speaker Introduction Agenda Why did we choose RocksDB? How are we using RocksDB?  TiKV Architecture Region Raft InsertWithHint Prefix Iterator Table Property for Region Split Check Table Property for GC Check Ingest the SST File Others  How are we contributing? Future Plans  Speaker Introduction Hi every one, thanks for having me here, the RocksDB team.</description>
+    </item>
+    
+    <item>
+      <title>Futures and gRPC in Rust</title>
+      <link>https://pingcap.com/blog/2017-09-12-futuresandgrpc/</link>
+      <pubDate>Tue, 12 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-09-12-futuresandgrpc/</guid>
+      <description>This is the speech Tang Liu (tl@pingcap.com) gave at the Bay Area Rust Meetup August 2017. See the video.
+ Speaker Introduction Async Programming  Why not Sync? Why Async?  Callback Hell Coroutine Makes it Easy Future, Another Way   Futures in Rust  Futures Combinator Synchronization Stream Sink Task  gRPC  Why gRPC? HTTP/2 gRPC based on HTTP/2  Combine Futures and gRPC  C gRPC Keywords Pseudo Flow Unary Client Streaming Server Streaming Duplex Streaming  Unary Future Implementation  Client Unary Unary Future Resolve Future  Benchmark Misc  Speaker Introduction Hi everyone!</description>
+    </item>
+    
+    <item>
+      <title>How we Hunted a Data Corruption bug in RocksDB</title>
+      <link>https://pingcap.com/blog/2017-09-08-rocksdbbug/</link>
+      <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-09-08-rocksdbbug/</guid>
+      <description>Data was corrupted. A cluster panicked. The crime scene was compromised. What happened? Detective Huang (huachao@pingcap.com) went all lengths to locate the criminal and solved it once and for all.
+Background As a distributed open source HTAP database, TiDB uses TiKV as its storage engine. Inside TiKV, we use RocksDB as the local storage. RocksDB is a great project. It&amp;rsquo;s mature, fast, tunable, and widely used in very large scale production environments.</description>
+    </item>
+    
+    <item>
+      <title>When TiDB Meets Jepsen</title>
+      <link>https://pingcap.com/blog/2017-09-01-tidbmeetsjepsen/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-09-01-tidbmeetsjepsen/</guid>
+      <description>What is Jepsen? How does Jepsen work?  DB Client Checker Nemesis Generator  Jepsen tests that TiDB goes through  The Bank Test The Set Test The Register Test  Miscellaneous  What is Jepsen? Written by Kyle Kingsbury in Clojure. Jepsen is a test framework for distributed systems verification. Kingsbury has used it to verify the consistency of many famous distributed systems (etcd, ZooKeeper, CockroachDB, etc.) and found multiple bugs in some of these systems.</description>
+    </item>
+    
+    <item>
+      <title>The Design and Implementation of Multi-raft</title>
+      <link>https://pingcap.com/blog/2017-08-15-multi-raft/</link>
+      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-08-15-multi-raft/</guid>
+      <description>(Email: tl@pingcap.com)
+
+ Placement Driver Raftstore  Region RocksDB / Keys Prefix Peer Storage Peer Multi-raft  Summary  Placement Driver Placement Driver (PD), the global central controller of TiKV, stores the metadata information of the entire TiKV cluster, generates Global IDs, and is responsible for the scheduling of TiKV and the global TSO time service.
+PD is a critical central node. With the integration of etcd, it automatically supports the distributed scaling and failover as well as solves the problem of single point of failure.</description>
+    </item>
+    
+    <item>
+      <title>How TiDB tackles fast data growth and complex queries for yuanfudao.com</title>
+      <link>https://pingcap.com/success-stories/tidb-in-yuanfudao/</link>
+      <pubDate>Tue, 08 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/success-stories/tidb-in-yuanfudao/</guid>
+      <description>Yuanfudao.com is an online tutoring service targeting the K-12 educational segment in China with the largest number of elementary and secondary school student users. It owns three applications, Yuantiku (猿题库), the online question bank, Xiaoyuansouti (小猿搜题), the application for question search by taking pictures, and yuanfudao.com, an online tutoring service.
+So far, the Yuanfudao APPs have more than 1.16 million paying users and provide live tutoring courses of English and Math Olympiad to the elementary users, as well as all the subjects for secondary school students.</description>
+    </item>
+    
+    <item>
+      <title>A TiKV Source Code Walkthrough - Raft in TiKV</title>
+      <link>https://pingcap.com/blog/2017-07-28-raftintikv/</link>
+      <pubDate>Fri, 28 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-07-28-raftintikv/</guid>
+      <description>(Email: tl@pingcap.com)
+
+Table of content  Architecture Raft  Storage Config RawNode   Architecture Below is TiKV’s overall architecture:
+Placement Driver: Placement Driver (PD) is responsible for the management scheduling of the whole cluster.
+Node: Node can be regarded as an actual physical machine and each Node is responsible for one or more Store.
+Store: Store uses RocksDB to implement actual data storage and usually one Store corresponds to one disk.</description>
+    </item>
+    
+    <item>
+      <title>TiDB Best Practices</title>
+      <link>https://pingcap.com/blog/2017-07-24-tidbbestpractice/</link>
+      <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-07-24-tidbbestpractice/</guid>
+      <description>From Li SHEN: shenli@pingcap.com
+See the following blogs (Data Storage, Computing, Scheduling) for TiDB&amp;rsquo;s principles.
+Table of Content  Preface Basic Concepts  Raft Distributed Transactions Data Sharding Load Balancing SQL on KV Secondary Indexes  Scenarios and Practices  Deployment Importing Data Write Query Monitoring and Log Documentation Best Scenarios for TiDB   Preface Database is a generic infrastructure system. It is important to, for one thing, consider various user scenarios during the development process, and for the other, modify the data parameters or the way to use according to actual situations in specific business scenarios.</description>
+    </item>
+    
+    <item>
+      <title>TiDB Internal (III) - Scheduling</title>
+      <link>https://pingcap.com/blog/2017-07-20-tidbinternal3/</link>
+      <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-07-20-tidbinternal3/</guid>
+      <description>From Li SHEN: shenli@pingcap.com
+Table of Content  Why scheduling The Requirements of Scheduling The Basic Operations of Scheduling Information Collecting The Policy of Scheduling The implementation of Scheduling Summary  Why scheduling? From the first blog of TiDB internal, we know that TiKV cluster is the distributed KV storage engine of TiDB database. Data is replicated and managed in Regions and each Region has multiple Replicas distributed on different TiKV nodes.</description>
+    </item>
+    
+    <item>
+      <title>TiDB Internal (I) - Data Storage</title>
+      <link>https://pingcap.com/blog/2017-07-11-tidbinternal1/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-07-11-tidbinternal1/</guid>
+      <description>From Li SHEN: shenli@pingcap.com 
+Table of Content  Foreword Storing data Key-Value RocksDB Raft Region MVCC Transaction Miscellaneous  Foreword: Database, operating system and compiler are known as the three big systems and regarded as the footstone of the whole computer software. Among them, database supports the businesses and is closer to the application layer. After decades of development, progress keeps emerging in this field.
+Many people must have used databases of different kinds, but few have the experience of developing one, especially a distributed database.</description>
+    </item>
+    
+    <item>
+      <title>TiDB Internal (II) - Computing</title>
+      <link>https://pingcap.com/blog/2017-07-11-tidbinternal2/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-07-11-tidbinternal2/</guid>
+      <description>From Li SHEN: shenli@pingcap.com
+Table of Content  Mapping the Relational Model to the Key-Value Model Metadata Management Architecture of SQL on Key-Value SQL Computing Distributed SQL Operation Architecture of the SQL Layer Summary  My last blog introduces the way that TiDB stores data, which is also the basic concepts of TiKV. In this article, I’ll elaborate on how TiDB uses the bottom layer Key-Value to store data, maps the relational model to the Key-Value model and performs SQL computing.</description>
+    </item>
+    
+    <item>
+      <title>Refactoring the Built-in Functions in TiDB</title>
+      <link>https://pingcap.com/blog/2017-06-27-refactor-builtin/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-06-27-refactor-builtin/</guid>
+      <description>In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.
+Table of Content  The overall process Example  Take a look at builtin_string.go Refine the existing TestLength() method Test the implementation of LENGTH at the SQL level   Before refactoring&amp;hellip; After refactoring&amp;hellip; Appendix  The overall process   Select any function to your interest from the expression directory, assuming the function is named XX.</description>
+    </item>
+    
+    <item>
+      <title>Rust in TiKV</title>
+      <link>https://pingcap.com/blog/2017-05-27-rust-in-tikv/</link>
+      <pubDate>Sat, 27 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-05-27-rust-in-tikv/</guid>
+      <description>This is the speech Siddon Tang gave at the 1st Rust Meetup in Beijing on April 16, 2017.
+(Email: tl@pingcap.com)
+Table of Content 
+ What&amp;rsquo;s TiKV We need a language with&amp;hellip; Why not C++? Why not Go? So we turned to Rust&amp;hellip; TiKV Timeline TiKV Architecture Multi-Raft Scale out A simple write flow Key technologies Future plan  Hello everyone, today I will talk about how we use Rust in TiKV.</description>
+    </item>
+    
+    <item>
+      <title>A Brief Introduction of TiDB</title>
+      <link>https://pingcap.com/blog/2017-05-23-perconalive17/</link>
+      <pubDate>Tue, 23 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-05-23-perconalive17/</guid>
+      <description>This is the speech Edward Huang gave at Percona Live - Open Source Database Conference 2017.
+The slides are here.
+ Speaker introduction What would you do when… TiDB Project - Goal Sofware Stack Safe Split Scale Out ACID Transaction Distributed SQL TiDB SQL Layer Overview What Happens behind a query Distributed Join (HashJoin) Tools Matter Use Cases Sysbench Roadmap  Speaker introduction  As one of the three co-founders of PingCAP, I feel honored that PingCAP was once again invited to the Percona Live Conference.</description>
+    </item>
+    
+    <item>
+      <title>Migration from MySQL to TiDB to handle tens of millions of rows of data per day</title>
+      <link>https://pingcap.com/blog/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/</link>
+      <pubDate>Mon, 22 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-05-22-Comparison-between-MySQL-and-TiDB-with-tens-of-millions-of-data-per-day/</guid>
+      <description>Table of content  Background MySQL, our first choice Look for new solutions TiDB, give it a go Feedbacks from TiDB  Background GAEA is a mobile gaming provider and aims to develop high-quality games for international players. GAEA uses its GaeaAD system to support the cross-platform real-time advertising system. GaeaAD performs a real-time match between the advertising data and the information reported by the game SDK. In other words, GaeaAD conducts a real-time analysis based on the data of the advertisements on different advertising channels and the amount of players brought by the corresponding channels, with the purpose of displaying and optimizing the conversion effects of advertising within minutes.</description>
+    </item>
+    
+    <item>
+      <title>About the TiDB Source Code</title>
+      <link>https://pingcap.com/blog/2017-01-06-about-the-tidb-source-code/</link>
+      <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2017-01-06-about-the-tidb-source-code/</guid>
+      <description>The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.
+Table of content  System architecture Overview of the code structure The protocol layer The SQL layer The optimizer The executor The distributed executor  System architecture As is shown in the architecture diagram, the TiDB Server is between the Load Balancer (or Application) and the storage engine layer at the bottom.</description>
+    </item>
+    
+    <item>
+      <title>Adding Built-in Functions</title>
+      <link>https://pingcap.com/blog/2016-12-19-adding-built-in-function/</link>
+      <pubDate>Mon, 19 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-12-19-adding-built-in-function/</guid>
+      <description>This document describes how to add built-in functions to TiDB.
+ Background The procedure to add a built-in function Example  Background How is the SQL statement executed in TiDB?
+The SQL statement is parsed to an abstract syntax tree (AST) by the parser first and then uses Query Optimizer to generate an execution plan. The plan can then be executed to get the result. This process involves how to access the data in the table, and how to filter, calculate, sort, aggregate, and distinct the data, etc.</description>
+    </item>
+    
+    <item>
+      <title>Subquery Optimization in TiDB</title>
+      <link>https://pingcap.com/blog/2016-12-07-Subquery-Optimization-in-TiDB/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-12-07-Subquery-Optimization-in-TiDB/</guid>
+      <description>MathJax.Hub.Config({ extensions: [&#34;tex2jax.js&#34;], jax: [&#34;input/TeX&#34;, &#34;output/HTML-CSS&#34;], tex2jax: { inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&#34;\\(&#34;,&#34;\\)&#34;] ], displayMath: [ [&#39;$$&#39;,&#39;$$&#39;], [&#34;\\[&#34;,&#34;\\]&#34;] ], processEscapes: true }, &#34;HTML-CSS&#34;: { availableFonts: [&#34;TeX&#34;] } });    Introduction to subqueries Subquery is a query within another SQL query. A common subquery is embedded within the FROM clause, for example：
+SELECT ID FROM (SELECT * FROM SRC) AS T The subexpressions in the FROM clauses can be processed very well by the general SQL optimizers.</description>
+    </item>
+    
+    <item>
+      <title>MVCC in TiKV</title>
+      <link>https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-11-17-mvcc-in-tikv/</guid>
+      <description>Introduction to concurrency control Transaction isolation is important for database management system. Because database should provide an illusion that the user is the only one who connects to the database, which greatly simplifies application development. But, the concurrency controlling problems like data races must be resolved since there will be a lot of connections to the database. Due to this background, the database management system (DBMS) ensures that the resulting concurrent access patterns are safe, ideally by serializablity.</description>
+    </item>
+    
+    <item>
+      <title>Travelling Back in Time and Reclaiming the Lost Treasures</title>
+      <link>https://pingcap.com/blog/2016-11-15-Travelling-Back-in-Time-and-Reclaiming-the-Lost-Treasures/</link>
+      <pubDate>Tue, 15 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-11-15-Travelling-Back-in-Time-and-Reclaiming-the-Lost-Treasures/</guid>
+      <description>About the History Read feature in TiDB Data is the core and is a matter of life and death for every business. So ensuring the data safety is the top priority of every database. From a macro point of view, the safety of data is not only about whether a database is stable enough that no data is lost, but also about whether a sufficient and convenient solution is in place when data is lost because of the business or human errors, for example, to solve the anti-cheat problem in the game industry or to meet the audit requirements in the financing business.</description>
+    </item>
+    
+    <item>
+      <title>A Deep Dive into TiKV</title>
+      <link>https://pingcap.com/blog/2016-11-09-Deep-Dive-into-TiKV/</link>
+      <pubDate>Wed, 09 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-11-09-Deep-Dive-into-TiKV/</guid>
+      <description>Table of Content  About TiKV Architecture Protocol Raft Placement Driver (PD) Transaction Coprocessor Key processes analysis  Key-Value operation Membership Change Split   About TiKV TiKV (The pronunciation is: /&amp;lsquo;taɪkeɪvi:/ tai-K-V, etymology: titanium) is a distributed Key-Value database which is based on the design of Google Spanner, F1, and HBase, but it is much simpler without dependency on any distributed file system.
+Architecture  Placement Driver (PD): PD is the brain of the TiKV system which manages the metadata about Nodes, Stores, Regions mapping, and makes decisions for data placement and load balancing.</description>
+    </item>
+    
+    <item>
+      <title>How we build TiDB</title>
+      <link>https://pingcap.com/blog/2016-10-17-how-we-build-tidb/</link>
+      <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/blog/2016-10-17-how-we-build-tidb/</guid>
+      <description>This is the speech Max Liu gave at Percona Live Open Source Database Conference 2016. 
+The slides are here.
+ Speaker introduction Why another database? What to build? How to design?  The principles or the philosophy  Disaster recovery Easy to use The community and ecosystem  Loose coupling – the logical architecture The alternatives  How to develop  The architecture TiKV core technologies  TiKV software stack Placement Driver Raft MVCC Transaction  TiDB core technologies  Mapping table data to Key-Value store Predicate push-down Schema changes   How to test?</description>
+    </item>
+    
+  </channel>
+</rss>

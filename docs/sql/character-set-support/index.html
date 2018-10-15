@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"content="IE=edge">
+<meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Character Set Support | PingCAP</title>
+<script>
+window.ga =
+    window.ga ||
+    function() {
+        ;(ga.q = ga.q || []).push(arguments)
+    }
+ga.l = +new Date()
+ga('create', 'UA-99991864-4', 'auto')
+ga('send', 'pageview')
+</script>
+<script async src="https://download.pingcap.com/js/ga-analytics.js"></script>
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="canonical" href="https://www.pingcap.com/">
+<meta name="description" content="Learn about the supported character sets in TiDB.">
+<meta name="robots" content="noodp">
+<meta name="keywords" content="SQL, HTAP, Open Source, Cloud-Native, NewSQL">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Character Set Support">
+<meta property="og:description" content="Learn about the supported character sets in TiDB.">
+<meta property="og:url" content="https://pingcap.com/docs/sql/character-set-support/">
+<meta property="og:site_name" content="PingCAP">
+<meta property="og:image" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta property="og:image:secure_url" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Learn about the supported character sets in TiDB.">
+<meta name="twitter:title" content="Character Set Support">
+<meta name="twitter:site" content="@pingcap">
+<meta name="twitter:image:src" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:creator" content="@pingcap">
+
+
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0076/9903.js" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+    "@context": "http:\/\/schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/www.pingcap.com\/",
+    "name": "PingCAP",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+<link rel="preload" href="https://download.pingcap.com/js/jquery.min.js" as="script">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/docsearch.min.css">
+<style type="text/css" media="screen">
+        .st_tree {
+            display: none;
+        }
+    </style>
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css">
+
+
+<link rel="stylesheet" href="/css/doc.css">
+
+    
+    
+    
+    
+    <script type="text/javascript">"/"===location.pathname&&"pingcap.github.io"===location.hostname&&(location.href="/en/")</script>
+<link rel="preload"as="script"href="/js/app.js">
+</head><body ><style type="text/css">
+    .center-element {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+
+    #page-loader {
+        transform: translate(-50%, -50%) scale(0.6);
+        -webkit-transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    #hexagon {
+        width: 60px;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+    }
+
+    #hexagon #hexagon-base,
+    #hexagon #hexagon-line-animation {
+        fill: transparent;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+    }
+
+    #hexagon #hexagon-base {
+        stroke: #cdd5e0;
+    }
+
+    #hexagon #hexagon-line-animation {
+        stroke: #3a59f0;
+        stroke-linecap: round;
+        animation: dash 1.5s linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: 1 431.7;
+        }
+        100% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: -867.4;
+        }
+    }
+</style>
+
+<div id="page-loader" class="center-element">
+    <svg id="hexagon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129.78 150.37">
+        <path id="hexagon-base" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+        <path id="hexagon-line-animation" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+    </svg>
+</div>
+<div id="page-content"style="display:none">
+<header role="navigation" class="fixed-top">
+    <div class="container">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        <div class="nav-wrapper">
+            <div class="navigation">
+                <ul>
+                <li class="sel"><a href="/docs">Docs</a></li>
+                <li ><a href="/success-stories">Success Stories</a></li>
+                <li ><a href="/blog">Blog</a></li>
+                <li ><a href="/about">About</a></li>
+                <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+                </ul>
+            </div>
+            <div class="global-search">
+                <div class="search-wrapper">
+                <span class="icon-search"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 67.125 67.125"><path d="M23.902 0C11.01 0 .523 10.488.523 23.38c0 12.891 10.487 23.379 23.379 23.379a23.258 23.258 0 0 0 14.471-5.037l24.816 24.817c.391.391.902.586 1.414.586s1.023-.195 1.414-.586a2 2 0 0 0 0-2.828L41.293 38.985c3.721-4.142 5.989-9.613 5.989-15.605C47.282 10.488 36.794 0 23.902 0zM4.523 23.38C4.523 12.694 13.216 4 23.902 4c10.687 0 19.38 8.694 19.38 19.38 0 5.396-2.221 10.279-5.791 13.795a1.959 1.959 0 0 0-.488.349 2.003 2.003 0 0 0-.271.343C33.31 40.9 28.825 42.76 23.903 42.76c-10.686-.001-19.38-8.695-19.38-19.38z"/><path d="M24.075 8.591c-8.25 0-14.962 6.712-14.962 14.962a2 2 0 0 0 4 0c0-6.044 4.918-10.962 10.962-10.962a2 2 0 0 0 0-4z"/></svg></span>
+                <input data-lang="en" type="search" id="search-input" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+        <div class="nav-btn nav-slider">
+            <i class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 459 459"><path d="M0 382.5h459v-51H0v51zM0 255h459v-51H0v51zM0 76.5v51h459v-51H0z" fill="#FFF"/></svg></i>
+        </div>
+    </div>
+</header>
+
+
+
+<nav class="mobile-sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        </div>
+    </div>
+    <ul class="ul-base">
+        <li class="sel"><a href="/docs">Docs</a></li>
+        <li ><a href="/success-stories">Success Stories</a></li>
+        <li ><a href="/blog">Blog</a></li>
+        <li ><a href="/about">About</a></li>
+        <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+    </ul>
+    <div class="nav-footer">
+        <div class="contact-list-wrap">
+        <div class="flex-list">
+            <h4 class="list-title"><strong>Contact</strong></h4>
+            <ul class="social ul-base">
+            <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg></a></li>
+            <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg></a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg></a></li>
+            <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+        <div class="container">
+        <a href="/docs-cn/sql/character-set-support" class="btn-lang" id="lang">中文</a>
+        </div>
+    </div>
+</nav>
+
+<div class="doc">
+    <div class="container"><div class="sidebar">
+    <div class="sticky-sidebar">
+        <div class="title"> Documentation </div>
+        <div class="st_tree nav-toc"><ul><li class="has-child"><a href="#">About TiDB<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/overview/">TiDB Introduction</a>
+            </li><li class="leaf-child">
+                <a href="/docs/architecture/">TiDB Architecture</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Quick Start<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/QUICKSTART/">TiDB Quick Start Guide</a>
+            </li><li class="leaf-child">
+                <a href="/docs/try-tidb/">Basic SQL Statements</a>
+            </li><li class="leaf-child">
+                <a href="/docs/bikeshare-example-database/">Bikeshare Example Database</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">TiDB User Guide<i class="icon-arrow"></i></a><ul><li class="has-child"><a href="#">TiDB Server Administration<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/tidb-server/">The TiDB Server</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/server-command-option/">The TiDB Command Options</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/tidb-server/#tidb-data-directory">The TiDB Data Directory</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/system-database/">The TiDB System Database</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/variable/">The TiDB System Variables</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/tidb-specific/">The Proprietary System Variables and Syntax in TiDB</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/tidb-server/#tidb-server-logs">The TiDB Server Logs</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/privilege/">The TiDB Access Privilege System</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/user-account-management/">TiDB User Account Management</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/encrypted-connections/">Use Encrypted Connections</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">SQL Optimization<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/understanding-the-query-execution-plan/">Understand the Query Execution Plan</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/statistics/">Introduction to Statistics</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Language Structure<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/literal-values/">Literal Values</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/schema-object-names/">Schema Object Names</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/keywords-and-reserved-words/">Keywords and Reserved Words</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/user-defined-variables/">User-Defined Variables</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/expression-syntax/">Expression Syntax</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/comment-syntax/">Comment Syntax</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Globalization<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/character-set-support/">Character Set Support</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/character-set-configuration/">Character Set Configuration</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/time-zone/">Time Zone Support</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Data Types<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/datatype/#numeric-types">Numeric Types</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#date-and-time-types">Date and Time Types</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#string-types">String Types</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#json-types">JSON Types</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#the-enum-data-type">The ENUM data type</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#the-set-type">The SET Type</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/datatype/#data-type-default-values">Data Type Default Values</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Functions and Operators<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/functions-and-operators-reference/">Function and Operator Reference</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/type-conversion-in-expression-evaluation/">Type Conversion in Expression Evaluation</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/operators/">Operators</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/control-flow-functions/">Control Flow Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/string-functions/">String Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/numeric-functions-and-operators/">Numeric Functions and Operators</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/date-and-time-functions/">Date and Time Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/bit-functions-and-operators/">Bit Functions and Operators</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/cast-functions-and-operators/">Cast Functions and Operators</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/encryption-and-compression-functions/">Encryption and Compression Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/information-functions/">Information Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/json-functions/">JSON Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/aggregate-group-by-functions/">Aggregate (GROUP BY) Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/miscellaneous-functions/">Miscellaneous Functions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/precision-math/">Precision Math</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">SQL Statement Syntax<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/sql/ddl/">Data Definition Statements</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/dml/">Data Manipulation Statements</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/transaction/">Transactions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/admin/">Database Administration Statements</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/prepare/">Prepared SQL Statement Syntax</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/util/">Utility Statements</a>
+            </li><li class="leaf-child">
+                <a href="https://pingcap.github.io/sqlgram/">TiDB SQL Syntax Diagram</a>
+            </li></ul>
+</li><li class="leaf-child">
+                <a href="/docs/sql/json-functions-generated-column/">JSON Functions and Generated Column</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/connection-and-APIs/">Connectors and APIs</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/transaction-isolation/">TiDB Transaction Isolation Levels</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/error/">Error Codes and Troubleshooting</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/mysql-compatibility/">Compatibility with MySQL</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/tidb-memory-control/">TiDB Memory Control</a>
+            </li><li class="leaf-child">
+                <a href="/docs/sql/slow-query/">Slow Query Log</a>
+            </li><li class="has-child"><a href="#">Advanced Usage<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/history-read/">Read Data From History Versions</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/gc/">Garbage Collection (GC)</a>
+            </li></ul>
+</li></ul>
+</li><li class="has-child"><a href="#">TiDB Operations Guide<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/recommendation/">Hardware and Software Requirements</a>
+            </li><li class="has-child"><a href="#">Deploy<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/ansible-deployment/">Ansible Deployment (Recommended)</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/offline-ansible-deployment/">Offline Deployment Using Ansible</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/docker-deployment/">Docker Deployment</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/docker-compose/">Docker Compose Deployment</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/location-awareness/">Cross-Region Deployment</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/kubernetes/">Kubernetes Deployment</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Configure<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/configuration/">Configuration Flags</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/tidb-config-file/">Configuration File Description</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/ansible-deployment-rolling-update/#modify-component-configuration">Modify Component Configuration Using Ansible</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/security/">Enable TLS Authentication</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/generate-self-signed-certificates/">Generate Self-signed Certificates</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Monitor<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/monitor-overview/">Overview of the Monitoring Framework</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/dashboard-overview-info/">Key Metrics</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/monitor/">Monitor a TiDB Cluster</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Scale<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/horizontal-scale/">Scale a TiDB Cluster</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/ansible-deployment-scale/">Scale Using Ansible</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">Upgrade<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/ansible-deployment-rolling-update/#upgrade-the-component-version">Upgrade the Component Version</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/tidb-v2-upgrade-guide/">TiDB 2.0 Upgrade Guide</a>
+            </li></ul>
+</li><li class="leaf-child">
+                <a href="/docs/op-guide/tune-tikv/">Tune Performance</a>
+            </li><li class="has-child"><a href="#">Backup and Migrate<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/backup-restore/">Backup and Restore</a>
+            </li><li class="has-child"><a href="#">Migrate<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/op-guide/migration-overview/">Migration Overview</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/migration/#use-the-mydumper--loader-tool-to-export-and-import-all-the-data">Migrate All the Data</a>
+            </li><li class="leaf-child">
+                <a href="/docs/op-guide/migration/#use-the-syncer-tool-to-import-data-incrementally-optional">Migrate the Data Incrementally</a>
+            </li></ul>
+</li></ul>
+</li><li class="leaf-child">
+                <a href="/docs/op-guide/ansible-operation/">TiDB-Ansible Common Operations</a>
+            </li><li class="leaf-child">
+                <a href="/docs/trouble-shooting/">Troubleshoot</a>
+            </li></ul>
+</li><li class="has-child"><a href="#">TiDB Enterprise Tools<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/tools/syncer/">Syncer</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/mydumper/">mydumper</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/loader/">Loader</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/tidb-binlog-kafka/">TiDB-Binlog</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/pd-control/">PD Control</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/pd-recover/">PD Recover</a>
+            </li><li class="leaf-child">
+                <a href="https://github.com/tikv/tikv/blob/master/docs/tools/tikv-control.md">TiKV Control</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tools/tidb-controller/">TiDB Controller</a>
+            </li></ul>
+</li><li class="leaf-child">
+                <a href="https://github.com/tikv/tikv/wiki">TiKV Documentation</a>
+            </li><li class="has-child"><a href="#">TiSpark Documentation<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/tispark/tispark-quick-start-guide/">Quick Start Guide</a>
+            </li><li class="leaf-child">
+                <a href="/docs/tispark/tispark-user-guide/">User Guide</a>
+            </li></ul>
+</li><li class="leaf-child">
+                <a href="/docs/FAQ/">Frequently Asked Questions (FAQ)</a>
+            </li><li class="leaf-child">
+                <a href="https://pingcap.com/blog/2017-07-24-tidbbestpractice/">TiDB Best Practices</a>
+            </li><li class="has-child"><a href="#">Releases<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="/docs/releases/21rc3/">2.1 RC3</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/21rc2/">2.1 RC2</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/207/">2.0.7</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/21rc1/">2.1 RC1</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/206/">2.0.6</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/205/">2.0.5</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/21beta/">2.1 Beta</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/204/">2.0.4</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/203/">2.0.3</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/202/">2.0.2</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/201/">2.0.1</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/2.0ga/">2.0</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/2rc5/">2.0 RC5</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/2rc4/">2.0 RC4</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/2rc3/">2.0 RC3</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/2rc1/">2.0 RC1</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/11beta/">1.1 Beta</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/108/">1.0.8</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/107/">1.0.7</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/11alpha/">1.1 Alpha</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/106/">1.0.6</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/105/">1.0.5</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/104/">1.0.4</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/103/">1.0.3</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/102/">1.0.2</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/101/">1.0.1</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/ga/">1.0</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/prega/">Pre-GA</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/rc4/">RC4</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/rc3/">RC3</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/rc2/">RC2</a>
+            </li><li class="leaf-child">
+                <a href="/docs/releases/rc1/">RC1</a>
+            </li></ul>
+</li><li class="leaf-child">
+                <a href="/docs/adopters/">TiDB Adopters</a>
+            </li><li class="leaf-child">
+                <a href="/docs/ROADMAP/">TiDB Roadmap</a>
+            </li><li class="leaf-child">
+                <a href="/docs/community/">Connect with us</a>
+            </li><li class="has-child"><a href="#">More Resources<i class="icon-arrow"></i></a><ul><li class="leaf-child">
+                <a href="https://github.com/pingcap/tidb-tools">Frequently Used Tools</a>
+            </li><li class="leaf-child">
+                <a href="https://pingcap.com/blog/">PingCAP Blog</a>
+            </li><li class="leaf-child">
+                <a href="https://pingcap.com/weekly/">Weekly Update</a>
+            </li></ul>
+</li></ul>
+</div>
+    </div>
+</div>
+<div class="archive">
+            <div class="content markdown-body">
+
+<h1 id="character-set-support">Character Set Support</h1>
+
+<p>A character set is a set of symbols and encodings. A collation is a set of rules for comparing characters in a character set.</p>
+
+<p>Currently, TiDB supports the following character sets:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> CHARACTER <span style="color:#66d9ef">SET</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">---------|---------------|-------------------|--------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> Charset <span style="color:#f92672">|</span> Description   <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#66d9ef">collation</span> <span style="color:#f92672">|</span> Maxlen <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------|---------------|-------------------|--------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> utf8    <span style="color:#f92672">|</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span> Unicode <span style="color:#f92672">|</span> utf8_bin          <span style="color:#f92672">|</span>      <span style="color:#ae81ff">3</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> utf8mb4 <span style="color:#f92672">|</span> UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span> Unicode <span style="color:#f92672">|</span> utf8mb4_bin       <span style="color:#f92672">|</span>      <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> ascii   <span style="color:#f92672">|</span> US ASCII      <span style="color:#f92672">|</span> ascii_bin         <span style="color:#f92672">|</span>      <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span> Latin1        <span style="color:#f92672">|</span> latin1_bin        <span style="color:#f92672">|</span>      <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> binary  <span style="color:#f92672">|</span> binary        <span style="color:#f92672">|</span> binary            <span style="color:#f92672">|</span>      <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">---------|---------------|-------------------|--------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: In TiDB, utf8 is treated as utf8mb4.</p>
+</blockquote>
+
+<p>Each character set has at least one collation. Most of the character sets have several collations. You can use the following statement to display the available character sets:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SHOW</span> <span style="color:#66d9ef">COLLATION</span> <span style="color:#66d9ef">WHERE</span> Charset <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;latin1&#39;</span>;
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|---------|------|---------|----------|---------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#66d9ef">Collation</span>         <span style="color:#f92672">|</span> Charset <span style="color:#f92672">|</span> Id   <span style="color:#f92672">|</span> <span style="color:#66d9ef">Default</span> <span style="color:#f92672">|</span> Compiled <span style="color:#f92672">|</span> Sortlen <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|---------|------|---------|----------|---------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> latin1_german1_ci <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>    <span style="color:#ae81ff">5</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_swedish_ci <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>    <span style="color:#ae81ff">8</span> <span style="color:#f92672">|</span> Yes     <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_danish_ci  <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">15</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_german2_ci <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">31</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_bin        <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">47</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_general_ci <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">48</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_general_cs <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">49</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">|</span> latin1_spanish_ci <span style="color:#f92672">|</span> latin1  <span style="color:#f92672">|</span>   <span style="color:#ae81ff">94</span> <span style="color:#f92672">|</span>         <span style="color:#f92672">|</span> Yes      <span style="color:#f92672">|</span>       <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">-------------------|---------|------|---------|----------|---------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">8</span> <span style="color:#66d9ef">rows</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>The <code>latin1</code> collations have the following meanings:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Collation</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><code>latin1_bin</code></td>
+<td align="left">Binary according to <code>latin1</code> encoding</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_danish_ci</code></td>
+<td align="left">Danish/Norwegian</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_general_ci</code></td>
+<td align="left">Multilingual (Western European)</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_general_cs</code></td>
+<td align="left">Multilingual (ISO Western European), case sensitive</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_german1_ci</code></td>
+<td align="left">German DIN-1 (dictionary order)</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_german2_ci</code></td>
+<td align="left">German DIN-2 (phone book order)</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_spanish_ci</code></td>
+<td align="left">Modern Spanish</td>
+</tr>
+
+<tr>
+<td align="left"><code>latin1_swedish_ci</code></td>
+<td align="left">Swedish/Finnish</td>
+</tr>
+</tbody>
+</table>
+
+<p>Each character set has a default collation. For example, the default collation for utf8 is <code>utf8_bin</code>.</p>
+
+<blockquote>
+<p><strong>Note</strong>: The collations in TiDB are case sensitive.</p>
+</blockquote>
+
+<h2 id="collation-naming-conventions">Collation naming conventions</h2>
+
+<p>The collation names in TiDB follow these conventions:</p>
+
+<ul>
+<li>The prefix of a collation is its corresponding character set, generally followed by one or more suffixes indicating other collation characteristic.  For example, <code>utf8_general_ci</code> and <code>latin1_swedish_ci</code> are collations for the utf8 and latin1 character sets, respectively. The <code>binary</code> character set has a single collation, also named <code>binary</code>, with no suffixes.</li>
+<li>A language-specific collation includes a language name. For example, <code>utf8_turkish_ci</code> and <code>utf8_hungarian_ci</code> sort characters for the utf8 character set using the rules of Turkish and Hungarian, respectively.</li>
+
+<li><p>Collation suffixes indicate whether a collation is case and accent sensitive, or binary. The following table shows the suffixes used to indicate these characteristics.</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Suffix</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">_ai</td>
+<td align="left">Accent insensitive</td>
+</tr>
+
+<tr>
+<td align="left">_as</td>
+<td align="left">Accent sensitive</td>
+</tr>
+
+<tr>
+<td align="left">_ci</td>
+<td align="left">Case insensitive</td>
+</tr>
+
+<tr>
+<td align="left">_cs</td>
+<td align="left">Case sensitive</td>
+</tr>
+
+<tr>
+<td align="left">_bin</td>
+<td align="left">Binary</td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>: Currently, TiDB only supports some of the collations in the above table.</p>
+</blockquote>
+
+<h2 id="database-character-set-and-collation">Database character set and collation</h2>
+
+<p>Each database has a character set and a collation. You can use the <code>CREATE DATABASE</code> statement to specify the database character set and collation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> db_name
+    [[<span style="color:#66d9ef">DEFAULT</span>] CHARACTER <span style="color:#66d9ef">SET</span> charset_name]
+    [[<span style="color:#66d9ef">DEFAULT</span>] <span style="color:#66d9ef">COLLATE</span> <span style="color:#66d9ef">collation_name</span>]</code></pre></div>
+<p>Where <code>DATABASE</code> can be replaced with <code>SCHEMA</code>.</p>
+
+<p>Different databases can use different character sets and collations. Use the <code>character_set_database</code> and  <code>collation_database</code> to see the character set and collation of the current database:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">schema</span> test1 character <span style="color:#66d9ef">set</span> utf8 <span style="color:#66d9ef">COLLATE</span> uft8_general_ci;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">09</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> use test1;
+<span style="color:#66d9ef">Database</span> changed
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>character_set_database, <span style="color:#f92672">@@</span>collation_database;
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#f92672">@@</span>character_set_database <span style="color:#f92672">|</span> <span style="color:#f92672">@@</span>collation_database <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> utf8                     <span style="color:#f92672">|</span> uft8_general_ci      <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">create</span> <span style="color:#66d9ef">schema</span> test2 character <span style="color:#66d9ef">set</span> latin1 <span style="color:#66d9ef">COLLATE</span> latin1_general_ci;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">09</span> sec)
+
+mysql<span style="color:#f92672">&gt;</span> use test2;
+<span style="color:#66d9ef">Database</span> changed
+mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">@@</span>character_set_database, <span style="color:#f92672">@@</span>collation_database;
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> <span style="color:#f92672">@@</span>character_set_database <span style="color:#f92672">|</span> <span style="color:#f92672">@@</span>collation_database <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#f92672">|</span> latin1                   <span style="color:#f92672">|</span> latin1_general_ci    <span style="color:#f92672">|</span>
+<span style="color:#f92672">+</span><span style="color:#75715e">--------------------------|----------------------+
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span> <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">set</span> (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">00</span> sec)</code></pre></div>
+<p>You can also see the two values in INFORMATION_SCHEMA:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
+<span style="color:#66d9ef">FROM</span> INFORMATION_SCHEMA.SCHEMATA <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">SCHEMA_NAME</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;db_name&#39;</span>;</code></pre></div>
+<h2 id="table-character-set-and-collation">Table character set and collation</h2>
+
+<p>You can use the following statement to specify the character set and collation for tables:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> tbl_name (column_list)
+    [[<span style="color:#66d9ef">DEFAULT</span>] CHARACTER <span style="color:#66d9ef">SET</span> charset_name]
+    [<span style="color:#66d9ef">COLLATE</span> <span style="color:#66d9ef">collation_name</span>]]
+
+<span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> tbl_name
+    [[<span style="color:#66d9ef">DEFAULT</span>] CHARACTER <span style="color:#66d9ef">SET</span> charset_name]
+    [<span style="color:#66d9ef">COLLATE</span> <span style="color:#66d9ef">collation_name</span>]</code></pre></div>
+<p>For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1(a int) CHARACTER <span style="color:#66d9ef">SET</span> utf8 <span style="color:#66d9ef">COLLATE</span> utf8_general_ci;
+Query OK, <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">rows</span> affected (<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">08</span> sec)</code></pre></div>
+<p>The table character set and collation are used as the default values for column definitions if the column character set and collation are not specified in individual column definitions.</p>
+
+<h2 id="column-character-set-and-collation">Column character set and collation</h2>
+
+<p>See the following table for the character set and collation syntax for columns:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">col_name <span style="color:#960050;background-color:#1e0010">{</span>CHAR <span style="color:#f92672">|</span> VARCHAR <span style="color:#f92672">|</span> TEXT<span style="color:#960050;background-color:#1e0010">}</span> (col_length)
+    [CHARACTER <span style="color:#66d9ef">SET</span> charset_name]
+    [<span style="color:#66d9ef">COLLATE</span> <span style="color:#66d9ef">collation_name</span>]
+
+col_name <span style="color:#960050;background-color:#1e0010">{</span>ENUM <span style="color:#f92672">|</span> <span style="color:#66d9ef">SET</span><span style="color:#960050;background-color:#1e0010">}</span> (val_list)
+    [CHARACTER <span style="color:#66d9ef">SET</span> charset_name]
+    [<span style="color:#66d9ef">COLLATE</span> <span style="color:#66d9ef">collation_name</span>]</code></pre></div>
+<h2 id="connection-character-sets-and-collations">Connection character sets and collations</h2>
+
+<ul>
+<li><p>The server character set and collation are the values of the <code>character_set_server</code> and <code>collation_server</code> system variables.</p></li>
+
+<li><p>The character set and collation of the default database are the values of the <code>character_set_database</code> and <code>collation_database</code> system variables.
+You can use <code>character_set_connection</code> and <code>collation_connection</code> to specify the character set and collation for each connection.
+The <code>character_set_client</code> variable is to set the client character set. Before returning the result, the <code>character_set_results</code> system variable indicates the character set in which the server returns query results to the client, including the metadata of the result.</p></li>
+</ul>
+
+<p>You can use the following statement to specify a particular collation that is related to the client:</p>
+
+<ul>
+<li><p><code>SET NAMES 'charset_name' [COLLATE 'collation_name']</code></p>
+
+<p><code>SET NAMES</code> indicates what character set the client will use to send SQL statements to the server. <code>SET NAMES utf8</code> indicates that all the requests from the client use utf8, as well as the results from the server.</p>
+
+<p>The <code>SET NAMES 'charset_name'</code> statement is equivalent to the following statement combination:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> character_set_client <span style="color:#f92672">=</span> charset_name;
+<span style="color:#66d9ef">SET</span> character_set_results <span style="color:#f92672">=</span> charset_name;
+<span style="color:#66d9ef">SET</span> character_set_connection <span style="color:#f92672">=</span> charset_name;</code></pre></div>
+<p><code>COLLATE</code> is optional, if absent, the default collation of the <code>charset_name</code> is used.</p></li>
+
+<li><p><code>SET CHARACTER SET 'charset_name'</code></p>
+
+<p>Similar to <code>SET NAMES</code>, the <code>SET NAMES 'charset_name'</code> statement is equivalent to the following statement combination:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SET</span> character_set_client <span style="color:#f92672">=</span> charset_name;
+<span style="color:#66d9ef">SET</span> character_set_results <span style="color:#f92672">=</span> charset_name;
+<span style="color:#66d9ef">SET</span> collation_connection <span style="color:#f92672">=</span> <span style="color:#f92672">@@</span>collation_database;</code></pre></div></li>
+</ul>
+
+<p>For more information, see <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html">Connection Character Sets and Collations in MySQL</a>.</p>
+</div>
+            <div class="article-toc"></div>
+<div class="git-info">
+                <a class="link" href="https://github.com/pingcap/docs/blob/master/sql/character-set-support.md">"Character Set Support"</a>
+                was last updated
+                <span>Oct 8 2018</span>:
+                <a class="link" href="https://github.com/pingcap/docs/commit/1bd2eca388d00a2b587bbd25e2a9c9afe2b574fd">
+                    sql: fix a typo and update wording (#653) <span class="hash">(1bd2eca)</span>
+                </a>
+            </div></div>
+        <div class="sidebar-page">
+            <div class="sticky-sidebar"><a href="https://github.com/pingcap/docs/edit/master/sql/character-set-support.md" class="improve-doc" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#142848" width="14" height="14" viewBox="0 0 275.836 275.836"><path d="M191.344 20.922l-95.155 95.155a5.99 5.99 0 0 0-1.565 2.734l-8.167 31.454a6.003 6.003 0 0 0 7.315 7.316l31.454-8.168a6.003 6.003 0 0 0 2.734-1.565l95.153-95.153.005-.004.004-.005 19.156-19.156a5.998 5.998 0 0 0 .001-8.484L218.994 1.758a5.998 5.998 0 0 0-8.485 0l-19.155 19.155-.005.004-.005.005zm-70.713 117.286l-19.993 5.192 5.191-19.993 89.762-89.762 14.801 14.802-89.761 89.761zm94.12-123.723l14.801 14.802-10.675 10.675-14.801-14.802 10.675-10.675z"/><path d="M238.037 65.022a6 6 0 0 0-6 6v192.813H43.799V34.417h111.063a6 6 0 0 0 0-12H37.799a6 6 0 0 0-6 6v241.419a6 6 0 0 0 6 6h200.238a6 6 0 0 0 6-6V71.022a6 6 0 0 0-6-6z"/></svg>
+    Improve this page
+</a>
+<p class="toc-title">What’s on this page</p>
+                <div id="smart_toc_wrapper"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="flex-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Product</strong></h4>
+                <ul>
+                <li><a href="/docs/">TiDB</a></li>
+                <li><a href="/docs/tispark/tispark-user-guide/">TiSpark</a></li>
+                <li><a href="/docs/ROADMAP/">Roadmap</a></li>
+                <li><a href="/tidb-cloud/">TiDB Cloud</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Docs</strong></h4>
+                <ul>
+                <li><a href="/docs/QUICKSTART/">Quick Start</a></li>
+                <li><a href="/blog/2017-07-24-tidbbestpractice/">Best Practices</a></li>
+                <li><a href="/docs/FAQ/">FAQ</a></li>
+                <li><a href="/docs/tools/syncer/">TiDB Utilities</a></li>
+                <li><a href="/docs/releases/rn/">Release Notes</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Resources</strong></h4>
+                <ul>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/weekly/">Weekly</a></li>
+                <li><a href="https://github.com/pingcap" target="_blank">GitHub</a></li>
+                <li><a href="/tidb-academy/">TiDB Academy</a></li>
+                <li><a href="/community/">TiDB Community</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Company</strong></h4>
+                <ul>
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://angel.co/pingcap-1/jobs" target="_blank">Careers</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/contact-us/">Contact Us</a></li>
+                <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="/terms-of-service/">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Connect</strong></h4>
+                <ul>
+                <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg> Twitter</a></li>
+                <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg> LinkedIn</a></li>
+                <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg>Reddit</a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg>Google Group</a></li>
+                <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg>Stack Overflow</a></li>
+                </ul>
+            </div>
+            <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+    </div>
+    <div class="container copyright-container">
+        <p class="copyright">&copy; 2018 PingCAP. All Rights Reserved.</p>
+        <a href="/docs-cn/sql/character-set-support" class="copyright-btn-lang" id="lang">中文</a>
+    </div>
+</footer>
+<button class="back-to-top" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 284.929 284.929"><path d="M282.082 195.285L149.028 62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665.953-6.567 2.856L2.856 195.285C.95 197.191 0 199.378 0 201.853c0 2.474.953 4.664 2.856 6.566l14.272 14.271c1.903 1.903 4.093 2.854 6.567 2.854s4.664-.951 6.567-2.854l112.204-112.202 112.208 112.209c1.902 1.903 4.093 2.848 6.563 2.848 2.478 0 4.668-.951 6.57-2.848l14.274-14.277c1.902-1.902 2.847-4.093 2.847-6.566.001-2.476-.944-4.666-2.846-6.569z" fill="#FFF"/></svg>
+</button>
+</div>
+<script type="text/javascript">document.getElementById("page-loader").style.display="none",document.getElementById("page-content").style.display="block"</script>
+<div class="overlay"></div>
+<script src="https://download.pingcap.com/js/jquery.min.js"></script><script type="text/javascript" src="/js/doc.js"></script><script type="text/javascript"src="https://download.pingcap.com/js/docsearch.min.js"></script>
+<script type="text/javascript"src="/js/app.js"></script></body>
+</html>

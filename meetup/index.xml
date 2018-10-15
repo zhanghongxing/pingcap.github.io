@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PingCAP Site</title>
+    <link>https://pingcap.com/meetup/</link>
+    <description>Recent content on PingCAP Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://pingcap.com/meetup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>【Infra Meetup No.72】TiDB Operator，让 TiDB 成为真正的 Cloud-Native 数据库</title>
+      <link>https://pingcap.com/meetup/meetup-2018-08-20/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-08-20/</guid>
+      <description>TiDB Operator 是 TiDB 在 Kubernetes 平台上的自动化部署运维工具，目前已经开源。在上周六举办的 Infra Meetup 第 72 期上，我司邓栓老师为大家分享了 TiDB Operator 开源的细节，并演示了单机快速体验 TiDB Operator 的操作。 以下是邓栓老师撰写的技术详解文章和 Meetup 现场视频。希望大家通过文字和视频深入了解 TiDB Operator 之后，可以速来贡献代码、成为 Contributor ！( ´▽｀)  TiDB Operator 是 TiDB 在 Kubernetes 平台上的自动化部署运维工具。目前，TiDB Operator 已正式开源（pingcap/tidb-operator）。借助 TiDB Operator，TiDB 可以无缝运行在公有云厂商提供的 Kubernetes 平台上，让 TiDB 成为真正的 Cloud-Native 数据库。
+要了解 TiDB Operator，首先需要对 TiDB 和 Kubernetes 有一定了解，相信长期以来一直关注 TiDB 的同学可能对 TiDB 已经比较熟悉了。本文将首先简单介绍一下 TiDB 和 Kubernetes，聊一聊为什么我们要做 TiDB Operator，然后讲讲如何快速体验 TiDB Operator，以及如何参与到 TiDB Operator 项目中来成为 Contributor。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.72】TiDB 2.1 新特性与未来规划</title>
+      <link>https://pingcap.com/meetup/meetup-2018-07-10/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-07-10/</guid>
+      <description>在上周六举办的 Infra Meetup No.71 上，我司申砾老师重点介绍了 TiDB 2.1 Beta 版本在 Raft / PD / SQL 执行引擎等方面的新特性以及未来的规划（中间穿插着我司 CTO 的各种「插播新闻」😂）。当天虽然下着小雨，但丝毫没有影响大家的热情，活动结束后还有不少童鞋留下来讨论哦～以下是现场视频&amp;amp;文字回顾，enjoy ！
+视频回顾 视频 | Infra Meetup No.72：TiDB 2.1 新特性与未来规划
+可下载 完整 PPT 配合观看
+干货节选 TiDB 2.0 版本于今年 4 月底发布，经过两个月的开发，2.1-Beta 版本于 6 月底发布。这个版本在 2.0 的基础之上做了不少改进。
+在 Raft 方面，2.1 最大的变化是引入了 Learner 和 PreVote 两个特性。其中 Learner 可以加强调度过程中的数据安全性，并且为将来 OLAP 请求读 Learner 副本打下基础；PreVote 可以增强系统的稳定性，降低诸如网络隔离后节点重新加入造成的系统抖动。
+在 PD 方面，2.1 优化了热点调度功能，收集更详细更准确的集群负载信息，并做更合理的调度在 SQL 优化器方面对 CBO 框架做了进一步改进，提升代价估算准确度。
+在 SQL 执行引擎方面，将 Hash 聚合算子以及 Projection 算子做了并行化，提升大数据量下查询的性能。同时我们也在探索 OLTP 场景下的性能提升方案，预计到 2.</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.70】Paper Party：CEO 解读 TiDB 下一代存储引擎</title>
+      <link>https://pingcap.com/meetup/meetup-2018-06-26/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-06-26/</guid>
+      <description>上周六举办的 Infra Meetup No.70，我们换了一个开阔些的场地——嗯，没看错，是我司的一间办公室，然而掏空了房间里的椅子沙发，还是不够坐。
+爆满的原因当然是我司 CEO 刘奇的「重磅分享」：刘奇分享了受威斯康辛的论文启发的 TiDB 下一代存储引擎的设计考量及实践，以及「关门福利」——非常强悍的测试结果，以下是现场视频 &amp;amp; 文字回顾，enjoy！
+视频回顾 视频 | Infra Meetup No.70：CEO 解读 TiDB 下一代存储引擎
+论文 slides 链接
+我司 CEO 刘奇首先为大家介绍了新的磁盘进化发展趋势，如何做软硬件协同设计，以及硬件的发展对数据库系统架构的影响。
+干货节选 存储引擎是数据库的核心组件之一，目前 TiDB 使用 LSM-Tree 作为底层的存储引擎，其良好的顺序写入特性得到了很大的发挥。然而 LSM-Tree 模型本身也不是尽善尽美，其中较为突出的缺点是写放大比较严重。该问题也吸引了不少学者的研究，也有不少改进论文出现。来自威斯康辛的论文 WiscKey: Separating Keys from Values in SSD-conscious Storage 是其中的典型代表。
+刘奇接着介绍了新一代存储引擎利用新的硬件特性的方式（比如充分发挥 SSD/NVMe/Optane 的多通道写入对存储引擎的提升），并解读了威斯康辛的论文在这方面的实践——利用多通道的并行能力来弥补 Key-Value 分离带来的开销。这个方法实现简单，效果极佳。TiDB 的新一代存储模型也受到这篇论文的启发。
+最后，刘奇分享了 PingCAP 在这方面的思考与实践，以及对下一代存储引擎设计的具体考量，并展示了正在研发的 TiDB 下一代存储引擎的强悍实测性能。测试结果显示，相比当前的版本，系统整体性能提升了 2-10 倍。
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.69】CASPaxos，一个有趣的 RSM 算法</title>
+      <link>https://pingcap.com/meetup/meetup-2018-06-12/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-06-12/</guid>
+      <description>上周六，Infra Meetup 时隔一个月终于回归北京大本营，北京的朋友们格外热情，会议室最后都挤不下啦 ～现场有几位朋友拿着提前打印的论文认真地记笔记，分享结束后大家还围绕 CASPaxos 讨论了很久，瞬间有种“Paper Party”的感觉——看来 Infra Meetup 不定期的论文分享大大激发了社区小伙伴的“学术”之心啊！（不过，全场最大的亮点还是我司 CTO 的“魔性”PPT……）
+视频回顾 视频 | Infra Meetup No.69：CASPaxos，一个有趣的 RSM 算法
+配合 PPT 观看更佳～
+干货节选 本期 Meetup 我司 CTO 黄东旭分享了一篇有趣的论文——CASPaxos: Replicated State Machines without logs。他首先通过一个简单的例子通俗易懂地介绍了经典 Paxos 的算法。随后引入了 RSM（日志复制状态机）的概念 ， 并指出 CASPaxos 其实是在经典 Paxos 的基础上进行了拓展，变成了没有日志的 RSM 。接着，他介绍了 CASPaxos 的主体算法，包括 membership change 算法以及用 CASPaxos 实现一个通用数据库时需要考虑的问题。
+来自大神的“魔性” PPT
+东旭接着对比了目前常用的 RSM 算法 ，比如 TiDB 中用到的 Raft 算法与 CASPaxos 的区别。相较而言，CASPaxos 目前是一个偏学术性的理论，在工业上应用的完整度和相关优化算法还不够。CASPaxos 的优点在于出现异常时的不可用时间非常短，并且没有额外的日志开销，缺陷是做数据丢失的故障恢复代价比较高，而且读依然是多数派读，对业务上的灵活性会有一些影响。
+P.S. 东旭还和现场的朋友们一起针对 CASPaxos 的缺点，大开脑洞，畅聊了一些可能的优化方法 。现场越聊越嗨，不得不说大家想法都很“清奇”啊 ( ´▽｀) 。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.68】虚怀迎远客 魔都 Talk 「长」</title>
+      <link>https://pingcap.com/meetup/meetup-2018-05-26/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-05-26/</guid>
+      <description>距离去年在上海举办的 TechDay 已经过去了近一年，上海社区小伙伴们积攒已久的热情终于在上周六的 Infra Meetup 现场释放了出来~ 现场爆满不说，Q&amp;amp;A 环节大家都抢着与讲师互动，结束后还有小伙伴意犹未尽，强烈要求多在上海举办这样的技术交流趴（我们会努力的，嗯💪）。以下是现场视频&amp;amp;文字回顾，enjoy！
+ 现场同学坐定之后，我司 CTO 黄东旭简短开场，欢迎 Percona CEO Peter Zaitsev 做客 Infra Meetup No.68 上海站～随后 Peter 带来了 Using MySQL for Distributed Database Architectures 的主题演讲。
+Using MySQL for Distributed Database Architectures Percona CEO Peter Zaitsev
+视频链接：1st Talk by Peter Zaitsev
+Peter 首先介绍了 MySQL 最近几个版本迭代的性能升级数据。他认为 MySQL 单机性能提升很大，但是与分布式数据库在应用场景上仍有较大的区别，很多问题是单机解决不了的。从而引出了基于 MySQL 做分布式尝试的方法论，并从高可用、扩展性、数据分布策略几个方面进行了详细解读。随后分享了在 MySQL 上实现分布式计算和分布式系统的方法。
+Peter 提到不同业务对数据库的需求不一样，对隔离级别和一致性的要求也不一样, 需要仔细思考相关配置。他重点介绍了 Percona 数据库管理工具和集群方案，同时分享了对市面上常见的基于 MySQL 分片的中间件的看法，以及对 TiDB 等 NewSQL 未来发展的期待。
+How to build a Self-Driving database PingCAP CTO 黄东旭</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.67】杭州站</title>
+      <link>https://pingcap.com/meetup/meetup-2018-05-09/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-05-09/</guid>
+      <description>上周日 Infra Meetup 首次走进杭州，感谢热情的杭州社区小伙伴们冒雨参加活动～这次活动由我司数据库专家马晓宇老师和资深数据库架构师房晓乐老师为大家带来精彩的分享，还有来自二维火、挖财、蘑菇街的社区小伙伴带来了三个闪电 Talk，分享了他们的 TiDB 实践经验。
+马晓宇：TiDB 架构及 2.0 详解 首先，我司数据库专家马晓宇老师带来《TiDB 架构及 2.0 详解》精彩分享，介绍了 TiDB 的方方面面，包括存储模块 TiKV，调度模块 PD，计算模块 TiDB， OLAP 组件 TiSpark，数据流转 Syncer 和 Binlog 以及 Cloud 集成等等众多组件和独立产品。
+马晓宇老师更与现场的同学深入探讨了 TiDB 背后的技术细节以及一些重大选择的原因。
+例如，从单体 KV 演进到分布式，就不得不思考如何多副本容错，且还需要在多个副本之间达到一致性，这是选择 Raft 协议的根本动机。然而，仅仅是 Raft 并不能满足扩展性的需求，因此又引入了 Raft Group / Region 的分片机制，再加上 PD 模块的调度，让数据和负载均衡得以实现。
+在 TiDB 部分，马晓宇老师重点介绍了数据库计算引擎的详细架构，包含模块及其不同作用，详细讲解了用户的 SQL 输入如何被分解分析之后产生执行计划并执行，以及数据在 TiDB 中如何将行数据以及索引编码成 TiKV 所需的键值对等等。
+另外，4 月底 TiDB 2.0 GA 和 TiSpark 1.0 正式发布，马晓宇老师在分享中也提到了 TiDB 和 TiSpark 版本的重大提升：相对 1.0 版本，TiDB 加强了稳定性和性能，针对 TPC-H 等分析型场景，TiDB 有了本质的飞跃。而 TiSpark 1.</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.66】Application of TLA&#43; at PingCAP</title>
+      <link>https://pingcap.com/meetup/meetup-2018-04-17/</link>
+      <pubDate>Tue, 17 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-04-17/</guid>
+      <description>上周六的 Meetup 上，我司董麒麟同学为大家讲解了 TLA+ 在 TiDB 中的应用。现奉上现场视频 &amp;amp; 干货节选，Enjoy～
+ 视频回顾 视频 | Infra Meetup No.66：Application of TLA+ at PingCAP
+可下载 完整 PPT 配合观看
+干货节选 TLA+ 是一个用来设计、描述和验证并发系统的一套形式化语言，易学易用。在 TiDB 中，我们非常关心一些关键系统的设计正确性，所以使用 TLA+ 来保证这一点。PingCAP 在 2017 年底开始尝试使用 TLA+，到目前为止，已经用 TLA+ 验证了我们优化过的 Percolator 协议以及 Multi-raft region merge 的正确性。这些代码可以在 pingcap/tla-plus 上找到。
+TLA+ 可以在一个比代码更高的层面上描述系统。在编写代码之前，将系统完整地表述一遍是很重要的。这能强迫我们去思考这个系统的细节，避免早期设计时出现失误并保证正确性。TLA+ 的基本原理是将系统描述成为一个状态机。系统可以用 TLA+ 来抽象出若干变量表达它的当前状态，并用形式化的语言去描述这个状态机的初始结束状态与状态转移。我们对这个系统的一些 Safety 性质比较感兴趣，这些 Safety 的性质也可以在 TLA+ 中用谓词来刻画。另外一个工具 TLC 可以用来验证被 TLA+ 抽象出来的系统模型。TLC 的原理是枚举状态机的所有可以遍历到的状态集。验证系统的正确性就是确保所有状态都满足对应的谓词。
+TLA+ 在 TiDB 的第一个应用是 Percolator 事务协议。这个协议是一个二阶段提交算法，用来在只支持单行事物的存储上实现多行事务。这个协议的具体介绍可以在 这里 找到。和原始协议的不同，TiDB 做了一个很重要的优化，在 prewrite 阶段，我们并不是采取了先 prewrite 主锁，再并发副锁的策略，而是主锁和副锁一起并发。但是如果直接这样设计是存在问题的。在视频中可以看到我们是如何用 TLA+ 定位这个问题，然后提出了一个解决方案来克服这个问题。我们用 TLA+ 验证了优化的正确性。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.65】「四美具，二难并」之成都行</title>
+      <link>https://pingcap.com/meetup/meetup-2018-04-04/</link>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2018-04-04/</guid>
+      <description>上周 Infra Meetup 走进了成都，来自 G7 汇通天下的廖强老师和来自 PingCAP 的申砾、孙浩老师，为大家带来了三个干货满满的 Talk 。 这是第二场走出帝都的 Meetup，场面依然火爆～「四美具，二难并」 成都，唯有美食与同道者不可辜负！
+ 下午两点大家陆续进场，不得不说成都的同学们太热情了，场地差点坐不下，各式各样的椅子都被搬来了～等同学们坐定之后，PingCAP Engineering VP 申砾老师首先上台，深入讲解了 TiDB 的各项核心性能，让同学们对 TiDB 的架构和性能有了充分的认知。
+申砾：《Deep Dive into TiDB》 视频回顾 | Infra Meetup No.65 成都站：Deep Dive into TiDB（申砾）
+ PingCAP Engineering VP 申砾
+ 申砾老师从系统整体到技术细节，从核心项目到周边工具，介绍了 TiDB 的方方面面。
+ TiDB 的设计目标、核心特性以及整体架构。
+ 系统分层介绍，包括分布式 Key-Value 存储引擎 TiKV 的核心技术及实现细节，分布式 SQL 引擎的设计思路以及优化器、执行引擎等核心组件的介绍。
+ Cloud TiDB、TiSpark 等核心项目以及 TiDB 集群的周边工具。
+ Q&amp;amp;A 环节：TiDB 在实践中的使用经验，TiDB 2.0 版本的最新进展以及如何实现性能上的巨大提升。
+  短暂休息之后，G7 汇通天下技术合伙人廖强老师讲述了他为什么选择了 TiDB ，以及 G7 的实践方案。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.60】初探 Orca 查询优化器</title>
+      <link>https://pingcap.com/meetup/meetup-2017-12-23/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-12-23/</guid>
+      <description> 上周六，PingCAP Infra Meetup 迎来了第 60 期 👏 由我司 “SQL 小王子”韩飞同学出台，为大家带来了《初探 Orca 查询优化器》主题分享~
+视频回顾 视频 | Infra Meetup No.60：初探 Orca 查询优化器
+可下载 完整 PPT 配合观看
+干货节选 Orca 优化器是基于代价面向 MPP 执行引擎的优化器，使用了先进 Cascades 模型，将优化分为 Exploration，Stats Derivation，Implemetation 等阶段。Orca 优化器可以将优化任务分解，利用多核 CPU 并行执行，以加快优化速度。
+知乎上有个热门问题：在做一个数据库的过程中，最难的是哪个部分？
+很多人都认为查询优化器可能是数据库中一个最难的部分。也有人会有疑问：一个 SQL 生成一个执行计划可能是一个很确定的事情，为什么会是最难的？
+对此，韩飞同学表示，难点主要集中在基于代价的物理计划生成。
+在本次分享中，韩飞同学从逻辑计划的优化及物理计划的优化讲起，重点介绍了 Orca 优化器的架构，算法实现，优化效果以及测试保证等问题。
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.55 Rust 专场】《Rocket Web 框架解析》</title>
+      <link>https://pingcap.com/meetup/meetup-2017-10-25/</link>
+      <pubDate>Wed, 25 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-10-25/</guid>
+      <description>Rust 专场 2.0 Rust 作为系统级编程语言，同样可以非常方便的开发上层 Web 应用。借助目前 Rust 社区最火的 web 框架 Rocket，可以像动态语言一样方便地创建高性能的 Web 应用，同时可以拥有 Rust 强大的类型安全保障。
+在上周六，我们邀请了 Rocket 的作者 Sergio Benitez，与大家面对面分享了《Rocket Web 框架解析》。
+据 Sergio 现场表示，这是他首次来中国，以往虽然也有在公开场合解读过 Rocket Web 框架，但本次，有些新鲜内容可是第一时间共享给 Rust 中国社区的小伙伴哦~
+这一次，让我们跳过现场内容解读环节，直接为大家奉上新鲜出炉的干货视频，enjoy~~
+视频 | Infra Meetup No.55：Rocket Web 框架解析
+讲师介绍： Sergio Benitez，斯坦福大学博士四年级的学生，主要研究如何将编程语言理论与操作系统和安全性融合在一起。目前在做项目包括对 Rust 的类型系统 “Rusty Types” 的规范化，以及 Rust 的 Rocket Web Framework。在斯坦福大学之前，Sergio 曾在 Google、Apple 和 SpaceX 实习，参与的项目包括设计异常检测算法，火箭及其它航天器的操作系统的性能调优。
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.56】MonetDB/X100 Paper 解读</title>
+      <link>https://pingcap.com/meetup/meetup-2017-09-20/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-09-20/</guid>
+      <description>上周六，PingCAP Infra Meetup 第 56 期特设论文专场，我司核心工程师张建与大家一起分享并解读了“MonetDB/X100: Hyper-Pipelining Query Execution” 论文。此篇论文作为分析型数据库领域内引用次数最多的论文之一，它为何如此火爆？在今天的文章里你应该可以找到答案。
+ 精彩视频 视频 | Infra Meetup No.56: MonetDB/X100 Paper 解读
+精彩现场 在 PingCAP Infra Meetup 第 56 期论文专场，来了很多对 MonetDB/X100 论文感兴趣的小伙伴们。分享一开始，我司联合创始人兼 CEO 刘奇就为何选择 MonetDB/X100 这篇论文分享了自己看法。
+刘奇提到:&amp;ldquo;如果大家有阅读近两年新出的一些 Paper，会发现里面引用率最高的一篇文章就是 MonetDB/X100。MonetDB/X100 发表于 2005 年，其实不算新。但读过该论文的人会发现目前主流的 OLAP 系统相关的技术，基本上都能在这篇论文中找到影子，如文中提到了列存、Pipeline，甚至是 JIT。他做 JIT 的思路不一样，都是比较早就有的，所以这是一篇很不错的论文。现在也可以看到很多性能比较的时候，大家新做了一个系统，说我的性能非常好，会拿出来 benchmark 说你看我打败了 MonetDB。
+另外还有一些比较创新的项目，多是基于 MonetDB 改造的。一个就是英特尔最近出的一篇论文，他把 MonetDB 改造一下，把正则表达式的搜索，放到 FPGA 里面去。英特尔最近出了一款服务器，这个服务器的 CPU 和 FPGA 是放在一起的，他们得到 Performance 最小提倡是 2.3 倍以上，大概意思上就是说，MonetDB 在这上面做一个简单的改造，就可以适应到更新的硬件。
+在 2012年的时候，第一个提供论文、代码的基于 MonetDB 的 GPU 的 Database 也出来了。当时是在 TPCH 的 query 里面，有一些复杂的 query，提升是非常的明显。所以大家可以看到，基于 MonetDB 改造的，在 FPGA 或者 GPU上运行的系统都有，实际上这是一个非常优秀的学术的原形，今年得了十年最佳论文奖。&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.55】TiDB Pre-GA 版本新特性介绍以及后续功能展望</title>
+      <link>https://pingcap.com/meetup/meetup-2017-09-06/</link>
+      <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-09-06/</guid>
+      <description>上周六，PingCAP Infra Meetup 第 55 期，由我司 Engineering VP 申砾为大家分享《TiDB Pre-GA 版本新特性介绍以及后续功能展望》。在活动现场，小伙伴们就 TiDB 新特性提出了很多问题，申砾在现场与大家有一番深度的交流与讨论。精彩现场小编立马为你呈现。
+ 精彩视频 视频 | Infra Meetup No.55：TiDB Pre-GA 版本新特性介绍以及后续功能展望
+精彩现场 上周，TiDB 正式发布了 Pre-GA 版本。针对 Pre-GA 版本的新特性，PingCAP Infra Meetup 第 55 期特设定 Pre-GA 详解专场。活动当天，现场来了很多关注 TiDB 的粉丝们。
+简单开场后，我司 Engineering VP 申砾同学介绍到本期内容主要围绕新版本带来的变化和内部实现细节，以及这种新型的 HTAP 数据库解决的实际问题和典型应用场景等做深度解析。
+技术干货节选 TiDB Pre-GA 版本对 MySQL 兼容性、SQL 优化器、系统稳定性、性能方面做了大量优化工作。本次分享中，申砾就各个组件的优化做了详解：
+TiDB 在优化器方面
+ RC4 已经从一个假的基于代价产品模型，切换成一个真的基于代价产品模型，也真的是用统计信息去算。在 RC3 版本中，一些代价实际上是有规则算法的，比如说，A 等于 10 设置一个过滤比例，A 大于 10 又算另外一个过滤比例，这都是一些规则，RC4 是基于代价的一个传统模型。 Pre-GA 新特性也主要对代价模型做了一些调整。
+ 其次，在索引选择上做了优化，可以支持不同类型字段比较的索引选择，这一优化用户反馈查询速度明显变快。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.54】数据库计算存储分离架构分析</title>
+      <link>https://pingcap.com/meetup/meetup-2017-08-25/</link>
+      <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-08-25/</guid>
+      <description>上周六，PingCAP Infra Meetup 第 54 期，我们邀请到了知乎大 V 李凯（知乎 ID：郁白）为大家分享了《数据库计算存储分离架构分析》。在活动现场，郁白老师跟小伙伴们有一番深度的交流与思想碰撞。长话短说，小编带你一起回顾精彩现场。
+ 精彩视频 视频 | Infra Meetup No.54：数据库计算存储分离架构分析
+精彩现场 PingCAP Infra Meetup 第 54 期的活动现场十分火爆，活动签到时间未开始，小伙伴们就早早来到现场占位置，我想说早来的小伙伴们还是很明智的。因为&amp;hellip;&amp;hellip;
+后续到场的小伙伴只能酱婶儿滴扎堆在门口竖起耳朵听了，这场活动简直是一场郁白大神与粉丝的见面会。
+说了这么多，先上一张郁白老师的图吧~ 🙂
+技术干货节选 大数据下公有云面临的 5 个挑战 谈到存储架构分离，为什么现在会有 Aurora 架构？包括前一阵阿里的 PolarDB 推出来以后，他们也在分析为什么要做这个东西。
+郁白老师认为单就公有云来说，现在云数据面临的挑战有以下 5 个：
+ 跨 AZ 的可用性与数据安全性。 现在都提多 AZ 部署，亚马逊在全球有 40 多个 AZ， 16 个 Region，基本上每一个 Region 之内的那些关键服务都是跨 3 个 AZ。你要考虑整个 AZ 意外宕机或者计划内维护要怎么处理，数据迁移恢复速度怎么样。以传统的 MySQL 为例，比如说一个机器坏了，可能这个机器上存了几十 T、上百 T 的数据，那么即使在万兆网卡的情况下，也要拷个几分钟或者几十分钟都有可能。那么有没有可能加快这个速度。 还有一个就是服务恢复的速度。可能大家广为诟病就是基于 MySQL Binlog 复制。在主机压力非常大的情况下，是有可能在切换到备机以后，这个备机恢复可能需要几分钟甚至几十分钟。关键因素是回放 Binlog 的效率，MySQL 即使最新版本也只能做到 Group Commit 内的并发回放。这是数据库 RTO 指标，能不能在秒级、分钟级把这个服务恢复起来，这是一个在设计系统的时候要考虑的关键问题。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.53】知乎数据平台实践</title>
+      <link>https://pingcap.com/meetup/meetup-2017-08-05/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-08-05/</guid>
+      <description> 今天的 Meetup，我们邀请到了知乎数据平台负责人王雨舟为大家做《知乎数据平台实践》的技术分享。
+ 又是一个美好的周末，勤劳的小蜜蜂们早早出来参加活动了~🙂 今天的活动现场又是爆满~ 感觉要换地儿的节奏啊~
+今天 Meetup 的开场，我司联合创始人兼 CTO 黄东旭同学首先为大家分享了 TiDB 项目的最新进展。黄东旭同学好开心的样子，因为就在昨天，TiDB 正式发布 RC4 版 。
+开场过后，接下来由知乎数据平台负责人王雨舟（江湖人称宇宙哥）开始为大家做技术分享。
+宇宙哥真是 PingCAP 的真爱粉儿~ 穿着我司的文化衫亮相活动现场，超级有气场~
+以下是部分技术干货分享，Enjoy~
+宇宙哥在演讲开始先介绍了知乎大数据平台的整体架构情况
+并讲解了埋点流程及使用 Protobuf 做埋点标准化规范
+除此之外，宇宙哥还从以下几点来分析介绍 Druid
+在知乎的实践：
+ 自定义多维分析功能和留存分析功能；
+ 如何做到实时数据分析；
+ 自定义指标、维度、报表、文件夹、Dashboard。
+  这张 PPT 中有眼熟的部分哦😏宇宙哥用“丝般顺滑”总结了自己现在使用 TiDB 的感受，并表达了对 TiSpark 的期待✌️分享结束后，显然大家都还没有尽兴，接下来是一段时长堪比分享环节的 QA。激烈的讨论后现场小伙伴跟宇宙哥都嗨了，还没有嗨够的小伙伴我们下次见~
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.52】TiDB 自动化运维管理 —— TiDB-Operator》</title>
+      <link>https://pingcap.com/meetup/meetup-2017-07-22/</link>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-07-22/</guid>
+      <description> 今天的 Meetup，由我司技术大拿邓栓同学为大家分享《TiDB 自动化运维管理 —— TiDB-Operator》。
+ 今日的帝都带着一丝凉爽，如此好天气怎能辜负。小伙伴们一清早就来到互动现场，一起来吃“营养早午餐”。
+我司技术大拿邓栓同学激情满满的开始为大家做主题分享，主要从 TiDB-Operator 的功能介绍、整体架构、实现细节这几个纬度切入。
+邓栓同学开场介绍到：分布式系统由于自身的复杂性，其管理和运维通常是非常困难的事情，借助 TiDB-Operator 我们能够轻松地将 TiDB 集群部署到 Kubernetes 集群之上，并做到自动化运维管理，极大地降低了人力运维成本，现场小伙伴们听呆了～
+咦？what&amp;rsquo;wrong ? 黑灯瞎火嘛呢？
+其实是小伙伴们在一起很专注的看 demo 演示~
+活动最后，邓栓同学通过 demo 演示了 TiDB-operator bootstrap 一套完整的 TiDB 集群，然后在集群上面执行一个简单的操作就可以轻松实现扩容缩容，并且模拟物理节点挂掉时 TiDB-operator 对集群做自动恢复等各种自动化运维操作流程。
+以上为最新前方报道～ enjoy 😁
+讲师介绍：邓栓，PingCAP SRE 工程师，Kubernetes 爱好者，目前主要负责 TiDB 与各种云平台整合。Rust 中国社区联合创始人。
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.51】百度统一分布式计算框架 Bigflow (内附 PPT 下载链接)</title>
+      <link>https://pingcap.com/meetup/meetup-2017-07-01/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-07-01/</guid>
+      <description> 今天的 Meetup，我们邀请到了滴滴地图事业部专家工程师王聪老师，为大家分享《百度统一分布式计算框架 Bigflow 》。
+ 讲师介绍：王聪，滴滴地图事业部专家工程师，前百度基础架构部工程师，主要工作方向为分布式计算与流式计算，在百度负责计算表示层 Bigflow 与流式计算引擎 Flink。
+活动现场听得很专注的小伙伴们，桑拿天也阻止不了大家的学习热情。
+王聪老师首先展示了分布式计算在百度的发展例程，他介绍百度在 2003 年建立了自己的分布式搜索系统。08 年引入 hadoop，09 年底搭建了大规模的机器学习平台，当时用的是 MPI。10 年百度自研了两套流式计算引擎，主要用来完成点击流与展现流的 join。
+基于多引擎并存、跨引擎成本高、升级困难这几个痛点，最终开发了一款叫做 Bigflow 的计算框架，Bigflow 希望用户使用我们提供的 API 写代码，Bigflow 将作业进行计划的优化和翻译，并提交到计算引擎之上。对于这样的思路，有一种说法“计算机领域的任何问题，都可以通过增加一个额外的中间层来解决”。在这里 Bigflow 就是架在用户与引擎之间的中间层。
+以下是新鲜出炉的 PPT 节选，尽情享用~
+附：完整 PPT 链接
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.49】TiDB Best Practice</title>
+      <link>https://pingcap.com/meetup/meetup-2017-06-03/</link>
+      <pubDate>Sat, 03 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-06-03/</guid>
+      <description>今日的 Meetup，我司 Engineering VP 申砾同学亲自上阵，为大家分享了《TiDB Best Practice 》，好多使用经验及背后技术实现原理都是首次揭秘（当然，包括彩蛋）。
+ 本期讲师：申砾，PingCAP Engineering VP，前网易有道词典服务器端核心开发，前奇虎 360 新闻推荐系统 / 地图基础数据与检索系统 Tech Lead。
+TiDB 是一个分布式数据库，支持 MySQL 协议以及语法，在一些场景中都可以无缝替换 MySQL，以获得分布式的好处。但是分布式数据库有其自身的特点，想要在业务中用好需要遵循一些实践原则。
+本次分享申砾同学首先介绍了 TiDB 的一些关键部分的实现原理，理解这些内部实现有利于理解 TiDB 的外在表现。然后与大家讨论了应用数据库时的典型操作的最佳实践以及要注意的事项，并对 TiDB 的适用场景进行了讲解。
+PPT 很干，一点水都挤不出来&amp;hellip;随便放几张你们感受下┑(￣Д ￣)┍
+最后，申砾同学还分享了 TiDB 最近的一些项目进展，并首次公开披露 PingCAP 最新动向：独立研发的 TiDB 专用的 Spark Connector 即将上线。
+Spark 是当下最流行的大数据分析系统，拥有活跃的社区。PingCAP 希望能够将 TiDB 与 Spark 相结合，通过 Spark 对 TiDB 中存储的数据做实时分析，以融入这个生态。为了保证这个连接过程尽可能的高效，所以除了基本的 JDBC Connector 之外，便有了 TiDB 专用的 Spark Connector。
+附：完整 PPT 链接
+彩蛋来啦 视频：Demo of Spark on TiDB</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.48】分布式对象存储面临的挑战</title>
+      <link>https://pingcap.com/meetup/meetup-2017-05-13/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-05-13/</guid>
+      <description> 今天的 Meetup，我们请到了来自白山云的张炎泼老师，为大家分享《分布式对象存储面临的挑战》。
+ 本期讲师：张炎泼 (xp)
+30 年软件开发经验，物理系背叛者，设计师眼中的美工，bug maker，vim 死饭，悬疑片脑残粉。曾就职新浪，美团。现在白山云，不是白云山。
+在本次分享中，张炎泼老师从：海量小文件如何存储、如何节省存储成本、如何实现数据的自动恢复，三个方面，为大家进行了详细讲解。
+以下是本期 PPT 节选
+附：完整 PPT 下载链接
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.47】分布式定时任务中间件架构 Elastic-Job 的两种实现</title>
+      <link>https://pingcap.com/meetup/meetup-2017-05-06/</link>
+      <pubDate>Sat, 06 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-05-06/</guid>
+      <description> 今天的 Meetup ，我们请到了当当架构部负责人张亮，大家分享了《分布式定时任务中间件架构 Elastic-Job 的两种实现》。
+ 本期讲师：张亮
+当当架构部负责人，主要负责分布式中间件以及私有云平台的搭建。致力于开源，目前主导两个开源项目 elastic-job 和 sharding-jdbc。擅长以 java 为主分布式架构以及以 Mesos 为主的云平台方向，推崇优雅代码，对如何写出具有展现力的代码有较多研究。
+今日帝都依然大风，但小伙伴们学习的热情丝毫未减哦~
+在本次分享中，张亮老师从分布式定时任务中间件的适用场景，轻量级去中心化架构方案以及基于 Mesos 的中心化架构方案，三个方面为大家进行了详细讲解。
+在互联网应用中，各式各样的定时任务存于系统的各个角落，我们希望由一个平台统一将这些作业管理起来。然而，一旦平台中运行大量的作业，发现异常作业并手动处理难免会感到繁琐，同时人工处理还会带来很多其他的额外成本。如何最大限度的减少人工干预？
+高可用可以让作业在被系统发现宕机之后能自动切换。而弹性化可以认为是高可用的进阶版本，在高可用的同时还能够提升效率和充分利用资源。对于动态的扩容和缩容，通常采用分片的方式实现。
+去中心化架构是指所有的作业节点都是对等的，优点是轻量级，部署成本低；缺点则是，如果各作业服务器时钟不一致会产生同一作业的不同分片运行有先有后，缺乏统一调度，并且不能跨语言。
+中心化架构将系统分为调度节点和执行节点，可以解决服务器时间差以及跨语言的问题；缺点是部署和运维稍复杂。
+Elastic-Job 最初的版本分离于当当内部的应用框架 ddframe，是一个纯 Java 实现的分布式方案，参照 dubbo 的方式，提供无中心化解决方案。
+如今，Elastic-Job 已开源近 2 年，截止目前已更新发布18 次，GitHub Star 数近 2000，成绩出色。更有多个开源产品衍生自 Elastic-Job。
+应小伙伴们的强烈要求，张亮老师临时加场 Demo 演示。
+最后，还有超多第一手爆料，是属于现场听讲小伙伴们的专属福利 ✌️ 很心动？下周六，老时间，老地点，PingCAP 第 48 期 Infra Meetup 等你呦！
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.46】MySQL 5.7 的特性及实践</title>
+      <link>https://pingcap.com/meetup/meetup-2017-04-22/</link>
+      <pubDate>Sat, 22 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-04-22/</guid>
+      <description>今天的 Meetup，我们邀请到了熊猫直播 DBA 杨尚刚老师，为大家分享《MySQL 5.7 的特性及实践》~
+  讲师介绍：杨尚刚，熊猫直播高级 DBA，负责后端数据库平台建设和架构设计。前新浪高级数据库工程师，负责新浪微博核心数据库架构改造优化，以及数据库相关的服务器存储选型设计。
+ 2015 年最重磅的当属 MySQL 5.7 GA 的发布，号称 160 万只读 QPS，大有赶超 NoSQ L趋势。
+不过官方的硬件测试环境是很高的，所以这个 160 万 QPS 对于大家测试来说，可能还比较遥远，所以实际测试的结果可能会失望。但是，至少我们看到了基于同样测试环境，MySQL 5.7 在性能上的改进，对于多核利用的改善。
+本次分享中，杨老师讲解了 MySQL 5.7 在运维、优化器 Server 层、InnoDB 层等方面的优化，以及 MySQL 未来的发展趋势。
+运维方面  动态修改 Buffer Pool
+ MySQL redo log大小
+ innodb_file_per_table
+ query cache
+ SQL_Mode
+ binlog_rows_query_log_events
+ max_execution_time
+ replication info in tables
+ innodb_numa_interleave
+ 动态修改 replication filter</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.45】Rust 专场</title>
+      <link>https://pingcap.com/meetup/meetup-2017-04-16/</link>
+      <pubDate>Sun, 16 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-04-16/</guid>
+      <description>今天，小伙伴们期待已久的北京 Rust Meetup 终于和大家见面啦！在这场 Rust 社区在中国的首次官方活动中，我们邀请了两位 Rust 团队核心成员，Alex Crichton、Brian Anderson，与我司首席架构师唐刘，共同为大家带来了干货十足的分享内容~第一手现场资料，看这里！
+ 这一次的 Meetup，小伙伴们都好积极 👏 提前一小时就有入场抢座位的~也是让小编感动到不行~~知道大家都已经迫不及待了，简单的开场之后，我们直接上干货！
+Concurrency and asynchronous IO in Rust 并发在当今编程领域是如此重要，然而要想实现并发程序通常会面临数据竞争，竞态，死锁，悬空指针，多次 free 等问题，Alex 在本期 meetup 里给我们讲解了 Rust 是如何用 ownership/borrowing 系统解决这些问题的，其核心思想是:
+ A mutable reference cannot be aliased
+ A reference cannot outlive its referent
+   Alex Crichton，Mozilla 工程师，Rust 核心团队成员。从事 Rust 编程语言方面的工作已有 5 年。在 Mozilla 主要负责 Rust 的标准库、Cargo、异步 I/O 子系统以及 Rust 本身的基础设施。目前在做异步 I/O 栈 Tokio。
+ Rust 语言本身只提供了 ownership/borrowing 机制，标准库里提供了 thread，channel，arc，atomic，mutex 等基础设施，但没有提供轻量级协程，这样虽说并发程序写起来比较麻烦，但是不会只局限于一种并发模型。而后，简单介绍了第三方并行库 rayon 和 crossbeam。最后重点讲解了异步 IO 库 futures。</description>
+    </item>
+    
+    <item>
+      <title>【Infra Meetup No.44】Elasticsearch 运维</title>
+      <link>https://pingcap.com/meetup/meetup-2017-04-08/</link>
+      <pubDate>Sat, 08 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-04-08/</guid>
+      <description> 今天的 Meetup，我们邀请到去哪儿网的资深工程师徐磊，为大家分享关于 Elasticsearch 运维的那些事，跟小编一起走进现场吧~~
+Elasticsearch 运维 Elasticsearch 在近两年越来越火了，越来越多的公司和团队尝试使用它支撑业务。运维人员如何保证 Elasticsearch 集群的稳定？有哪些必须掌握的优化技巧？
+在本次分享中，徐磊老师从数据模型设计，使用技巧，参数优化，监控对比等多个方面为大家分析了 Elasticsearch 的优缺点和运维重点。同时与大家分享了内部的 Elasticsearch 私有云的建设经验。
+ 徐磊，2015 年加入去哪儿网平台事业部 OPSDEV 团队，负责实时日志系统的建设和运维工作，开源社区贡献者，曾供职于 Red Hat。
+ 干货节选 来~这里还有讲师的 PPT 节选，一起看看，在 Elasticsearch 中，有哪些要注意的坑吧~~
+ PingCAP Infra Meetup
+作为一个基础架构领域的前沿技术公司，PingCAP 希望能为国内真正关注技术本身的 Hackers 打造一个自由分享的平台。自 2016 年 3 月 5 日开始，我们定期在周六的上午举办 Infra Meetup，邀请业内大牛与大家深度探讨基础架构领域的前瞻性技术思考与经验。在这里，我们希望提供一个高水准的前沿技术讨论空间，让大家真正感受到自由的开源精神魅力。
+ </description>
+    </item>
+    
+    <item>
+      <title>RocksDB 专场分享|PingCAP 第 43 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-03-25/</link>
+      <pubDate>Sat, 25 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-03-25/</guid>
+      <description>RocksDB 专场分享|PingCAP 第 43 期 NewSQL Meetup 2017-03-25 宋昭&amp;amp;赵安安 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 42 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-03-18/</link>
+      <pubDate>Sat, 18 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-03-18/</guid>
+      <description>COISF 专场|PingCAP 第 42 期 NewSQL Meetup 2017-03-18 梁堰波 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 41 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-03-11/</link>
+      <pubDate>Sat, 11 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-03-11/</guid>
+      <description>COISF 专场|PingCAP 第 41 期 NewSQL Meetup 2017-03-11 杨建军&amp;amp;张金鹏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 40 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-03-04/</link>
+      <pubDate>Sat, 04 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-03-04/</guid>
+      <description>COISF 专场|PingCAP 第 40 期 NewSQL Meetup 2017-03-04 吴晓飞&amp;amp;韩飞 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 39 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-02-25/</link>
+      <pubDate>Sat, 25 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-02-25/</guid>
+      <description>COISF 专场|PingCAP 第 39 期 NewSQL Meetup 2017-02-25 郝立飞 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 38 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-02-18/</link>
+      <pubDate>Sat, 18 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-02-18/</guid>
+      <description>COISF 专场|PingCAP 第 38 期 NewSQL Meetup 2017-02-18 刘奇 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 37 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-01-14/</link>
+      <pubDate>Sat, 14 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-01-14/</guid>
+      <description>COISF 专场|PingCAP 第 37 期 NewSQL Meetup 2017-01-14 杨策&amp;amp;黄华超 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 36 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2017-01-07/</link>
+      <pubDate>Sat, 07 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2017-01-07/</guid>
+      <description>COISF 专场|PingCAP 第 36 期 NewSQL Meetup 2017-01-07 蔡杰明&amp;amp;袁进辉 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 35 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-12-24/</link>
+      <pubDate>Sat, 24 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-12-24/</guid>
+      <description>COISF 专场|PingCAP 第 35 期 NewSQL Meetup 2016-12-24 张頔&amp;amp;黄梦龙 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 34 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-12-17/</link>
+      <pubDate>Sat, 17 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-12-17/</guid>
+      <description>COISF 专场|PingCAP 第 34 期 NewSQL Meetup 2016-12-17 覃左言&amp;amp;申砾 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>COISF 专场|PingCAP 第 33 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-12-10/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-12-10/</guid>
+      <description>COISF 专场|PingCAP 第 33 期 NewSQL Meetup 2016-12-10 王康&amp;amp;李康 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>分布式系统测试那些事儿——信心的毁灭与重建</title>
+      <link>https://pingcap.com/meetup/meetup-2016-12-07/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-12-07/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>【现场】COISF 专场 Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-12-03/</link>
+      <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-12-03/</guid>
+      <description>【现场】COISF 专场 Meetup 2016-12-03 COISF PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+COISF Meetup
+今天是一期人数爆满的 Meetup。😊 作为 COISF 专场，感谢众多小伙伴与我们一起见证 COISF 的首次亮相。当然，
+首场参与是一定会有福利滴。这一期，我们邀请到了一位女神级讲师&amp;ndash;
+百度网页搜索部工程师
+雷丽媛，为大家讲解
+百度文件系统的架构设计；
+另外，PingCAP 联合创始人崔秋也有出台，为大家深情
+回顾 TiDB 的发展历程 :)
+▌开场：COISF Opening Talk
+在本环节中，PingCAP
+Co-Founde
+r 崔秋，百度搜索基础架构团队技术负责人颜世光，以及奇虎 360 基础架构组存储负责人陈宗志
+共同为大家介绍了 COISF 的由来和使命，并对目前基金会内的顶级项目进行了简单介绍。
+COISF（China Open Infrastructure Software Foundation ）：
+中国开放基础软件基金会，其核心技术委员会由 PingCAP、百度、奇虎 360、小米（排名不分先后）等公司的基础软件项目团队组成，致力于促进和发展中国的新一代开源基础软件。目前基金会项目包括：Baidu/BFS、Baidu/Tera、PingCAP/TiDB、PingCAP/TiKV、Qihoo360/Zeppelin 等。
+我们认为，一方面开源是软件开发的未来，能更好地促进创新与合作；另一方面未来几十年中国的基础软件必将蓬勃发展，并在世界范围内扮演重要角色。但当前国内有很多优秀的开源软件, 因为文化和语言的藩篱没能融入西方社区, 无法获得足够的关注与支持，导致发展缓慢。我们通过建设中国统一的基础软件开发社区，甄选优秀的项目加入，集中优势资源促进这些项目的快速发展与成熟。
+COISF 的使命是：促进中国下一代开源基础软件生态系统的发展。
+▌Topic 1
+：百度文件系统－面向实时应用的分布式文件系统</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 31 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-26/</link>
+      <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-26/</guid>
+      <description>PingCAP 第 31 期 NewSQL Meetup 2016-11-26 黄华超&amp;amp;邓栓 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 31 期 Meetup，
+主题是黄华超分
+享的《PD 的实现和演进》以及邓栓分享的《从容器和微服务的发展看基础架构变迁》。
+▌Topic 1：
+PD 的实现和演进
+Lecturer：
+黄华超，PingCAP 工程师，曾就职于微信、好赞科技，从事分布式存储相关工作，现负责 PingCAP PD 研发工作。
+Content：
+本次分享首先介绍了 PD 在 TiDB 集群的作用，以及集群是如何动态扩容缩容的。然后分别讲解了 PD 的各个功能是如何实现的，其中，着重分享了集群调度的相关设计和思考，以及新的标签调度功能。
+▌Topic 2
+：从容器和微服务的发展看基础架构变迁
+Lecturer：
+邓栓（Tennix），Rust 中文社区管理员，PingCAP SRE 工程师，负责 TiDB 与 Kubernetes 一体化整合部署方案。
+Content：
+近些年来容器和微服务的概念变得特别火热，越来越多的互联网公司开始尝试将以前的单体服务迁移到微服务，并且在实践中使用容器来部署服务，容器和微服务也催生了 DevOps，CaaS，Immutable infrastructure，Service orchestration 等概念。今天主要从容器和微服务角度谈了新技术应用和实践给开发者带来了哪些便利和挑战，基础架构发生了哪些改变，并尝试探讨了未来的应用服务会是什么样的架构。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 30 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-19/</link>
+      <pubDate>Sat, 19 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-19/</guid>
+      <description>PingCAP 第 30 期 NewSQL Meetup 2016-11-19 刘锦龙&amp;amp;刘寅 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 30 期 Meetup，
+主题是墨迹天气气象算法负责人刘锦龙分享的《深度学习，众包数据与短时临近预报系统》以及刘寅分享的《谈谈 TiDB-Binlog 的设计》。
+▌Topic 1：深度学习，众包数据与短时临近预报系统
+Lecturer：
+刘锦龙，北大理论物理博士，墨迹天气气象算法负责人，负责墨迹相关天气预测算法的研发工作，主要方向为机器学习和深度学习。
+Content：
+深入介绍如何将深度学习的最新技术用于革新传统气象预测的一些研究和应用，以及如何处理从用户获取的众包反馈数据并进而改进天气预报的精准度。
+▌Topic 2：
+谈谈 TiDB-Binlog 的设计
+Lecturer：
+刘寅，PingCAP engineer，现负责 TiDB 商业产品开发和自动化运维。
+Content：
+随着
+TiDB
+的不断稳定和完善
+，
+我们也逐步开发了很多
+TiDB
+周边工具。今天主要介绍了
+TiDB-Binlog
+设计上的一些考量和实现细节。
+TiDB-Binlog 可
+实时记录
+TiDB
+的一切数据变化
+，
+可以用来做集群的实时备份和恢复
+，</description>
+    </item>
+    
+    <item>
+      <title>MPP and SMP in TiDB</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-15/</link>
+      <pubDate>Tue, 15 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-15/</guid>
+      <description>MPP and SMP in TiDB 原创
+2016-11-15 申砾 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 29 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-12/</link>
+      <pubDate>Sat, 12 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-12/</guid>
+      <description>PingCAP 第 29 期 NewSQL Meetup 2016-11-12 王振涛&amp;amp;张金鹏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 29 期 Meetup，主题是映客服务端架构师王振涛分享的《映客直播服务端架构优化之路》以及张金鹏分享的《MySQL 与 TiDB 的事务机制》。
+▌ ****
+T
+o
+pic 1：映客直播服务端架构优化之路
+Lecture：
+王振涛，南开大学计算机硕士毕业，曾先后供职于腾讯、搜狗等互联网公司，拥有多年的服务端研发、面向服务体系结构设计经验，专注于解决海量数据存储和计算带来的分布式、高并发、强一致性等技术难题和挑战。2016 年初加入映客直播，担任服务端架构师，主要负责映客基础平台架构设计、评审和用户体系的研发工作，经历了映客业务快速发展、构建高可用大容量基础服务体系的过程，对分布式计算、微服务、分布式数据库架构、高可用高并发系统设计等方面都有较深刻的理解和实践经验。
+Content：
+1、介绍了映客服务端架构演进历程；
+2、关于服务端技术选型的探索和思考；
+3、移动直播典型应用场景分析。
+▌ ****
+T
+o
+pi
+c 2：MySQL 与 TiDB 的事务机制
+Lecture：
+张金鹏，PingCAP 核心成员，前百度资深研发工程师／京东数据库专家，《MariaDB 原理和实现》作者。
+Content：
+在 MySQL 的 InnoDB 存储引擎中，进行写操作时，会将数据修改前的状态纪录在 Undo Log 中，一旦事务，失败利用 Undo Log 来进行回滚，保证事务的原子性。同时 InnoDB 利用 Undo Log 实现了多版本并发控制，InnoDB 的读取操作是不加锁的，事务只能读取到事务开始时已提交的纪录。由于 MySQL 是单机数据库，所有很方便的纪录所有活跃的事务 ID，Purge 线程根据当前活跃的事务情况来定期清理 Undo Log 中过期版本的数据。InnoDB 的事务支持 read uncommitted、read committed、repeatable read、serializable 四种事务隔离级别，InnoDB 通过 next-key lock 来解决 repeatable read 隔离级别下的幻读现象。</description>
+    </item>
+    
+    <item>
+      <title>分布式系统测试那些事儿——错误注入</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-10/</link>
+      <pubDate>Thu, 10 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-10/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 28 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-05/</link>
+      <pubDate>Sat, 05 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-05/</guid>
+      <description>PingCAP 第 28 期 NewSQL Meetup 2016-11-05 时延军&amp;amp;韩飞 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第
+28 期 Meetup，主题是 TalkingData 数据经理时延军分享的《Spark 架构设计要点剖析》以及韩飞分享的《Performing group-by before join》。
+▌ ****
+T
+opi
+c 1：Spark 架构设计要点剖析
+Lecture：
+时延军，TalkingData 数据经理，负责领域工程数据平台架构和研发，曾在 COMODO 中国负责基础数据平台建设，在车语传媒考拉 FM 负责后端数据平台架构（支持离线+实时分析处理）。推崇工程师文化，热爱开源，乐于分享，兴趣广泛，熟悉大数据技术生态，擅长软件系统架构、分布式计算系统设计。
+Content：
+1、RDD 特性，RDD 是如何抽象数据集的；
+2、详解 Spark 基本架构；
+3、Spark 内部核心组件及其交互；
+4、逻辑执行计划与物理执行计划；
+5、Spark 资源管理与任务调度。
+▌ ****
+T
+opic
+2：Performing group-by before join</description>
+    </item>
+    
+    <item>
+      <title>How to write a good commit message</title>
+      <link>https://pingcap.com/meetup/meetup-2016-11-01/</link>
+      <pubDate>Tue, 01 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-11-01/</guid>
+      <description>How to write a good commit message 原创
+2016-11-01 金坤 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 27 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-10-29/</link>
+      <pubDate>Sat, 29 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-10-29/</guid>
+      <description>PingCAP 第 27 期 NewSQL Meetup 2016-10-29 付力力&amp;amp;刘寅 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 27 期 Meetup，主题是
+神策数
+据联合创始人&amp;amp;首席架构师付力力分享的《Impala 在用户行为分析中的应用与优化》以及刘寅分享的《How we build CI/CD for TiDB at scale》。
+▌ ****
+T
+opic 1
+：
+Impala 在用户行为分析中的应用与优化
+多冷的天都不能阻止技术童鞋们浓厚的求知欲 :-D
+Lecture：
+付力力，神策数据联合创始人&amp;amp;首席架构师，曾任百度、豌豆荚资深研发工程师，熟悉大规模数据处理、数据仓库、OLAP 数据库等领域。
+Content：
+ 介绍用户行为分析的典型应用场景；
+ 简单介绍 Impala 的架构和实现；
+ 使用 Impala 进行用户行为分析的基本做法；
+ 针对特定场景对 Impala 进行的一些优化和改造。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 26 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-10-22/</link>
+      <pubDate>Sat, 22 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-10-22/</guid>
+      <description>PingCAP 第 26 期 NewSQL Meetup 2016-10-22 张成远&amp;amp;刘奇 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 26 期 Meetup，主题是
+开源项目 speedy 作者
+张成远分享的《京东分布式数据库实践》以及刘奇分享的《深度探索分布式系统测试》。 我司 CEO 亲自出台，现场不时传来三观碎一地的声音
+┑(￣Д ￣)┍
+另外，本周初次试水直播 (✿◡‿◡)
+▌ ****
+T
+opic 1
+：
+京东分布式数据库实践
+Lecture：
+张成远，《Mariadb 原理与实现》作者，开源项目 speedy 作者。目前就职于京东数据库系统研发团队，负责京东分布式数据库系统架构与研发工作，主导了京东分布式数据库系统在公司的落地及大规模推广。擅长高性能服务器开发，擅长分布式数据库/存储/缓存等大规模分布式系统架构。
+Content：
+ 介绍京东分布式数据库的设计与实现；
+ 介绍去 oracle 的发展历程以及遇到的一些坑；
+ 如何做到高效的运维监控等。
+  ▌ ****
+T</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 25 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-10-15/</link>
+      <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-10-15/</guid>
+      <description>PingCAP 第 25 期 NewSQL Meetup 2016-10-15 武毅&amp;amp;张金鹏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 25 期 Meetup，顶着帝都的大雾霾，依然来了很多小伙伴。这一次我们有换新场地噢，但不变的是分享内容依然满满干货。本周的主题分别是
+百分点
+集团高级架构师武毅分享的《分布式数据处理在个性化系统的应用》以及张金鹏分享的《TiKV 性能优化》。
+▌ ****
+T
+opic 1
+：
+分布式数据处理在个性化系统的应用
+Lecture：
+武毅，现任百分点集团高级架构师，负责大数据平台基础架构的设计与研发，曾参与个性化推荐系统等多个大型系统的设计和开发。Linux 爱好者，活跃于 GitHub，Ubuntu 等社区，重点关注分布式技术，平台技术。
+Content：
+相信大家也都在各自的领域用到过不同的分布式存储／计算开源工具，本周我们分享了一些在运营个性化系统时使用分布式存储／计算工具遇到的坑和经验。
+▌ ****
+T
+opic 2
+：
+TiKV 性能优化
+Content：
+RocksDB 的 Column Families 之间会共享 WAL，但是又有各自的 memtables 和 sst files，共享 WAL 使得实现跨 CF 的 atomic 操作变成可能，不同 CF 的 memtables 和 sst files 是分离开的，这样我们可以将不同类型的数据分别存放在不同的 CF 内，根据数据的性质给 CF 定制不同配置，使数据的写入和访问达到最佳状态。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 24 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-09-24/</link>
+      <pubDate>Sat, 24 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-09-24/</guid>
+      <description>PingCAP 第 24 期 NewSQL Meetup 2016-09-24 杜川&amp;amp;杨哲 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 24 期 Meetup，主题是阿里云 ODPS 研发工程师杜川分享的《LLVM 简介及其在大规模 OLAP 中的应用》以及来自小米云平台的杨哲分享的《阻塞访问数据库的相关问题》。
+▌ ****
+T
+opic 1
+：LLVM 简介及其在大规模 OLAP 中的应用
+Lecture：
+杜川，阿里云 ODPS 研发工程师，分布式数据库爱好者，重点关注 SQL 运行时优化以及 Code Generation 技术。
+Content：
+LLVM 是一个开源的编译器框架及生态链，已在工业界得到广泛的应用（著名的 Clang 编译器就是基于LLVM实现的）。因其前后端分离，模块化等优势，近年来被引入数据库领域，作为 JIT Code Generation 的工具，并吸引了越来越多的关注。本次分享介绍了 LLVM，及其在大规模 OLAP 中的应用。
+▌ ****</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 23 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-09-10/</link>
+      <pubDate>Sat, 10 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-09-10/</guid>
+      <description>PingCAP 第 23 期 NewSQL Meetup 2016-09-10 金坤&amp;amp;黄华超 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 Ping
+CAP 第 23 期 Meetup，主题是金坤分享的《
+How to write a good commit message
+》以及黄华超分享的《QuorumKV：微信分布式 KV 存储系统》。
+【T
+opic 1】
+How to write a good commit message
+Content：
+This talk about writing good commit messages aims to act as the beginning of a series of talks about writing quality technical content.</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 22 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-09-03/</link>
+      <pubDate>Sat, 03 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-09-03/</guid>
+      <description>PingCAP 第 22 期 NewSQL Meetup 2016-09-03 宋昭&amp;amp;张帅 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 22 期 Meetup，主题是
+360 基础架构组研发工程师
+宋昭
+分享的《360 开发的大容量 redis -pika》以及 美团云工程师
+张帅
+分享的《分布式对象存储系统设计介绍》。
+▌ ****
+T
+opic 1：36
+0 开发的大容量 redis -pika
+Lecture：
+宋昭，360 基础架构组研发工程师。专注于分布式存储领域，目前负责 360 开源项目 pika 相关的设计和开发工作。
+Content：
+目前 pika 在 360 内部大量使用，有 300 多实例，主要解决大容量的 redis（400G,800G）场景；在外部，被微博、美团、万达电商、garena、apus 等使用于线上核心系统中。本次分享主要介绍 pika 的系统设计和实现。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 21 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-08-27/</link>
+      <pubDate>Sat, 27 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-08-27/</guid>
+      <description>PingCAP 第 21 期 NewSQL Meetup 2016-08-27 韩飞&amp;amp;申砾 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 21 期 Meetup，主题是韩飞分享的《An Introduction to Join-Reorder in TiDB》以及申砾分享的《MPP and SMP in TiDB》。
+▌ ****
+Topic 1
+：
+An Introduction to Join-Reorder in TiDB
+Content：
+本次分享详细介绍了 TiDB 中 Join-Reorder 的流程。包括 Join-Reorder 的动机，outer-join 的 reorder 局限性和解决办法。为了解决某些 outer join re-association 的问题，我们可以引入的新算子 Generalized outerJoin。最后介绍了通过为 Join Query 建立 Query Graph 进行启发式搜索和动态规划的</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 20 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-08-20/</link>
+      <pubDate>Sat, 20 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-08-20/</guid>
+      <description>PingCAP 第 20 期 NewSQL Meetup 2016-08-20 雷丽媛&amp;amp;温文鎏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 20 期 Meetup，主题是百度网页搜索部工程师雷丽媛分享的《搜索引擎背后的万亿量级存储系统 Tera 》以及温文鎏分享的《Cloudtable：分布式强一致的 KV 存储系统》。
+【
+To
+pic 1
+】
+搜索引擎背后的万亿量级存储系统 Tera
+近景福利：
+今日的美女讲师 :)
+Lecture：
+雷丽媛，百度网页搜索部工程师。专注于分布式存储领域，目前负责百度结构化数据存储和分布式文件系统的相关工作。
+Content：
+介绍支撑搜索引擎核心的海量存储——Tera 的设计与实现
+【 ****
+Topic 2
+】
+Cloudtable：分布式强一致的 KV 存储系统
+Content：
+如何搭建一个适用于互联网公司业务的大容量分布式强一致性 KV 存储系统?
+通过结合分布式一致性协议 Raft，嵌入式存储引擎 RocksDB，HBASE 的架构和接口，YY 云存储团队在过去的两年开发了 Cloudtable 存储系统，它是一个分布式强一致性的 KV 存储系统。今天，前 YY 云存储工程师温文鎏分享了他们在构建 Cloudtbable 系统的实践和经验。</description>
+    </item>
+    
+    <item>
+      <title>TiDB 优化器实现的基础 -- 统计信息的收集</title>
+      <link>https://pingcap.com/meetup/meetup-2016-08-11/</link>
+      <pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-08-11/</guid>
+      <description>TiDB 优化器实现的基础 &amp;ndash; 统计信息的收集 原创
+2016-08-11 周昱行 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 19 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-08-06/</link>
+      <pubDate>Sat, 06 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-08-06/</guid>
+      <description>PingCAP 第 19 期 NewSQL Meetup 2016-08-06 方君&amp;amp;韩飞 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 19 期 Meetup，主题是百度基础架构部工程师方君分享的《
+What&amp;rsquo;s New in Spark 2.0
+》以及韩飞分享 的《An Overview of Cost Based Optimization and Join Reorder》。
+▌ ****
+Topic 1
+：What&amp;rsquo;s New in Spark 2.0
+Lecture：
+方君，百度基础架构部工程师，专注于分布式计算与流式计算领域，目前在百度负责 Spark 计算平台和计算表示层的相关工作。
+Content:
+ DataSet API Performance Optimization Structure Streaming  ▌ ****</description>
+    </item>
+    
+    <item>
+      <title>TiDB 中的子查询优化技术</title>
+      <link>https://pingcap.com/meetup/meetup-2016-08-01/</link>
+      <pubDate>Mon, 01 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-08-01/</guid>
+      <description>TiDB 中的子查询优化技术 原创
+2016-08-01 韩飞 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 18 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-07-30/</link>
+      <pubDate>Sat, 30 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-07-30/</guid>
+      <description>PingCAP 第 18 期 NewSQL Meetup 2016-07-30 常冰琳&amp;amp;张阳 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 18 期 Meetup，主题是小米云平台工程师常冰琳分享的《Kudu 的设计思想和具体实现》以及张阳分享的《Kubernetes in PingCAP》。
+▌ ****
+Topic 1
+：Kudu 的设计思想和具体实现
+lecture：
+常冰琳 小米云平台工程师，长期专注于 Hadoop 生态的分布式计算框架，Kudu PMC&amp;amp;Commiter, Hadoop Nativetask 项目发起者(已合入 Hadoop)。目前在小米负责 SQL 类数据分析平台，利用 Impala 和 Kudu 搭建实时数据分析云服务。
+Content：
+本次分享将简单介绍 Kudu 的设计思想和具体实现，以及小米作为 Kudu 最早用户的一些实践经验。
+ 设计目标
+ 数据模型，分区和副本设计
+ Tablet 存储设计</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 17 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-07-23/</link>
+      <pubDate>Sat, 23 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-07-23/</guid>
+      <description>PingCAP 第 17 期 NewSQL Meetup 2016-07-23 崔秋 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 17 期 Meetup，主题是崔秋
+分享的《How does TiKV auto-balance work?》
+。
+▌ ****
+Topic
+：
+How does TiKV auto-balance work?
+TiDB
+最近发布了
+Beta
+版本，相比传统的关系型数据库，
+TiDB
+具有在线弹性伸缩，高可用和强一致性，一致性的分布式事务和
+MySQL
+协议兼容性等特性，特别适用于大规模高并发的海量数据场景。
+本次交流主要介绍了 TiKV 的 Balance Scheduler 框架和算法实现演进，对于大家主要关注的 TiKV 集群的在线弹性扩容实现细节和 TiKV Balance 中在线服务高可用的问题，进行了深度的探讨。
+在 TiKV 里面，数据是按照 Range 进行存放的，称为一个 Region。PD(Placement Driver) 负责整个 TiKV 集群的管理和调度。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第 16 期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-07-16/</link>
+      <pubDate>Sat, 16 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-07-16/</guid>
+      <description>PingCAP 第 16 期 NewSQL Meetup 2016-07-16 田琪&amp;amp;孟圣智 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第 16 期 Meetup，主题是
+来自京东的田琪分享的《Cool Extensions of Raft for NewSQL》，以及
+来自百度的孟圣智分享的《基于 Ceph 构建文件共享服务的实践》 。
+▌ ****
+Topic
+1
+：Cool Extensions of Raft for NewSQL
+lecturer：
+田琪，京东数据库系统部负责人，开源 docker 镜像存储系统 speedy 作者，
+TiDB committer, etcd contributor
+Topic summary:
+主要分享了 Raft 协议在 etcd 中的实现，与 etcd 在 Raft 协议方面近期更新地比较重要的特性，以及引进这些特性的缘由。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第15期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-07-09/</link>
+      <pubDate>Sat, 09 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-07-09/</guid>
+      <description>PingCAP 第15期 NewSQL Meetup 2016-07-09 申砾&amp;amp;周昱行 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第15期 Meetup ，主题是申砾分享
+的《TiDB 存储模型变更》以及周昱行
+分享的《TiDB 优化器统计信息的采集》
+。
+▌
+Part 1
+：《TiDB 存储模型变更》
+TiDB 在 Key-Value 存储模型之上，将一行数据拆分成多个 Key-Value pair。这样做有利于列较多并且 update 较为频繁的业务场景，同时对 Online Schema 变更较为友好。但是这种存储模型对于需要读取/写入大量 row 的业务场景并不适用。为此我们修改了 TiDB 的存储模型，将一行内需要频繁修改和很少修改的数据存储在不同的 column family 中，以更好地适应不同热度的数据,以及生存期差别比较大的数据。同时，非常有效地适配了读写放大以及空间放大的问题。
+▌Part 2：
+《TiDB 优化器统计信息的采集》
+统计信息是实现基于代价的优化（CBO）的必要条件，本期为大家介绍 TiDB 收集统计信息使用的采样算法和直方图生成算法。
+PingCAP Meetup</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第14期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-07-02/</link>
+      <pubDate>Sat, 02 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-07-02/</guid>
+      <description>PingCAP 第14期 NewSQL Meetup 2016-07-02 马涛&amp;amp;刘奇 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第14期 Meetup ，主题是酷克数据联合创始人
+马涛
+分享的《HashData 数据仓库的动态缩容扩容实现》以及 PingCAP 联合创始人兼 CEO 刘奇针对近日发布的 TiDB Beta 版进行的现场 Demo 演示。
+▌
+Part 1
+：《 HashData 数据仓库的动态缩容扩容实现》
+讲师：马涛，酷克数据联合创始人，数据库领域从业近10年，最初 Pivotal HAWQ 项目成员，06年至11年就职人大金仓做内核开发。目前主要负责 OLAP 系统内核和外围云化工作。
+通过对比 Greenplum，Dynamo 和 HashData 的当前实现，为大家简单介绍数据处理系统动态缩容扩容的实现。阐述数据系统缩容和扩容的需求集合和设计方案，深入介绍 HashData 选择的设计、目前实现和后续改进。
+▌
+Part 2
+：
+《 TiDB Beta 版现场 Demo 演示》</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第13期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-06-25/</link>
+      <pubDate>Sat, 25 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-06-25/</guid>
+      <description>PingCAP 第13期 NewSQL Meetup 2016-06-25 闫宇&amp;amp;崔秋 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第13期 Meetup ，主题是百度资深研发工程师、百度 BAC 存储负责人闫宇分享的《 百度 redis3 生产环境实践》以及 PingCAP 联合创始人崔秋分享的《TiKV Auto Balance 》。
+▌
+Topic 1
+：
+《百度 redis3 生产环境实践》
+讲师：
+闫宇，百度资深研发工程师，百度 BAC 存储负责人
+**
+（百度 BAC 的 redis3 服务目前机器规模达到1400台左右，总数据量接近100T，日 pv 超过1500亿，用户涵盖了百度贴吧、百度糯米、手机百度等百度内部几百个业务线。）
+内容方向：
+1）介绍百度BAC的 redis3 服务的整体架构；
+2）交流在 redis3 实践中的一些经验。
+以下为本次分享的干货PPT：
+▌
+Topic 2：
+《TiKV Auto Balance》</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第12期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-06-18/</link>
+      <pubDate>Sat, 18 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-06-18/</guid>
+      <description>PingCAP 第12期 NewSQL Meetup 2016-06-18 张金鹏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第12期 Meetup ，主题是
+张金鹏分享的《 rocksdb 日志分析和性能调优经验 》。
+▌张金鹏
+《 rocksdb 日志分析和性能调优经验 》
+首先和大家一起分享如何分析 rocksdb 的 LOG，包括观察 compaction 相关的统计信息。
+例如每个 level 导致的 compaction 个数，每个 compaction job 的平均持续时长，compaction 导致的 read 总量和 write 量，以及写放大等；也可以观察整个系统是否有 stall 情况，持续多长时间，时间占比是多少等；另外，还有跟踪某个具体的 compaction job 的 input files 组成，output files，以及 compacting 过程中 drop 掉的 key 个数等信息。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第11期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-06-04/</link>
+      <pubDate>Sat, 04 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-06-04/</guid>
+      <description>PingCAP 第11期 NewSQL Meetup 2016-06-04 黄梦龙&amp;amp;张金鹏 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第11期 Meetup ，
+主题是黄梦龙分享的《 TiKV 的结构化存储模型优化》和张金鹏分享的《深入解析 LevelDB 》。
+▌黄梦龙
+《 TiKV 的结构化存储模型优化》
+目前 TiKV 的存储模型是简单的纯 Key-Value，在存储 SQL 结构化数据的过程中会产生比较严重的读写放大问题。我们计划为 TiKV 添加类似于 Hbase 的 ColumnFamily 机制，以使得 TiKV 与 TiDB 成为更加完美的搭档。大家对其中的实现细节，以及各种方案的优缺点进行了探讨。
+▌张金鹏
+《深入解析 LevelDB 》
+首先介绍了 LevelDB 的整体架构，以及 LSM Tree 这一数据库中非常经典的结构。之后对 LevelDB 的写和读的流程进行分析，同时介绍 LevelDB 的 snapshot 功能的实现原理，以及 iterator 内部实现，和 iterator 存在的潜在问题。最后介绍 LevelDB 的 compaction 过程，以及存在的问题。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第10期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-05-28/</link>
+      <pubDate>Sat, 28 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-05-28/</guid>
+      <description>PingCAP 第10期 NewSQL Meetup 2016-05-28 刘奇&amp;amp;周昱行 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第10期 Meetup ，跟京东小伙伴就
+Raft group 中出现网络隔离时的 stale read 的问题做了充分讨论交流。之后进行的
+分享主题是《 TiKV 的网络模拟测试》和《 TiDB 的条件下推优化》。
+▌随机讨论
+Raft group 中出现网络隔离时，会有stale read 的问题。目前我们考虑采用 region leader 的方案，保证在出现网络隔离的情况下，也能保证读的正确性。大家对其中的实现细节，以及各种方案的优缺点进行了讨论。
+▌刘奇
+《 TiKV 的网络模拟测试》
+TiKV 如何做分布式系统测试。目前已经构建了一套测试框架，提供设置网络延迟、网络隔离、节点掉线等功能，用于构建测试用例。
+▌周昱行
+《 TiDB 的条件下推优化》
+使用基于 Row 的 Merge 算法，解决存在脏数据时，使用 TiDB 下推 API 优化的问题。
+TiDB 的下推 API 相比基础的 API 对读性能有着几个数量级的提升，任何无法使用下推 API 的操作的请求，性能都慢到完全无法接受的程度。</description>
+    </item>
+    
+    <item>
+      <title>PingCAP 第9期 NewSQL Meetup</title>
+      <link>https://pingcap.com/meetup/meetup-2016-05-21/</link>
+      <pubDate>Sat, 21 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/meetup-2016-05-21/</guid>
+      <description>PingCAP 第9期 NewSQL Meetup 2016-05-21 韩飞&amp;amp;刘奇 PingCAP PingCAP
+PingCAP ![]() 微信号
+pingcap2015
+功能介绍
+PingCAP 专注于新型分布式数据库的研发，是知名开源数据库 TiDB (GitHub 总计10000+ stars ) 背后的团队，总部设在北京，是国内第一家开源的新型分布式关系型数据库公司、国内领先的大数据技术和解决方案提供商。
+NewSQL Meetup
+今天是 PingCAP 第9期 NewSQL Meetup ，分享主题是韩飞的《 SQL 子查询优化》和刘奇的《 TiKV MVCC 和 GC 实现》。
+▌韩飞 《 SQL 子查询优化》
+分享 SQL subqueries 的变换和优化问题。
+关联子查询的优化是 SQL 优化中很重要的一部分，一般的执行方式方式是 correlated execution，但是可以通过引入 Apply 算子形式化证明所有的子查询都可以改写成 Join 的不同形式。在分布式场景下，Join 可以比 correlated execution 有更多的优化空间。
+▌刘奇
+《 TiKV MVCC 和 GC 实现》
+详细分析了 TiKV 的 MVCC 机制, 事务模型，并进一步介绍了 percolator 事务模型的特点，以及对 GC 的影响。另外讲解了 TiKV 对 percolator 事务模型的改进, 以及 TiKV 的 GC 算法，和如何支持长时间的数据库备份和分析操作。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://pingcap.com/meetup/list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://pingcap.com/meetup/list/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

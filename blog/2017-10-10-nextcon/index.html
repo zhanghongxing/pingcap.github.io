@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"content="IE=edge">
+<meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Scale the Relational Database with NewSQL | PingCAP</title>
+<script>
+window.ga =
+    window.ga ||
+    function() {
+        ;(ga.q = ga.q || []).push(arguments)
+    }
+ga.l = +new Date()
+ga('create', 'UA-99991864-4', 'auto')
+ga('send', 'pageview')
+</script>
+<script async src="https://download.pingcap.com/js/ga-analytics.js"></script>
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="canonical" href="https://www.pingcap.com/">
+<meta name="description" content="This is the speech Li SHEN gave at the 3rd NEXTCON.">
+<meta name="robots" content="noodp">
+<meta name="keywords" content="SQL, HTAP, Open Source, Cloud-Native, NewSQL">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scale the Relational Database with NewSQL">
+<meta property="og:description" content="This is the speech Li SHEN gave at the 3rd NEXTCON.">
+<meta property="og:url" content="https://pingcap.com/blog/2017-10-10-nextcon/">
+<meta property="og:site_name" content="PingCAP">
+<meta property="og:image" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta property="og:image:secure_url" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="This is the speech Li SHEN gave at the 3rd NEXTCON.">
+<meta name="twitter:title" content="Scale the Relational Database with NewSQL">
+<meta name="twitter:site" content="@pingcap">
+<meta name="twitter:image:src" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:creator" content="@pingcap">
+
+
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0076/9903.js" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+    "@context": "http:\/\/schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/www.pingcap.com\/",
+    "name": "PingCAP",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+<link rel="preload" href="https://download.pingcap.com/js/jquery.min.js" as="script">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/docsearch.min.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css">
+
+
+<link rel="stylesheet" href="/css/doc.css">
+
+    <script type="text/javascript">"/"===location.pathname&&"pingcap.github.io"===location.hostname&&(location.href="/en/")</script>
+<link rel="preload"as="script"href="/js/app.js">
+</head><body ><style type="text/css">
+    .center-element {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+
+    #page-loader {
+        transform: translate(-50%, -50%) scale(0.6);
+        -webkit-transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    #hexagon {
+        width: 60px;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+    }
+
+    #hexagon #hexagon-base,
+    #hexagon #hexagon-line-animation {
+        fill: transparent;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+    }
+
+    #hexagon #hexagon-base {
+        stroke: #cdd5e0;
+    }
+
+    #hexagon #hexagon-line-animation {
+        stroke: #3a59f0;
+        stroke-linecap: round;
+        animation: dash 1.5s linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: 1 431.7;
+        }
+        100% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: -867.4;
+        }
+    }
+</style>
+
+<div id="page-loader" class="center-element">
+    <svg id="hexagon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129.78 150.37">
+        <path id="hexagon-base" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+        <path id="hexagon-line-animation" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+    </svg>
+</div>
+<div id="page-content"style="display:none">
+<header role="navigation" class="fixed-top">
+    <div class="container">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        <div class="nav-wrapper">
+            <div class="navigation">
+                <ul>
+                <li ><a href="/docs">Docs</a></li>
+                <li ><a href="/success-stories">Success Stories</a></li>
+                <li class="sel"><a href="/blog">Blog</a></li>
+                <li ><a href="/about">About</a></li>
+                <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+                </ul>
+            </div>
+            <div class="global-search">
+                <div class="search-wrapper">
+                <span class="icon-search"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 67.125 67.125"><path d="M23.902 0C11.01 0 .523 10.488.523 23.38c0 12.891 10.487 23.379 23.379 23.379a23.258 23.258 0 0 0 14.471-5.037l24.816 24.817c.391.391.902.586 1.414.586s1.023-.195 1.414-.586a2 2 0 0 0 0-2.828L41.293 38.985c3.721-4.142 5.989-9.613 5.989-15.605C47.282 10.488 36.794 0 23.902 0zM4.523 23.38C4.523 12.694 13.216 4 23.902 4c10.687 0 19.38 8.694 19.38 19.38 0 5.396-2.221 10.279-5.791 13.795a1.959 1.959 0 0 0-.488.349 2.003 2.003 0 0 0-.271.343C33.31 40.9 28.825 42.76 23.903 42.76c-10.686-.001-19.38-8.695-19.38-19.38z"/><path d="M24.075 8.591c-8.25 0-14.962 6.712-14.962 14.962a2 2 0 0 0 4 0c0-6.044 4.918-10.962 10.962-10.962a2 2 0 0 0 0-4z"/></svg></span>
+                <input data-lang="en" type="search" id="search-input" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+        <div class="nav-btn nav-slider">
+            <i class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 459 459"><path d="M0 382.5h459v-51H0v51zM0 255h459v-51H0v51zM0 76.5v51h459v-51H0z" fill="#FFF"/></svg></i>
+        </div>
+    </div>
+</header>
+
+
+
+<nav class="mobile-sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        </div>
+    </div>
+    <ul class="ul-base">
+        <li ><a href="/docs">Docs</a></li>
+        <li ><a href="/success-stories">Success Stories</a></li>
+        <li class="sel"><a href="/blog">Blog</a></li>
+        <li ><a href="/about">About</a></li>
+        <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+    </ul>
+    <div class="nav-footer">
+        <div class="contact-list-wrap">
+        <div class="flex-list">
+            <h4 class="list-title"><strong>Contact</strong></h4>
+            <ul class="social ul-base">
+            <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg></a></li>
+            <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg></a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg></a></li>
+            <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+        <div class="container">
+        <a href="/blog-cn" class="btn-lang" id="lang">中文</a>
+        </div>
+    </div>
+</nav>
+
+<div class="blog">
+        <div class="container">
+            
+<div class="sidebar nav-tags" data-type="single"><div class="title">Popular Tags<a class="rss" href="/blog/index.xml" title="RSS Feed"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 402.041 402.04"><g fill="#3A59F0"><path d="M54.816 292.382c-15.229 0-28.169 5.331-38.831 15.988C5.33 319.026 0 331.969 0 347.197c0 15.232 5.325 28.172 15.985 38.828 10.662 10.657 23.606 15.988 38.831 15.988 15.227 0 28.168-5.331 38.828-15.988 10.656-10.656 15.986-23.596 15.986-38.828 0-15.229-5.33-28.171-15.986-38.827-10.657-10.657-23.598-15.988-38.828-15.988zM181.01 221.002c-21.51-21.698-46.158-38.97-73.948-51.816-27.79-12.85-56.914-20.511-87.366-22.985h-1.425c-4.949 0-9.042 1.619-12.275 4.854C1.997 154.477 0 158.953 0 164.472v38.543c0 4.757 1.569 8.85 4.708 12.279 3.14 3.429 7.089 5.332 11.848 5.708 43.586 4.189 80.845 21.752 111.773 52.678 30.93 30.926 48.49 68.187 52.677 111.771.382 4.764 2.284 8.712 5.712 11.847 3.427 3.148 7.517 4.72 12.275 4.72h38.545c5.517 0 9.989-1.995 13.415-5.996 3.621-3.812 5.236-8.381 4.863-13.709-2.478-30.447-10.14-59.573-22.987-87.361-12.846-27.792-30.121-52.438-51.819-73.95z"/><path d="M367.728 239.701c-20.365-45.585-48.345-86.078-83.936-121.482-35.405-35.594-75.896-63.572-121.485-83.939C116.723 13.917 68.996 2.494 19.126.02h-.855c-4.949 0-9.136 1.713-12.563 5.14C1.903 8.583 0 12.964 0 18.294v40.825c0 4.76 1.667 8.897 4.996 12.419 3.33 3.523 7.373 5.376 12.132 5.57 40.924 2.478 79.799 12.188 116.63 29.127 36.83 16.94 68.806 38.972 95.93 66.09 27.118 27.123 49.149 59.101 66.089 95.931 16.94 36.836 26.557 75.705 28.839 116.627.195 4.764 2.046 8.809 5.564 12.139 3.524 3.329 7.762 4.999 12.71 4.999h40.823c5.331 0 9.701-1.902 13.134-5.715 3.809-3.806 5.517-8.274 5.144-13.415-2.471-49.874-13.898-97.6-34.263-143.19z"/></g></svg></a></div><a href="#" class="tag all">ALL (44)</a>
+    <div class="tag-list"><a href="#Community" class="tag " data-tag="Community">Community&nbsp;(5)
+                </a><a href="#Engineering" class="tag " data-tag="Engineering">Engineering&nbsp;(27)
+                </a><a href="#Golang" class="tag sel" data-tag="Golang">Golang&nbsp;(23)
+                </a><a href="#HTAP" class="tag sel" data-tag="HTAP">HTAP&nbsp;(3)
+                </a><a href="#Product" class="tag " data-tag="Product">Product&nbsp;(4)
+                </a><a href="#Raft" class="tag " data-tag="Raft">Raft&nbsp;(4)
+                </a><a href="#Rust" class="tag sel" data-tag="Rust">Rust&nbsp;(17)
+                </a><a href="#Success-Story" class="tag " data-tag="Success-Story">Success-Story&nbsp;(4)
+                </a><a href="#TiDB" class="tag sel" data-tag="TiDB">TiDB&nbsp;(32)
+                </a><a href="#TiKV" class="tag sel" data-tag="TiKV">TiKV&nbsp;(16)
+                </a><a href="#TiSpark" class="tag " data-tag="TiSpark">TiSpark&nbsp;(2)
+                </a>
+    </div>
+</div>
+<div class="archive">
+                <div class="content markdown-body">
+                    <h1 class="title">Scale the Relational Database with NewSQL</h1>
+                    <ul class="blog-post-meta">
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-date.svg">Tue, Oct 10, 2017</li>
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-writer.svg">Li SHEN</li>
+                    </ul>
+                    <div class="blog-text">
+
+<p><span id="top">This is the speech Li SHEN gave at the 3rd NEXTCON: Cloud+Data NEXT Conference Seattle on September 16th, 2017.</span></p>
+
+<ul>
+<li><a href="#speaker-introduction">Speaker introduction</a></li>
+<li><a href="#why-we-build-a-new-relational-database">Why we build a new relational database</a></li>
+<li><a href="#tidb-project---goal">TiDB Project - Goal</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#the-core-components-of-tidb">The core components of TiDB</a>
+
+<ul>
+<li><a href="#the-storage-stack">The Storage stack</a></li>
+<li><a href="#dynamic-multi-raft">Dynamic Multi-Raft</a></li>
+<li><a href="#safe-split">Safe Split</a></li>
+<li><a href="#acid-transaction">ACID Transaction</a></li>
+<li><a href="#something-we-havent-mentioned">Something we haven&rsquo;t mentioned</a></li>
+<li><a href="#placement-driver">Placement Driver</a></li>
+<li><a href="#the-sql-layer">The SQL Layer</a></li>
+<li><a href="#what-happens-behind-a-query">What Happens behind a query</a></li>
+<li><a href="#sql-layer-overview">SQL Layer Overview</a></li>
+<li><a href="#cost-based-optimizer">Cost-Based Optimizer</a></li>
+</ul></li>
+<li><a href="#tools-matter">Tools matter</a></li>
+<li><a href="#spark-on-tikv">Spark on TiKV</a></li>
+<li><a href="#future-plans">Future plans</a></li>
+</ul>
+
+<h2 id="speaker-introduction">Speaker introduction</h2>
+
+<p><img src="/images/blog/nextconshenli.png" alt="Shen Li"  /></p>
+
+<p>Hello everyone, I am glad to be here in this beautiful city and share this talk with you.
+The talk‘s  name is “Scale the Relational Database with NewSQL”. It is about a new distributed relational database named <a href="https://github.com/pingcap/tidb">TiDB</a>. In this talk I’ll draw a detailed picture of TiDB to help you understand why and how we build it.</p>
+
+<p>First of all, I’d like to introduce myself and our company <a href="https://pingcap.com/index">PingCAP</a>. My name is Shen Li, an infrastructure software engineer and the VP of Engineering at PingCAP.
+Our company is a startup based in Beijing, China. We focus on building database solutions.
+We are building a distributed transactional database TiDB and have more than thirty adoptions for production use in China.</p>
+
+<p>So today we will cover the following topics:</p>
+
+<ul>
+<li>Motivations</li>
+<li>The goals of TiDB</li>
+<li>The core components of TiDB</li>
+<li>The tools around TiDB</li>
+<li>Spark on TiKV</li>
+<li>Future plans</li>
+</ul>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h2 id="why-we-build-a-new-relational-database">Why we build a new relational database</h2>
+
+<p>Ok. Let&rsquo;s begin. I want to ask a question: what would you do when your RDBMS is becoming the bottleneck of your application? Maybe most of you guys have experienced the following situations:</p>
+
+<ul>
+<li>RDBMS is becoming the performance bottleneck of your backend service</li>
+<li>The amount of data stored in the database is overwhelming</li>
+<li>You want to do some complex queries on a sharding cluster
+
+<ul>
+<li>e.g., simple <code>JOIN</code> or <code>GROUP BY</code></li>
+</ul></li>
+<li>Your application needs ACID transaction on a sharding cluster</li>
+</ul>
+
+<p>In the old days, all you can do is to either refactor your application or use database middleware, something like MySQL proxy. But once you decide to use the sharding solution, it’s one-way path, and you will never get rid of the sharding keys and have to say goodbye to complex queries&hellip; So how to scale your relational database is a pain point for the entire industry.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h2 id="tidb-project-goal">TiDB Project - Goal</h2>
+
+<p>And there comes TiDB, when we were designing TiDB, we want to achieve the following goals:
+- Make sharding and data movement transparent to users so that the developers can be freed to focus on application development.
+- 100% OLTP and 80% OLAP support. TiDB aims to be a Hybrid database that supports both OLTP and OLAP workload. This is feasible because TiDB supports transactions and has our own full-featured distributed SQL engine (including the parser , optimizer and query executor).  We build it from the ground up.
+- Twenty-four/Seven availability, even in case of datacenter outages. Thanks to the Raft consensus algorithm, TiDB can ensure the data strong consistency and availability all the time.
+- TiDB has to be compatible with the MySQL protocol, by implementing the MySQL syntax and protocol. In this way,  our users can easily migrate their existing application to TiDB with nearly zero costs. And also use their familiar MySQL tools to manage the database.
+- Open source, of course. You can find all our projects on GitHub.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h2 id="architecture">Architecture</h2>
+
+<p><img src="/images/blog/tidb-architecture.png" alt="TiDB Architecture"  /></p>
+
+<p>Let&rsquo;s see the TiDB architecture. In this diagram, there are three components:
+- The SQL layer, which is TiDB servers. TiDB servers are stateless. They don&rsquo;t store data, just do the computing.
+- The distributed storage layer, which is <a href="https://github.com/pingcap/tikv">TiKV</a>. TiKV is a distributed key-value database, acting as the underlying storage layer of TiDB and it’s the place where data is actually stored. This layer uses Raft consensus algorithm to replicate data and guarantee data safety.
+- And Placement Driver, aka PD. The brain of the entire cluster and provides a God&rsquo;s view.</p>
+
+<p>These three components communicate with each other through gRPC.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h2 id="the-core-components-of-tidb">The core components of TiDB</h2>
+
+<h3 id="the-storage-stack">The Storage stack</h3>
+
+<p><img src="/images/blog/storage-stack1.png" alt="Storage Stack"  /></p>
+
+<p>One thing I need to point out here is that TiDB doesn&rsquo;t depend on any distributed file system.</p>
+
+<p>TiKV is the underlying storage layer where data is actually stored. More specifically, data is stored in RocksDB locally which is the bottom layer of the TiKV architecture as you can see from this diagram. On top of RocksDB, we build a Raft layer.
+ So what is Raft? Raft is a consensus algorithm that equals to Paxos in fault-tolerance and performance. It has several key features such as leader election, auto failover, and membership changes. And Raft ensures that data is safely replicated with strong consistency.</p>
+
+<p>We have exposed the Raw Key-Value API at this layer, if you want a scalable, high-performance, highly available Key-Value database, and don’t care about a cross-row ACID transaction; you can use raw KV API for higher performance.</p>
+
+<p>The middle layer is MVCC, Multi-version concurrency control. The top two layers are transaction and gRPC API. The API here is the transactional KV API.</p>
+
+<p>TiKV is written in Rust and the reason is that the storage layer is performance critical and stability is the first-class citizen of course. We only got c/c++ in the past, and now we have Rust is great for infrastructure system software like database, operation system… No extra cost for GC and runtime, high performance, and another great thing is that Rust does a lot of innovation works in preventing memory leaks and data race, that matters a lot for us.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/key-space.png" alt="Key Space"  /></p>
+
+<p>TiKV is a key-value storage engine. Keys and values are both byte arrays. Logically, we could regard TiKV as a giant sorted key-value map.
+In order to achieve data distribution, we split the key space into multiple ranges. Each range has a metadata which contains start_key and end_key.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/storage-stack3.png" alt="Storage Stack3"  /></p>
+
+<p>Now we know that the actual data is stored in RocksDB. And we also know that the key space is split into ranges.
+Region is a set of continuous key-value pairs in byte-order. Let’s take a look at the diagram here: The data is split into a set of continuous key-value pairs which we name them from a to z. Region 1 stores “a” to “e”, Region 2 “f” to “j”, Region 3 “k” to “o”, etc. notice that region is a logical concept, all the regions in a physical node share the same RocksDB instance.</p>
+
+<p>In each RocksDB instance, there are several regions and each region is replicated to other instances by Raft. The replicas of the same Region, Region 4 for example, make a Raft group.</p>
+
+<p>The metadata of the Raft groups is stored in PD. And of course, PD is a cluster, replicating the metadata by Raft, too. I will introduce it later.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="dynamic-multi-raft">Dynamic Multi-Raft</h3>
+
+<p><img src="/images/blog/dynamic-region-split.png" alt="Storage Stack3"  /></p>
+
+<p>In TiKV, we adopt a multi-raft model. What’s multi-raft? It’s a way to split and merge regions dynamically, and of course, safely. We name this approach “safe split/merge”.</p>
+
+<p>For example, Region 1 from “a” to “e” is safely split into Region 1.1 “a” to “c” and Region 1.2 “d” to “e”, we need to guarantee no data is lost during the split.</p>
+
+<p>This explains how one Region is split, but how about its replicas on other nodes? Let’s go to next few slides.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="safe-split">Safe Split</h3>
+
+<p><img src="/images/blog/image_2.png" alt="Safe Split: 1/4"  />
+This is the initial state for Region 1. You can see there is a Raft group with three TiKV nodes.</p>
+
+<p>Region 1 on TiKV1 is the Leader and the other two replicas are the followers.
+However, there comes a situation that there are too much data in Region 1 and it needs to be split.</p>
+
+<p>It’s easy if there is only one Region 1. But in this case, we have three replicas.  How can all the replicas be split safely? The answer is also Raft. Let’s see how it works.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/image_3.png" alt="Safe Split: 1/4"  /></p>
+
+<p>The split is initiated by the Leader, which means Region 1 is split to Region 1.1 and Region 1.2 firstly in the Leader as you can see from the diagram.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/image_4.png" alt="Safe Split: 3/4"  /></p>
+
+<p>When the split-log is written to WAL in the Leader, the split log is replicated by Raft and sent to the followers. Then, the followers apply the split log, just like any other normal Raft log.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/image_5.png" alt="Safe Split: 4/4"  /></p>
+
+<p>And finally, once the split-log is committed, all the replicas in the Raft group are safely split into two regions on each TiKV node. There is no data lost in the process,and the correctness of the split procedure is ensured.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/image_6.png" alt="Scale Out"  /></p>
+
+<p>We‘ve talked about split. Now let’s see how TiKV scales out. Our project is as scalable as a NoSQL system, which means you can easily increase the capacity or balance the workload by adding more machines.
+In this diagram, we have 4 physical nodes, namely Node A, Node B, Node C, and Node D. And we have 3 regions, Region 1, Region 2 and Region 3. We can see that there are 3 regions on Node A. Let’s say that node A encountered a capacity problem, maybe disk is almost full.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<p><img src="/images/blog/scale3.jpg" alt="Scale Out"  /></p>
+
+<p>To balance the data, we add a new node, Node E. The first step is to transfer the leadership from the replica of Region 1 on Node A to the replica on Node B.</p>
+
+<p><img src="/images/blog/scale4.jpg" alt="Scale Out"  /></p>
+
+<p>Step 2, a Replica of Region 1 is added to Node E. therefore Region 1 contains 4 replicas temporary.</p>
+
+<p><img src="/images/blog/scale5.jpg" alt="Scale Out"  /></p>
+
+<p>The final step, TiKV removes the replica of Region One from Node A. Now the data is balanced and the cluster scales out from 4 nodes to 5 nodes. In the process of scale-out, this data movement occurs in different regions. The result of the scheduling is that the regions are distributed equally among the physical nodes.</p>
+
+<p>This is how TiKV scales out.</p>
+
+<h3 id="acid-transaction">ACID Transaction</h3>
+
+<p>Our transaction model is inspired by Google’s Percolator. It’s mainly a decentralized 2-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign increasing timestamp for each transaction.</p>
+
+<p>TiKV employs an optimistic transaction model and only locks data in the final 2 phase commit (2PC) stage, which is the time that client calls the <code>Commit()</code> function. In order to deal with the lock problem when reading/writing data in the 2pc stage, TiKV adds a simple Scheduler layer in the storage node to queue locally before returning to the client for retry. In this way, the network overhead is reduced.</p>
+
+<p>The default isolation level of TiKV is Snapshot Isolation (SI) and it exposes the lock API, which is used for implementing SSI (Serializable snapshot isolation), such as <code>SELECT … FOR UPDATE</code> in MySQL, for the client.</p>
+
+<h3 id="something-we-haven-t-mentioned">Something we haven&rsquo;t mentioned</h3>
+
+<p>Now, we have a distributed, transactional, auto-scalable key-value storage. What next?How to allocate the Timestamp and store the Metadata, how to make the balance decision?</p>
+
+<p>That&rsquo;s what Placement Driver is for.</p>
+
+<h3 id="placement-driver">Placement Driver</h3>
+
+<p><img src="/images/blog/pd.png" alt="Placement Driver"  />
+Placement Driver is the managing component of the entire cluster. We call it the brain of the TiKV cluster. It stores the metadata and handles timestamp allocation request for ACID transaction, just like the TrueTime for Spanner. But we don’t have the hardware. What’s more, it’s controlling the data movement for dynamic workload balance and failover.</p>
+
+<p>PD guarantees the following constraints:</p>
+
+<ul>
+<li>There should be exactly enough replicas for each raft group.</li>
+<li>Replicas in a single raft-group should not be on the same machine/rack/data-center, admin should add geo tags on the tikv node.</li>
+<li>Replicas should be balanced among the whole cluster.</li>
+</ul>
+
+<p><img src="/images/blog/scheduling-strategy.png" alt="Scheduling Strategy"  /></p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="the-sql-layer">The SQL Layer</h3>
+
+<p>The following diagram shows how to map the relational model to Key-Value model:</p>
+
+<p><img src="/images/blog/sql-kv.png" alt="SQL to Key-Value"  /></p>
+
+<p>We take the performance of TiDB very seriously. TiDB has a full-featured SQL layer. For some operations, for example select count(*), there is no need for TiDB to get data from row to row first and then count. The quicker way is that TiDB pushes down these operations to the corresponding TiKV nodes, the TiKV nodes do the computing and then TiDB consolidates the final results.
+Cost-based optimizer, aka CBO, is to optimize a plan by calculating the query cost. This optimizer is very complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.</p>
+
+<p><img src="/images/blog/image_8.png" alt="SQL Layer Overview"  /></p>
+
+<p>This diagram shows the architecture of the SQL layer. Let’s take a look and see how the process works.
+The client sends SQL to the Protocol Layer. Within the life cycle of a connection, we need to maintain the connection context and decode the protocol to get the structured request which will be further processed in the SQL core Layer.
+Inside the SQL core layer, we need to maintain the session context which includes all the related information, such as the variable of the session scope. Meanwhile, the session context is also the entrance to the SQL Layer. After the SQL statement enters the SQL layer, the parser parses the SQL statement into AST, The next step is to process the AST, including validation, name resolution, type infer, privilege management, etc.
+The next layer is the core layer of the SQL engine, the Optimizer. There are two optimizers, the logical optimizer and the physical optimizer. The first step is logical optimization which transfers each AST node into a logical plan andoptimizes the SQL logic. Based on the logical plan, the Physical Optimizer makes the physical plan which is then executed by the distributed executor. Here, the optimizer is like a boss who makes plans, and the executor is like the employees who execute the plan and perform the RPC call. During the execution, interactions with the storage layer are inevitable, such as accessing data, computing, and so on.</p>
+
+<p>There are also other crucial components like Privilege Manager, Schema Manager, DDL Worker, GC worker, BG Job Worker, just to name a few.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="what-happens-behind-a-query">What Happens behind a query</h3>
+
+<p>We have talked about the process. Let’s see an example to show what’s going on behind a query. Assuming we have a schema with two fields and an index. Now we need to run the following query: <code>SELECT COUNT(c1) FROM t WHERE c1 &gt; 10 AND c2 = ‘seatle’;</code></p>
+
+<p>This is a very simple statement and it’s easy to make the logical plan and the physical plan. Note that when it comes to the physical plan, you should calculate the query cost of the plan, which is the cost-based optimization that you’ve been quite familiar with.</p>
+
+<p>The plan works well in a stand-alone database, but what happens in a distributed database that needs distributed computing in most cases? Let’s see the next slide to show how the SQL statement is executed in TiDB.</p>
+
+<p><img src="/images/blog/image_9.png" alt=""  /></p>
+
+<p>This is the physical plan of the SQL statement. The SQL layer and the storage layer, TiKV, work together. Some predicates and aggregators are pushed down to TiKV and then sent the partial result back to TiDB for final aggregation.</p>
+
+<p>There are several advantages in this approach: First, there are more nodes involved in the computing and therefore, the computing becomes faster. Second, the network transmission is greatly reduced because after filtering and aggregating, the computing can easily access the data because the data is closer.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="sql-layer-overview">SQL Layer Overview</h3>
+
+<p>Now, let’s see a more complex query: we have two tables, left and right. Now I write a simple join query, let’s see what happens behind a join.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t1(id INT, email TEXT<span style="color:#960050;background-color:#1e0010">，</span><span style="color:#66d9ef">KEY</span> idx_id(id));
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> t2(id INT, email TEXT, <span style="color:#66d9ef">KEY</span> idx_id(id));
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> t1 <span style="color:#66d9ef">join</span> t2 <span style="color:#66d9ef">WHERE</span> t1.id <span style="color:#f92672">=</span> t2.id;</code></pre></div>
+<p><img src="/images/blog/image_10.png" alt=""  /></p>
+
+<p>For this query, we may choose hashjoin, because HashJoin performs well in processing small and medium sized data. We have implemented the operator and optimized it for parallel data processing, and make it streaming.</p>
+
+<p>To join the tables mentioned in the previous query, TiKV reads the tables in parallel. When reading the smaller table, TiKV starts to build a Hash Table in memory. When reading the bigger table, the data is sent to several Join Workers. When the Hash Table is finished, all the Join Workers will be notified to start Join in stream and output the Joined Table.</p>
+
+<p>TiDB’s SQL layer currently supports 3 kinds of join operators, hashjoin / sort merge join (when the optimizer thinks even the smallest table is too large to fit in memory and the predicates contain indexed column, optimizer would choose sort merge join) / index lookup join.</p>
+
+<h3 id="cost-based-optimizer">Cost-Based Optimizer</h3>
+
+<p>For CBO, we implemented the following strategies:</p>
+
+<ul>
+<li>Predicate Pushdown</li>
+<li>Column Pruning</li>
+<li>Eager Aggregate</li>
+<li>Convert Subquery to Join</li>
+<li>Statistics framework</li>
+<li>CBO Framework
+
+<ul>
+<li>Index Selection</li>
+<li>Join Operator Selection</li>
+<li>Stream Operators VS Hash Operators</li>
+</ul></li>
+</ul>
+
+<h2 id="tools-matter">Tools matter</h2>
+
+<p>To help users exploit the best of TiDB, we have prepared the following tools: Syncer, TiDB-Binlog, Mydumper/MyLoader(loader).</p>
+
+<p><img src="/images/blog/image_11.png" alt=""  /></p>
+
+<p>Syncer is a tool to synchronize data from MySQL in real time.</p>
+
+<p>It is hook up as a MySQL replica: we have a MySQL master with binlog enabled and Syncer acts as a fake slave. At the very beginning, Syncer gets the position of the current binlog which is the initial synchronizing position. When new data is written into MySQL, Syncer obtains the binlog from the master, synchronizes the data to the Save Point in the disk, and then applies the rule filter to send data to either MySQL or TiDB cluster.</p>
+
+<p><img src="/images/blog/image_12.png" alt=""  /></p>
+
+<p>On the other hand, TiDB can output binlogs too. We build TiDB-binlog toolset to make it possible for 3rd party applications synchronize data from TiDB cluster. As TiDB-server is distributed, binlog pumper should be deployed in every TiDB-server instance and send it to a component we called ‘Cistern’. Cistern will sort the transactions by TransactionID (aka. timestamp) in a short period of time, and output as protobuf for downstream application.</p>
+
+<p>For data migration, we don’t have our own tool. We use MyDumper / Loader for data backup and restore in parallel. You can use MyDumper to export data from MySQL and MyLoader to import the data into TiDB.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h2 id="spark-on-tikv">Spark on TiKV</h2>
+
+<p>TiSpark is Spark SQL on TiKV. Why on TiKV, not TiDB? That’s because we make the Spark SQL layer run directly on top of the distributed storage layer and bypass TiDB.
+We are using two Experimental methods，Extra Optimizer Rules and Extra Strategies，from Spark which corresponds to Spark Optimizer and Planner.
+We hijack the logical Plan from Spark SQL and pick up the elements to be leveraged by TiKV and rewrite the plan. We need to see which predictors can be converted to index related access,  which can be converted to be Key Range related, and which can be pushed down.
+TiDB, TiKV, TiSpark, the three components together serve as one platform. This platform provides you both the OLTP and OLAP capacity. You can use TiDB for OLTP and TiSpark for OLAP. This kind of capacity is also called HTAP, a term created by Gartner.</p>
+
+<p><img src="/images/blog/sparkontikv.png" alt="Spark on TiKV"  /></p>
+
+<p>Whether it’s Analytical or Transactional, now you can have both types of workloads on one unified platform. The biggest benefit is no ETL. Previously, if you want to upload the data in a database to a Hadoop file system, it’s very complicated. You have a base table, which is a full table dump, and after that, you set up a scheduled job, maybe run hourly or daily to capture the change of the data. So you have the deltas and the base data, and you merge them all together. But now, you don’t need such complicated strategy. We just have one platform, you write data using TiDB and then read it back and analyse it through TiSpark. Besides, because everything is on one platform, the data you read is the data you write without any delay, not to mention you don’t have to load data from one database to another data analysis platform. All you need is to maintain one platform and one platform only.</p>
+
+<p>What’s more, because we have Spark underneath,  we are invited to the entire Spark eco-system. We can access the complicated analytical use cases, we can write Scala and Python program, and we can do machine learning. And when we support write we can also support Spark Streaming, etc.</p>
+
+<p>We can utilize the capacity of the storage layer to the max. We can not only prune data, but also push down the operators. We can also use some features provided by the storage layer:</p>
+
+<ul>
+<li>Different Transaction Isolation Levels
+
+<ul>
+<li>For OLTP: Snapshot Isolation</li>
+<li>For OLAP: Read Committed to avoid lock resolving</li>
+</ul></li>
+<li>Different resource schedule priority
+
+<ul>
+<li>Larger query tend to be assigned lower priority hence less resource when other queries running</li>
+<li>Users can manually specify priority not to disturb OLTP</li>
+</ul></li>
+</ul>
+
+<h2 id="future-plans">Future plans</h2>
+
+<p>The final section of my speech is our roadmap to the future:
+- Now TiDB project is in the status of Pre-GA. We will release GA version early in October
+- We are still improving the Statistic collection framework &amp; cost-based optimizer. (cost based optimizer)
+- Another big thing is that the json type and document store for TiDB has already been put on our agenda. (the document store is introduced into MySQL in 5.7.12+ X-Plugin??)
+- We are going to make TiDB integrate with Kubernetes, that makes it very easy to set up a large cluster.</p>
+
+<p>OK, that&rsquo;s all. Thank you very much!</p>
+
+<p><img src="/images/blog/nextconbooth.png" alt="PingCAP booth"  /></p>
+
+<p><a href="#top">Back to the top</a></p>
+</div>
+                </div><div class="ssba-wrap">
+    <div class="ssba">
+        <a data-site="" class="ssba_twitter_share" href="http://twitter.com/share?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-10-10-nextcon%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg>
+        </a>
+        <a data-site="reddit" class="ssba_reddit_share" href="http://reddit.com/submit?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-10-10-nextcon%2f&title=Scale%20the%20Relational%20Database%20with%20NewSQL" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 429.709 429.709" width="18" height="18"><path d="M429.709 196.618c0-29.803-24.16-53.962-53.963-53.962-14.926 0-28.41 6.085-38.176 15.881-30.177-19.463-68.73-31.866-111.072-33.801.026-17.978 8.078-34.737 22.104-45.989 14.051-11.271 32.198-15.492 49.775-11.588l2.414.536c-.024.605-.091 1.198-.091 1.809 0 24.878 20.168 45.046 45.046 45.046s45.046-20.168 45.046-45.046c0-24.879-20.168-45.046-45.046-45.046-15.997 0-30.01 8.362-38.002 20.929l-4.317-.959c-24.51-5.446-49.807.442-69.395 16.156-19.564 15.695-30.792 39.074-30.818 64.152-42.332 1.934-80.878 14.331-111.052 33.785-9.767-9.798-23.271-15.866-38.2-15.866C24.16 142.656 0 166.815 0 196.618c0 20.765 11.75 38.755 28.946 47.776a106.48 106.48 0 0 0-1.993 20.462c0 77.538 84.126 140.395 187.901 140.395s187.901-62.857 187.901-140.395c0-6.948-.687-13.775-1.991-20.452 17.197-9.023 28.945-27.019 28.945-47.786zM345.746 47.743c12 0 21.762 9.762 21.762 21.762 0 11.999-9.762 21.761-21.762 21.761s-21.762-9.762-21.762-21.761c0-12 9.763-21.762 21.762-21.762zM23.284 196.618c0-16.916 13.762-30.678 30.678-30.678 7.245 0 13.895 2.538 19.142 6.758-16.412 14.08-29.118 30.631-37.007 48.804-7.748-5.565-12.813-14.634-12.813-24.884zm310.5 148.859c-31.492 23.53-73.729 36.489-118.929 36.489s-87.437-12.959-118.929-36.489c-29.462-22.013-45.688-50.645-45.688-80.621 0-29.977 16.226-58.609 45.688-80.622 31.492-23.53 73.729-36.489 118.929-36.489s87.437 12.959 118.929 36.489c29.462 22.013 45.688 50.645 45.688 80.622-.001 29.976-16.226 58.608-45.688 80.621zm59.821-123.989c-7.891-18.17-20.596-34.716-37.005-48.794 5.247-4.22 11.901-6.754 19.147-6.754 16.916 0 30.678 13.762 30.678 30.678-.001 10.249-5.072 19.307-12.82 24.87z" fill="#181a1c"/><g fill="#d80000"><circle cx="146.22" cy="232.07" r="24.57"/><circle cx="283.48" cy="232.07" r="24.57"/></g><path d="M273.079 291.773c-17.32 15.78-39.773 24.47-63.224 24.47-26.332 0-50.729-10.612-68.696-29.881-4.384-4.704-11.751-4.96-16.454-.575-4.703 4.384-4.96 11.752-.575 16.454 22.095 23.695 53.341 37.285 85.726 37.285 29.266 0 57.288-10.847 78.905-30.543 4.752-4.33 5.096-11.694.765-16.446-4.329-4.749-11.688-5.097-16.447-.764z" fill="#181a1c"/></svg>
+        </a>
+        <a data-site="" class="ssba_facebook_share" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-10-10-nextcon%2f" target="_blank">
+        <svg preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M134.941 272.691h56.123v231.051a8.256 8.256 0 0 0 8.258 8.258h95.159a8.256 8.256 0 0 0 8.258-8.258V273.78h64.519a8.26 8.26 0 0 0 8.204-7.315l9.799-85.061a8.259 8.259 0 0 0-8.202-9.203h-74.316V118.88c0-16.073 8.654-24.224 25.726-24.224h48.59a8.258 8.258 0 0 0 8.258-8.258V8.319a8.256 8.256 0 0 0-8.258-8.258h-66.965A65.863 65.863 0 0 0 307.027 0c-11.619 0-52.006 2.281-83.909 31.63-35.348 32.524-30.434 71.465-29.26 78.217v62.352H134.94a8.256 8.256 0 0 0-8.258 8.258v83.975a8.26 8.26 0 0 0 8.259 8.259z" fill="#385c8e"/></svg>
+        </a>
+        <a data-site="linkedin" class="ssba_linkedin_share" href="http://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fpingcap.com%2fblog%2f2017-10-10-nextcon%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg>
+        </a>
+        <a data-site="hackernews" class="ssba_hackernews_share" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-10-10-nextcon%2f&t=Scale%20the%20Relational%20Database%20with%20NewSQL" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 31.254 31.254"><path d="M0 .393v30.469h31.254V.393H0zM17.623 15.27v10.322h-3.992V15.27L7.429 5.192l4.61-.023s3.66 6.486 3.684 6.511h.071c.024-.025 3.779-6.488 3.779-6.488h4.253L17.623 15.27z"/></svg>
+        </a>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+<footer>
+    <div class="container">
+        <div class="flex-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Product</strong></h4>
+                <ul>
+                <li><a href="/docs/">TiDB</a></li>
+                <li><a href="/docs/tispark/tispark-user-guide/">TiSpark</a></li>
+                <li><a href="/docs/ROADMAP/">Roadmap</a></li>
+                <li><a href="/tidb-cloud/">TiDB Cloud</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Docs</strong></h4>
+                <ul>
+                <li><a href="/docs/QUICKSTART/">Quick Start</a></li>
+                <li><a href="/blog/2017-07-24-tidbbestpractice/">Best Practices</a></li>
+                <li><a href="/docs/FAQ/">FAQ</a></li>
+                <li><a href="/docs/tools/syncer/">TiDB Utilities</a></li>
+                <li><a href="/docs/releases/rn/">Release Notes</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Resources</strong></h4>
+                <ul>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/weekly/">Weekly</a></li>
+                <li><a href="https://github.com/pingcap" target="_blank">GitHub</a></li>
+                <li><a href="/tidb-academy/">TiDB Academy</a></li>
+                <li><a href="/community/">TiDB Community</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Company</strong></h4>
+                <ul>
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://angel.co/pingcap-1/jobs" target="_blank">Careers</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/contact-us/">Contact Us</a></li>
+                <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="/terms-of-service/">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Connect</strong></h4>
+                <ul>
+                <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg> Twitter</a></li>
+                <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg> LinkedIn</a></li>
+                <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg>Reddit</a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg>Google Group</a></li>
+                <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg>Stack Overflow</a></li>
+                </ul>
+            </div>
+            <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+    </div>
+    <div class="container copyright-container">
+        <p class="copyright">&copy; 2018 PingCAP. All Rights Reserved.</p>
+        <a href="/blog-cn" class="copyright-btn-lang" id="lang">中文</a>
+    </div>
+</footer>
+<button class="back-to-top" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 284.929 284.929"><path d="M282.082 195.285L149.028 62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665.953-6.567 2.856L2.856 195.285C.95 197.191 0 199.378 0 201.853c0 2.474.953 4.664 2.856 6.566l14.272 14.271c1.903 1.903 4.093 2.854 6.567 2.854s4.664-.951 6.567-2.854l112.204-112.202 112.208 112.209c1.902 1.903 4.093 2.848 6.563 2.848 2.478 0 4.668-.951 6.57-2.848l14.274-14.277c1.902-1.902 2.847-4.093 2.847-6.566.001-2.476-.944-4.666-2.846-6.569z" fill="#FFF"/></svg>
+</button>
+</div>
+<script type="text/javascript">document.getElementById("page-loader").style.display="none",document.getElementById("page-content").style.display="block"</script>
+<div class="overlay"></div>
+<script src="https://download.pingcap.com/js/jquery.min.js"></script><script type="text/javascript" src="/js/doc.js"></script><script type="text/javascript"src="https://download.pingcap.com/js/docsearch.min.js"></script>
+<script type="text/javascript"src="/js/app.js"></script></body>
+</html>

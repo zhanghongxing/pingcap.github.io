@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"content="IE=edge">
+<meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Refactoring the Built-in Functions in TiDB | PingCAP</title>
+<script>
+window.ga =
+    window.ga ||
+    function() {
+        ;(ga.q = ga.q || []).push(arguments)
+    }
+ga.l = +new Date()
+ga('create', 'UA-99991864-4', 'auto')
+ga('send', 'pageview')
+</script>
+<script async src="https://download.pingcap.com/js/ga-analytics.js"></script>
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="canonical" href="https://www.pingcap.com/">
+<meta name="description" content="In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.">
+<meta name="robots" content="noodp">
+<meta name="keywords" content="SQL, HTAP, Open Source, Cloud-Native, NewSQL">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Refactoring the Built-in Functions in TiDB">
+<meta property="og:description" content="In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.">
+<meta property="og:url" content="https://pingcap.com/blog/2017-06-27-refactor-builtin/">
+<meta property="og:site_name" content="PingCAP">
+<meta property="og:image" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta property="og:image:secure_url" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.">
+<meta name="twitter:title" content="Refactoring the Built-in Functions in TiDB">
+<meta name="twitter:site" content="@pingcap">
+<meta name="twitter:image:src" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:creator" content="@pingcap">
+
+
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0076/9903.js" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+    "@context": "http:\/\/schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/www.pingcap.com\/",
+    "name": "PingCAP",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+<link rel="preload" href="https://download.pingcap.com/js/jquery.min.js" as="script">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/docsearch.min.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css">
+
+
+<link rel="stylesheet" href="/css/doc.css">
+
+    <script type="text/javascript">"/"===location.pathname&&"pingcap.github.io"===location.hostname&&(location.href="/en/")</script>
+<link rel="preload"as="script"href="/js/app.js">
+</head><body ><style type="text/css">
+    .center-element {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+
+    #page-loader {
+        transform: translate(-50%, -50%) scale(0.6);
+        -webkit-transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    #hexagon {
+        width: 60px;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+    }
+
+    #hexagon #hexagon-base,
+    #hexagon #hexagon-line-animation {
+        fill: transparent;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+    }
+
+    #hexagon #hexagon-base {
+        stroke: #cdd5e0;
+    }
+
+    #hexagon #hexagon-line-animation {
+        stroke: #3a59f0;
+        stroke-linecap: round;
+        animation: dash 1.5s linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: 1 431.7;
+        }
+        100% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: -867.4;
+        }
+    }
+</style>
+
+<div id="page-loader" class="center-element">
+    <svg id="hexagon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129.78 150.37">
+        <path id="hexagon-base" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+        <path id="hexagon-line-animation" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+    </svg>
+</div>
+<div id="page-content"style="display:none">
+<header role="navigation" class="fixed-top">
+    <div class="container">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        <div class="nav-wrapper">
+            <div class="navigation">
+                <ul>
+                <li ><a href="/docs">Docs</a></li>
+                <li ><a href="/success-stories">Success Stories</a></li>
+                <li class="sel"><a href="/blog">Blog</a></li>
+                <li ><a href="/about">About</a></li>
+                <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+                </ul>
+            </div>
+            <div class="global-search">
+                <div class="search-wrapper">
+                <span class="icon-search"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 67.125 67.125"><path d="M23.902 0C11.01 0 .523 10.488.523 23.38c0 12.891 10.487 23.379 23.379 23.379a23.258 23.258 0 0 0 14.471-5.037l24.816 24.817c.391.391.902.586 1.414.586s1.023-.195 1.414-.586a2 2 0 0 0 0-2.828L41.293 38.985c3.721-4.142 5.989-9.613 5.989-15.605C47.282 10.488 36.794 0 23.902 0zM4.523 23.38C4.523 12.694 13.216 4 23.902 4c10.687 0 19.38 8.694 19.38 19.38 0 5.396-2.221 10.279-5.791 13.795a1.959 1.959 0 0 0-.488.349 2.003 2.003 0 0 0-.271.343C33.31 40.9 28.825 42.76 23.903 42.76c-10.686-.001-19.38-8.695-19.38-19.38z"/><path d="M24.075 8.591c-8.25 0-14.962 6.712-14.962 14.962a2 2 0 0 0 4 0c0-6.044 4.918-10.962 10.962-10.962a2 2 0 0 0 0-4z"/></svg></span>
+                <input data-lang="en" type="search" id="search-input" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+        <div class="nav-btn nav-slider">
+            <i class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 459 459"><path d="M0 382.5h459v-51H0v51zM0 255h459v-51H0v51zM0 76.5v51h459v-51H0z" fill="#FFF"/></svg></i>
+        </div>
+    </div>
+</header>
+
+
+
+<nav class="mobile-sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        </div>
+    </div>
+    <ul class="ul-base">
+        <li ><a href="/docs">Docs</a></li>
+        <li ><a href="/success-stories">Success Stories</a></li>
+        <li class="sel"><a href="/blog">Blog</a></li>
+        <li ><a href="/about">About</a></li>
+        <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+    </ul>
+    <div class="nav-footer">
+        <div class="contact-list-wrap">
+        <div class="flex-list">
+            <h4 class="list-title"><strong>Contact</strong></h4>
+            <ul class="social ul-base">
+            <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg></a></li>
+            <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg></a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg></a></li>
+            <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+        <div class="container">
+        <a href="/blog-cn" class="btn-lang" id="lang">中文</a>
+        </div>
+    </div>
+</nav>
+
+<div class="blog">
+        <div class="container">
+            
+<div class="sidebar nav-tags" data-type="single"><div class="title">Popular Tags<a class="rss" href="/blog/index.xml" title="RSS Feed"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 402.041 402.04"><g fill="#3A59F0"><path d="M54.816 292.382c-15.229 0-28.169 5.331-38.831 15.988C5.33 319.026 0 331.969 0 347.197c0 15.232 5.325 28.172 15.985 38.828 10.662 10.657 23.606 15.988 38.831 15.988 15.227 0 28.168-5.331 38.828-15.988 10.656-10.656 15.986-23.596 15.986-38.828 0-15.229-5.33-28.171-15.986-38.827-10.657-10.657-23.598-15.988-38.828-15.988zM181.01 221.002c-21.51-21.698-46.158-38.97-73.948-51.816-27.79-12.85-56.914-20.511-87.366-22.985h-1.425c-4.949 0-9.042 1.619-12.275 4.854C1.997 154.477 0 158.953 0 164.472v38.543c0 4.757 1.569 8.85 4.708 12.279 3.14 3.429 7.089 5.332 11.848 5.708 43.586 4.189 80.845 21.752 111.773 52.678 30.93 30.926 48.49 68.187 52.677 111.771.382 4.764 2.284 8.712 5.712 11.847 3.427 3.148 7.517 4.72 12.275 4.72h38.545c5.517 0 9.989-1.995 13.415-5.996 3.621-3.812 5.236-8.381 4.863-13.709-2.478-30.447-10.14-59.573-22.987-87.361-12.846-27.792-30.121-52.438-51.819-73.95z"/><path d="M367.728 239.701c-20.365-45.585-48.345-86.078-83.936-121.482-35.405-35.594-75.896-63.572-121.485-83.939C116.723 13.917 68.996 2.494 19.126.02h-.855c-4.949 0-9.136 1.713-12.563 5.14C1.903 8.583 0 12.964 0 18.294v40.825c0 4.76 1.667 8.897 4.996 12.419 3.33 3.523 7.373 5.376 12.132 5.57 40.924 2.478 79.799 12.188 116.63 29.127 36.83 16.94 68.806 38.972 95.93 66.09 27.118 27.123 49.149 59.101 66.089 95.931 16.94 36.836 26.557 75.705 28.839 116.627.195 4.764 2.046 8.809 5.564 12.139 3.524 3.329 7.762 4.999 12.71 4.999h40.823c5.331 0 9.701-1.902 13.134-5.715 3.809-3.806 5.517-8.274 5.144-13.415-2.471-49.874-13.898-97.6-34.263-143.19z"/></g></svg></a></div><a href="#" class="tag all">ALL (44)</a>
+    <div class="tag-list"><a href="#Community" class="tag " data-tag="Community">Community&nbsp;(5)
+                </a><a href="#Engineering" class="tag sel" data-tag="Engineering">Engineering&nbsp;(27)
+                </a><a href="#Golang" class="tag sel" data-tag="Golang">Golang&nbsp;(23)
+                </a><a href="#HTAP" class="tag " data-tag="HTAP">HTAP&nbsp;(3)
+                </a><a href="#Product" class="tag " data-tag="Product">Product&nbsp;(4)
+                </a><a href="#Raft" class="tag " data-tag="Raft">Raft&nbsp;(4)
+                </a><a href="#Rust" class="tag " data-tag="Rust">Rust&nbsp;(17)
+                </a><a href="#Success-Story" class="tag " data-tag="Success-Story">Success-Story&nbsp;(4)
+                </a><a href="#TiDB" class="tag sel" data-tag="TiDB">TiDB&nbsp;(32)
+                </a><a href="#TiKV" class="tag " data-tag="TiKV">TiKV&nbsp;(16)
+                </a><a href="#TiSpark" class="tag " data-tag="TiSpark">TiSpark&nbsp;(2)
+                </a>
+    </div>
+</div>
+<div class="archive">
+                <div class="content markdown-body">
+                    <h1 class="title">Refactoring the Built-in Functions in TiDB</h1>
+                    <ul class="blog-post-meta">
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-date.svg">Tue, Jun 27, 2017</li>
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-writer.svg">Huaiyu XU</li>
+                    </ul>
+                    <div class="blog-text">
+
+<p><span id="top"> </span>
+In order to accelerate expression evaluation, we recently refactored its framework. This tutorial will show you how to use the new computational framework to rewrite or add a built-in function in TiDB.</p>
+
+<h2 id="table-of-content">Table of Content</h2>
+
+<ul>
+<li><a href="#overall">The overall process</a></li>
+<li><a href="#example">Example</a>
+
+<ul>
+<li><a href="#first">Take a look at <code>builtin_string.go</code></a></li>
+<li><a href="#move">Refine the existing <code>TestLength()</code> method</a></li>
+<li><a href="#final">Test the implementation of <code>LENGTH</code> at the SQL level </a></li>
+</ul></li>
+<li><a href="#before">Before refactoring&hellip;</a></li>
+<li><a href="#after">After refactoring&hellip;</a></li>
+<li><a href="#app">Appendix</a></li>
+</ul>
+
+<h3 id="span-id-overall-the-overall-process-span"><span id="overall"> The overall process </span></h3>
+
+<ol>
+<li><p>Select any function to your interest from the <a href="https://github.com/pingcap/tidb/tree/master/expression">expression</a> directory, assuming the function is named XX.</p></li>
+
+<li><p>Override the <code>XXFunctionClass.getFunction()</code> method:</p>
+
+<p>This method refers to MySQL rules, inferring the return value type according to the parameter of the built-in function.</p>
+
+<p>Different function signatures will be generated based on the number &amp; type of the parameters, and the return value type of the function.
+See detailed description of the function signature in the appendix at the end of this article.</p></li>
+
+<li><p>Implement the <code>evalYY()</code> method on all the function signatures corresponding to the built-in function. YY represents the return value type of the function signature.</p></li>
+
+<li><p>Add tests
+in the <a href="https://github.com/pingcap/tidb/tree/master/expression">expression</a> directory, refine tests about the implementation of the given function in the <code>TestXX()</code> method.
+In the executor directory, add tests at the SQL level.</p></li>
+
+<li><p>Run <code>make dev</code> and ensure that all the test cases pass.</p></li>
+</ol>
+
+<h3 id="example">Example:</h3>
+
+<p>Let&rsquo;s look at the <a href="https://github.com/pingcap/tidb/pull/3519">PR</a> of overriding the <code>LENGTH ()</code> function for detailed explanation:</p>
+
+<h4 id="span-id-first-take-a-look-at-expression-builtin-string-go-span"><span id="first"> Take a look at <code>expression/builtin_string.go</code>：</span></h4>
+
+<p>First, let&rsquo;s take a look at the <a href="https://github.com/pingcap/tidb/blob/master/expression/builtin_string.go"><code>expression/builtin_string.go</code></a> file:</p>
+
+<ol>
+<li><p>Implement the <code>lengthFunctionClass.getFunction()</code> method. This method mainly accomplishes two tasks:</p>
+
+<p>1). Infer the return value type of the <code>LEGNTH</code> function according to MySQL rules.</p>
+
+<p>2). Generate function signature based on the number &amp; type of parameters, and return value type of the <code>LENGTH</code> function. Because the <code>LENGTH</code> function only has one number &amp; type of parameters, and return value type, we don’t need to define a type for the new function signature. Instead, we modified the existing <code>builtinLengthSig</code>, so that it could be <strong>composite with <code>baseIntBuiltinFunc</code>, which means that the return value type in the given function signature is int.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">builtinLengthSig</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">baseIntBuiltinFunc</span>
+}
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">lengthFunctionClass</span>) <span style="color:#a6e22e">getFunction</span>(<span style="color:#a6e22e">args</span> []<span style="color:#a6e22e">Expression</span>, <span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#a6e22e">builtinFunc</span>, <span style="color:#66d9ef">error</span>) {
+     
+<span style="color:#75715e">//Infer the return value type of `LEGNTH` function according to MySQL rules
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">tp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">NewFieldType</span>(<span style="color:#a6e22e">mysql</span>.<span style="color:#a6e22e">TypeLonglong</span>)
+<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Flen</span> = <span style="color:#ae81ff">10</span>
+<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">SetBinChsClnFlag</span>(<span style="color:#a6e22e">tp</span>)
+     
+<span style="color:#75715e">//Generate function signature based on the number &amp; type of parameters, and return value type. Note that after refactoring, instead of the `newBaseBuiltinFunc` method, the `newBaseBuiltinFuncWithTp` method is used here.
+</span><span style="color:#75715e">//In the `newBaseBuiltinFuncWithTp` function declaration, `args` represents the function&#39;s parameters, `tp` represents the return value type of the function, and `argsTp` represents the correct types of all parameters in the function signature.
+</span><span style="color:#75715e">// The number of parameters for `LENGTH` is 1, the parameter type is string, and the return value type is int. Therefore, `tp` here stands for the return value type of the function and `tpString` is used to identify the correct type of parameter. For a function with multiple parameters, when calling `newBaseBuiltinFuncWithTp`, we need to input the correct types of all parameters.
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">bf</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newBaseBuiltinFuncWithTp</span>(<span style="color:#a6e22e">args</span>, <span style="color:#a6e22e">tp</span>, <span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">tpString</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Trace</span>(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#a6e22e">sig</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">builtinLengthSig</span>{<span style="color:#a6e22e">baseIntBuiltinFunc</span>{<span style="color:#a6e22e">bf</span>}}
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sig</span>.<span style="color:#a6e22e">setSelf</span>(<span style="color:#a6e22e">sig</span>), <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Trace</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">verifyArgs</span>(<span style="color:#a6e22e">args</span>))
+}</code></pre></div></li>
+
+<li><p>Implement the <code>builtinLengthSig.evalInt()</code> method:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">builtinLengthSig</span>) <span style="color:#a6e22e">evalInt</span>(<span style="color:#a6e22e">row</span> []<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">Datum</span>) (<span style="color:#66d9ef">int64</span>, <span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
+  <span style="color:#75715e">// For the `builtinLengthSig` function signature, the parameter type is decided as string, so we can directly call the `b.args[0].EvalString()` method to calculate the parameter:
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">val</span>, <span style="color:#a6e22e">isNull</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">EvalString</span>(<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">GetSessionVars</span>().<span style="color:#a6e22e">StmtCtx</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">isNull</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">isNull</span>, <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Trace</span>(<span style="color:#a6e22e">err</span>)
+    }
+    <span style="color:#66d9ef">return</span> int64(len([]byte(<span style="color:#a6e22e">val</span>))), <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">nil</span>
+}</code></pre></div></li>
+</ol>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h4 id="span-id-move-refine-the-existing-testlength-method-span"><span id="move"> Refine the existing <code>TestLength()</code> method:</span></h4>
+
+<p>Moving on to <a href="https://github.com/pingcap/tidb/blob/master/expression/builtin_string_test.go"><code>expression/builtin_string_test.go</code></a>, let’s refine the existing <code>TestLength()</code> method:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testEvaluatorSuite</span>) <span style="color:#a6e22e">TestLength</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>) {
+   	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">testleak</span>.<span style="color:#a6e22e">AfterTest</span>(<span style="color:#a6e22e">c</span>)() <span style="color:#75715e">// This line is used to monitor goroutine leak.
+</span><span style="color:#75715e"></span>   	<span style="color:#75715e">// You can use the following cases to test the `LENGTH` function
+</span><span style="color:#75715e"></span>   	<span style="color:#75715e">// Note: in addition to normal cases, it is best to add some abnormal cases, such as the input args is nil, or the function has different types of parameters.
+</span><span style="color:#75715e"></span>   	<span style="color:#a6e22e">cases</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">struct</span> {
+          	<span style="color:#a6e22e">args</span>     <span style="color:#66d9ef">interface</span>{}
+          	<span style="color:#a6e22e">expected</span> <span style="color:#66d9ef">int64</span>
+          	<span style="color:#a6e22e">isNil</span>    <span style="color:#66d9ef">bool</span>
+          	<span style="color:#a6e22e">getErr</span>   <span style="color:#66d9ef">bool</span>
+   	}{
+          	{<span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#ae81ff">3</span>, <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">false</span>},
+          	{<span style="color:#e6db74">&#34;你好&#34;</span>, <span style="color:#ae81ff">6</span>, <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">false</span>},
+          	{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">false</span>},
+          	<span style="color:#f92672">...</span>
+   	}
+   	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">cases</span> {
+          	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newFunctionForTest</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Length</span>, <span style="color:#a6e22e">primitiveValsToConstants</span>([]<span style="color:#66d9ef">interface</span>{}{<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">args</span>})<span style="color:#f92672">...</span>)
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">IsNil</span>)
+          	<span style="color:#75715e">// The following lines test the return value type of the `LENGTH` function:
+</span><span style="color:#75715e"></span>          	<span style="color:#a6e22e">tp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">GetType</span>()
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Tp</span>, <span style="color:#a6e22e">Equals</span>, <span style="color:#a6e22e">mysql</span>.<span style="color:#a6e22e">TypeLonglong</span>)
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Charset</span>, <span style="color:#a6e22e">Equals</span>, <span style="color:#a6e22e">charset</span>.<span style="color:#a6e22e">CharsetBin</span>)
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Collate</span>, <span style="color:#a6e22e">Equals</span>, <span style="color:#a6e22e">charset</span>.<span style="color:#a6e22e">CollationBin</span>)
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Flag</span>, <span style="color:#a6e22e">Equals</span>, uint(<span style="color:#a6e22e">mysql</span>.<span style="color:#a6e22e">BinaryFlag</span>))
+          	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">tp</span>.<span style="color:#a6e22e">Flen</span>, <span style="color:#a6e22e">Equals</span>, <span style="color:#ae81ff">10</span>)
+          	<span style="color:#75715e">// The following lines test the evaluation result of LENGTH function:
+</span><span style="color:#75715e"></span>          	<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Eval</span>(<span style="color:#66d9ef">nil</span>)
+          	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">getErr</span> {
+                 	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">NotNil</span>)
+          	} <span style="color:#66d9ef">else</span> {
+                 	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">IsNil</span>)
+                 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">isNil</span> {
+                        	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Kind</span>(), <span style="color:#a6e22e">Equals</span>, <span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">KindNull</span>)
+                 	} <span style="color:#66d9ef">else</span> {
+                        	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">GetInt64</span>(), <span style="color:#a6e22e">Equals</span>, <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">expected</span>)
+                 	}
+          	}
+   	}
+   	<span style="color:#75715e">// The following lines test whether the function has determinacy:
+</span><span style="color:#75715e"></span>   	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">funcs</span>[<span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Length</span>].<span style="color:#a6e22e">getFunction</span>([]<span style="color:#a6e22e">Expression</span>{<span style="color:#a6e22e">Zero</span>}, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">ctx</span>)
+   	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">IsNil</span>)
+   	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Assert</span>(<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">isDeterministic</span>(), <span style="color:#a6e22e">IsTrue</span>)
+}</code></pre></div>
+<p><a href="#top">Back to the top</a></p>
+
+<h4 id="span-id-final-test-the-implementation-of-length-at-the-sql-level-span"><span id="final"> Test the implementation of <code>LENGTH</code> at the SQL level </span></h4>
+
+<p>Finally let’s look at <a href="https://github.com/pingcap/tidb/blob/master/expression/evaluator_test.go"><code>executor/executor_test.go</code></a> and test the implementation of <code>LENGTH</code> at the SQL level:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Tests for string built-in functions can be added in the following method:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testSuite</span>) <span style="color:#a6e22e">TestStringBuiltin</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">C</span>) {
+   	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() {
+          	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">cleanEnv</span>(<span style="color:#a6e22e">c</span>)
+          	<span style="color:#a6e22e">testleak</span>.<span style="color:#a6e22e">AfterTest</span>(<span style="color:#a6e22e">c</span>)()
+   	}()
+   	<span style="color:#a6e22e">tk</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">testkit</span>.<span style="color:#a6e22e">NewTestKit</span>(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">store</span>)
+   	<span style="color:#a6e22e">tk</span>.<span style="color:#a6e22e">MustExec</span>(<span style="color:#e6db74">&#34;use test&#34;</span>)
+   	<span style="color:#75715e">// for length
+</span><span style="color:#75715e"></span>   	<span style="color:#75715e">// It’s best that these tests can also cover different scenarios:
+</span><span style="color:#75715e"></span>   	<span style="color:#a6e22e">tk</span>.<span style="color:#a6e22e">MustExec</span>(<span style="color:#e6db74">&#34;drop table if exists t&#34;</span>)
+   	<span style="color:#a6e22e">tk</span>.<span style="color:#a6e22e">MustExec</span>(<span style="color:#e6db74">&#34;create table t(a int, b double, c datetime, d time, e char(20), f bit(10))&#34;</span>)
+   	<span style="color:#a6e22e">tk</span>.<span style="color:#a6e22e">MustExec</span>(<span style="color:#e6db74">`insert into t values(1, 1.1, &#34;2017-01-01 12:01:01&#34;, &#34;12:01:01&#34;, &#34;abcdef&#34;, 0b10101)`</span>)
+   	<span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tk</span>.<span style="color:#a6e22e">MustQuery</span>(<span style="color:#e6db74">&#34;select length(a), length(b), length(c), length(d), length(e), length(f), length(null) from t&#34;</span>)
+   	<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">Check</span>(<span style="color:#a6e22e">testkit</span>.<span style="color:#a6e22e">Rows</span>(<span style="color:#e6db74">&#34;1 3 19 8 6 2 &lt;nil&gt;&#34;</span>))
+}</code></pre></div>
+<h3 id="span-id-before-before-refactoring-span"><span id="before"> Before refactoring&hellip;</span></h3>
+
+<p>TiDB abstracts the expression through the Expression interface (defined in the <a href="https://github.com/pingcap/tidb/blob/master/expression/expression.go">expression/expression.go</a> file) and defines the <code>eval</code> method to evaluate the expression:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Expression</span> <span style="color:#66d9ef">interface</span>{
+   <span style="color:#f92672">...</span>
+   <span style="color:#a6e22e">eval</span>(<span style="color:#a6e22e">row</span> []<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">Datum</span>) (<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">Datum</span>, <span style="color:#66d9ef">error</span>)
+   <span style="color:#f92672">...</span>
+}</code></pre></div>
+<p>Expressions that implement the Expression interface include:</p>
+
+<ul>
+<li>Scalar Function</li>
+<li>Column</li>
+<li>Constant</li>
+</ul>
+
+<p>The case below shows the framework of expression evaluation before refactoring:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">table</span> t (
+   c1 int,
+   c2 varchar(<span style="color:#ae81ff">20</span>),
+   c3 double
+)
+<span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> t <span style="color:#66d9ef">where</span> c1 <span style="color:#f92672">+</span> CONCAT( c2, c3 <span style="color:#f92672">&lt;</span> <span style="color:#960050;background-color:#1e0010">“</span><span style="color:#ae81ff">1</span>.<span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">”</span> )</code></pre></div>
+<p>About the <code>where</code> condition in the <code>select</code> statement shown above:</p>
+
+<p>In the <strong>compiling phase</strong>. TiDB will build an expression tree as shown in the graph below:</p>
+
+<p><img src="/images/blog/before_reconstruction.png" alt=""  /></p>
+
+<p>In the <strong>executing phase</strong>, the <code>eval</code> method of the root node is called, and the expression is evaluated by the following traversal expression tree.</p>
+
+<p>The evaluate the <code>&lt;</code> expression, take the types of the two parameters into account, and convert the values of the two parameters into required data types according to certain rules. In the expression tree above, the parameter types are double and varchar. According to the evaluation rules of MySQL, these two parameters need to be compared using the float type. Therefore, &ldquo;1.1&rdquo; should be converted to double type, and then be evaluated.</p>
+
+<p>Similarly, for the <code>CONCAT</code> expression in the expression tree above, the parameters should be converted to string type before evaluation. For the expression &lsquo;+&rsquo;, the parameters should be converted to double before evaluation.</p>
+
+<p>Therefore, before refactoring, the framework of expression evaluation needs to  <strong>determine the data type of the parameter on each branch repeatedly</strong> for every group of data involved. If the parameter type does not meet the evaluation rules of the expression, you need to convert it to the corresponding data type.
+Moreover, from the definition of the <code>Expression.eval ()</code> method, we can see that when evaluating, we must <strong>continually wrap and unwrap intermediate results through the Datum structure</strong>, which also increases time and capacity cost.</p>
+
+<p>In order to solve these two problems, we refactored the expression evaluation framework.</p>
+
+<p><a href="#top">Back to the top</a></p>
+
+<h3 id="span-id-after-after-refactoring-span"><span id="after"> After refactoring&hellip;</span></h3>
+
+<p>The refactored framework has two advantages:</p>
+
+<ol>
+<li>In the compiling phase, we use the existing information on expression types to generate the expression with parameter types that match the evaluation rules. This way, no extra branch judgment about the parameter types are needed in the executing phase.</li>
+<li>Only the original data types are involved in the evaluation, thus avoiding the time and capacity cost by Datum.</li>
+</ol>
+
+<p>Let’s go back to the previous example, in the <strong>compiling phase</strong>, the generated expression tree is shown in the following graph. For expressions that do not match the function parameters types, we add the <code>cast</code> function for type conversion:</p>
+
+<p><img src="/images/blog/after_reconstruction.png" alt=""  /></p>
+
+<p>In this way, in the <strong>executing phase</strong>, for every <code>ScalarFunction</code>, it is guaranteed that all of its parameter types match the data types in the given expression evaluation, and we don’t need to check and convert parameter types repeatedly.</p>
+
+<h3 id="span-id-app-appendix-span"><span id="app"> Appendix </span></h3>
+
+<ul>
+<li>For a built-in function, multiple function signatures may be created to handle different scenarios, depending on the number &amp; type of parameters, and the type of return value. For most built-in functions, each parameter type and return value type are determined, so only a function signature is needed.</li>
+<li>For referring rules of more complicated return value type, you can refer to the implementation and test of the <code>CONCAT</code> function. You can use the <code>MySQLWorkbench</code> tool to run the query <code>select funcName (arg0, arg1, ...)</code> to observe the field type of the return value in MySQL&rsquo;s built-in functions when inputting different parameters.</li>
+
+<li><p>In the evaluation process of TiDB expression, only the following six evaluation types (currently we are implementing the JSON type) are supported:</p>
+
+<ol>
+<li>int (int64)</li>
+<li>real (float64)</li>
+<li>decimal</li>
+<li>string</li>
+<li>Time</li>
+<li>Duration
+<br /></li>
+</ol>
+
+<p>The <code>WrapWithCastAsXX ()</code> method can convert an expression to the corresponding type.</p></li>
+
+<li><p>For a function signature, its return value type has been determined, so when defining, you need to combine it with the corresponding <code>baseXXBuiltinFunc</code> and implement the <code>evalXX ()</code> method. Note that XX should only be one of the six types listed above.</p></li>
+</ul>
+
+<p><a href="#top">Back to the top</a></p>
+</div>
+                </div><div class="ssba-wrap">
+    <div class="ssba">
+        <a data-site="" class="ssba_twitter_share" href="http://twitter.com/share?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-06-27-refactor-builtin%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg>
+        </a>
+        <a data-site="reddit" class="ssba_reddit_share" href="http://reddit.com/submit?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-06-27-refactor-builtin%2f&title=Refactoring%20the%20Built-in%20Functions%20in%20TiDB" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 429.709 429.709" width="18" height="18"><path d="M429.709 196.618c0-29.803-24.16-53.962-53.963-53.962-14.926 0-28.41 6.085-38.176 15.881-30.177-19.463-68.73-31.866-111.072-33.801.026-17.978 8.078-34.737 22.104-45.989 14.051-11.271 32.198-15.492 49.775-11.588l2.414.536c-.024.605-.091 1.198-.091 1.809 0 24.878 20.168 45.046 45.046 45.046s45.046-20.168 45.046-45.046c0-24.879-20.168-45.046-45.046-45.046-15.997 0-30.01 8.362-38.002 20.929l-4.317-.959c-24.51-5.446-49.807.442-69.395 16.156-19.564 15.695-30.792 39.074-30.818 64.152-42.332 1.934-80.878 14.331-111.052 33.785-9.767-9.798-23.271-15.866-38.2-15.866C24.16 142.656 0 166.815 0 196.618c0 20.765 11.75 38.755 28.946 47.776a106.48 106.48 0 0 0-1.993 20.462c0 77.538 84.126 140.395 187.901 140.395s187.901-62.857 187.901-140.395c0-6.948-.687-13.775-1.991-20.452 17.197-9.023 28.945-27.019 28.945-47.786zM345.746 47.743c12 0 21.762 9.762 21.762 21.762 0 11.999-9.762 21.761-21.762 21.761s-21.762-9.762-21.762-21.761c0-12 9.763-21.762 21.762-21.762zM23.284 196.618c0-16.916 13.762-30.678 30.678-30.678 7.245 0 13.895 2.538 19.142 6.758-16.412 14.08-29.118 30.631-37.007 48.804-7.748-5.565-12.813-14.634-12.813-24.884zm310.5 148.859c-31.492 23.53-73.729 36.489-118.929 36.489s-87.437-12.959-118.929-36.489c-29.462-22.013-45.688-50.645-45.688-80.621 0-29.977 16.226-58.609 45.688-80.622 31.492-23.53 73.729-36.489 118.929-36.489s87.437 12.959 118.929 36.489c29.462 22.013 45.688 50.645 45.688 80.622-.001 29.976-16.226 58.608-45.688 80.621zm59.821-123.989c-7.891-18.17-20.596-34.716-37.005-48.794 5.247-4.22 11.901-6.754 19.147-6.754 16.916 0 30.678 13.762 30.678 30.678-.001 10.249-5.072 19.307-12.82 24.87z" fill="#181a1c"/><g fill="#d80000"><circle cx="146.22" cy="232.07" r="24.57"/><circle cx="283.48" cy="232.07" r="24.57"/></g><path d="M273.079 291.773c-17.32 15.78-39.773 24.47-63.224 24.47-26.332 0-50.729-10.612-68.696-29.881-4.384-4.704-11.751-4.96-16.454-.575-4.703 4.384-4.96 11.752-.575 16.454 22.095 23.695 53.341 37.285 85.726 37.285 29.266 0 57.288-10.847 78.905-30.543 4.752-4.33 5.096-11.694.765-16.446-4.329-4.749-11.688-5.097-16.447-.764z" fill="#181a1c"/></svg>
+        </a>
+        <a data-site="" class="ssba_facebook_share" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-06-27-refactor-builtin%2f" target="_blank">
+        <svg preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M134.941 272.691h56.123v231.051a8.256 8.256 0 0 0 8.258 8.258h95.159a8.256 8.256 0 0 0 8.258-8.258V273.78h64.519a8.26 8.26 0 0 0 8.204-7.315l9.799-85.061a8.259 8.259 0 0 0-8.202-9.203h-74.316V118.88c0-16.073 8.654-24.224 25.726-24.224h48.59a8.258 8.258 0 0 0 8.258-8.258V8.319a8.256 8.256 0 0 0-8.258-8.258h-66.965A65.863 65.863 0 0 0 307.027 0c-11.619 0-52.006 2.281-83.909 31.63-35.348 32.524-30.434 71.465-29.26 78.217v62.352H134.94a8.256 8.256 0 0 0-8.258 8.258v83.975a8.26 8.26 0 0 0 8.259 8.259z" fill="#385c8e"/></svg>
+        </a>
+        <a data-site="linkedin" class="ssba_linkedin_share" href="http://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fpingcap.com%2fblog%2f2017-06-27-refactor-builtin%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg>
+        </a>
+        <a data-site="hackernews" class="ssba_hackernews_share" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-06-27-refactor-builtin%2f&t=Refactoring%20the%20Built-in%20Functions%20in%20TiDB" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 31.254 31.254"><path d="M0 .393v30.469h31.254V.393H0zM17.623 15.27v10.322h-3.992V15.27L7.429 5.192l4.61-.023s3.66 6.486 3.684 6.511h.071c.024-.025 3.779-6.488 3.779-6.488h4.253L17.623 15.27z"/></svg>
+        </a>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+<footer>
+    <div class="container">
+        <div class="flex-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Product</strong></h4>
+                <ul>
+                <li><a href="/docs/">TiDB</a></li>
+                <li><a href="/docs/tispark/tispark-user-guide/">TiSpark</a></li>
+                <li><a href="/docs/ROADMAP/">Roadmap</a></li>
+                <li><a href="/tidb-cloud/">TiDB Cloud</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Docs</strong></h4>
+                <ul>
+                <li><a href="/docs/QUICKSTART/">Quick Start</a></li>
+                <li><a href="/blog/2017-07-24-tidbbestpractice/">Best Practices</a></li>
+                <li><a href="/docs/FAQ/">FAQ</a></li>
+                <li><a href="/docs/tools/syncer/">TiDB Utilities</a></li>
+                <li><a href="/docs/releases/rn/">Release Notes</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Resources</strong></h4>
+                <ul>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/weekly/">Weekly</a></li>
+                <li><a href="https://github.com/pingcap" target="_blank">GitHub</a></li>
+                <li><a href="/tidb-academy/">TiDB Academy</a></li>
+                <li><a href="/community/">TiDB Community</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Company</strong></h4>
+                <ul>
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://angel.co/pingcap-1/jobs" target="_blank">Careers</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/contact-us/">Contact Us</a></li>
+                <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="/terms-of-service/">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Connect</strong></h4>
+                <ul>
+                <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg> Twitter</a></li>
+                <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg> LinkedIn</a></li>
+                <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg>Reddit</a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg>Google Group</a></li>
+                <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg>Stack Overflow</a></li>
+                </ul>
+            </div>
+            <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+    </div>
+    <div class="container copyright-container">
+        <p class="copyright">&copy; 2018 PingCAP. All Rights Reserved.</p>
+        <a href="/blog-cn" class="copyright-btn-lang" id="lang">中文</a>
+    </div>
+</footer>
+<button class="back-to-top" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 284.929 284.929"><path d="M282.082 195.285L149.028 62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665.953-6.567 2.856L2.856 195.285C.95 197.191 0 199.378 0 201.853c0 2.474.953 4.664 2.856 6.566l14.272 14.271c1.903 1.903 4.093 2.854 6.567 2.854s4.664-.951 6.567-2.854l112.204-112.202 112.208 112.209c1.902 1.903 4.093 2.848 6.563 2.848 2.478 0 4.668-.951 6.57-2.848l14.274-14.277c1.902-1.902 2.847-4.093 2.847-6.566.001-2.476-.944-4.666-2.846-6.569z" fill="#FFF"/></svg>
+</button>
+</div>
+<script type="text/javascript">document.getElementById("page-loader").style.display="none",document.getElementById("page-content").style.display="block"</script>
+<div class="overlay"></div>
+<script src="https://download.pingcap.com/js/jquery.min.js"></script><script type="text/javascript" src="/js/doc.js"></script><script type="text/javascript"src="https://download.pingcap.com/js/docsearch.min.js"></script>
+<script type="text/javascript"src="/js/app.js"></script></body>
+</html>

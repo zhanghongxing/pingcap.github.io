@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible"content="IE=edge">
+<meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>About the TiDB Source Code | PingCAP</title>
+<script>
+window.ga =
+    window.ga ||
+    function() {
+        ;(ga.q = ga.q || []).push(arguments)
+    }
+ga.l = +new Date()
+ga('create', 'UA-99991864-4', 'auto')
+ga('send', 'pageview')
+</script>
+<script async src="https://download.pingcap.com/js/ga-analytics.js"></script>
+
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="canonical" href="https://www.pingcap.com/">
+<meta name="description" content="The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.">
+<meta name="robots" content="noodp">
+<meta name="keywords" content="SQL, HTAP, Open Source, Cloud-Native, NewSQL">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About the TiDB Source Code">
+<meta property="og:description" content="The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.">
+<meta property="og:url" content="https://pingcap.com/blog/2017-01-06-about-the-tidb-source-code/">
+<meta property="og:site_name" content="PingCAP">
+<meta property="og:image" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta property="og:image:secure_url" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.">
+<meta name="twitter:title" content="About the TiDB Source Code">
+<meta name="twitter:site" content="@pingcap">
+<meta name="twitter:image:src" content="https://pingcap.com/images/pingcap-opengraph.jpg">
+<meta name="twitter:creator" content="@pingcap">
+
+
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0076/9903.js" async="async"></script>
+
+
+<script type="application/ld+json">
+{
+    "@context": "http:\/\/schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/www.pingcap.com\/",
+    "name": "PingCAP",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/www.pingcap.com\/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/lato/lato-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+<link rel="preload" href="https://download.pingcap.com/fonts/titilliumweb/titilliumweb-regular-webfont.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+<link rel="preload" href="https://download.pingcap.com/js/jquery.min.js" as="script">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/docsearch.min.css">
+
+
+<link rel="stylesheet" href="https://download.pingcap.com/style/github-markdown.css">
+
+
+<link rel="stylesheet" href="/css/doc.css">
+
+    <script type="text/javascript">"/"===location.pathname&&"pingcap.github.io"===location.hostname&&(location.href="/en/")</script>
+<link rel="preload"as="script"href="/js/app.js">
+</head><body ><style type="text/css">
+    .center-element {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+    }
+
+    #page-loader {
+        transform: translate(-50%, -50%) scale(0.6);
+        -webkit-transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    #hexagon {
+        width: 60px;
+        height: auto;
+        overflow: visible;
+        background-color: transparent;
+    }
+
+    #hexagon #hexagon-base,
+    #hexagon #hexagon-line-animation {
+        fill: transparent;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+    }
+
+    #hexagon #hexagon-base {
+        stroke: #cdd5e0;
+    }
+
+    #hexagon #hexagon-line-animation {
+        stroke: #3a59f0;
+        stroke-linecap: round;
+        animation: dash 1.5s linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: 1 431.7;
+        }
+        100% {
+            stroke-dasharray: 260.22 173.48;
+            stroke-dashoffset: -867.4;
+        }
+    }
+</style>
+
+<div id="page-loader" class="center-element">
+    <svg id="hexagon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129.78 150.37">
+        <path id="hexagon-base" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+        <path id="hexagon-line-animation" d="M-1665.43,90.94V35.83a15.09,15.09,0,0,1,6.78-12.59l48.22-31.83a15.09,15.09,0,0,1,16-.38L-1547,19.13a15.09,15.09,0,0,1,7.39,13V90.94a15.09,15.09,0,0,1-7.21,12.87l-47.8,29.24a15.09,15.09,0,0,1-15.75,0l-47.8-29.24A15.09,15.09,0,0,1-1665.43,90.94Z" transform="translate(1667.43 13.09)"/>
+    </svg>
+</div>
+<div id="page-content"style="display:none">
+<header role="navigation" class="fixed-top">
+    <div class="container">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        <div class="nav-wrapper">
+            <div class="navigation">
+                <ul>
+                <li ><a href="/docs">Docs</a></li>
+                <li ><a href="/success-stories">Success Stories</a></li>
+                <li class="sel"><a href="/blog">Blog</a></li>
+                <li ><a href="/about">About</a></li>
+                <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+                </ul>
+            </div>
+            <div class="global-search">
+                <div class="search-wrapper">
+                <span class="icon-search"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#fff" viewBox="0 0 67.125 67.125"><path d="M23.902 0C11.01 0 .523 10.488.523 23.38c0 12.891 10.487 23.379 23.379 23.379a23.258 23.258 0 0 0 14.471-5.037l24.816 24.817c.391.391.902.586 1.414.586s1.023-.195 1.414-.586a2 2 0 0 0 0-2.828L41.293 38.985c3.721-4.142 5.989-9.613 5.989-15.605C47.282 10.488 36.794 0 23.902 0zM4.523 23.38C4.523 12.694 13.216 4 23.902 4c10.687 0 19.38 8.694 19.38 19.38 0 5.396-2.221 10.279-5.791 13.795a1.959 1.959 0 0 0-.488.349 2.003 2.003 0 0 0-.271.343C33.31 40.9 28.825 42.76 23.903 42.76c-10.686-.001-19.38-8.695-19.38-19.38z"/><path d="M24.075 8.591c-8.25 0-14.962 6.712-14.962 14.962a2 2 0 0 0 4 0c0-6.044 4.918-10.962 10.962-10.962a2 2 0 0 0 0-4z"/></svg></span>
+                <input data-lang="en" type="search" id="search-input" placeholder="Search...">
+                </div>
+            </div>
+        </div>
+        <div class="nav-btn nav-slider">
+            <i class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 459 459"><path d="M0 382.5h459v-51H0v51zM0 255h459v-51H0v51zM0 76.5v51h459v-51H0z" fill="#FFF"/></svg></i>
+        </div>
+    </div>
+</header>
+
+
+
+<nav class="mobile-sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+        <a class="nav-brand" href="/en"><img src="/images/pingcap-logo.png" alt="PingCAP"></a>
+        </div>
+    </div>
+    <ul class="ul-base">
+        <li ><a href="/docs">Docs</a></li>
+        <li ><a href="/success-stories">Success Stories</a></li>
+        <li class="sel"><a href="/blog">Blog</a></li>
+        <li ><a href="/about">About</a></li>
+        <li><a class="link-download" href="https://meetings.hubspot.com/kevin255" target="_blank">Free Consultation</a></li>
+    </ul>
+    <div class="nav-footer">
+        <div class="contact-list-wrap">
+        <div class="flex-list">
+            <h4 class="list-title"><strong>Contact</strong></h4>
+            <ul class="social ul-base">
+            <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg></a></li>
+            <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg></a></li>
+            <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg></a></li>
+            <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+        <div class="container">
+        <a href="/blog-cn" class="btn-lang" id="lang">中文</a>
+        </div>
+    </div>
+</nav>
+
+<div class="blog">
+        <div class="container">
+            
+<div class="sidebar nav-tags" data-type="single"><div class="title">Popular Tags<a class="rss" href="/blog/index.xml" title="RSS Feed"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 402.041 402.04"><g fill="#3A59F0"><path d="M54.816 292.382c-15.229 0-28.169 5.331-38.831 15.988C5.33 319.026 0 331.969 0 347.197c0 15.232 5.325 28.172 15.985 38.828 10.662 10.657 23.606 15.988 38.831 15.988 15.227 0 28.168-5.331 38.828-15.988 10.656-10.656 15.986-23.596 15.986-38.828 0-15.229-5.33-28.171-15.986-38.827-10.657-10.657-23.598-15.988-38.828-15.988zM181.01 221.002c-21.51-21.698-46.158-38.97-73.948-51.816-27.79-12.85-56.914-20.511-87.366-22.985h-1.425c-4.949 0-9.042 1.619-12.275 4.854C1.997 154.477 0 158.953 0 164.472v38.543c0 4.757 1.569 8.85 4.708 12.279 3.14 3.429 7.089 5.332 11.848 5.708 43.586 4.189 80.845 21.752 111.773 52.678 30.93 30.926 48.49 68.187 52.677 111.771.382 4.764 2.284 8.712 5.712 11.847 3.427 3.148 7.517 4.72 12.275 4.72h38.545c5.517 0 9.989-1.995 13.415-5.996 3.621-3.812 5.236-8.381 4.863-13.709-2.478-30.447-10.14-59.573-22.987-87.361-12.846-27.792-30.121-52.438-51.819-73.95z"/><path d="M367.728 239.701c-20.365-45.585-48.345-86.078-83.936-121.482-35.405-35.594-75.896-63.572-121.485-83.939C116.723 13.917 68.996 2.494 19.126.02h-.855c-4.949 0-9.136 1.713-12.563 5.14C1.903 8.583 0 12.964 0 18.294v40.825c0 4.76 1.667 8.897 4.996 12.419 3.33 3.523 7.373 5.376 12.132 5.57 40.924 2.478 79.799 12.188 116.63 29.127 36.83 16.94 68.806 38.972 95.93 66.09 27.118 27.123 49.149 59.101 66.089 95.931 16.94 36.836 26.557 75.705 28.839 116.627.195 4.764 2.046 8.809 5.564 12.139 3.524 3.329 7.762 4.999 12.71 4.999h40.823c5.331 0 9.701-1.902 13.134-5.715 3.809-3.806 5.517-8.274 5.144-13.415-2.471-49.874-13.898-97.6-34.263-143.19z"/></g></svg></a></div><a href="#" class="tag all">ALL (44)</a>
+    <div class="tag-list"><a href="#Community" class="tag " data-tag="Community">Community&nbsp;(5)
+                </a><a href="#Engineering" class="tag sel" data-tag="Engineering">Engineering&nbsp;(27)
+                </a><a href="#Golang" class="tag sel" data-tag="Golang">Golang&nbsp;(23)
+                </a><a href="#HTAP" class="tag " data-tag="HTAP">HTAP&nbsp;(3)
+                </a><a href="#Product" class="tag " data-tag="Product">Product&nbsp;(4)
+                </a><a href="#Raft" class="tag " data-tag="Raft">Raft&nbsp;(4)
+                </a><a href="#Rust" class="tag " data-tag="Rust">Rust&nbsp;(17)
+                </a><a href="#Success-Story" class="tag " data-tag="Success-Story">Success-Story&nbsp;(4)
+                </a><a href="#TiDB" class="tag sel" data-tag="TiDB">TiDB&nbsp;(32)
+                </a><a href="#TiKV" class="tag " data-tag="TiKV">TiKV&nbsp;(16)
+                </a><a href="#TiSpark" class="tag " data-tag="TiSpark">TiSpark&nbsp;(2)
+                </a>
+    </div>
+</div>
+<div class="archive">
+                <div class="content markdown-body">
+                    <h1 class="title">About the TiDB Source Code</h1>
+                    <ul class="blog-post-meta">
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-date.svg">Fri, Jan 6, 2017</li>
+                        <li class="meta-item">
+                            <img src="/images/svgs/icon-writer.svg">PingCAP</li>
+                    </ul>
+                    <div class="blog-text">
+
+<p>The target audience of this document is the contributors in the TiDB community. The document aims to help them understand the TiDB project. It covers the system architecture, the code structure, and the execution process.</p>
+
+<h2 id="table-of-content">Table of content</h2>
+
+<ul>
+<li><a href="#system-architecture">System architecture</a></li>
+<li><a href="#overview-of-the-code-structure">Overview of the code structure</a></li>
+<li><a href="#the-protocol-layer">The protocol layer</a></li>
+<li><a href="#the-sql-layer">The SQL layer</a></li>
+<li><a href="#the-optimizer">The optimizer</a></li>
+<li><a href="#the-executor">The executor</a></li>
+<li><a href="#the-distributed-executor">The distributed executor</a></li>
+</ul>
+
+<h1 id="system-architecture">System architecture</h1>
+
+<p><img src="/images/blog/architecture.png" alt=""  /></p>
+
+<p>As is shown in the architecture diagram, the TiDB Server is between the Load Balancer (or Application) and the storage engine layer at the bottom. Within the TiDB server, there are three layers:</p>
+
+<ul>
+<li><p>The MySQL Protocol layer
+This layer has two functions:</p>
+
+<ul>
+<li>At the beginning, it receives the requests from the MySQL client, parses the MySQL Protocol packages to the corresponding commands in TiDB Session.</li>
+<li>In the end, it transfers the result to the MySQL protocol format and returns it to the Client.
+<br /></li>
+</ul></li>
+
+<li><p>The SQL layer
+This layer has the following functions:</p>
+
+<ul>
+<li>Parse and execute the SQL statement</li>
+<li>Make and optimize the query plans</li>
+<li>Generate the optimizer</li>
+<li>Access data through the Storage Engine API layer</li>
+<li>Return the result to the MySQL Protocol layer
+This layer is very important and see <a href="#the-sql-layer">The SQL layer</a> for further information.</li>
+</ul></li>
+
+<li><p>The Storage Engine API layer
+This layer provides transactional (distributed or standalone) storage. There is an abstraction layer between the KV layer and the SQL layer and it enables the SQL layer to see the unified interface and ignore the differences among the KV storage engines.</p></li>
+</ul>
+
+<h1 id="overview-of-the-code-structure">Overview of the code structure</h1>
+
+<p>See the following list for all the packages and their main functions:</p>
+
+<ul>
+<li><p><a href="https://github.com/pingcap/tidb">tidb</a></p>
+
+<p>This package can be considered to be the interface between the MySQL Protocol Layer and the SQL layer. There are three main files:</p>
+
+<ul>
+<li><a href="https://github.com/pingcap/tidb/blob/master/session/session.go"><code>session.go</code></a>: Each session object corresponds to a connection of the MySQL client. The MySQL protocol layer manages the binding between the connection and the session. All the MySQL queries/commands are executed by calling the Session interface.</li>
+<li><a href="https://github.com/pingcap/tidb/blob/master/session/tidb.go"><code>tidb.go</code></a>: This file includes some functions to be called by <code>session.go</code>.</li>
+<li><a href="https://github.com/pingcap/tidb/blob/master/session/bootstrap.go"><code>bootstrap.go</code></a>: If a TiDB Server is started but the system is not yet initialized, the <code>bootstrap.go</code> file will initiate the system. See the following section for the detailed information.</li>
+</ul></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/docs">docs</a></p></li>
+</ul>
+
+<p>This package contains some brief documents of TiDB. See <a href="https://github.com/pingcap/docs">Documents</a> for all the detailed documents.</p>
+
+<ul>
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/executor">executor</a></p>
+
+<p>This is the TiDB executor. A SQL statement will be transferred to the combination a series of executors (operators). The main interface exposed in this package is <code>Executor</code>:</p></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Executor</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#75715e">// Returns the next row of data (If the result is empty, then there is no more data)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Next</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Row</span>, <span style="color:#66d9ef">error</span>) 
+    <span style="color:#75715e">// Close the current Executor and clean up
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Close</span>() <span style="color:#66d9ef">error</span>
+    <span style="color:#75715e">//Change the result Schema from the executor, including the details of each Field
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Schema</span>() <span style="color:#a6e22e">expression</span>.<span style="color:#a6e22e">Schema</span>
+}</code></pre></div>
+<p>All kinds of executors implement this interface. The executing engine in TiDB adopts the <code>Volcano</code> model where the executors interact with each other through the above 3 interfaces. Each executor only needs to access the data through the <code>Next</code> interface and the meta data through the <code>Schema</code> interface.</p>
+
+<ul>
+<li><p><a href="https://github.com/pingcap/tidb/tree/rc2.3/plan">plan</a></p>
+
+<p>This is the core of the entire SQL layer. After a SQL statement is parsed to an abstract syntax tree (AST), the query plan is generated and optimized (including logical optimization and physical optimization) in this package.</p>
+
+<p>The following functions are also included in this package:</p>
+
+<ul>
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/validator.go"><code>validator.go</code></a>: Validates the AST.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/preprocess.go"><code>preprocess.go</code></a>: Currently, there is only <code>name resolve</code>.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/resolver.go"><code>resolver.go</code></a>`: Parses the name. To parse and bind the identifier of database/table/column/alias to the corresponding column or Field.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/typeinferer.go"><code>typeinferer.go</code></a>: Infers the type of the result. For SQL statements, the type of the result does not need inference.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/logical_plan_builder.go"><code>logical_plan_builder.go</code></a>: Makes optimized logical query plans.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/physical_plan_builder.go"><code>physical_plan_builder.go</code></a>: Makes the physical query plans based on the logical plans.</p></li>
+</ul></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/privilege">privilege</a></p>
+
+<p>The authority control related interface which is implemented in the <a href="https://github.com/pingcap/tidb/tree/master/privilege/privileges"><code>privilege/privileges</code></a> directory.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/sessionctx">sessionctx</a></p>
+
+<p>Stores the state information in the session, such as the session variables. The information can be obtained from the session. It is included in a separate directory for clear dependency and to avoid the problems of circular dependencies.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/table">table</a></p>
+
+<p>The <code>table</code> interface which is a layer of abstraction of the tables in the database. It provides many operations to the table such as getting the information of the column or reading a row of data. The implementation is in the <a href="https://github.com/pingcap/tidb/tree/master/table/tables">table/tables</a> directory.</p>
+
+<p>The directory also includes the abstraction of Column and Index.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/tidb-server">tidb-server</a></p>
+
+<p>The <a href="https://github.com/pingcap/tidb/blob/master/tidb-server/main.go">main.go</a> file of the TiDB Server which is mainly the codes to start the server.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/server">server</a></p>
+
+<p>The implementation of the MySQL Protocol which is to parse the protocol and to pass the command/query.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/ast">ast</a></p>
+
+<p>The SQL statement will be parsed to be an abstract syntax tree. The data structure is defined in the <a href="https://github.com/pingcap/tidb/tree/master/ast">ast</a> directory. Each node must implement the <code>visitor</code> interface and call the <code>Accept</code> method in the node to traverse the tree.</p>
+
+<p>If new syntax support is needed, besides adding the rule to <a href="https://github.com/pingcap/tidb/tree/master/parser">parser</a>, you also need to add the data structure to this directory.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/ddl">ddl</a></p>
+
+<p>The related codes for asynchronous schema changes which is similar to the implementation in <a href="http://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41344.pdf">Google F1</a>.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/domain">domain</a></p>
+
+<p><a href="https://github.com/pingcap/tidb/tree/master/domain">domain</a> can be considered as a storage space where databases and tables are created. Somewhat like Name Space, the databases with the same name can exist in different domains. Domains bind with the information schema detail.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/expression">expression</a></p>
+
+<p>The definition of the expressions. See the following for the most important interface:</p></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Expression</span> <span style="color:#66d9ef">interface</span> {
+<span style="color:#f92672">...</span>..
+}</code></pre></div>
+<p>The following lists the expressions that implement the interface:</p>
+
+<ul>
+<li>Scalar Function: Scalar Function expressions</li>
+<li>Aggregate Function: Aggregate Function expressions</li>
+<li>Column: Column expressions</li>
+
+<li><p>Const: Constant expressions</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/infoschema">infoschema</a></p>
+
+<p>The implementation of <code>InformationSchema</code> which provides the details of the <code>db/table/column</code>.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/kv">kv</a></p>
+
+<p>Key-Value related interface definition and some of the implementations, including <code>Retriever / Mutator / Transaction / Snapshot / Storage / Iterator</code>, etc. A unified abstraction of the underlying Key-Value storages.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/model">model</a></p>
+
+<p>The DDL / DML related data structure supported by TiDB, including <code>DBInfo / TableInfo / ColumnInfo / IndexInfo</code>, etc.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/parser">parser</a></p>
+
+<p>The syntax parsing module, including lexical analysis (<a href="https://github.com/pingcap/tidb/blob/master/parser/lexer.go">lexer.go</a>) and syntax analysis (<a href="https://github.com/pingcap/tidb/blob/master/parser/parser.y">parser.y</a>). The main interface to the external is <code>Parse ()</code> which is to parse the SQL text into AST.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/store">store</a></p>
+
+<p>The implementation of the Key-Value store at the bottom. If you want to plug in a new storage engines, you can package the storage engine and put the code in this package. The new storage engine needs to implement the interface defined in the <a href="https://github.com/pingcap/tidb/tree/master/kv">kv</a> package.</p>
+
+<p>Currently, there are two storage engines: TiKV, a distributed storage engine, and localstore/{goleveldb/boltdb}, a stand-alone storage engine.</p>
+
+<p>For more information about the KV and store, see <a href="https://github.com/ngaut/builddatabase/blob/master/tidb/storage.md">How to Plug in a New Storage Engine</a> (Currently in Chinese).</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/terror">terror</a></p>
+
+<p>The error system for TiDB. For more information, see <a href="https://docs.google.com/a/pingcap.com/document/d/1L7th17VTZCOeb4RfFqgs9cya6yORKqWcjB2fYqckOFU/edit?usp=sharing">Detailed specification</a> (Currently in Chinese).</p></li>
+
+<li><p>context</p>
+
+<p>The <code>context</code> interface. <code>Session</code> is the implementation of the <code>context</code> interface. The reason that we have an interface is to avoid the circular dependencies. All the state information of <code>session</code> can be accessed using this interface.</p></li>
+
+<li><p>inspectkv</p>
+
+<p>The auxiliary check package for TiDB SQL data and Key-Value storage. In the future, it will be used to access TiKV from the external and will be re-defined and developed.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/meta">meta</a></p>
+
+<p>The definition of the metadata related constants and common functions for TiDB. In <a href="https://github.com/pingcap/tidb/tree/master/meta/autoid">meta/autoid</a>, an API is defined for ID auto-increment within a globally unique session. The meta information depends on this tool.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/mysql">mysql</a></p>
+
+<p>MySQL related constant definitions.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/structure">structure</a></p>
+
+<p>A layer of encapsulation on top of Key-Value which supports rich Key-Value types, such as string, list, hash, etc. The package is mainly used in asynchronous Schema changes.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/util">util</a></p>
+
+<p>Some utility classes. The 7 package is very important because it contains the definitions of the data types and the operations toward different kinds of data type objects.</p></li>
+
+<li><p><a href="https://github.com/pingcap/tidb/tree/master/distsql">distsql</a></p>
+
+<p>The execution interface for distributed SQL. If the storage engine at the bottom supports distributed executor, it can send requests through this interface. See <a href="#the-distributed-executor">The distributed executor</a> for further information.</p></li>
+</ul>
+
+<h1 id="the-protocol-layer">The protocol layer</h1>
+
+<p>The protocol layer is the interface to interact with the applications. Currently, TiDB supports the MySQL protocol only. All the related codes are in the <a href="https://github.com/pingcap/tidb/tree/master/server">server</a> package.</p>
+
+<p>The main function of the protocol layer is to manage the client connections, parse the MySQL commands, and return the execution results. This layer is implemented according to the MySQL protocol, see <a href="https://dev.mysql.com/doc/internals/en/client-server-protocol.html">MySQL Client/Server Protocol</a> on the MySQL website for further information.</p>
+
+<p>For a single connection, the entry point method is the <a href="https://github.com/pingcap/tidb/blob/master/server/conn.go#L350">dispatch</a> of the <code>clientConn</code> class, where the protocol is parsed and different processing functions are called.</p>
+
+<p><img src="/images/blog/protocol_layer.png" alt=""  /></p>
+
+<h1 id="the-sql-layer">The SQL layer</h1>
+
+<p>The following sections are about how the TiDB SQL layer works and how a SQL statement changes from a piece of text to an execution result set. The introduction is focused on the SQL layer only and the Key-Value layer is not covered.</p>
+
+<p>Generally speaking, a SQL statement goes through the following process:</p>
+
+<p>Parse statement -&gt; Validate statement -&gt; Optimize statement -&gt; Generate access plan -&gt; Execute access plan</p>
+
+<p>The following diagram shows how TiDB processes a SQL statement:</p>
+
+<p><img src="/images/blog/process_flow.png" alt=""  /></p>
+
+<p>The entry point of the process is in the <a href="https://github.com/pingcap/tidb/blob/master/session/session.go"><code>session.go</code></a> file. TiDB-Server calls the <code>Session.Execute()</code> interface, inputs the SQL statement and implements <code>Session.Execute()</code>.</p>
+
+<ol>
+<li>First, call <code>Compile()</code> to parse the SQL statement using <code>tidb.Parse()</code> and get a list of <code>stmt</code> where each statement is an AST and each syntax unit is a Node of the AST. The structure is defined in the <a href="https://github.com/pingcap/tidb/tree/master/ast">ast</a> package.</li>
+<li>After the AST is got, call the the <code>Compiler</code> in the <a href="https://github.com/pingcap/tidb/tree/master/executor">executor</a> package. Input the AST and get <code>Compiler.Compile()</code>. During this process, the statement validation, query plan generation and optimization are all completed.</li>
+<li>In <code>Compiler.Compile()</code>, call <code>plan.Validate()</code> in plan/validator.go to validate the statement and then go to the <code>Preprocess</code> process. At the current stage, <code>Preprocess</code> has only finished name parsing and bound the column or alias name to the corresponding field. Take the &ldquo;select c from t;&rdquo; statement for an example, <code>Preprocess</code> binds the name <code>c</code> to the corresponding column in the table <code>t</code>. See plan/resolver.go for the detailed implementation. After this, enter <code>optimizer.Optimize()</code>.</li>
+<li>In the <code>Optimize()</code> method, infer the result of each node in AST. Take the &ldquo;select 1, &lsquo;xx&rsquo;, c from t;” statement as an example, for the select fields, the first field is &ldquo;1&rdquo; whose type is <code>Longlong</code>; the second field is &ldquo;&lsquo;xx&rsquo;&rdquo; whose field is <code>VarString</code>; the third field is &ldquo;c&rdquo; whose type is the type of column <code>c</code> in the table <code>t</code>. Note that besides the type information, the other information like charset also needs to be inferred. See plan/typeinferer.go for the detailed implementation.</li>
+<li>After the type inference, use the <code>planBuilder.build()</code> method for logical optimization which is to do equivalent transformation and simplification for AST based on the algebraic operation. For example, &ldquo;select c from t where c &gt; 1+1*2;&rdquo; can be equivalently transformed to &ldquo;select c from t where c &gt; 3;&rdquo;.</li>
+<li>After the logical optimization, the next step is physical optimization. The process involves generating query plan tree and transforming the tree according to the index, rules and the cost model to reduce the cost of the query process. The entry point is in the <code>doOptimize()</code> method in the <a href="https://github.com/pingcap/tidb/blob/master/plan/optimizer.go">plan/optimizer.go </a> file.</li>
+<li>When the query plan is generated, it will be transformed to the executor. Use the <code>Exec</code> interface to get the <code>RecordSet</code> object and call the <code>Next()</code> method to get the query result.</li>
+</ol>
+
+<h1 id="the-optimizer">The optimizer</h1>
+
+<p>The optimizer is the core of the database and it determines how a statement is executed. The optimizer to a database is what a commander-in-chief to an army.  As we all know, the commander-in-chief&rsquo;s failure is the disaster of the entire army. The same applies to the optimizer and database. For the same statement, the running time varies significantly using different query plans. The research on the optimization is an active academic field. There is no limit on optimization and you can never overestimate the efforts and importance it takes.</p>
+
+<p>There are following types of optimization methods:</p>
+
+<ul>
+<li><p>Rule based optimizer: optimize a plan by using a set of rules to determine the execution plan for a given query.</p>
+
+<p>This type of optimizer is easy to implement. It only takes some frequently used rules and it works well for most of the common queries. But you cannot choose the best solution based on the true data scenario. Take the &ldquo;select * from t where c1 = 10 and c2 &gt; 100&rdquo; statement as an example, when selecting index, if you only follow the rules, you must use the index in <code>c1</code> for the query. But if all the values of <code>c1</code> in <code>t</code> are <code>10</code>, it will be a bad query plan. If there is information about how the data is distributed in the table, it will help choose a better plan.</p></li>
+
+<li><p>Cost based optimizer: optimize a plan by calculating the query cost</p>
+
+<p>This type of optimizer is more complex. There are two key problems: one is how to get the true distribution information of the data; the other one is how to estimate the cost of a certain query plan based on this information.</p></li>
+
+<li><p>History based optimizer: optimize a plan according to the history query information</p>
+
+<p>This type of optimizer is seldom used, especially in OLTP databases.</p></li>
+</ul>
+
+<p>The codes for the TiDB optimizer is included in the <a href="https://github.com/pingcap/tidb/tree/rc2.3/plan">plan</a> package. The package is mainly to transform an AST to a query plan tree. The nodes of the tree are different types of logical operator and physical operator. All sorts of optimization towards the query plan are all based on the methods of calling the root node, optimizing all the related nodes recursively, then transforming and trimming each node on the tree.</p>
+
+<p>The most important interfaces are included in the <a href="https://github.com/pingcap/tidb/blob/rc2.3/plan/plan.go">plan.go</a> file, including:</p>
+
+<ul>
+<li>Plan: the interface to all the query plans</li>
+<li>LogicalPlan: the logical query plan which needs to be implemented by all the logical operator</li>
+<li>PhysicalPlan: the physical query plan which needs to be implemented by all the physical operator</li>
+</ul>
+
+<p>The entry point of the logical optimization is <code>planbuilder.build()</code>. The input is AST and the output is the logical query plan tree. And then perform logical optimization on this tree as follows:</p>
+
+<ul>
+<li>Call the <code>PredicatePushDown</code>interface of <code>LogicalPlan</code> and push down the predicate as much as possible</li>
+<li>Call the <code>PruneColumns</code> interface of <code>LogicalPlan</code> and cut the unnecessary columns</li>
+<li>Call <code>aggPushDownSolver.aggPushDown</code> and push down the aggregate operation before <code>Join</code></li>
+</ul>
+
+<p>After you get the logically optimized query plan tree, the next step is to get it physically optimized. The entry point is to call the <code>convert2PhysicalPlan(&amp;requiredProperty{})</code> towards the root node of the logical query plan tree. The <code>requiredProperty</code> is the requirement about the order and number of rows of the returned result.</p>
+
+<p>Starting from the root node, each node on the logical query plan tree is called recursively and transformed from a logical operator to a physical operator until a better query path is found based on the query cost of each node.</p>
+
+<h1 id="the-executor">The executor</h1>
+
+<p>Although the optimizer is the core component, an excellent database cannot make it without an excellent executor. The executor is to a database is what brilliant soldiers to an army. No matter how good the commander-in-chief is, without good soldiers, the army can&rsquo;t win in the battlefield.</p>
+
+<p>Compared with MySQL, TiDB has two advantages: one is the massively parallel processing (MPP) framework which enables computing on multiple TiKV and TiDB nodes to improve the efficiency and speed as much as possible; the other one is that a single operator can compute parallel as much as possible such as the operators like <code>Join</code>/ <code>Union</code>. TiDB starts several threads at the same time. The entire data computing process makes a pipeline and cut the waiting time of each operator as much as possible. This is why TiDB is better than MySQL when processing large amounts of data.</p>
+
+<p>The most important interface is in the <a href="https://github.com/pingcap/tidb/blob/master/executor/executor.go">executor.go</a> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Executor executes a query.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Executor</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Next</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Row</span>, <span style="color:#66d9ef">error</span>)
+    <span style="color:#a6e22e">Close</span>() <span style="color:#66d9ef">error</span>
+    <span style="color:#a6e22e">Schema</span>() <span style="color:#a6e22e">expression</span>.<span style="color:#a6e22e">Schema</span>
+}</code></pre></div>
+<p>The physical query plan tree from the optimizer is transformed to an executor. Each node on the tree will implement the interface. The executors pass data through the <code>Next</code> interface. Take &ldquo;select c1 from t where c2 &gt; 10;&rdquo; as an example, the final executor are the three executors: <code>Projection-&gt;Filter-&gt;TableScan</code>. The <code>Projection</code> on the top layer continuously calls the <code>Next</code> interface until the <code>TableScan</code> layer at the bottom and access data from the table.</p>
+
+<h1 id="the-distributed-executor">The distributed executor</h1>
+
+<p>As a distributed database, there is a distributed computing framework inside TiDB. A running query is distributed and parallelized as much as possible. The entry point of the framework is in the <a href="https://github.com/pingcap/tidb/tree/master/distsql">distsql</a> package. The following API and two interfaces are the most important part:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Select do a select request, returns SelectResult.
+</span><span style="color:#75715e">// conncurrency: The max concurrency for underlying coprocessor request.
+</span><span style="color:#75715e">// keepOrder: If the result should returned in key order. For example if we need keep data in order by
+</span><span style="color:#75715e">//            scan index, we should set keepOrder to true.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Select</span>(<span style="color:#a6e22e">client</span> <span style="color:#a6e22e">kv</span>.<span style="color:#a6e22e">Client</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">tipb</span>.<span style="color:#a6e22e">SelectRequest</span>, <span style="color:#a6e22e">keyRanges</span> []<span style="color:#a6e22e">kv</span>.<span style="color:#a6e22e">KeyRange</span>, <span style="color:#a6e22e">concurrency</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">keepOrder</span> <span style="color:#66d9ef">bool</span>) (<span style="color:#a6e22e">SelectResult</span>, <span style="color:#66d9ef">error</span>)
+
+<span style="color:#75715e">// SelectResult is an iterator of coprocessor partial results.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SelectResult</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#75715e">// Next gets the next partial result.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Next</span>() (<span style="color:#a6e22e">PartialResult</span>, <span style="color:#66d9ef">error</span>)
+	<span style="color:#75715e">// SetFields sets the expected result type.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">SetFields</span>(<span style="color:#a6e22e">fields</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">FieldType</span>)
+	<span style="color:#75715e">// Close closes the iterator.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Close</span>() <span style="color:#66d9ef">error</span>
+    <span style="color:#f92672">...</span>
+}
+
+<span style="color:#75715e">// PartialResult is the result from a single region server.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PartialResult</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#75715e">// Next returns the next row of the sub result.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// If no more row to return, data would be nil.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Next</span>() (<span style="color:#a6e22e">handle</span> <span style="color:#66d9ef">int64</span>, <span style="color:#a6e22e">data</span> []<span style="color:#a6e22e">types</span>.<span style="color:#a6e22e">Datum</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+	<span style="color:#75715e">// Close closes the partial result.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Close</span>() <span style="color:#66d9ef">error</span>
+}</code></pre></div>
+<p><code>Select()</code> is the most important interface of <code>DistSQL</code>. There are two parameters:</p>
+
+<ol>
+<li><p>The first parameter is <code>kv.Client</code>. As long as a Key-Value engine is transactional, meets the Key-Value interface and some interfaces of the <code>Client</code>, the engine can work with TiDB. Currently, some partners are working together with TiDB to run TiDB on other Key-Value storage engines and support distributed SQL.</p></li>
+
+<li><p>The second parameter is <code>SelectRequest</code>, which is constructed by the executor on the upper layer. It puts the computing logic, such as whether to sort or aggregate the expressions, in <code>req</code> which is a <code>Protobuf</code> structure, sends to the <code>Select</code> interface, and finally sends to the computing TiKV region server.</p></li>
+</ol>
+
+<p><img src="/images/blog/dist_sql_example.png" alt=""  /></p>
+
+<p>The distributed executor is mainly about distributing tasks and collecting results. The <code>Select</code> interface returns a data structure, which is called <code>SelectResult</code>. The structure can be considered to be an iterator. Because there are many region servers at the bottom layer, the results returned from each node is <code>PartialResult</code>. On top of these results is an encapsulated <code>SelectResult</code> which is an iterator of <code>PartialResult</code>. The next <code>PartialResult</code> can be obtained by using the <code>next</code> method.</p>
+
+<p>The internal implementation of the <code>SelectResult</code> can be considered to be a pipeline. TiDB can send requests to each region server concurrently and return the results to the upper layer. The order is determined by the order of the returned results from the bottom layers and the <code>KeepOrder</code> parameter of the <code>Select</code> interface.</p>
+
+<p>See the related code in the <a href="https://github.com/pingcap/tidb/tree/master/distsql">distsql</a> package and the <a href="https://github.com/pingcap/tidb/blob/master/store/tikv/coprocessor.go">store/tikv/coprocessor.go</a> file.</p>
+</div>
+                </div><div class="ssba-wrap">
+    <div class="ssba">
+        <a data-site="" class="ssba_twitter_share" href="http://twitter.com/share?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-01-06-about-the-tidb-source-code%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg>
+        </a>
+        <a data-site="reddit" class="ssba_reddit_share" href="http://reddit.com/submit?url=https%3a%2f%2fpingcap.com%2fblog%2f2017-01-06-about-the-tidb-source-code%2f&title=About%20the%20TiDB%20Source%20Code" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 429.709 429.709" width="18" height="18"><path d="M429.709 196.618c0-29.803-24.16-53.962-53.963-53.962-14.926 0-28.41 6.085-38.176 15.881-30.177-19.463-68.73-31.866-111.072-33.801.026-17.978 8.078-34.737 22.104-45.989 14.051-11.271 32.198-15.492 49.775-11.588l2.414.536c-.024.605-.091 1.198-.091 1.809 0 24.878 20.168 45.046 45.046 45.046s45.046-20.168 45.046-45.046c0-24.879-20.168-45.046-45.046-45.046-15.997 0-30.01 8.362-38.002 20.929l-4.317-.959c-24.51-5.446-49.807.442-69.395 16.156-19.564 15.695-30.792 39.074-30.818 64.152-42.332 1.934-80.878 14.331-111.052 33.785-9.767-9.798-23.271-15.866-38.2-15.866C24.16 142.656 0 166.815 0 196.618c0 20.765 11.75 38.755 28.946 47.776a106.48 106.48 0 0 0-1.993 20.462c0 77.538 84.126 140.395 187.901 140.395s187.901-62.857 187.901-140.395c0-6.948-.687-13.775-1.991-20.452 17.197-9.023 28.945-27.019 28.945-47.786zM345.746 47.743c12 0 21.762 9.762 21.762 21.762 0 11.999-9.762 21.761-21.762 21.761s-21.762-9.762-21.762-21.761c0-12 9.763-21.762 21.762-21.762zM23.284 196.618c0-16.916 13.762-30.678 30.678-30.678 7.245 0 13.895 2.538 19.142 6.758-16.412 14.08-29.118 30.631-37.007 48.804-7.748-5.565-12.813-14.634-12.813-24.884zm310.5 148.859c-31.492 23.53-73.729 36.489-118.929 36.489s-87.437-12.959-118.929-36.489c-29.462-22.013-45.688-50.645-45.688-80.621 0-29.977 16.226-58.609 45.688-80.622 31.492-23.53 73.729-36.489 118.929-36.489s87.437 12.959 118.929 36.489c29.462 22.013 45.688 50.645 45.688 80.622-.001 29.976-16.226 58.608-45.688 80.621zm59.821-123.989c-7.891-18.17-20.596-34.716-37.005-48.794 5.247-4.22 11.901-6.754 19.147-6.754 16.916 0 30.678 13.762 30.678 30.678-.001 10.249-5.072 19.307-12.82 24.87z" fill="#181a1c"/><g fill="#d80000"><circle cx="146.22" cy="232.07" r="24.57"/><circle cx="283.48" cy="232.07" r="24.57"/></g><path d="M273.079 291.773c-17.32 15.78-39.773 24.47-63.224 24.47-26.332 0-50.729-10.612-68.696-29.881-4.384-4.704-11.751-4.96-16.454-.575-4.703 4.384-4.96 11.752-.575 16.454 22.095 23.695 53.341 37.285 85.726 37.285 29.266 0 57.288-10.847 78.905-30.543 4.752-4.33 5.096-11.694.765-16.446-4.329-4.749-11.688-5.097-16.447-.764z" fill="#181a1c"/></svg>
+        </a>
+        <a data-site="" class="ssba_facebook_share" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-01-06-about-the-tidb-source-code%2f" target="_blank">
+        <svg preserveAspectRatio="xMidYMid" width="18" height="18" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M134.941 272.691h56.123v231.051a8.256 8.256 0 0 0 8.258 8.258h95.159a8.256 8.256 0 0 0 8.258-8.258V273.78h64.519a8.26 8.26 0 0 0 8.204-7.315l9.799-85.061a8.259 8.259 0 0 0-8.202-9.203h-74.316V118.88c0-16.073 8.654-24.224 25.726-24.224h48.59a8.258 8.258 0 0 0 8.258-8.258V8.319a8.256 8.256 0 0 0-8.258-8.258h-66.965A65.863 65.863 0 0 0 307.027 0c-11.619 0-52.006 2.281-83.909 31.63-35.348 32.524-30.434 71.465-29.26 78.217v62.352H134.94a8.256 8.256 0 0 0-8.258 8.258v83.975a8.26 8.26 0 0 0 8.259 8.259z" fill="#385c8e"/></svg>
+        </a>
+        <a data-site="linkedin" class="ssba_linkedin_share" href="http://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fpingcap.com%2fblog%2f2017-01-06-about-the-tidb-source-code%2f" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg>
+        </a>
+        <a data-site="hackernews" class="ssba_hackernews_share" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fpingcap.com%2fblog%2f2017-01-06-about-the-tidb-source-code%2f&t=About%20the%20TiDB%20Source%20Code" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 31.254 31.254"><path d="M0 .393v30.469h31.254V.393H0zM17.623 15.27v10.322h-3.992V15.27L7.429 5.192l4.61-.023s3.66 6.486 3.684 6.511h.071c.024-.025 3.779-6.488 3.779-6.488h4.253L17.623 15.27z"/></svg>
+        </a>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+<footer>
+    <div class="container">
+        <div class="flex-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Product</strong></h4>
+                <ul>
+                <li><a href="/docs/">TiDB</a></li>
+                <li><a href="/docs/tispark/tispark-user-guide/">TiSpark</a></li>
+                <li><a href="/docs/ROADMAP/">Roadmap</a></li>
+                <li><a href="/tidb-cloud/">TiDB Cloud</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Docs</strong></h4>
+                <ul>
+                <li><a href="/docs/QUICKSTART/">Quick Start</a></li>
+                <li><a href="/blog/2017-07-24-tidbbestpractice/">Best Practices</a></li>
+                <li><a href="/docs/FAQ/">FAQ</a></li>
+                <li><a href="/docs/tools/syncer/">TiDB Utilities</a></li>
+                <li><a href="/docs/releases/rn/">Release Notes</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Resources</strong></h4>
+                <ul>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/weekly/">Weekly</a></li>
+                <li><a href="https://github.com/pingcap" target="_blank">GitHub</a></li>
+                <li><a href="/tidb-academy/">TiDB Academy</a></li>
+                <li><a href="/community/">TiDB Community</a></li>
+                </ul>
+            </div>
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Company</strong></h4>
+                <ul>
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://angel.co/pingcap-1/jobs" target="_blank">Careers</a></li>
+                <li><a href="/news/">News</a></li>
+                <li><a href="/contact-us/">Contact Us</a></li>
+                <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="/terms-of-service/">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact-list-wrap">
+            <div class="flex-list">
+                <h4 class="list-title"><strong>Connect</strong></h4>
+                <ul>
+                <li><a href="https://twitter.com/PingCAP" class="twitter" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="18" height="18"><path d="M612 116.258a250.714 250.714 0 0 1-72.088 19.772c25.929-15.527 45.777-40.155 55.184-69.411-24.322 14.379-51.169 24.82-79.775 30.48-22.907-24.437-55.49-39.658-91.63-39.658-69.334 0-125.551 56.217-125.551 125.513 0 9.828 1.109 19.427 3.251 28.606-104.326-5.24-196.835-55.223-258.75-131.174-10.823 18.51-16.98 40.078-16.98 63.101 0 43.559 22.181 81.993 55.835 104.479a125.556 125.556 0 0 1-56.867-15.756v1.568c0 60.806 43.291 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.199 117.253 87.194-42.947 33.654-97.099 53.655-155.916 53.655-10.134 0-20.116-.612-29.944-1.721 55.567 35.681 121.536 56.485 192.438 56.485 230.948 0 357.188-191.291 357.188-357.188l-.421-16.253c24.666-17.593 46.005-39.697 62.794-64.861z"/></svg> Twitter</a></li>
+                <li><a href="https://www.linkedin.com/company/pingcap/" class="linkedin" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 438.536 438.535"><path d="M5.424 145.895H99.64v282.932H5.424zM408.842 171.739c-19.791-21.604-45.967-32.408-78.512-32.408-11.991 0-22.891 1.475-32.695 4.427-9.801 2.95-18.079 7.089-24.838 12.419-6.755 5.33-12.135 10.278-16.129 14.844-3.798 4.337-7.512 9.389-11.136 15.104v-40.232h-93.935l.288 13.706c.193 9.139.288 37.307.288 84.508 0 47.205-.19 108.777-.572 184.722h93.931V270.942c0-9.705 1.041-17.412 3.139-23.127 4-9.712 10.037-17.843 18.131-24.407 8.093-6.572 18.13-9.855 30.125-9.855 16.364 0 28.407 5.662 36.117 16.987 7.707 11.324 11.561 26.98 11.561 46.966V428.82h93.931V266.664c-.007-41.688-9.897-73.328-29.694-94.925zM53.103 9.708c-15.796 0-28.595 4.619-38.4 13.848C4.899 32.787 0 44.441 0 58.529 0 72.42 4.758 84.034 14.275 93.358c9.514 9.325 22.078 13.99 37.685 13.99h.571c15.99 0 28.887-4.661 38.688-13.99 9.801-9.324 14.606-20.934 14.417-34.829-.19-14.087-5.047-25.742-14.561-34.973C81.562 14.323 68.9 9.708 53.103 9.708z"/></svg> LinkedIn</a></li>
+                <li><a href="https://www.reddit.com/r/TiDB/" class="reddit" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.748 279.748" width="18" height="18"><path d="M279.748 133.142c0-19.299-15.701-35-35-35-10.768 0-20.674 4.812-27.279 13.064-18.532-8.431-39.663-13.626-62.015-15.271l19.206-60.692 42.895 9.294c3.285 12.782 14.901 22.258 28.693 22.258 16.336 0 29.627-13.29 29.627-29.626 0-16.336-13.291-29.627-29.627-29.627-11.801 0-21.999 6.941-26.759 16.95l-49.497-10.725a10.002 10.002 0 0 0-11.651 6.756L134.636 95.43c-26.164.638-50.988 6.053-72.356 15.775-6.606-8.251-16.512-13.063-27.28-13.063-19.299 0-35 15.701-35 35 0 9.373 3.683 18.173 10.222 24.709-3.9 8.37-5.875 17.076-5.875 25.936 0 24.048 14.396 46.492 40.538 63.199 25.447 16.264 59.183 25.221 94.989 25.221 35.808 0 69.542-8.957 94.989-25.221 26.142-16.707 40.538-39.151 40.538-63.199 0-8.859-1.975-17.565-5.875-25.936 6.539-6.537 10.222-15.336 10.222-24.709zM15.369 145.139c-2.212-3.59-3.369-7.688-3.369-11.997 0-12.682 10.317-23 23-23 5.444 0 10.558 1.851 14.649 5.258-14.622 8.302-26.132 18.289-34.28 29.739zm52.671 20.266c0-13.785 11.215-25 25-25s25 11.215 25 25-11.215 25-25 25-25-11.215-25-25zm123.119 57.054c-9.745 10.637-29.396 17.244-51.285 17.244-21.888 0-41.539-6.607-51.284-17.244a9.937 9.937 0 0 1-2.617-7.192 9.933 9.933 0 0 1 3.235-6.937 9.974 9.974 0 0 1 6.754-2.627c2.797 0 5.484 1.183 7.373 3.244 5.803 6.333 20.827 10.756 36.539 10.756s30.737-4.423 36.539-10.756a10.022 10.022 0 0 1 7.374-3.244c2.508 0 4.906.933 6.755 2.627a9.928 9.928 0 0 1 3.234 6.937 9.933 9.933 0 0 1-2.617 7.192zm-4.451-32.054c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm77.671-45.266c-8.147-11.45-19.657-21.436-34.28-29.739 4.092-3.408 9.205-5.258 14.649-5.258 12.683 0 23 10.318 23 23 0 4.309-1.157 8.407-3.369 11.997z"/></svg>Reddit</a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/tidb-user" class="google-plus" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491.858 491.858" width="18" height="18"><path d="M377.472 224.957H201.319v58.718H308.79c-16.032 51.048-63.714 88.077-120.055 88.077-69.492 0-125.823-56.335-125.823-125.824 0-69.492 56.333-125.823 125.823-125.823 34.994 0 66.645 14.289 89.452 37.346l42.622-46.328c-34.04-33.355-80.65-53.929-132.074-53.929C84.5 57.193 0 141.693 0 245.928s84.5 188.737 188.736 188.737c91.307 0 171.248-64.844 188.737-150.989v-58.718l-.001-.001zM491.858 224.857h-36.031v-36.031h-30.886v36.031H388.91v30.883h36.031v36.032h30.886V255.74h36.031z"/></svg>Google Group</a></li>
+                <li><a href="https://stackoverflow.com/questions/tagged/tidb" class="stack-overflow" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 547.597 547.597"><path d="M140.81 475.111h.024l189.91-.269c8.434-.013 15.3-6.886 15.3-15.318v-21.298c0-8.428-6.854-15.288-15.3-15.288l-189.91.264c-8.433.012-15.3 6.885-15.3 15.318v21.31c.001 8.427 6.855 15.281 15.276 15.281z"/><path d="M58.667 517.854c.073 29.26.073 29.449 3.072 29.449h.055l10.612.294h.086s85.814 0 171.629-.036c42.914-.019 85.821-.05 118-.092 16.09-.019 29.505-.043 38.887-.074 17.803-.055 17.803-.055 17.803-3.072l.3-10.697V333.299c0-8.434-6.866-15.3-15.3-15.3h-11.909c-8.434 0-15.3 6.866-15.3 15.3V496.22c0 5.062-4.119 9.18-9.181 9.18H110.51c-5.061 0-9.18-4.118-9.18-9.18V333.299c0-8.434-6.867-15.3-15.3-15.3H73.82c-8.433 0-15.3 6.86-15.3 15.3 0 23.342.012 76.084.055 122.981.019 23.447.05 45.442.092 61.574z"/><path d="M142.322 397.399l189.402 17.467c.478.043.948.062 1.413.062 7.956 0 14.468-5.985 15.159-13.917l1.83-21.096c.729-8.396-5.508-15.851-13.898-16.628l-189.102-17.461c-8.593-.795-15.869 5.441-16.653 13.825l-1.97 21.108a15.172 15.172 0 0 0 3.452 11.181 15.19 15.19 0 0 0 10.367 5.459zM437.636 208.849a15.253 15.253 0 0 0 17.694 12.443l21.065-3.678c8.311-1.451 13.898-9.395 12.454-17.706l-32.504-187.23c-1.42-8.207-9.21-13.917-17.692-12.448l-21.065 3.678c-8.311 1.451-13.898 9.395-12.454 17.705l32.502 187.236zM190.333 194.375l163.6 96.708a15.28 15.28 0 0 0 7.778 2.136c5.393 0 10.447-2.876 13.183-7.509l10.876-18.36c2.08-3.519 2.674-7.631 1.658-11.591a15.18 15.18 0 0 0-7.032-9.358l-163.6-96.714c-7.014-4.149-16.836-1.597-20.967 5.374l-10.869 18.36a15.2 15.2 0 0 0-1.658 11.591 15.21 15.21 0 0 0 7.031 9.363zM387.525 240.501a15.276 15.276 0 0 0 12.626 6.659c3.091 0 6.077-.924 8.635-2.681l17.405-11.934c6.953-4.768 8.752-14.314 4.015-21.292L323.29 54.104c-4.584-6.732-14.498-8.623-21.236-3.984l-17.737 12.21c-6.945 4.779-8.727 14.327-3.971 21.291l107.179 156.88zM154.482 302.319l183.465 49.156c1.298.349 2.632.526 3.966.526 6.903 0 12.98-4.67 14.762-11.347l5.508-20.624c2.179-8.152-2.681-16.555-10.826-18.74l-183.465-49.162c-8.017-2.148-16.604 2.852-18.728 10.826l-5.508 20.63c-2.179 8.142 2.68 16.551 10.826 18.735z"/></svg>Stack Overflow</a></li>
+                </ul>
+            </div>
+            <div class="subscribe">
+<style type="text/css" media="screen">
+    #mc_embed_signup .response {
+        margin-top: 12px;
+        line-height: 1.4;
+        font-size: 0.65rem;
+    }
+</style>
+<div id="mc_embed_signup">
+    <form action="//pingcap.us16.list-manage.com/subscribe/post?u=ab57beb8a88391cf6193c1b48&amp;id=7c67af4f9d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+            <div class="form-inline">
+                <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Subscribe to our newsletter">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-subscribe f-tc">
+            </div>
+            <div id="mce-responses" class="clear">
+                <div class="response" id="mce-error-response" style="display: none;"></div>
+                <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_ab57beb8a88391cf6193c1b48_7c67af4f9d" tabindex="-1" value="">
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="https://download.pingcap.com/js/mc-validate.js"></script>
+<script type='text/javascript'>
+;(function($) {
+    window.fnames = new Array()
+    window.ftypes = new Array()
+    fnames[0] = 'EMAIL'
+    ftypes[0] = 'email'
+    fnames[1] = 'FNAME'
+    ftypes[1] = 'text'
+    fnames[2] = 'LNAME'
+    ftypes[2] = 'text'
+})(jQuery)
+var $mcj = jQuery.noConflict(true)
+</script>
+
+</div>
+        </div>
+    </div>
+    <div class="container copyright-container">
+        <p class="copyright">&copy; 2018 PingCAP. All Rights Reserved.</p>
+        <a href="/blog-cn" class="copyright-btn-lang" id="lang">中文</a>
+    </div>
+</footer>
+<button class="back-to-top" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 284.929 284.929"><path d="M282.082 195.285L149.028 62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665.953-6.567 2.856L2.856 195.285C.95 197.191 0 199.378 0 201.853c0 2.474.953 4.664 2.856 6.566l14.272 14.271c1.903 1.903 4.093 2.854 6.567 2.854s4.664-.951 6.567-2.854l112.204-112.202 112.208 112.209c1.902 1.903 4.093 2.848 6.563 2.848 2.478 0 4.668-.951 6.57-2.848l14.274-14.277c1.902-1.902 2.847-4.093 2.847-6.566.001-2.476-.944-4.666-2.846-6.569z" fill="#FFF"/></svg>
+</button>
+</div>
+<script type="text/javascript">document.getElementById("page-loader").style.display="none",document.getElementById("page-content").style.display="block"</script>
+<div class="overlay"></div>
+<script src="https://download.pingcap.com/js/jquery.min.js"></script><script type="text/javascript" src="/js/doc.js"></script><script type="text/javascript"src="https://download.pingcap.com/js/docsearch.min.js"></script>
+<script type="text/javascript"src="/js/app.js"></script></body>
+</html>
